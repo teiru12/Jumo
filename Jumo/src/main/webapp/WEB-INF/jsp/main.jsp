@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-main.jsp test222333
+main.jsp 마스터
 </body>
 </html>
