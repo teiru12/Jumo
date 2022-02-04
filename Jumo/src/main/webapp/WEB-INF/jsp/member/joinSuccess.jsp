@@ -8,5 +8,6 @@
 </head>
 <body>
 joinSuccess
+<a href="/loginForm.al">로그인폼 페이지로</a><br>
 </body>
 </html>

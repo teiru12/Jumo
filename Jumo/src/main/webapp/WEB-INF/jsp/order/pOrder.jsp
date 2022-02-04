@@ -8,5 +8,7 @@
 </head>
 <body>
 pOrder
+<br>
+<a href="/orderResult.al">상품 구매 결과</a><br>
 </body>
 </html>

@@ -8,5 +8,8 @@
 </head>
 <body>
 adminPList
+<br>
+<a href="/adminPModifyForm.al">상품 이름 클릭시 상품 수정 폼 페이지로 이동</a><br>
+<a href="/adminPWriteForm.al">상품 추가 - 상품 입력폼으로 이동</a><br>
 </body>
 </html>

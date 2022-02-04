@@ -8,5 +8,8 @@
 </head>
 <body>
 qnaForm
+<br>
+<a href="/qna.al">등록</a><br>
+<a href="/qnaList.al">취소</a><br>
 </body>
 </html>

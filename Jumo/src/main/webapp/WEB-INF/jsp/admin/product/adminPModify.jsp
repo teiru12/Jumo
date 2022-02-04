@@ -8,5 +8,7 @@
 </head>
 <body>
 adminPModify
+<br>
+<a href="/adminPList.al">상품 리스트 페이지로 이동</a><br>
 </body>
 </html>

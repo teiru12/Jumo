@@ -8,5 +8,8 @@
 </head>
 <body>
 adminNoticeDetail
+<br>
+<a href="/adminNoticeModifyForm.al">수정 - 공지사항 수정폼 페이지</a><br>
+<a href="/adminNoticeDelete.al">삭제 - 공지사항 삭제 기능 페이지</a><br>
 </body>
 </html>

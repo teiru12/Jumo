@@ -8,5 +8,7 @@
 </head>
 <body>
 qna
+<br>
+<a href="/qnaList.al">고객센터 게시판으로 이동</a><br>
 </body>
 </html>

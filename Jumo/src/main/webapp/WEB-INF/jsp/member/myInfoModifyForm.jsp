@@ -8,5 +8,7 @@
 </head>
 <body>
 myInfoModifyForm
+<a href="/myInfoModify.al">회원정보 수정 기능</a><br>
+<a href="/myPage.al">마이페이지 기본 페이지</a><br>
 </body>
 </html>

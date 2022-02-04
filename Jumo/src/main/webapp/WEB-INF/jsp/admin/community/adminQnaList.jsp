@@ -8,5 +8,7 @@
 </head>
 <body>
 adminQnaList
+<br>
+<a href="/adminQnaDetail.al">고객센터 상세보기</a><br>
 </body>
 </html>

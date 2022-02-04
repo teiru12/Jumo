@@ -8,5 +8,7 @@
 </head>
 <body>
 memberModify
+<br>
+<a href="/memberList.al">회원정보 리스트 페이지로 이동</a><br>
 </body>
 </html>

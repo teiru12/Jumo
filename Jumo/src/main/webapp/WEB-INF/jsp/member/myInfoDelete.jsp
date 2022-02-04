@@ -8,5 +8,6 @@
 </head>
 <body>
 myInfoDelete
+<a href="/main.al">메인페이지</a><br>
 </body>
 </html>

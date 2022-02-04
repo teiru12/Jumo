@@ -8,5 +8,7 @@
 </head>
 <body>
 adminOrderModify
+<br>
+<a href="/adminOrderList.al">주문정보 리스트로 이동</a><br>
 </body>
 </html>

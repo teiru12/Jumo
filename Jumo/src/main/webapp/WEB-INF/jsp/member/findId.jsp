@@ -8,5 +8,6 @@
 </head>
 <body>
 findId
+<a href="/findResult.al">아이디 찾기 결과 페이지로 이동</a><br>
 </body>
 </html>

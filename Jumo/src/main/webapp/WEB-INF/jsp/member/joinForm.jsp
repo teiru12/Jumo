@@ -8,5 +8,10 @@
 </head>
 <body>
 joinForm
+<a href="/.al">아이디 중복확인</a><br>
+아이디 중복확인 jsp를 만들어야 한 다면 그때 링크 변경<br><br>
+
+<a href="/joinSuccess.al">회원가입 성공</a><br>
+<a href="/loginForm.al">로그인 폼 페이지</a><br>
 </body>
 </html>

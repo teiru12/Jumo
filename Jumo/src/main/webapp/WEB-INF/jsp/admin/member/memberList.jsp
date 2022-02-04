@@ -8,5 +8,7 @@
 </head>
 <body>
 memberList.jsp
+<br>
+<a href="/memberDetail.al">회원이메일 클릭 - 회원정보</a><br>
 </body>
 </html>

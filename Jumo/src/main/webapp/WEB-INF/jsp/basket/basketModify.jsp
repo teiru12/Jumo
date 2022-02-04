@@ -8,5 +8,8 @@
 </head>
 <body>
 basketModify
+<br>
+<a href="/basketList.al">장바구니 리스트로 이동</a><br>
+
 </body>
 </html>

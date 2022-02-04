@@ -8,5 +8,7 @@
 </head>
 <body>
 adminQnaDelete
+<br>
+<a href="/adminQnaList.al">고객센터 리스트</a><br>
 </body>
 </html>

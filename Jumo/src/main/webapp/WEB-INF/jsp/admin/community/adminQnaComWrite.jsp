@@ -8,5 +8,7 @@
 </head>
 <body>
 adminQnaComWrite
+<br>
+<a href="/adminQnaDetail.al">고객센터 상세 페이지로 이동</a><br>
 </body>
 </html>
