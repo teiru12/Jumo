@@ -24,5 +24,6 @@ main.jsp<br>
 <a href="/myPage.al">마이페이지</a><br>
 <a href="/basketList.al">장바구니</a><br>
 <a href="/logout.al">로그아웃</a><br>
+돼지국밥맛있다
 </body>
 </html>
