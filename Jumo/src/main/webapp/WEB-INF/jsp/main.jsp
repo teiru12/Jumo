@@ -27,6 +27,6 @@ main.jsp<br>
 돼지국밥맛있다
 yes
 ㅋㅋㅋz
-222222
+2222
 </body>
 </html>
