@@ -26,5 +26,6 @@ main.jsp<br>
 <a href="/logout.al">로그아웃</a><br>
 돼지국밥맛있다
 yes
+ㅋㅋㅋ
 </body>
 </html>
