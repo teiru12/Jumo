@@ -1,5 +1,5 @@
 package jumo.admin.product;
 
-public class AdminProductService {
+public interface AdminProductService {
 
 }

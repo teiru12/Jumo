@@ -1,5 +1,5 @@
 package jumo.admin.product;
 
-public interface AdminProductDAO {
+public class AdminProductDAO {
 
 }

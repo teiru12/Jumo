@@ -1,5 +1,5 @@
 package jumo.admin.community;
 
-public class AdminCommunityService {
+public interface AdminCommunityService {
 
 }

@@ -1,5 +1,5 @@
 package jumo.common.product;
 
-public class ProductService {
+public interface ProductService {
 
 }

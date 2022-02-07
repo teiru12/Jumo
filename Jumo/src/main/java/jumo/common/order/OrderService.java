@@ -1,5 +1,5 @@
 package jumo.common.order;
 
-public class OrderService {
+public interface OrderService {
 
 }

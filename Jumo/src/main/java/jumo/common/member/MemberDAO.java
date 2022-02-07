@@ -1,5 +1,5 @@
 package jumo.common.member;
 
-public interface MemberDAO {
+public class MemberDAO {
 
 }

@@ -1,5 +1,5 @@
 package jumo.admin.memeber;
 
-public class AdminMemberService {
+public interface AdminMemberService {
 
 }

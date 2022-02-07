@@ -1,5 +1,5 @@
 package jumo.common.product;
 
-public interface ProductDAO {
+public class ProductDAO {
 
 }

@@ -1,5 +1,5 @@
 package jumo.common.member;
 
-public class JoinService {
+public interface JoinService {
 
 }

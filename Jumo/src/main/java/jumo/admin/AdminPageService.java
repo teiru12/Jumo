@@ -1,5 +1,5 @@
 package jumo.admin;
 
-public class AdminPageService {
+public interface AdminPageService {
 
 }

@@ -1,5 +1,5 @@
 package jumo.common.basket;
 
-public interface BasketDAO {
+public class BasketDAO {
 
 }

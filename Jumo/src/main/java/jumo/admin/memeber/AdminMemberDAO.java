@@ -1,5 +1,5 @@
 package jumo.admin.memeber;
 
-public interface AdminMemberDAO {
+public class AdminMemberDAO {
 
 }
