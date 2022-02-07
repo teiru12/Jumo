@@ -3,191 +3,196 @@
 
 <mapper namespace="product">
 
-<!-- [selectProductBest]전체상품 게시판 리스트 -->
-<select id="selectProductBest" resultType="hashmap">
-<![CDATA[
-	SELECT 
-       PNAME,
-       PSELL,
-       PIMAGE,
-   	   PPRICE,
-       PSALE,
-       R
-	FROM (SELECT 
-	          PNAME,
-		      PSELL,
-		      PIMAGE,
-		      PPRICE,
-		      PSALE,
-				RANK() OVER(
-						ORDER BY PSELL DESC) AS R
-						FROM PRODUCT) 
-				WHERE R BETWEEN 1 AND 3   
-    ]]>
-</select>
-
-<!-- [selectProductId]상품 디테일 -->
-<select id="selectProductId" parameterType="hashmap" resultType="hashmap">
-<![CDATA[
- 	SELECT * 
-	FROM PRODUCT 
-	WHERE PID= #{PID}
-	]]>
-</select>
-
-<!-- [allList]전체상품 게시판 -->
-<select id="allList" resultType="hashmap">
-<![CDATA[
-	SELECT * 
-	FROM PRODUCT
-]]>
-</select> 
-
-<!-- [allListSearch]전체상품 게시판 리스트 검색 -->
-<select id="allListSearch" parameterType="hashmap" resultType="hashmap">
-<![CDATA[
-	SELECT * 
-	FROM PRODUCT 
-]]>
-<trim prefix="WHERE" prefixOverrides="AND">
+	<!-- [selectProductBest]전체상품 게시판 리스트 -->
+	<select id="selectProductBest" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+	    	  PNAME,
+	     	  PSELL,
+	     	  PIMAGE,
+	   	 	  PPRICE,
+	     	  PSALE,
+	     	  R
+		FROM (SELECT 
+		     	   PNAME,
+			 	   PSELL,
+			  	   PIMAGE,
+			  	   PPRICE,
+			   	   PSALE,
+					RANK() OVER(
+								ORDER BY PSELL DESC) AS R
+								FROM PRODUCT) 
+				WHERE 
+					R BETWEEN 1 AND 3   
+	    ]]>
+	</select>
 	
-	<if test="#{PKIND}!=NULL">
-		AND PKIND = #{PKIND} 
-	</if>
-	<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-		AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-	</if>
-    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-		AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-	</if>
-</trim>
-<trim prefix="ORDER BY">
-	<if test="#{PSELL}!=NULL">
-		PSELL DESC  
-	</if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE ASC 
-             </if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE DESC 
-             </if>
-             <if test="#{PDATE}!=NULL">
-		PDATE DESC 
-             </if>
-</trim>
-</select>
-
-<!-- [aclListSearch]주류상품 게시판 리스트 검색 -->
-<select id="aclListSearch" parameterType="hashmap" resultType="hashmap">
-<![CDATA[
-	SELECT * 
-	FROM PRODUCT 
-]]>
-<trim prefix="WHERE" prefixOverrides="AND">
-
-	<if test="#{PKIND}!=NULL">
-		AND PKIND = #{PKIND} 
-	</if>
-	<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-		AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-	</if>
-              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-		AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-	</if>
-		AND PTYPE='ALCOHOL' 
-</trim>
-<trim prefix="ORDER BY">
-	<if test="#{PSELL}!=NULL">
-		PSELL DESC 
-	</if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE ASC 
-             </if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE DESC 
-             </if>
-             <if test="#{PDATE}!=NULL">
-		PDATE DESC 
-             </if>
-</trim>
-</select>
-
-<!-- [etcListSearch]기타상품 게시판 리스트 검색 -->
-<select id="etcListSearch" parameterType="hashmap" resultType="hashmap">
-<![CDATA[
-	SELECT * 
-	FROM PRODUCT 
-	]]>
-<trim prefix="ORDER BY">
-	<if test="#{PSELL}!=NULL">
-		PSELL DESC  
-	</if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE ASC 
-             </if>
-             <if test="#{PPRICE}!=NULL">
-		PPRICE DESC 
-             </if>
-             <if test="#{PDATE}!=NULL">
-		PDATE DESC 
-             </if>
-</trim>
-</select>
-
-<!-- [allListKeywordSearch]전체상품 게시판 키워드 검색 -->
-<select id="allListKeyWordSearch" parameterType="hashmap" resultType="hashmap">
-<![CDATA[	
-	SELECT * 
-	FROM PRODUCT 
-	]]>
-<trim prefix="WHERE" prefixOverrides="AND">
-	
-	<if test="#{KEYWORD}=='ALCOHOL'">
-		AND PTYPE='ALCOHOL' 
-	</if>
-	<if test="#{KEYWORD}=='ETC'">
-		AND PTYPE='ETC' 
-	</if>
-	<if test="KEYWORD!=NULL and ISNUMBER==NULL">
-		AND (PKIND LIKE '%'||#{KEYWORD}||'%' 
-		OR PNAME LIKE '%'||#{KEYWORD}||'%')
-	</if>
-	<if test="KEYWORD!=NULL and ISNUMBER!=NULL">
-		AND (PDEGREE=TO_NUMBER(#{KEYWORD}) 
-		OR PNAME LIKE '%'||#{KEYWORD}||'%')
-	</if>
-</trim>
-</select>
-
-<!-- [insertProduct]상품 입력 기능 -->
-<insert id="insertProduct" parameterType="hashmap">
-<![CDATA[	
-	INSERT INTO 
-		PRODUCT
-	VALUES(
-		PID_SEQ.NEXTVAL,
-		#{PNAME},
-		#{PIMAGE},
-		SYSDATE,
-		#{PPRICE},
-		#{PSALE},
-		#{PSTOCK},
-		0,
-		#{PCOM},
-		#{PLOC},
-		#{PDEGREE},
-		#{PKIND},
-		#{PTYPE}
-	)
+	<!-- [selectProductId]상품 디테일 -->
+	<select id="selectProductId" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	 	SELECT * 
+		FROM 
+			PRODUCT 
+		WHERE 
+			PID= #{PID}
 		]]>
-</insert>
-
-<!-- [updateProduct]상품 수정 기능 -->
-<update id="updateProduct" parameterType="hashmap">
-<![CDATA[
-	UPDATE 
-	  PRODUCT
-	    SET PNAME=#{PNAME},
+	</select>
+	
+	<!-- [allList]전체상품 게시판 -->
+	<select id="allList" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM 
+			PRODUCT
+	]]>
+	</select> 
+	
+	<!-- [allListSearch]전체상품 게시판 리스트 검색 -->
+	<select id="allListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM 
+			PRODUCT 
+	]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<if test="#{PKIND}!=NULL">
+			AND PKIND = #{PKIND} 
+		</if>
+		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
+			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+		</if>
+	    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
+			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+		</if>
+	</trim>
+	<trim prefix="ORDER BY">
+		<if test="#{PSELL}!=NULL">
+			PSELL DESC  
+		</if>
+	             <if test="#{PPRICE}!=NULL">
+			PPRICE ASC 
+	             </if>
+	             <if test="#{PPRICE}!=NULL">
+			PPRICE DESC 
+	             </if>
+	             <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	             </if>
+	</trim>
+	</select>
+	
+	<!-- [aclListSearch]주류상품 게시판 리스트 검색 -->
+	<select id="aclListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+			FROM PRODUCT 
+	]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+	
+		<if test="#{PKIND}!=NULL">
+			AND PKIND = #{PKIND} 
+		</if>
+		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
+			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+		</if>
+	              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
+			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+		</if>
+			AND PTYPE='ALCOHOL' 
+	</trim>
+	<trim prefix="ORDER BY">
+	    <if test="#{PSELL}!=NULL">
+			PSELL DESC 
+		</if>
+	    <if test="#{PPRICE}!=NULL">
+			PPRICE ASC 
+	    </if>
+	    <if test="#{PPRICE}!=NULL">
+			PPRICE DESC 
+	    </if>
+	    <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	    </if>
+	</trim>
+	</select>
+	
+	<!-- [etcListSearch]기타상품 게시판 리스트 검색 -->
+	<select id="etcListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+			FROM PRODUCT 
+		]]>
+	<trim prefix="ORDER BY">
+		<if test="#{PSELL}!=NULL">
+			PSELL DESC  
+		</if>
+	    <if test="#{PPRICE}!=NULL">
+			PPRICE ASC 
+	    </if>
+	    <if test="#{PPRICE}!=NULL">
+			PPRICE DESC 
+	    </if>
+	    <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	    </if>
+	</trim>
+	</select>
+	
+	<!-- [allListKeywordSearch]전체상품 게시판 키워드 검색 -->
+	<select id="allListKeyWordSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[	
+		SELECT * 
+		FROM PRODUCT 
+		]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<if test="#{KEYWORD}=='ALCOHOL'">
+			AND PTYPE='ALCOHOL' 
+		</if>
+		<if test="#{KEYWORD}=='ETC'">
+			AND PTYPE='ETC' 
+		</if>
+		<if test="KEYWORD!=NULL and ISNUMBER==NULL">
+			AND (PKIND LIKE '%'||#{KEYWORD}||'%' 
+			OR PNAME LIKE '%'||#{KEYWORD}||'%')
+		</if>
+		<if test="KEYWORD!=NULL and ISNUMBER!=NULL">
+			AND (PDEGREE=TO_NUMBER(#{KEYWORD}) 
+			OR PNAME LIKE '%'||#{KEYWORD}||'%')
+		</if>
+	</trim>
+	</select>
+	
+	<!-- [insertProduct]상품 입력 기능 -->
+	<insert id="insertProduct" parameterType="hashmap">
+	<![CDATA[	
+		INSERT INTO 
+			PRODUCT
+		VALUES(
+			PID_SEQ.NEXTVAL,
+			#{PNAME},
+			#{PIMAGE},
+			SYSDATE,
+			#{PPRICE},
+			#{PSALE},
+			#{PSTOCK},
+			0,
+			#{PCOM},
+			#{PLOC},
+			#{PDEGREE},
+			#{PKIND},
+			#{PTYPE}
+		)
+	]]>
+	</insert>
+	
+	<!-- [updateProduct]상품 수정 기능 -->
+	<update id="updateProduct" parameterType="hashmap">
+	<![CDATA[
+		UPDATE 
+		  PRODUCT
+		SET PNAME=#{PNAME},
 			PIMAGE=#{PIMAGE},
 			PPRICE=#{PPRICE},
 			PSALE=#{PSALE},
@@ -197,17 +202,20 @@
 			PDEGREE=#{PDEGREE}, 
 			PKIND=#{PKIND},
 			PTYPE=#{PTYPE}
-		WHERE PID=#{PID}
-]]>
-</update>
-
-<!-- [deleteProduct]상품 삭제 기능 -->
-<delete id="deleteProduct" parameterType="hashmap">
-<![CDATA[
-	DELETE FROM 
-	  PRODUCT
-	WHERE PID=#{PID}
+		WHERE 
+			PID=#{PID}
 	]]>
-</delete>
+	</update>
+	
+	<!-- [deleteProduct]상품 삭제 기능 -->
+	<delete id="deleteProduct" parameterType="hashmap">
+	<![CDATA[
+		DELETE 
+		FROM 
+			PRODUCT
+		WHERE
+			PID=#{PID}
+		]]>
+	</delete>
 
 </mapper>
