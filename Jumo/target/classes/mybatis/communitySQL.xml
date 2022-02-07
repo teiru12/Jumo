@@ -73,7 +73,6 @@
 	</select>
 	
 	
-	
 	<!-- insertQna(고객센터 게시판 글 입력 기능) -->
 	<insert id="insertQna" parameterType="hashmap">
 	<![CDATA[
@@ -90,7 +89,7 @@
 				'Q'
 				)
 		]]>
-	</insert>
+	</insert> 
 	
 	
 	<!-- commentListId(고객센터 댓글 리스트) -->
