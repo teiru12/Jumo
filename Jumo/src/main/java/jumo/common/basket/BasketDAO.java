@@ -1,5 +1,29 @@
 package jumo.common.basket;
 
-public class BasketDAO {
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository("basketDAO")
+public class BasketDAO {
+	
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	public List<Map<String,Object>> basketList(Map<String,Object> map)throws Exception{
+		return sqlSessionTemplate.selectList("basket.basketList",map);
+	}
+	
+	public void updateBasket()throws Exception{
+		sqlSessionTemplate.update("basket.updateBasket");
+	}
+	
+	public void deleteBasket() throws Exception{
+		sqlSessionTemplate.delete("basket.deleteBasket");
+	}
 }
