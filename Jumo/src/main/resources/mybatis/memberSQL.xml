@@ -24,7 +24,7 @@
 	]]>
 	</select>
 	
-	<!-- insertMember(로그인 폼) -->
+	<!-- insertMember(회원가입 성공) -->
 	<insert id="insertMember" parameterType="hashmap" >
 	<![CDATA[
 		INSERT INTO 
