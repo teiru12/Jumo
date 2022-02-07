@@ -3,4 +3,55 @@
 
 <mapper namespace="basket">
 
+	<!-- insertBasket (장바구니 추가 기능) -->
+	<insert id="insertBasket" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO
+			BASKET
+		VALUES(
+			BNUMBER_SEQ.NEXTVAL,
+			#{BNAME},
+			#{BID},
+			#{BPRICE},
+			#{BSALE},
+			#{BEMAIL},
+			#{BCOUNT}
+		)	
+	]]>
+	</insert>
+	
+	<!-- basketList 장바구니 리스트) -->
+	<select id="basketList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			BASKET 
+		WHERE
+			BEMAIL=#{EMAIL}
+	]]>
+	</select>
+	
+	<!-- updateBasket (장바구니 수정기능) -->
+	<update id="updateBasket" parameterType="hashmap">
+	<![CDATA[
+		UPDATE
+			BASKET
+		SET
+			BCOUNT = #{BCOUNT} 
+		WHERE
+			BNUMBER = #{BNUMBER}
+	]]>
+	</update>
+
+	<!-- deleteBasket (장바구니 삭제기능) -->
+	<delete id="deleteBasket" parameterType="hashmap">
+	<![CDATA[
+		DELETE
+			FROM BASKET
+		WHERE
+			BNUMBER = #{BNUMBER}
+	]]>
+	</delete>
+
 </mapper>
