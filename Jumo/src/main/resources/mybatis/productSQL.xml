@@ -82,6 +82,17 @@
 	</trim>
 	</select>
 	
+	<!-- [aclList]주류상품 게시판 -->
+	<select id="aclList" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM
+			PRODUCT 
+		WHERE
+			PTYPE ='ALCOHOL'
+	]]>
+	</select> 
+	
 	<!-- [aclListSearch]주류상품 게시판 리스트 검색 -->
 	<select id="aclListSearch" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -116,6 +127,17 @@
 	    </if>
 	</trim>
 	</select>
+	
+	<!-- [etcList]기타상품 게시판 -->
+	<select id="etcList" resultType="hashmap">
+	<![CDATA[
+		SELECT *
+		FROM
+			PRODUCT
+		WHERE
+			PTYPE ='ETC'
+	]]>
+	</select> 
 	
 	<!-- [etcListSearch]기타상품 게시판 리스트 검색 -->
 	<select id="etcListSearch" parameterType="hashmap" resultType="hashmap">
