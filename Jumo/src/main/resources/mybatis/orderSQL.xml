@@ -3,4 +3,132 @@
 
 <mapper namespace="order">
 
+	<!-- selectOrderMemberId (주문자:Email로 주문 정보 조회) -->
+	<select id="selectOrderMemberId" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			ORDERCOMMAND 
+		WHERE
+			OMAIL=#{EMAIL}
+	]]>
+	</select>
+
+	<!-- selectOrderOID (주문번호로 주문 정보 조회) -->
+	<select id="selectOrderOID" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			ORDERCOMMAND 
+		WHERE
+			OID = #{OID}
+	]]>
+	</select>
+	
+	<!-- selectOrderOBNUMBER (장바구니번호로 주문 정보 조회) -->
+	<select id="selectOrderOBNUMBER" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			ORDERCOMMAND 
+		WHERE
+			OBNUMBER = #{OBNUMBER}
+	]]>
+	</select>
+
+	<!-- insertOrderDirect (상품 바로 구매정보 입력) -->
+	<insert id="insertOrderDirect" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO
+			ORDERCOMMAND
+		VALUES(
+			OID_SEQ.NEXTVAL,
+			NULL,
+			#{OMAIL},
+			SYSDATE,
+			#{OPID},
+			#{OPRODUCT},
+			#{OCOUNT},
+			#{OPRICE},
+			#{OSALE},
+			#{OTOTAL}, 
+			#{OADDRESS1},
+			#{OADDRESS2},
+			'배송전',
+			 '100254889564'
+		)
+	]]>
+	</insert>
+
+	<!-- insertOrderBasket (장바구니 구매정보 입력) -->
+	<insert id="insertOrderBasket" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO
+			ORDERCOMMAND 
+		VALUES(
+			OID_SEQ.NEXTVAL,
+			#{OBNUMBER},
+			#{OMAIL},
+			SYSDATE,
+			#{OPID},
+			#{OPRODUCT},
+			#{OCOUNT},
+			#{OPRICE},
+			#{OSALE},
+			#{OTOTAL},
+			#{OADDRESS1},
+			#{OADDRESS2},
+			'배송전',
+			'100254889564'
+		)
+	]]>
+	</insert>
+
+	<!-- orderList (주문 정보 리스트) -->
+	<select id="orderList" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			ORDERCOMMAND
+	]]>
+	</select>
+
+	<!-- orderListSearch (주문 정보 리스트 검색) -->
+	<select id="orderListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			ORDERCOMMAND O, PRODUCT P
+	]]>
+	<trim prefix="WHERE"
+		prefixOverrides="AND">
+		
+		<if test="KEYWORD!=NULL">
+		AND (P.PCOM LIKE '%'||#{KEYWORD}||'%' 
+		OR P.PNAME LIKE '%'||#{KEYWORD}||'%') 
+		</if>
+		<if test="OSTATUS!=NULL">
+		AND O.OSTATUS=#{OSTATUS}
+		</if>
+		AND O.OPID=P.PID
+	</trim>
+	</select>
+
+	<!-- updateOrderId (주문 정보 수정) -->
+	<update id="updateOrderId" parameterType="hashmap">
+	<![CDATA[
+		UPDATE
+			ORDERCOMMAND
+		SET
+			OSTATUS=#{OSTATUS}
+		WHERE
+			OID=#{OID}
+	]]>
+	</update>
+
 </mapper>
