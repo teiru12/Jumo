@@ -23,7 +23,7 @@ public interface ProductService {
 
 	public List<Map<String, Object>> etcListSearch(ProductBean product) throws Exception;
 
-	public Map<String, Object> selectReviewMemberId(CommunityBean community) throws Exception;
+	public Map<String, Object> selectReviewProduct(CommunityBean community) throws Exception;
 
 	public void insertBasket(BasketBean basket) throws Exception;
 
