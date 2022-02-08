@@ -19,8 +19,8 @@ public class OrderDAO {
 	}
 	
 	//장바구니 상품 구매 폼
-	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectMemberId", map);
+	public Map<String, Object> selectMemberOId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("order.selectMemberOId", map);
 	}
 	
 	//장바구니 상품 구매 기능
