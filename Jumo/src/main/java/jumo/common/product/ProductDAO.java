@@ -63,10 +63,10 @@ public class ProductDAO {
 			"prouduct.etcListSearch", map);
 	}
 	
-	public Map<String, Object> selectReviewMemberId(Map<String, Object> map)
+	public List<Map<String, Object>> selectReviewProduct(Map<String, Object> map)
 			throws Exception {
-		return sqlSessionTemplate.selectOne(
-			"community.selectReviewMemberId", map);
+		return sqlSessionTemplate.selectList(
+			"community.selectReviewProduct", map);
 	}
 	
 	public void insertBasket(Map<String, Object> map) 
