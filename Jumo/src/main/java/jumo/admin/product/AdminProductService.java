@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
+ 
 public interface AdminProductService {
 	@Resource(name="sqlSessionTemplate")
 	
