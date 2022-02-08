@@ -23,16 +23,16 @@ public interface AdminCommunityService {
 	public void updateNoticeId(CommunityBean community)throws Exception;
 	
 	
-	public List<Map<String, Object>>reviewList()throws Exception;
+	public List<Map<String, Object>> reviewList()throws Exception;
 	
 	
-	public List<Map<String, Object>>qnaList()throws Exception;
+	public List<Map<String, Object>> qnaList()throws Exception;
 	
 	
 	public Map<String, Object> selectQnaId(CommunityBean community)throws Exception;
 	
 	
-	public List<Map<String, Object>>commentListId(CommentBean comment)throws Exception;
+	public List<Map<String, Object>> commentListId(CommentBean comment)throws Exception;
 	
 	
 	public void insertComment(CommentBean comment)throws Exception;
@@ -42,9 +42,6 @@ public interface AdminCommunityService {
 	
 	
 	public void deleteComment(CommentBean comment)throws Exception;
-	
-	
-	public List<Map<String, Object>>selectReviewProduct()throws Exception;
 	
 	
 	public void deleteCommunityId(CommunityBean community)throws Exception;
