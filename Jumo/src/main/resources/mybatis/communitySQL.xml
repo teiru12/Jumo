@@ -142,7 +142,7 @@
 		<![CDATA[
 			SELECT * 
 				FROM COMMUNITY 
-				WHERE CTYPE = 'Q' AND CWRITER=#{EMAIL}
+				WHERE CTYPE = 'Q' AND CWRITER = #{EMAIL}
 		]]>
 	</select>
 	
