@@ -8,8 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-
-@Repository("ProductDAO")
+@Repository("productDAO")
 public class ProductDAO {
 
 	@Resource(name="sqlSessionTemplate")
