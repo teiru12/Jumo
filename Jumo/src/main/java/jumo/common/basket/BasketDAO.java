@@ -19,11 +19,11 @@ public class BasketDAO {
 		return sqlSessionTemplate.selectList("basket.basketList",map);
 	}
 	
-	public void updateBasket()throws Exception{
+	public void updateBasket(Map<String,Object> map)throws Exception{
 		sqlSessionTemplate.update("basket.updateBasket");
 	}
 	
-	public void deleteBasket() throws Exception{
+	public void deleteBasket(Map<String,Object> map) throws Exception{
 		sqlSessionTemplate.delete("basket.deleteBasket");
 	}
 }

@@ -14,7 +14,7 @@ public interface CommunityService {
 	
 	public List<Map<String, Object>> qnaList() throws Exception;
 	
-	public Map<String, Object> selectQnaMemberId(CommunityBean community) throws Exception;
+	public Map<String, Object> selectQnaId(CommunityBean community) throws Exception;
 	
 	public List<Map<String, Object>> commentListId(CommentBean comment) throws Exception;
 	
