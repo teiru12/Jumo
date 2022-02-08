@@ -15,28 +15,28 @@ public class OrderDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//상품 바로 구매 기능	
-	public List<Map<String, Object>> insertOrderDirect(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("order.insertOrderDirect", map);
+	public void insertOrderDirect(Map<String, Object> map) throws Exception {
+		sqlSessionTemplate.selectList("order.insertOrderDirect", map);
 	}
 	
 	//장바구니 상품 구매 폼
 	public List<Map<String, Object>> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("order.selectMemberId", map);
+		return sqlSessionTemplate.selectOne("order.selectMemberId", map);
 	}
 	
 	//장바구니 상품 구매 기능
-	public List<Map<String, Object>> insertOrderBasket(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("order.insertOrderBasket", map);
+	public void insertOrderBasket(Map<String, Object> map) throws Exception {
+		sqlSessionTemplate.selectList("order.insertOrderBasket", map);
 	}
 	
 	//상품 구매 결과(selectOrderOId)
 	public List<Map<String, Object>> selectOrderOId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("order.selectOrderOId", map);
+		return sqlSessionTemplate.selectOne("order.selectOrderOId", map);
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)
 	public List<Map<String, Object>> selectOrderOBNumber(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("order.selectOrderOBNumber", map);
+		return sqlSessionTemplate.selectOne("order.selectOrderOBNumber", map);
 	}
 	
 }
