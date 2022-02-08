@@ -142,7 +142,7 @@
 		<![CDATA[
 			SELECT * 
 				FROM COMMUNITY 
-				WHERE CTYPE = 'Q' AND CWRITER=#{EMAIL}
+				WHERE CTYPE = 'Q' AND CWRITER = #{CWRITER}
 		]]>
 	</select>
 	
@@ -191,7 +191,7 @@
 		<![CDATA[
 				SELECT * 
 				FROM COMMUNITY 
-				WHERE CTYPE = 'R' AND CWRITER=#{EMAIL}
+				WHERE CTYPE = 'R' AND CWRITER=#{CWRITER}
 		]]>
 	</select>
 	

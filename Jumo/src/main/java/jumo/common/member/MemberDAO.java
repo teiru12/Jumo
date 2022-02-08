@@ -14,6 +14,11 @@ public class MemberDAO {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//회원리스트
+	public List<Map<String, Object>> memberList() throws Exception {
+		return sqlSessionTemplate.selectList("member.memberList");
+	}
+	
 	//아이디 중복확인, 로그인 기능, 회원정보수정폼
 	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
