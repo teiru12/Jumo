@@ -12,7 +12,7 @@ public interface AdminOrderService {
 	
 	//주문리스트
 	public List<Map<String, Object>> orderList() throws Exception;
-	
+	 
 	//주문리스트 검색
 	public List<Map<String, Object>> orderListSearch(Map<String, Object> map) throws Exception;
 	

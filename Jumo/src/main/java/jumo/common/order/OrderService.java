@@ -10,7 +10,7 @@ public interface OrderService {
 	
 	//상품 바로 구매 기능
 	public void insertOrderDirect(Map<String, Object> map) throws Exception;
-	
+	 
 	//장바구니 상품 구매 폼
 	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception;
 	

@@ -10,7 +10,7 @@ public interface AdminProductService {
 	
 	//관리자 상품 리스트
 	public List<Map<String, Object>> allList() throws Exception;
-	
+	 
 	//관리자 상품 리스트 검색
 	public List<Map<String, Object>> allListKeyWordSearch(Map<String, Object> map) throws Exception;
 
