@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
 	public Map<String, Object> selectOrderOBNumber(OrderBean order) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OBNUMBER", order.getOBNUMBER());
-		return orderDAO.selectOrderOBNUMBER(map);
+		return orderDAO.selectOrderOBNumber(map);
 	}
 	
 

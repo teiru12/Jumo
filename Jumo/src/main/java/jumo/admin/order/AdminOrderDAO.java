@@ -24,10 +24,10 @@ public class AdminOrderDAO {
 	}
 	//주문리스트 상세보기
 	public Map<String, Object> selectOrderOId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("member.selectOrderOId", map);
+		return sqlSessionTemplate.selectOne("order.selectOrderOId", map);
 	}
 	//주문 정보 수정 기능
 	public void updateOrderId(Map<String, Object> map) throws Exception {
-		sqlSessionTemplate.update("orderupdateOrderId", map); 
+		sqlSessionTemplate.update("order.updateOrderId", map); 
 	}
 }
