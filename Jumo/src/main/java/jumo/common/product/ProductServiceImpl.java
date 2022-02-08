@@ -76,7 +76,6 @@ public class ProductServiceImpl implements ProductService{
 		map.put("PDATE", product.getPDATE());
 		map.put("PORDER", PORDER);
 		
-		
 		return productDAO.aclListSearch(map);
 	}
 
@@ -102,7 +101,6 @@ public class ProductServiceImpl implements ProductService{
 	public List<Map<String, Object>> selectReviewProduct(CommunityBean community) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("CTYPE",community.getCTYPE());
 		map.put("PID", community.getPID());
 		
 		return productDAO.selectReviewProduct(map);
