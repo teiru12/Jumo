@@ -1,6 +1,5 @@
 package jumo.common.order;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,7 +19,7 @@ public class OrderDAO {
 	}
 	
 	//장바구니 상품 구매 폼
-	public List<Map<String, Object>> selectMemberId(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectOne("order.selectMemberId", map);
 	}
 	
@@ -35,7 +34,7 @@ public class OrderDAO {
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)
-	public List<Map<String, Object>> selectOrderOBNumber(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectOrderOBNumber(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectOne("order.selectOrderOBNumber", map);
 	}
 	
