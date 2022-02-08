@@ -15,8 +15,8 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//아이디 중복확인, 로그인 기능, 회원정보수정폼
-	public List<Map<String, Object>> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("member.selectMemberId", map);
+	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
 	}
 	
 	//회원가입 성공
@@ -40,7 +40,7 @@ public class MemberDAO {
 	}
 	
 	//고객센터
-	public List<Map<String,Object>> selectMemberQnaId(Map<String,Object> map) throws Exception{
+	public List<Map<String,Object>> selectQnaMemberId(Map<String,Object> map) throws Exception{
 		return sqlSessionTemplate.selectList("community.selectQnaId",map);
 	}
 	
