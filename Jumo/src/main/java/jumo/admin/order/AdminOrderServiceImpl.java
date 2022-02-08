@@ -14,11 +14,11 @@ import jumo.model.OrderBean;
 public class AdminOrderServiceImpl implements AdminOrderService{
 
 	@Resource(name="adminOrderDAO")
-	private AdminOrderDAO AdminOrderDAO;
+	private AdminOrderDAO adminOrderDAO;
 	
 	@Override
 	public List<Map<String, Object>> orderList() throws Exception {
-		return AdminOrderDAO.orderList();
+		return adminOrderDAO.orderList();
 	}
 
 	@Override
@@ -27,14 +27,14 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 		
 		map.put("KEYWORD", keyword);
 		map.put("OSTATUS", oStatus);
-		return AdminOrderDAO.orderListSearch(map);
+		return adminOrderDAO.orderListSearch(map);
 	}
 
 	@Override
 	public Map<String, Object> selectOrderOId(OrderBean order) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OID", order.getOID());
-		return AdminOrderDAO.selectOrderOId(map);
+		return adminOrderDAO.selectOrderOId(map);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OSTATUS", order.getOSTATUS());
 		map.put("OID", order.getOID());
-		AdminOrderDAO.updateOrderId(map);
+		adminOrderDAO.updateOrderId(map);
 	}
 	
 	
