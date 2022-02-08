@@ -5,6 +5,7 @@ import java.util.Map;
 
 import jumo.model.MemberBean;
 import jumo.model.CommunityBean;
+import jumo.model.OrderBean;
 
 public interface MyInfoService {
 
@@ -14,9 +15,9 @@ public interface MyInfoService {
 	
 	public void deleteMember(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectQnaMemberId(CommunityBean community) throws Exception;
+	public List<Map<String,Object>> selectQnaMemberId(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectReviewMemberId(CommunityBean community) throws Exception;
+	public List<Map<String,Object>> selectReviewMemberId(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectOrderMemberId(CommunityBean community) throws Exception;
+	public List<Map<String,Object>> selectOrderMemberId(MemberBean member) throws Exception;
 }

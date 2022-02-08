@@ -17,8 +17,8 @@ public class AdminCommunityDAO  {
 	 
 	
 	//관리자 공지 게시판 리스트
-	public List<Map<String, Object>> noticeList(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.noticeList", map);
+	public List<Map<String, Object>> noticeList() throws Exception {
+		return sqlSessionTemplate.selectList("community.noticeList");
 	}
 	
 	
@@ -41,14 +41,14 @@ public class AdminCommunityDAO  {
 	
 	
 	//관리자 고객후기 게시판 리스트
-	public List<Map<String, Object>>reviewList(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.reviewList", map);
+	public List<Map<String, Object>>reviewList() throws Exception {
+		return sqlSessionTemplate.selectList("community.reviewList");
 	}
 		
 	
 	//관리자 고객센터 게시판 리스트
-	public List<Map<String, Object>>qnaList(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.qnaList", map);
+	public List<Map<String, Object>>qnaList() throws Exception {
+		return sqlSessionTemplate.selectList("community.qnaList");
 	}
 	
 	
@@ -81,12 +81,6 @@ public class AdminCommunityDAO  {
 		sqlSessionTemplate.delete("community.deleteComment", map);
 	}
 	
-	
-	
-	//관리자 상품 후기 리스트
-	public List<Map<String, Object>>selectReviewProduct(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.selectReviewProduct", map);
-	}
 	
 	
 	//관리자 공지,후기 삭제 기능

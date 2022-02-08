@@ -28,6 +28,6 @@ public class AdminOrderDAO {
 	}
 	//주문 정보 수정 기능
 	public void updateOrderId(Map<String, Object> map) throws Exception {
-		sqlSessionTemplate.update("orderupdateOrderId", map); 
+		sqlSessionTemplate.update("order.updateOrderId", map); 
 	}
 }

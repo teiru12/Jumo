@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("OrderDAO")
+@Repository("orderDAO")
 public class OrderDAO {
 		
 	@Resource(name="sqlSessionTemplate")
@@ -20,7 +20,7 @@ public class OrderDAO {
 	
 	//장바구니 상품 구매 폼
 	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectMemberId", map);
+		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
 	}
 	
 	//장바구니 상품 구매 기능
