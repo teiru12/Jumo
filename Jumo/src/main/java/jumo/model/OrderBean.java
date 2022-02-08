@@ -12,12 +12,28 @@ public class OrderBean {
 	private String OPRODUCT;
 	private int OSALE;
 	private int OTOTAL;
+	private int OCOUNT;
+	private int OPRICE;
 	private String OADDRESS1;
 	private String OADDRESS2;
 	private String OSTATUS;
 	private String OWAYBILL;
 	
 	
+	
+	
+	public int getOCOUNT() {
+		return OCOUNT;
+	}
+	public void setOCOUNT(int oCOUNT) {
+		OCOUNT = oCOUNT;
+	}
+	public int getOPRICE() {
+		return OPRICE;
+	}
+	public void setOPRICE(int oPRICE) {
+		OPRICE = oPRICE;
+	}
 	public int getOID() {
 		return OID;
 	}
