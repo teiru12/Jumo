@@ -16,8 +16,8 @@ public class CommunityDAO {
 	
 	
 	//공지 게시판 리스트
-	public List<Map<String, Object>> noticeList(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.noticeList", map);
+	public List<Map<String, Object>> noticeList() throws Exception {
+		return sqlSessionTemplate.selectList("community.noticeList");
 	}
 	
 	
@@ -28,8 +28,8 @@ public class CommunityDAO {
 	
 	
 	//고객센터 게시판 리스트
-	public List<Map<String, Object>>qnaList(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.qnaList", map);
+	public List<Map<String, Object>>qnaList() throws Exception {
+		return sqlSessionTemplate.selectList("community.qnaList");
 	}
 	
 	
@@ -44,4 +44,8 @@ public class CommunityDAO {
 		sqlSessionTemplate.insert("community.insertQna",map);
 	}	
 	
+	//고객센터 댓글 보기
+	public List<Map<String, Object>>commentListId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectList("community.commentListId", map);
+	}
 }
