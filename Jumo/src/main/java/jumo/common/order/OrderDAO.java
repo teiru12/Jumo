@@ -16,7 +16,7 @@ public class OrderDAO {
 	
 	//상품 바로 구매 기능	
 	public void insertOrderDirect(Map<String, Object> map) throws Exception {
-		sqlSessionTemplate.selectList("order.insertOrderDirect", map);
+		sqlSessionTemplate.insert("order.insertOrderDirect", map);
 	}
 	
 	//장바구니 상품 구매 폼
@@ -26,11 +26,11 @@ public class OrderDAO {
 	
 	//장바구니 상품 구매 기능
 	public void insertOrderBasket(Map<String, Object> map) throws Exception {
-		sqlSessionTemplate.selectList("order.insertOrderBasket", map);
+		sqlSessionTemplate.insert("order.insertOrderBasket", map);
 	}
 	
 	//상품 구매 결과(selectOrderOId)
-	public List<Map<String, Object>> selectOrderOId(Map<String, Object> map) throws Exception {
+	public Map<String, Object> selectOrderOId(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectOne("order.selectOrderOId", map);
 	}
 	
