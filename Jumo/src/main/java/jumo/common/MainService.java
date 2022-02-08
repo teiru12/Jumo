@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface MainService {
 
-	public List<Map<String, Object>> selectProductBest();
+	public List<Map<String, Object>> selectProductBest() throws Exception;
 }
