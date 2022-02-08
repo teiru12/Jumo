@@ -6,7 +6,7 @@ import jumo.model.MemberBean;
 
 public interface JoinService {
 
-	public Map<String, Object> selectMemberId(MemberBean member);
+	public Map<String, Object> selectMemberId(MemberBean member) throws Exception;
 	
-	public void insertMember(MemberBean member);
+	public void insertMember(MemberBean member) throws Exception;
 }

@@ -8,15 +8,15 @@ import jumo.model.CommunityBean;
 
 public interface MyInfoService {
 
-	public Map<String, Object> selectMemberId(MemberBean member);
+	public Map<String, Object> selectMemberId(MemberBean member) throws Exception;
 	
-	public void updateMember(MemberBean member);
+	public void updateMember(MemberBean member) throws Exception;
 	
-	public void deleteMember(MemberBean member);
+	public void deleteMember(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectQnaMemberId(CommunityBean community);
+	public List<Map<String,Object>> selectQnaMemberId(CommunityBean community) throws Exception;
 	
-	public List<Map<String,Object>> selectReviewMemberId(CommunityBean community);
+	public List<Map<String,Object>> selectReviewMemberId(CommunityBean community) throws Exception;
 	
-	public List<Map<String,Object>> selectOrderMemberId(CommunityBean community);
+	public List<Map<String,Object>> selectOrderMemberId(CommunityBean community) throws Exception;
 }
