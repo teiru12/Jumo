@@ -7,11 +7,11 @@ import jumo.model.MemberBean;
 
 public interface AdminMemberService {
 
-	public Map<String, Object> selectMemberId(MemberBean member);
+	public Map<String, Object> selectMemberId(MemberBean member) throws Exception;;
 	
-	public List<Map<String, Object>> memberList();
+	public List<Map<String, Object>> memberList() throws Exception;;
 		
-	public void updateMemberAdmin(MemberBean member);
+	public void updateMemberAdmin(MemberBean member) throws Exception;;
 	
-	public void deleteMember(MemberBean member);	
+	public void deleteMember(MemberBean member) throws Exception;;	
 }
