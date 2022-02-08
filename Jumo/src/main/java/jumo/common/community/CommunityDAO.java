@@ -42,10 +42,6 @@ public class CommunityDAO {
 	//고객센터 게시판 글 등록 
 	public void insertQna(Map<String,Object> map) throws Exception{
 		sqlSessionTemplate.insert("community.insertQna",map);
-	}
-			
-		
-		
-	
+	}	
 	
 }
