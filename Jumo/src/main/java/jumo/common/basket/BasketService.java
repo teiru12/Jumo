@@ -1,5 +1,16 @@
 package jumo.common.basket;
 
-public interface BasketService {
+import java.util.List;
+import java.util.Map;
 
-}
+import jumo.model.BasketBean;
+
+public interface BasketService {
+	
+	public List<Map<String,Object>> basketList(BasketBean basket) throws Exception;
+
+	public void updateBasket(BasketBean basket) throws Exception;
+
+	public void deleteBasket(BasketBean basket) throws Exception;
+
+}//주석처리
