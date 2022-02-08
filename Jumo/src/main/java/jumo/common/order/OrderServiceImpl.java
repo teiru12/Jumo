@@ -7,13 +7,18 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import jumo.common.member.MemberDAO;
+import jumo.model.MemberBean;
 import jumo.model.OrderBean;
 
 @Service("orderService")
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 	
 	@Resource(name="orderDAO")
 	private OrderDAO orderDAO;
+	
+	@Resource(name="memberDAO")
+	private MemberDAO memberDAO;
 
 	@Override
 	public void insertOrderDirect(OrderBean order) throws Exception {
@@ -21,6 +26,8 @@ public class OrderServiceImpl implements OrderService{
 		map.put("OMAIL", order.getOMAIL());
 		map.put("OPID", order.getOPID());
 		map.put("OPRODUCT", order.getOPRODUCT());
+		map.put("OCOUNT", order.getOCOUNT());
+		map.put("OPRICE", order.getOPRICE());
 		map.put("OSALE", order.getOSALE());
 		map.put("OTOTAL", order.getOTOTAL());
 		map.put("OADDRESS1", order.getOADDRESS1());
@@ -30,9 +37,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Map<String, Object> selectMemberId(OrderBean order) throws Exception {
+	public Map<String, Object> selectMemberId(MemberBean member) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("OMAIL", order.getOMAIL());
+		map.put("EMAIL", member.getEMAIL());
 		return orderDAO.selectMemberId(map);
 	}
 
@@ -43,6 +50,8 @@ public class OrderServiceImpl implements OrderService{
 		map.put("OMAIL", order.getOMAIL());
 		map.put("OPID", order.getOPID());
 		map.put("OPRODUCT", order.getOPRODUCT());
+		map.put("OCOUNT", order.getOCOUNT());
+		map.put("OPRICE", order.getOPRICE());
 		map.put("OSALE", order.getOSALE());
 		map.put("OTOTAL", order.getOTOTAL());
 		map.put("OADDRESS1", order.getOADDRESS1());

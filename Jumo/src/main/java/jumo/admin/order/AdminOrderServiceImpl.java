@@ -14,7 +14,7 @@ import jumo.model.OrderBean;
 public class AdminOrderServiceImpl implements AdminOrderService{
 
 	@Resource(name="adminOrderDAO")
-	private AdminOrderDAO adminorderDAO;
+	private AdminOrderDAO adminorderDAO; // 대소문자 고치기
 	
 	@Override
 	public List<Map<String, Object>> orderList() throws Exception {
@@ -23,6 +23,10 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 
 	@Override
 	public List<Map<String, Object>> orderListSearch(String keyword, String oStatus) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("KEYWORD", keyword);
+		map.put("OSTATUS", oStatus);
 		return adminorderDAO.orderListSearch(null);
 	}
 
