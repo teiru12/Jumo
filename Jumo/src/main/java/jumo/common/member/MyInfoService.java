@@ -15,9 +15,9 @@ public interface MyInfoService {
 	
 	public void deleteMember(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectQnaMemberId(CommunityBean community) throws Exception;
+	public List<Map<String,Object>> selectQnaMemberId(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectReviewMemberId(CommunityBean community) throws Exception;
+	public List<Map<String,Object>> selectReviewMemberId(MemberBean member) throws Exception;
 	
-	public List<Map<String,Object>> selectOrderMemberId(OrderBean order) throws Exception;
+	public List<Map<String,Object>> selectOrderMemberId(MemberBean member) throws Exception;
 }

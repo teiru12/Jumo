@@ -54,28 +54,28 @@ public class MyInfoServiceImpl implements MyInfoService {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectQnaMemberId(CommunityBean community) throws Exception {
+	public List<Map<String, Object>> selectQnaMemberId(MemberBean member) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CWRITER", community.getCWRITER());
+		map.put("EMAIL", member.getEMAIL());
 		
 		return memberDAO.selectQnaMemberId(map);
 	}
 
 	@Override
-	public List<Map<String, Object>> selectReviewMemberId(CommunityBean community) throws Exception {
+	public List<Map<String, Object>> selectReviewMemberId(MemberBean member) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CWRITER", community.getCWRITER());
+		map.put("EMAIL", member.getEMAIL());
 		
 		return memberDAO.selectQnaMemberId(map);
 	}
 
 	@Override
-	public List<Map<String, Object>> selectOrderMemberId(OrderBean order) throws Exception {
+	public List<Map<String, Object>> selectOrderMemberId(MemberBean member) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("OMAIL", order.getOMAIL());
+		map.put("EMAIL", member.getEMAIL());
 		
 		return memberDAO.selectQnaMemberId(map);
 	}

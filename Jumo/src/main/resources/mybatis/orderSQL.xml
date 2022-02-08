@@ -11,7 +11,7 @@
 		FROM
 			ORDERCOMMAND 
 		WHERE
-			OMAIL=#{OMAIL}
+			OMAIL=#{EMAIL}
 	]]>
 	</select>
 
