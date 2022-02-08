@@ -15,22 +15,22 @@ public class AdminMemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	// 회원 전체목록 불러오기
-	public List<Map<String, Object>> memberList(Map<String, Object> map) throws Exception{
-		return sqlSessionTemplate.selectList("member.memberList", map);
+	public List<Map<String, Object>> memberList() throws Exception{
+		return sqlSessionTemplate.selectList("member.memberList");
 	}
 	
 	//회원 검색, 상세보기
-	public List<Map<String, Object>> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("member.selectMemberId", map);
+	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
 	}
 	
 	//회원정보 수정
-	public Object updateMemberAdmin(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.update("member.updateMemberAdmin", map);
+	public void updateMemberAdmin(Map<String, Object> map) throws Exception {
+		
 	}
 	
 	//회원정보 삭제
-	public Object deleteMember(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.delete("member.deleteMember", map);
+	public void deleteMember(Map<String, Object> map) throws Exception {
+		
 	}
 }
