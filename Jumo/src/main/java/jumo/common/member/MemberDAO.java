@@ -29,7 +29,12 @@ public class MemberDAO {
 		return sqlSessionTemplate.selectOne("member.selectMemberJumin",map);
 	}
 	
-	//회원정보 수정기능
+	//일반회원 - 회원정보 수정기능
+	public void updateMember(Map<String, Object> map) throws Exception {
+		sqlSessionTemplate.update("member.updateMember", map);
+	}
+	
+	//관리자 - 회원정보 수정기능
 	public void updateMemberAdmin(Map<String, Object> map) throws Exception {
 		sqlSessionTemplate.update("member.updateMemberAdmin", map);
 	}
