@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
 
-@Service("CommnunityService")
+@Service("commnunityService")
 public class CommunityServiceImpl implements CommunityService {
 
 	@Resource(name = "communityDAO")
@@ -37,7 +37,7 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public Map<String, Object> selectQnaMemberId(CommunityBean community) throws Exception {
+	public Map<String, Object> selectQnaId(CommunityBean community) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("CIDX", community.getCIDX());
@@ -49,7 +49,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<Map<String, Object>> commentListId(CommentBean comment) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CIDX", comment.getARTICLEIDX());
+		map.put("ARTICLEIDX", comment.getARTICLEIDX());
 		
 		return communityDAO.commentListId(map);
 	}
@@ -59,10 +59,9 @@ public class CommunityServiceImpl implements CommunityService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("CIDX", community.getCTITLE());
-		map.put("CIDX", community.getCWRITER());
-		map.put("CIDX", community.getCCONTENT());
+		map.put("CWRITER", community.getCWRITER());
+		map.put("CCONTENT", community.getCCONTENT());
 		
 		communityDAO.insertQna(map);
 	}
-
 }
