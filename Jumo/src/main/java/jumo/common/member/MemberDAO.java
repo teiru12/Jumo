@@ -30,8 +30,8 @@ public class MemberDAO {
 	}
 	
 	//회원정보 수정기능
-	public void updateMemberAdmin(Map<String, Object> map) throws Exception {
-		sqlSessionTemplate.update("member.updateMemberAdmin", map);
+	public void updateMember(Map<String, Object> map) throws Exception {
+		sqlSessionTemplate.update("member.updateMember", map);
 	}
 	
 	//회원탈퇴기능
