@@ -15,8 +15,8 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//아이디 중복확인, 로그인 기능, 회원정보수정폼
-	public Map<String, Object> selectMemberId() throws Exception {
-		return sqlSessionTemplate.selectOne("member.selectMemberId");
+	public List<Map<String, Object>> selectMemberId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectList("member.selectMemberId", map);
 	}
 	
 	//회원가입 성공
