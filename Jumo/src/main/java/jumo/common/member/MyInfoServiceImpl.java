@@ -12,7 +12,7 @@ import jumo.model.CommunityBean;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
 
-@Service("joinService")
+@Service("myInfoService")
 public class MyInfoServiceImpl implements MyInfoService {
 
 	@Resource(name = "memberDAO")

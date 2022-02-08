@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jumo.model.MemberBean;
 
-@Service("joinService")
+@Service("loginService")
 public class LoginServiceImpl implements LoginService {
 	
 	@Resource(name = "memberDAO")
