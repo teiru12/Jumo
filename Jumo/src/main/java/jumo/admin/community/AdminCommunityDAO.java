@@ -83,12 +83,6 @@ public class AdminCommunityDAO  {
 	
 	
 	
-	//관리자 상품 후기 리스트
-	public List<Map<String, Object>>selectReviewProduct(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectList("community.selectReviewProduct", map);
-	}
-	
-	
 	//관리자 공지,후기 삭제 기능
 	public void deleteCommunityId(Map<String, Object> map) throws Exception {
 		sqlSessionTemplate.delete("community.deleteCommunityId", map);
