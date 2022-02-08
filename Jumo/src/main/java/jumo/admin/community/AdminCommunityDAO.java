@@ -6,24 +6,22 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Repository;
 
-@Repository("AdminCommunityDAO")
+
 public class AdminCommunityDAO  {
 
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
 	 
+	
 	//관리자 공지 게시판 리스트
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> noticeList(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectList("community.noticeList", map);
 	}
 	
 	
 	//관리자 공지 게시판 상세보기
-	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectNoticeId(Map<String, Object> map) throws Exception {
 		return  sqlSessionTemplate.selectOne("community.selectNoticeId", map);
 	}
@@ -42,28 +40,24 @@ public class AdminCommunityDAO  {
 	
 	
 	//관리자 고객후기 게시판 리스트
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>>reviewList(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectList("community.reviewList", map);
 	}
 		
 	
 	//관리자 고객센터 게시판 리스트
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>>qnaList(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectList("community.qnaList", map);
 	}
 	
 	
 	//관리자 고객센터 게시판 상세보기
-	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectQnaId(Map<String, Object> map) throws Exception {
 		return  sqlSessionTemplate.selectOne("community.selectQnaId", map);
 	}
 	
 	
 	//관리자 고객센터 댓글 보기
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>>commentListId(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectList("community.commentListId", map);
 	}
@@ -89,7 +83,6 @@ public class AdminCommunityDAO  {
 	
 	
 	//관리자 상품 후기 리스트
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>>selectReviewProduct(Map<String, Object> map) throws Exception {
 		return sqlSessionTemplate.selectList("community.selectReviewProduct", map);
 	}
