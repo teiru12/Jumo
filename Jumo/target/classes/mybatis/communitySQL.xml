@@ -4,7 +4,7 @@
 <mapper namespace="community">
 
 	<!-- noticeList(공지 게시판 리스트) -->
-	<select id="noticeList" parameterType="hashmap" resultType="hashmap">
+	<select id="noticeList" resultType="hashmap">
         <![CDATA[
 				SELECT * 
 					FROM COMMUNITY
@@ -54,7 +54,7 @@
 	
 	
 	<!-- qnaList(고객센터 게시판 리스트) -->
-	<select id="qnaList" parameterType="hashmap" resultType="hashmap">
+	<select id="qnaList" resultType="hashmap">
 	 <![CDATA[
 		SELECT *
 			FROM COMMUNITY
@@ -149,7 +149,7 @@
 
 
 	<!-- reviewList(후기 게시판 리스트) -->
-	<select id="reviewList" parameterType="hashmap" resultType="hashmap">
+	<select id="reviewList" resultType="hashmap">
 	 <![CDATA[
 			SELECT * 
 				FROM COMMUNITY 
