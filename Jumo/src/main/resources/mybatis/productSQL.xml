@@ -70,10 +70,10 @@
 		<if test="#{PSELL}!=NULL">
 			PSELL DESC  
 		</if>
-	             <if test="#{PPRICE}!=NULL">
+	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE ASC 
 	             </if>
-	             <if test="#{PPRICE}!=NULL">
+	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE DESC 
 	             </if>
 	             <if test="#{PDATE}!=NULL">
@@ -116,10 +116,10 @@
 	    <if test="#{PSELL}!=NULL">
 			PSELL DESC 
 		</if>
-	    <if test="#{PPRICE}!=NULL">
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE ASC 
 	    </if>
-	    <if test="#{PPRICE}!=NULL">
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE DESC 
 	    </if>
 	    <if test="#{PDATE}!=NULL">
@@ -149,10 +149,10 @@
 		<if test="#{PSELL}!=NULL">
 			PSELL DESC  
 		</if>
-	    <if test="#{PPRICE}!=NULL">
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE ASC 
 	    </if>
-	    <if test="#{PPRICE}!=NULL">
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
 			PPRICE DESC 
 	    </if>
 	    <if test="#{PDATE}!=NULL">

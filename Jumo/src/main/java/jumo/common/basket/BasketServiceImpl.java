@@ -1,5 +1,5 @@
 package jumo.common.basket;
 
-public class BasketServiceImpl implements BasketService {
+public class BasketServiceImpl {
 
 }
