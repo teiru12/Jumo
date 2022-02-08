@@ -15,13 +15,13 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//아이디 중복확인, 로그인 기능, 회원정보수정폼
-	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
+	public Map<String, Object> selectMemberId() throws Exception {
+		return sqlSessionTemplate.selectOne("member.selectMemberId");
 	}
 	
 	//회원가입 성공
 	public void insertMember(Map<String, Object> map) throws Exception{
-		
+		sqlSessionTemplate.insert("member.insertMember",map);
 	}
 	
 	//회원정보찾기
@@ -31,12 +31,12 @@ public class MemberDAO {
 	
 	//회원정보 수정기능
 	public void updateMemberAdmin(Map<String, Object> map) throws Exception {
-		
+		sqlSessionTemplate.update("member.updateMemberAdmin", map);
 	}
 	
 	//회원탈퇴기능
 	public void deleteMember(Map<String, Object> map) throws Exception {
-		
+		sqlSessionTemplate.delete("member.deleteMember", map);
 	}
 	
 	//고객센터

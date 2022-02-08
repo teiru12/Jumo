@@ -26,11 +26,11 @@ public class AdminMemberDAO {
 	
 	//회원정보 수정
 	public void updateMemberAdmin(Map<String, Object> map) throws Exception {
-		
+		sqlSessionTemplate.update("member.updateMemberAdmin", map);
 	}
 	
 	//회원정보 삭제
 	public void deleteMember(Map<String, Object> map) throws Exception {
-		
+		sqlSessionTemplate.delete("member.deleteMember", map);
 	}
 }
