@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("OrderDAO")
+@Repository("orderDAO")
 public class OrderDAO {
 		
 	@Resource(name="sqlSessionTemplate")
