@@ -19,8 +19,8 @@ public class OrderDAO {
 	}
 	
 	//장바구니 상품 구매 폼
-	public Map<String, Object> selectMemberOId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectMemberOId", map);
+	public Map<String, Object> selectMemberId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("member.selectMemberId", map);
 	}
 	
 	//장바구니 상품 구매 기능
@@ -34,8 +34,8 @@ public class OrderDAO {
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)
-	public Map<String, Object> selectOrderOBNumber(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectOrderOBNumber", map);
+	public Map<String, Object> selectOrderOBNUMBER(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("order.selectOrderOBNUMBER", map);
 	}
 	
 }

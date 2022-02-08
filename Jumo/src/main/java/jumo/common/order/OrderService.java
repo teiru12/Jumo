@@ -10,7 +10,7 @@ public interface OrderService {
 	   public void insertOrderDirect(OrderBean order) throws Exception;
 	    
 	   //장바구니 상품 구매 폼
-	   public Map<String, Object> selectMemberOId(OrderBean order) throws Exception;
+	   public Map<String, Object> selectMemberId(OrderBean order) throws Exception;
 	   
 	   //장바구니 상품 구매 기능
 	   public void insertOrderBasket(OrderBean order) throws Exception;
