@@ -9,7 +9,7 @@
 <body>
 basketOrderForm
 <br>
-<a href="/basketOrder.al">상품 구매 - 장바구니 바로 구매 기능</a><br>
-<a href="/basketList.al">취소 - 장바구니 페이지</a><br>
+<a href="/Jumo/basketOrder.al">상품 구매 - 장바구니 바로 구매 기능</a><br>
+<a href="/Jumo/basketList.al">취소 - 장바구니 페이지</a><br>
 </body>
 </html>

@@ -8,6 +8,6 @@
 </head>
 <body>
 logout
-<a href="/main.al">메인페이지로 이동</a><br>
+<a href="/Jumo/main.al">메인페이지로 이동</a><br>
 </body>
 </html>

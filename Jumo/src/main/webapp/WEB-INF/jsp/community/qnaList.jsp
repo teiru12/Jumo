@@ -9,7 +9,7 @@
 <body>
 qnaList
 <br>
-<a href="/qnaDetail.al">고객센터 게시판 상세보기</a><br>
-<a href="/qnaForm.al">고객센터 게시판 글쓰기</a><br>
+<a href="/Jumo/qnaDetail.al">고객센터 게시판 상세보기</a><br>
+<a href="/Jumo/qnaForm.al">고객센터 게시판 글쓰기</a><br>
 </body>
 </html>

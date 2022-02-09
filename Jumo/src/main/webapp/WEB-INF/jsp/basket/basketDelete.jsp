@@ -9,6 +9,6 @@
 <body>
 basketDelete
 <br>
-<a href="/basketList.al">장바구니 리스트로 이동</a><br>
+<a href="/Jumo/basketList.al">장바구니 리스트로 이동</a><br>
 </body>
 </html>

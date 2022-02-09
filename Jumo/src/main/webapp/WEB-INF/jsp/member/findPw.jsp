@@ -8,6 +8,6 @@
 </head>
 <body>
 findPw
-<a href="/findPwResult.al">비밀번호 찾기 결과 페이지로 이동</a><br>
+<a href="/Jumo/findPwResult.al">비밀번호 찾기 결과 페이지로 이동</a><br>
 </body>
 </html>
