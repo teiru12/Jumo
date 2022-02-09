@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
 
-@Service("commnunityService")
+@Service("communityService")
 public class CommunityServiceImpl implements CommunityService {
 
 	@Resource(name = "communityDAO")

@@ -6,12 +6,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import jumo.common.community.CommunityDAO;
+import org.springframework.stereotype.Service;
+
 import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
 
-
+@Service("productService")
 public class ProductServiceImpl implements ProductService{
 	
 	@Resource(name="productDAO")
