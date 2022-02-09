@@ -9,7 +9,7 @@
 <body>
 adminNoticeList
 <br>
-<a href="/adminNoticeWriteForm.al">글쓰기</a><br>
-<a href="/adminNoticeDetail.al">공지사항 상세보기</a><br>
+<a href="/Jumo/adminNoticeWriteForm.al">글쓰기</a><br>
+<a href="/Jumo/adminNoticeDetail.al">공지사항 상세보기</a><br>
 </body>
 </html>

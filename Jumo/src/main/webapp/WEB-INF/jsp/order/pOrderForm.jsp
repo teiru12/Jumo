@@ -9,7 +9,7 @@
 <body>
 pOrderForm
 <br>
-<a href="/pOrder.al">상품 구매 - 상품 바로 구매 기능</a><br>
-<a href="/pDetail.al">취소 - 상품 디테일 페이지</a><br>
+<a href="/Jumo/pOrder.al">상품 구매 - 상품 바로 구매 기능</a><br>
+<a href="/Jumo/pDetail.al">취소 - 상품 디테일 페이지</a><br>
 </body>
 </html>

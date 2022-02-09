@@ -9,7 +9,7 @@
 <body>
 adminOrderDetail
 <br>
-<a href="/adminOrderModify.al">저장 - 주문정보 수정 기능</a><br>
-<a href="/adminOrderList.al">취소 - 주문정보 리스트</a><br>
+<a href="/Jumo/adminOrderModify.al">저장 - 주문정보 수정 기능</a><br>
+<a href="/Jumo/adminOrderList.al">취소 - 주문정보 리스트</a><br>
 </body>
 </html>

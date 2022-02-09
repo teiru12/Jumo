@@ -8,6 +8,6 @@
 </head>
 <body>
 myInfoQna
-<a href="/myPage.al">마이페이지 기본 페이지</a><br>
+<a href="/Jumo/myPage.al">마이페이지 기본 페이지</a><br>
 </body>
 </html>

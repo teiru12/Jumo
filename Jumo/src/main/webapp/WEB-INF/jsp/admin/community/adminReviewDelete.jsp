@@ -9,6 +9,6 @@
 <body>
 adminReviewDelete
 <br>
-<a href="/adminReviewList.al">후기 게시판 리스트로 이동</a><br>
+<a href="/Jumo/adminReviewList.al">후기 게시판 리스트로 이동</a><br>
 </body>
 </html>

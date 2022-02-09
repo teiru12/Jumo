@@ -9,6 +9,6 @@
 <body>
 pReview
 <br>
-<a href="/pDetail.al">상품 디테일로 돌아가기</a><br>
+<a href="/Jumo/pDetail.al">상품 디테일로 돌아가기</a><br>
 </body>
 </html>

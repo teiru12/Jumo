@@ -9,6 +9,6 @@
 <body>
 noticeList
 <br>
-<a href="/noticeDetail.al">공지 게시판 상세보기</a><br>
+<a href="/Jumo/noticeDetail.al">공지 게시판 상세보기</a><br>
 </body>
 </html>

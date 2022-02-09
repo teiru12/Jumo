@@ -9,6 +9,6 @@
 <body>
 adminNoticeWrite
 <br>
-<a href="/adminNoticeList.al">공지사항 리스트</a><br>
+<a href="/Jumo/adminNoticeList.al">공지사항 리스트</a><br>
 </body>
 </html>
