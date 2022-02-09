@@ -1,20 +1,38 @@
 package jumo.common.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//
+import jumo.model.MemberBean;
+
 @Controller
 public class MemberController {
+	
+	@Resource(name="joinService")
+	private JoinService joinService;
 
 	@RequestMapping(value = "/joinForm.al")
 	public String joinForm (Model model) {
+	
 		return "member/joinForm";
 	}
 	
 	@RequestMapping(value = "/confirmId.al")
-	public String conformId (Model model) {
+	public String conformId(MemberBean member, Model model) throws Exception {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberBean memberBean = new MemberBean();
+		
+		map = joinService.selectMemberId(member);
+		
+		// memberBean = mapToMember(map);
+		
 		return "member/confirmId";
 	}
 	
