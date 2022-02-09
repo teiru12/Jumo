@@ -98,12 +98,11 @@ public class OrderController {
 		list = orderService.selectOrderOBNumber(order);
 		
 		for(Map<String, Object> mapToOrder : list) {
-		orderBeanList.add(MapToBean.mapToBasket(mapToOrder));
+			orderBeanList.add(MapToBean.mapToOrder(mapToOrder));
 		}
 		
 		model.addAttribute("orderBeanList", orderBeanList);
 	
-		
 		return "/order/orderResult";
 	}
 }

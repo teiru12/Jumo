@@ -45,6 +45,8 @@ public class MemberController {
 		
 		memberBean = MapToBean.mapToMember(map);
 		
+		model.addAttribute("memberBean", memberBean);
+		
 		return "member/confirmId";
 	}
 	
@@ -72,6 +74,8 @@ public class MemberController {
 		
 		memberBean = MapToBean.mapToMember(map);
 		
+		model.addAttribute("memberBean", memberBean);
+		
 		return "member/login";
 	}
 	
@@ -94,6 +98,8 @@ public class MemberController {
 		
 		map = loginService.selectMemberJumin(member);
 		
+		model.addAttribute("memberBean", memberBean);
+		
 		return "member/findIdResult";
 	}
 	
@@ -111,6 +117,8 @@ public class MemberController {
 		
 		map = loginService.selectMemberJumin(member);
 		
+		model.addAttribute("memberBean", memberBean);
+		
 		return "member/findPwResult";
 	}
 		
@@ -127,6 +135,8 @@ public class MemberController {
 		memberBean = MapToBean.mapToMember(map);
 		
 		map = myInfoService.selectMemberId(member);
+		
+		model.addAttribute("memberBean", memberBean);
 		
 		return "member/myInfoModifyForm";
 	}
@@ -178,7 +188,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/myInfoOrder.al")
-	public String myInfoOrder (MemberBean member, Model model) {
+	public String myInfoOrder (MemberBean member, Model model) throws Exception {
 		List<Map<String, Object>> list = myInfoService.selectOrderMemberId(member);
 	
 		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
+import jumo.util.MapToBean;
 
 @Controller
 public class ProductController {

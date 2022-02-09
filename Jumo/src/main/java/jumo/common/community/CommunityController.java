@@ -60,13 +60,11 @@ public class CommunityController {
 		list = communityService.qnaList();
 		
 		
-		 for(Map<String, Object> mapObject : list) {
+		for(Map<String, Object> mapObject : list) {
 			 qnaBeanList.add(	 MapToBean.mapToCommunity(mapObject) ); 
-		}
-		
+		}		
 		
 		model.addAttribute("qnaBeanList", qnaBeanList);
-		
 		
 		return "community/qnaList";
 	}
