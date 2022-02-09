@@ -11,4 +11,9 @@ public class MainController {
 	public String main(Model model) {
 		return "main";
 	}
+	
+	@RequestMapping(value="/adminMain.al")
+	public String adminMain(Model model) {
+		return "admin/adminMain";
+	}
 }
