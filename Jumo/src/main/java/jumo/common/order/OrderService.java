@@ -1,6 +1,7 @@
 package jumo.common.order;
 
 import java.util.Map;
+import java.util.List;
 
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
@@ -20,5 +21,5 @@ public interface OrderService {
 	   public Map<String, Object> selectOrderOId(OrderBean order) throws Exception;
 	   
 	   //상품 구매 결과(selectOrderOBNumber)
-	   public Map<String, Object> selectOrderOBNumber(OrderBean order) throws Exception;
+	   public List<Map<String, Object>> selectOrderOBNumber(OrderBean order) throws Exception;
 }

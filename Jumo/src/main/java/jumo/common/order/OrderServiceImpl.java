@@ -2,6 +2,7 @@ package jumo.common.order;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -69,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Map<String, Object> selectOrderOBNumber(OrderBean order) throws Exception {
+	public List<Map<String, Object>> selectOrderOBNumber(OrderBean order) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OBNUMBER", order.getOBNUMBER());
 		return orderDAO.selectOrderOBNumber(map);

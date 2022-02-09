@@ -1,6 +1,7 @@
 package jumo.common.order;
 
 import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -34,8 +35,8 @@ public class OrderDAO {
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)
-	public Map<String, Object> selectOrderOBNumber(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectOrderOBNumber", map);
+	public List<Map<String, Object>> selectOrderOBNumber(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectList("order.selectOrderOBNumber", map);
 	}
 	
 }
