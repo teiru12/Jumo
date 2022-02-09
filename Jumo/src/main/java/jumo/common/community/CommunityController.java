@@ -35,7 +35,7 @@ public class CommunityController {
 		
 		model.addAttribute("noticeBeanList", noticeBeanList);
 		
-		return "community/noticeList";
+		return "noticeList";
 	}
 
 
@@ -49,7 +49,7 @@ public class CommunityController {
 		communityBean = MapToBean.mapToCommunity(map);
 		model.addAttribute("communityBean", communityBean);
 		
-		return "community/noticeDetail";
+		return "noticeDetail";
 	}
 	
 	
@@ -66,7 +66,7 @@ public class CommunityController {
 		
 		model.addAttribute("qnaBeanList", qnaBeanList);
 		
-		return "community/qnaList";
+		return "qnaList";
 	}
 	
 	
@@ -81,13 +81,13 @@ public class CommunityController {
 		
 		model.addAttribute("communityBean", communityBean);
 		
-		return "community/qnaDetail";
+		return "qnaDetail";
 	}
 	
 	
 	@RequestMapping(value="/qnaForm.al")
 	public String qnaForm(Model model) {
-		return "community/qnaForm";
+		return "qnaForm";
 	}
 	
 	
@@ -97,6 +97,6 @@ public class CommunityController {
 		
 		communityService.insertQna(communityBean);
 		
-		return "community/qna";
+		return "/community/qna";
 	}
 }

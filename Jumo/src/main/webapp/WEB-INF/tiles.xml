@@ -6,18 +6,12 @@
        
 <tiles-definitions>
 
-	<definition name="main_layout" template="/WEB-INF/jsp/layout/main_base.jsp">
+	<definition name="main_layout" template="/WEB-INF/jsp/layout/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/jsp/layout/main_header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/jsp/layout/main_footer.jsp" />
-		<put-attribute name="body" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/main.jsp" />
 	</definition>
 	
-	<definition name="main" extends="main_layout">		
-		<put-attribute name="body"
-			value="/WEB-INF/jsp/main.jsp" />
-	</definition>
-
-
 	<!-- Admin -->
 	
 	<definition name="adminMain" extends="main_layout">		

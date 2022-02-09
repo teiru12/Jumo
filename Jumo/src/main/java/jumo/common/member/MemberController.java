@@ -32,7 +32,7 @@ public class MemberController {
 	@RequestMapping(value = "/joinForm.al")
 	public String joinForm (Model model) {
 	
-		return "member/joinForm";
+		return "joinForm";
 	}
 	
 	@RequestMapping(value = "/confirmId.al")
@@ -47,7 +47,7 @@ public class MemberController {
 		
 		model.addAttribute("memberBean", memberBean);
 		
-		return "member/confirmId";
+		return "/member/confirmId";
 	}
 	
 	@RequestMapping(value = "/joinSuccess.al")
@@ -55,14 +55,12 @@ public class MemberController {
 		
 		joinService.insertMember(member);
 		
-		return "member/joinSuccess";
-	}
-	
-	
+		return "/member/joinSuccess";
+	}	
 	
 	@RequestMapping(value = "/loginForm.al")
 	public String loginForm (Model model) throws Exception {
-		return "member/loginForm";
+		return "loginForm";
 	}
 	
 	@RequestMapping(value = "/login.al")
@@ -76,17 +74,17 @@ public class MemberController {
 		
 		model.addAttribute("memberBean", memberBean);
 		
-		return "member/login";
+		return "/member/login";
 	}
 	
 	@RequestMapping(value = "/logout.al")
 	public String logout (Model model) throws Exception {
-		return "member/logout";
+		return "/member/logout";
 	}
 	
 	@RequestMapping(value = "/findId.al")
 	public String findId (Model model) throws Exception {
-		return "member/findId";
+		return "findId";
 	}
 	
 	@RequestMapping(value = "/findIdResult.al")
@@ -100,12 +98,12 @@ public class MemberController {
 		
 		model.addAttribute("memberBean", memberBean);
 		
-		return "member/findIdResult";
+		return "findIdResult";
 	}
 	
 	@RequestMapping(value = "/findPw.al")
 	public String findPw (Model model) throws Exception {
-		return "member/findPw";
+		return "findPw";
 	}
 	
 	@RequestMapping(value = "/findPwResult.al")
@@ -119,12 +117,12 @@ public class MemberController {
 		
 		model.addAttribute("memberBean", memberBean);
 		
-		return "member/findPwResult";
+		return "findPwResult";
 	}
 		
 	@RequestMapping(value = "/myPage.al")
 	public String myPage (Model model) throws Exception {
-		return "member/myPage";
+		return "myPage";
 	}
 	
 	@RequestMapping(value = "/myInfoModifyForm.al")
@@ -138,7 +136,7 @@ public class MemberController {
 		
 		model.addAttribute("memberBean", memberBean);
 		
-		return "member/myInfoModifyForm";
+		return "myInfoModifyForm";
 	}
 	
 	@RequestMapping(value = "/myInfoModify.al")
@@ -146,7 +144,7 @@ public class MemberController {
 		
 		myInfoService.updateMember(member);
 		
-		return "member/myInfoModify";
+		return "/member/myInfoModify";
 	}
 	
 	@RequestMapping(value = "/myInfoDelete.al")
@@ -154,7 +152,7 @@ public class MemberController {
 		
 		myInfoService.deleteMember(member);
 		
-		return "member/myInfoDelete";
+		return "/member/myInfoDelete";
 	}
 	
 	@RequestMapping(value = "/myInfoQna.al")
@@ -169,7 +167,7 @@ public class MemberController {
 	
 		model.addAttribute("qnaBeanList", qnaBeanList);
 		
-		return "member/myInfoQna";
+		return "myInfoQna";
 	}
 	
 	@RequestMapping(value = "/myInfoReview.al")
@@ -184,7 +182,7 @@ public class MemberController {
 
 		model.addAttribute("reviewBeanList", reviewBeanList);
 		
-		return "member/myInfoReview";
+		return "myInfoReview";
 	}
 	
 	@RequestMapping(value = "/myInfoOrder.al")
@@ -199,7 +197,7 @@ public class MemberController {
 
 		model.addAttribute("orderBeanList", orderBeanList);
 		
-		return "member/myInfoOrder";
+		return "myInfoOrder";
 	}
 	
 }

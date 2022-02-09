@@ -39,7 +39,7 @@ public class ProductController {
 		}
 		model.addAttribute("productBeanList", productBeanList);
 		
-		return "/product/allList";
+		return "allList";
 	}
 	
 	@RequestMapping(value="/allList.al", method=RequestMethod.POST)
@@ -69,7 +69,7 @@ public class ProductController {
 		
 		model.addAttribute("searchList", searchList);
 	
-		return "/product/allList";
+		return "allList";
 	}
 	
 	@RequestMapping("/aclList.al")
@@ -85,7 +85,7 @@ public class ProductController {
 		}
 		model.addAttribute("productBeanList", productBeanList);
 		
-		return "/product/aclList";
+		return "aclList";
 	}
 	
 	@RequestMapping(value="/aclList.al", method=RequestMethod.POST)
@@ -114,7 +114,7 @@ public class ProductController {
 		model.addAttribute("pPriceMax", pPriceMax);
 		
 		model.addAttribute("searchList", searchList);
-		return "/product/aclList";
+		return "aclList";
 	}
 	
 	@RequestMapping("/etcList.al")
@@ -130,7 +130,7 @@ public class ProductController {
 		}
 		model.addAttribute("productBeanList", productBeanList);
 		
-		return "/product/etcList";
+		return "etcList";
 	}
 	
 	@RequestMapping(value="/etcList.al", method=RequestMethod.POST)
@@ -147,7 +147,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("etcBeanList", etcBeanList);
-		return "/product/etcList";
+		return "etcList";
 	}
 	
 	@RequestMapping("/pDetail.al")
@@ -169,7 +169,7 @@ public class ProductController {
 		model.addAttribute("productBean", productBean);
 		model.addAttribute("reviewBeanList", reviewBeanList);
 		
-		return "/product/pDetail";
+		return "pDetail";
 	}
 
 
@@ -184,7 +184,7 @@ public class ProductController {
 	@RequestMapping("/pReviewForm.al")
 	public String pReviewForm(Model model) throws Exception{
 		
-		return "/product/pReviewForm";
+		return "pReviewForm";
 	}
 	
 	@RequestMapping("/pReview.al")

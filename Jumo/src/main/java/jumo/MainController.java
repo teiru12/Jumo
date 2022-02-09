@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
 	@RequestMapping(value="/main.al")
-	public String main(Model model) {
-		return "main";
+	public String main_layout(Model model) {
+		return "main_layout";
 	}
 	
 	@RequestMapping(value="/adminMain.al")
 	public String adminMain(Model model) {
-		return "admin/adminMain";
+		return "adminMain";
 	}
 }

@@ -30,7 +30,7 @@ public class BasketController {
 		
 		model.addAttribute("basketBeanList", basketBeanList);
 		
-		return "/basket/basketList";
+		return "basketList";
 	}
 	
 	@RequestMapping(value="/basketModify.al")

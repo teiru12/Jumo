@@ -40,7 +40,7 @@ public class OrderController {
 		model.addAttribute("memberBean", memberBean);
 		
 		
-		return "/order/pOrderForm";
+		return "pOrderForm";
 	}
 	
 	
@@ -56,7 +56,7 @@ public class OrderController {
 		memberBean = MapToBean.mapToMember(map);
 		model.addAttribute("memberBean", memberBean);
 		
-		return "/order/basketOrderForm";
+		return "basketOrderForm";
 	}
 	
 	
@@ -103,6 +103,6 @@ public class OrderController {
 		
 		model.addAttribute("orderBeanList", orderBeanList);
 	
-		return "/order/orderResult";
+		return "orderResult";
 	}
 }
