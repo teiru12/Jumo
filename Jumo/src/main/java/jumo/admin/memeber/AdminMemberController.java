@@ -45,6 +45,8 @@ public class AdminMemberController {
 		
 		map = adminMemberService.selectMemberId(member);
 		
+		memberBean = MapToBean.mapToMember(map);
+		
 		model.addAttribute("memberBean", memberBean);
 
 		return "memberList";
@@ -56,6 +58,8 @@ public class AdminMemberController {
 		MemberBean memberBean = new MemberBean();
 		
 		map = adminMemberService.selectMemberId(member);
+		
+		memberBean = MapToBean.mapToMember(map);
 		
 		model.addAttribute("memberBean", memberBean);
 		
