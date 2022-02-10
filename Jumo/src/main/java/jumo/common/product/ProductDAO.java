@@ -18,7 +18,7 @@ public class ProductDAO {
 	public List<Map<String, Object>> selectProductBest()
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.selectProductBest");
+			"product.selectProductBest");
 	}
 	
 	public Map<String, Object> selectProductId(Map<String, Object> map)
@@ -30,37 +30,37 @@ public class ProductDAO {
 	public List<Map<String, Object>> allList()
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.allList");
+			"product.allList");
 	}
 
 	public List<Map<String, Object>> allListSearch(Map<String, Object> map)
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.allListSearch", map);
+			"product.allListSearch", map);
 	}
 	
 	public List<Map<String, Object>> aclList()
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.aclList");
+			"product.aclList");
 	}	
 	
 	public List<Map<String, Object>> aclListSearch(Map<String, Object> map)
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.aclListSearch", map);
+			"product.aclListSearch", map);
 	}
 	
 	public List<Map<String, Object>> etcList()
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.etcList");
+			"product.etcList");
 	}	
 	
 	public List<Map<String, Object>> etcListSearch(Map<String, Object> map)
 			throws Exception {
 		return sqlSessionTemplate.selectList(
-			"prouduct.etcListSearch", map);
+			"product.etcListSearch", map);
 	}
 	
 	public List<Map<String, Object>> selectReviewProduct(Map<String, Object> map)
