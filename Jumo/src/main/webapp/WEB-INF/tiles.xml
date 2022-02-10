@@ -76,6 +76,8 @@
 	
 	<!-- Admin Community -->
 	
+	<!-- Notice -->
+	
 	<definition name="adminNoticeDetail" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminNoticeDetail.jsp" />
@@ -86,15 +88,17 @@
 			value="/WEB-INF/jsp/admin/community/adminNoticeList.jsp" />
 	</definition>
 	
-	<definition name="adminModifyForm" extends="main_layout">		
+	<definition name="adminNoticeModifyForm" extends="main_layout">		
 		<put-attribute name="body"
-			value="/WEB-INF/jsp/admin/community/adminModifyForm.jsp" />
+			value="/WEB-INF/jsp/admin/community/adminNoticeModifyForm.jsp" />
 	</definition>
 	
-	<definition name="adminWriteForm" extends="main_layout">		
+	<definition name="adminNoticeWriteForm" extends="main_layout">		
 		<put-attribute name="body"
-			value="/WEB-INF/jsp/admin/community/adminWriteForm.jsp" />
+			value="/WEB-INF/jsp/admin/community/adminNoticeWriteForm.jsp" />
 	</definition>
+
+	<!-- Qna -->
 
 	<definition name="adminQnaDetail" extends="main_layout">		
 		<put-attribute name="body"
@@ -105,6 +109,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminQnaList.jsp" />
 	</definition>
+	
+	<!-- Review -->	
 	
 	<definition name="adminReviewList" extends="main_layout">		
 		<put-attribute name="body"
