@@ -1,20 +1,29 @@
 package jumo.util.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jumo.model.OrderBean;
 
 public class OrderValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+		return OrderBean.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
+	
 		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "OMAIL", "required");
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "OPRODUCT", "required");
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "OADDRESS1", "required");
+		
+
 	}
 
 }
