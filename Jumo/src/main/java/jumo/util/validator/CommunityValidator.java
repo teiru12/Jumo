@@ -1,20 +1,23 @@
 package jumo.util.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jumo.model.CommunityBean;
 
 public class CommunityValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+		return CommunityBean.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
-		
+	    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "CTITLE", "required");
+	    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "CWRITER", "required");
+	    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "CCONTENT", "required");    
 	}
 
 }
