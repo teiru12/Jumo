@@ -1,20 +1,25 @@
 package jumo.util.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jumo.model.ProductBean;
 
 public class ProductValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+		return ProductBean.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
-		
+	
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "PNAME", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "PIMAGE", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "PCOM", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "PLOC", "required");
 	}
 	
 }
