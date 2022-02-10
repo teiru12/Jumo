@@ -96,12 +96,12 @@ public class AdminProductController {
 		
 		List<Map<String, Object>> list = adminProductService.allList();
 		
-		List<ProductBean> productBeanList = new ArrayList<ProductBean>();
+		List<ProductBean> sellList = new ArrayList<ProductBean>();
 		
 		for(Map<String, Object> mapObject : list) {
-			productBeanList.add(MapToBean.mapToProduct(mapObject));
+			sellList.add(MapToBean.mapToProduct(mapObject));
 		}
-		model.addAttribute("productBeanList", productBeanList);
+		model.addAttribute("sellList", sellList);
 		
 		return "adminSellList";
 	}	
