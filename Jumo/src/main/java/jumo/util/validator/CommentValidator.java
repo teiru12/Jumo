@@ -1,20 +1,22 @@
 package jumo.util.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import jumo.model.CommentBean;
 
 public class CommentValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
-		return false;
+		return CommentBean.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
-		
+	    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "COMMENTWRITER", "required");
+	    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "COMMENTT", "required");
 	}
 	
 }
