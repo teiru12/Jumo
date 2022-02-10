@@ -23,13 +23,13 @@ public class AdminReviewController {
 	public String adminReviewList(Model model) throws Exception{
 		List<Map<String, Object>> list = adminCommunityService.reviewList();
 		
-		List<CommunityBean> communityBeanList = new ArrayList<CommunityBean>();
+		List<CommunityBean> reviewList = new ArrayList<CommunityBean>();
 		
 		for(Map<String,Object> mapObject : list) {
-			communityBeanList.add(MapToBean.mapToCommunity(mapObject));
+			reviewList.add(MapToBean.mapToCommunity(mapObject));
 		}
 		
-		model.addAttribute("communityBeanList", communityBeanList);
+		model.addAttribute("reviewList", reviewList);
 		
 		return "adminReviewList";
 	}
@@ -38,7 +38,6 @@ public class AdminReviewController {
 	@RequestMapping(value="/adminReviewDelete.al")
 	public String adminReviewDelete(CommunityBean community, Model model) throws Exception{
 		adminCommunityService.deleteCommunityId(community);
-		
 		return "admin/community/adminReviewDelete";
 	}
 	
