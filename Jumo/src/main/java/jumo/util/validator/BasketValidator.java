@@ -20,7 +20,6 @@ public class BasketValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "BEMAIL", "required");
 		
-		
 	}
 
 }
