@@ -5,15 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
+import jumo.util.validator.CommunityValidator;
 
 @Controller
 public class CommunityController {
@@ -92,8 +93,15 @@ public class CommunityController {
 	
 	
 	@RequestMapping(value="/qna.al")
-	public String qna(Model model, CommunityBean community)throws Exception {
+	public String qna(Model model, CommunityBean community,
+			BindingResult result)throws Exception {
 		CommunityBean communityBean = new CommunityBean();
+		
+		new CommunityValidator().validate(community, result);
+		
+		if(result.hasErrors()) {
+			return "/qnaForm.al";
+		}
 		
 		communityService.insertQna(communityBean);
 		

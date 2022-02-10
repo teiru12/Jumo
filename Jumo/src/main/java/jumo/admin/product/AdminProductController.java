@@ -9,12 +9,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.ProductBean;
 import jumo.util.MapToBean;
+import jumo.util.validator.ProductValidator;
 
 @Controller
 public class AdminProductController {
@@ -62,7 +64,14 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value="/adminPWrite.al")
-	public String adminPWrite(ProductBean product, Model model) throws Exception {
+	public String adminPWrite(ProductBean product, BindingResult result,
+			Model model) throws Exception {
+		
+		new ProductValidator().validate(product, result);
+		
+		if(result.hasErrors()) {
+			return "/adminPWriteForm.al";
+		}
 		
 		adminProductService.insertProduct(product);
 		
@@ -84,7 +93,15 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value="/adminPModify.al")
-	public String adminPModify(Model model, ProductBean product) throws Exception {
+	public String adminPModify(ProductBean product, BindingResult result,
+			Model model) throws Exception {
+		
+		new ProductValidator().validate(product, result);
+		
+		if(result.hasErrors()) {
+			// /adminPModifyForm.al가 ProductBean을 파라미터로 받아 오류발생 가능성 있음
+			return "/adminPModifyForm.al";
+		}
 		
 		adminProductService.updateProduct(product);
 		

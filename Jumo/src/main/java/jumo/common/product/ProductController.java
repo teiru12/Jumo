@@ -1,15 +1,14 @@
 package jumo.common.product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +17,8 @@ import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
 import jumo.util.MapToBean;
+import jumo.util.validator.BasketValidator;
+import jumo.util.validator.CommunityValidator;
 
 @Controller
 public class ProductController {
@@ -174,7 +175,18 @@ public class ProductController {
 
 
 	@RequestMapping(value="/putBasket.al", method=RequestMethod.POST)
-	public String putBasket(BasketBean basket, Model model) throws Exception{
+	public String putBasket(BasketBean basket, BindingResult result,
+			Model model) throws Exception{
+		
+		new BasketValidator().validate(basket, result);
+		
+		if(result.hasErrors()) {
+			return "/allList.al";
+			// pDetail 페이지로 넘어가기 위해서는 ProductBean, CommunityBean 객체를 넘겨줘야하는데
+			// 바로 리턴하면 오류발생
+			// 자바 스크립트로 오류체크
+			// return "pDetail";
+		}
 		
 		productService.insertBasket(basket);
 		
@@ -188,7 +200,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/pReview.al")
-	public String pReview(CommunityBean community, Model model) throws Exception{
+	public String pReview(CommunityBean community, BindingResult result,
+			Model model) throws Exception{
+		
+		new CommunityValidator().validate(community, result);
+		
+		if(result.hasErrors()) {
+			return "pReviewForm";
+		}
 		
 		productService.insertReview(community);
 		

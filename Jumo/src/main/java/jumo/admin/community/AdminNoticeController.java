@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
+import jumo.util.validator.CommunityValidator;
 
 @Controller
 public class AdminNoticeController {
@@ -41,10 +43,15 @@ public class AdminNoticeController {
 	
 	
 	@RequestMapping(value="/adminNoticeWrite.al")
-	public String adminNoticeWrite(CommunityBean community, Model model)
-			throws Exception {
+	public String adminNoticeWrite(CommunityBean community, BindingResult result,
+			Model model) throws Exception {
 		
 		// Validator로 유효성 검사
+		new CommunityValidator().validate(community, result);
+		
+		if(result.hasErrors()) {
+			return "adminNoticeWriteForm";
+		}		
 		
 		adminComService.insertNotice(community);
 		
@@ -66,10 +73,19 @@ public class AdminNoticeController {
 	
 	
 	@RequestMapping(value="/adminNoticeModify.al")
-	public String adminNoticeModify(CommunityBean community, Model model)
-			throws Exception {
+	public String adminNoticeModify(CommunityBean community, BindingResult result,
+			Model model) throws Exception {
 		
 		// Validator로 유효성 검사
+		new CommunityValidator().validate(community, result);
+		
+		if(result.hasErrors()) {
+			return "adminNoticeList";
+			// adminNoticeModifyForm 페이지로 넘어가기 위해서는 CommunityBean 객체를 넘겨줘야하는데
+			// 바로 리턴하면 오류발생
+			// 자바 스크립트로 오류체크
+			// return "adminNoticeModifyForm";
+		}	
 		
 		adminComService.updateNoticeId(community);
 		
@@ -80,8 +96,6 @@ public class AdminNoticeController {
 	@RequestMapping(value="/adminNoticeDelete.al")
 	public String adminNoticeDelete(CommunityBean community, Model model)
 			throws Exception {
-		
-		// Validator로 유효성 검사
 		
 		adminComService.deleteCommunityId(community);
 		

@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.model.CommunityBean;
@@ -16,6 +17,7 @@ import jumo.model.MemberBean;
 import jumo.model.OrderBean;
 
 import jumo.util.MapToBean;
+import jumo.util.validator.MemberValidator;
 
 @Controller
 public class MemberController {
@@ -51,7 +53,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/joinSuccess.al")
-	public String joinSuccess (MemberBean member, Model model) throws Exception {
+	public String joinSuccess (MemberBean member, BindingResult result,
+			Model model) throws Exception {
+		
+		new MemberValidator().validate(member, result);
+		
+		if(result.hasErrors()) {
+			return "/joinForm.al";
+		}
 		
 		joinService.insertMember(member);
 		
@@ -128,6 +137,8 @@ public class MemberController {
 	@RequestMapping(value = "/myInfoModifyForm.al")
 	public String myInfoModifyForm (MemberBean member, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+			// memberBean을 세션으로 입력받도록 변환
 		MemberBean memberBean = new MemberBean();
 		
 		memberBean = MapToBean.mapToMember(map);
@@ -140,7 +151,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/myInfoModify.al")
-	public String myInfoModify (MemberBean member, Model model) throws Exception {
+	public String myInfoModify (MemberBean member, BindingResult result, 
+			Model model) throws Exception {
+		
+		new MemberValidator().validate(member, result);
+		
+		if(result.hasErrors()) {
+			return "/myInfoModifyForm.al";
+		}
 		
 		myInfoService.updateMember(member);
 		

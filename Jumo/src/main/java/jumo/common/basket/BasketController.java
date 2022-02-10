@@ -7,10 +7,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.model.BasketBean;
 import jumo.util.MapToBean;
+
+import jumo.util.validator.BasketValidator;
 
 @Controller
 public class BasketController {
@@ -34,7 +37,18 @@ public class BasketController {
 	}
 	
 	@RequestMapping(value="/basketModify.al")
-	public String basketModify(BasketBean basket, Model model) throws Exception {
+	public String basketModify(BasketBean basket, BindingResult result,
+			Model model) throws Exception {
+		
+		new BasketValidator().validate(basket, result);
+		
+		if(result.hasErrors()) {
+			// basketList.al이 파라미터로 BasketBean을 받아서 오류가 발생할 수 있음
+			// BasketBean을 파라미터로 빼고 메서드 내에서 BasketBean을 생성한 뒤
+			// 세션을 이용하여 BEMail값을 저장할 수 있도록 변경 basketBean.setBEMAIL() = request.getSession("EMAIL");
+			// basketService.basketList(basketBean);
+			return "/basketList.al";
+		}
 		
 		basketService.updateBasket(basket);		
 		

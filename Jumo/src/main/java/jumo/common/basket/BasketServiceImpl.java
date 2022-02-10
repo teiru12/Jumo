@@ -19,12 +19,7 @@ public class BasketServiceImpl implements BasketService {
 	public List<Map<String, Object>> basketList(BasketBean basket) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("BNAME", basket.getBNAME());
-		map.put("BID", basket.getBID());
-		map.put("BPRICE", basket.getBPRICE());
-		map.put("BSALE", basket.getBSALE());
 		map.put("BEMAIL", basket.getBEMAIL());
-		map.put("BCOUNT", basket.getBCOUNT());
 						
 		return basketDAO.basketList(map);
 	}

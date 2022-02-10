@@ -9,12 +9,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jumo.model.MemberBean;
 import jumo.util.MapToBean;
-
+import jumo.util.validator.MemberValidator;
 
 @Controller
 public class AdminMemberController {
@@ -67,8 +68,15 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value = "/memberModify.al")
-	public String memberModify (MemberBean member) throws Exception {
+	public String memberModify (MemberBean member, BindingResult result)
+			throws Exception {
 
+		new MemberValidator().validate(member, result);
+		
+		if(result.hasErrors()) {
+			return "./memberList.al";
+		}
+		
 		adminMemberService.updateMemberAdmin(member);
 		
 		return "admin/member/memberModify";

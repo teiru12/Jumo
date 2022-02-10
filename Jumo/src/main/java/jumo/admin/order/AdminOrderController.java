@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.OrderBean;
 import jumo.util.MapToBean;
-
+import jumo.util.validator.OrderValidator;
 
 @Controller
 public class AdminOrderController {
@@ -70,7 +71,15 @@ public class AdminOrderController {
 		return "adminOrderDetail";
 	}
 	@RequestMapping("/adminOrderModify.al")
-	public String adminOrderModify (OrderBean order, Model model) throws Exception{
+	public String adminOrderModify (OrderBean order, BindingResult result, 
+			Model model) throws Exception{
+		
+		new OrderValidator().validate(order, result);
+		
+		if(result.hasErrors()) {
+			return "/adminOrderList.al";
+		}
+		
 		adminOrderService.updateOrderId(order);
 		
 		return "/admin/order/adminOrderModify";

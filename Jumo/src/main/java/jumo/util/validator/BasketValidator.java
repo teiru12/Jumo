@@ -14,11 +14,16 @@ public class BasketValidator implements Validator {
 	}
 
 	@Override
-	public void validate(Object target, Errors errors) {		
+	public void validate(Object target, Errors errors) {	
+		BasketBean basket = (BasketBean) target;
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "BNAME", "required");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "BEMAIL", "required");
+		
+		if(basket.getBCOUNT()<0) {
+			errors.rejectValue("BCOUNT", "minus");
+		}
 		
 	}
 
