@@ -40,9 +40,9 @@
 			#{ADDRESS2}, 
 			#{POSTCODE}, 
 			#{PHONE}, 
-			#{MOBILE}, 
-			#{RANK}, 
-			#{BLOCK}) 
+			#{MOBILE},
+			'B',
+			'N') 
 	]]>
     </insert>
 	
@@ -60,7 +60,7 @@
 			PHONE =#{PHONE},
 			MOBILE = #{MOBILE} 
 		WHERE 
-			EMAIL=#{EMAIL};
+			EMAIL=#{EMAIL}
 	]]>
 	</update>
 	

@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-joinSuccess
-<a href="/Jumo/loginForm.al">로그인폼 페이지로</a><br>
+   <script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 </body>
 </html>
