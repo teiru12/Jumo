@@ -40,9 +40,9 @@
 			#{ADDRESS2}, 
 			#{POSTCODE}, 
 			#{PHONE}, 
-			#{MOBILE}, 
-			#{RANK}, 
-			#{BLOCK}) 
+			#{MOBILE},
+			'B',
+			'N') 
 	]]>
     </insert>
 	
