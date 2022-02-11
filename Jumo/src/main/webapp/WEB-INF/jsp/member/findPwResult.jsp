@@ -18,11 +18,14 @@
          </c:when>
          <c:when test ="${empty Find}">
          고객님의 회원가입시 비밀번호는 ${memberBean.PASSWORD} 입니다.
+         <button type="button" onclick="location.href='/Jumo/login.al';">로그인으로 돌아가기</button>
          </c:when>
          <c:when test = "${!empty Find}">
          존재하지 않는 회원 입니다.
          </c:when>
 	</c:choose>
+	
+	
     
 </body>
 </html>
