@@ -4,10 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-logout
-<a href="/Jumo/main.al">메인페이지로 이동</a><br>
+
+	<script>
+	if(${! empty msg}) {
+		alert('${msg}');
+	}
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
+    
 </body>
 </html>

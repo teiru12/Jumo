@@ -4,14 +4,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-loginForm
 
-<a href="/Jumo/login.al">로그인 기능</a><br>
-<a href="/Jumo/joinForm.al">회원가입폼</a><br>
-<a href="/Jumo/findId.al">아이디찾기</a><br>
-<a href="/Jumo/findPw.al">비밀번호찾기</a><br>
+<div style="text-align:center">
+	<br>
+	<h3><b>로그인</b></h3>
+</div>
+
+<div style="text-align:center">
+	<form action="/Jumo/login.al" method="post">
+		<input type="text" id="EMAIL" name="EMAIL"><br>
+		<input type="password" id="PASSWORD" name="PASSWORD"><br>
+	
+		<!-- 아이디 저장 &nbsp; <input type="checkbox" id="ID_SAVE" name="ID_SAVE"><br> -->
+		
+		<input type="submit" value="로그인"><br>
+		<input type="button" value="회원가입" onClick="location.href='/Jumo/joinForm.al'"><br>
+		<input type="button" value="아이디 찾기" onClick="location.href='/Jumo/findId.al'">&nbsp;
+		<input type="button" value="비밀번호 찾기" onClick="location.href='/Jumo/findPw.al'">
+	</form>
+</div>
+
 </body>
 </html>

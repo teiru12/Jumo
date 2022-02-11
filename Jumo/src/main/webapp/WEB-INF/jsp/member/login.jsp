@@ -4,12 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-login.jsp
-<a href="/Jumo/adminMain.al">관리자 메인 페이지로</a><br>
-<a href="/Jumo/loginForm.al">로그인 폼 페이지로 돌아가기</a><br>
-<a href="/Jumo/main.al">메인 페이지로</a><br>
+	
+	<script>
+	if(${! empty msg}) {
+		alert('${msg}');
+	}
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
+
+
 </body>
 </html>

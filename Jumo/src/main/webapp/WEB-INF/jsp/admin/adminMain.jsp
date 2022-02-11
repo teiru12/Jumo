@@ -37,6 +37,8 @@ adminMain.jsp
 
 <a href="/Jumo/adminMainForm.al">페이지 관리</a><br>
 
+<%= session.getAttribute("EMAIL") %>
+
 
 </body>
 </html>
