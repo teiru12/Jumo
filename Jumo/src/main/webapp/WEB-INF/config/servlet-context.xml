@@ -18,13 +18,13 @@
 		
 	<mvc:annotation-driven/>
 	
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean id="loggerIntercepter"
 				class="first.common.logger.LoggerInterceptor" />
 		</mvc:interceptor>		
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 	
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /> -->
 	

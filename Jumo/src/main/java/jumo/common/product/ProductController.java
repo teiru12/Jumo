@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import jumo.model.ProductBean;
 import jumo.util.MapToBean;
 import jumo.util.validator.BasketValidator;
 import jumo.util.validator.CommunityValidator;
+import jumo.util.Paging;
 
 @Controller
 public class ProductController {
@@ -27,18 +29,42 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping("/allList.al")
-	public String allList(Model model) throws Exception{
-		
-		List<Map<String, Object>> list = productService.allList();
-		
-		List<ProductBean> productBeanList = new ArrayList<ProductBean>();
+	public String allList(
+			HttpServletRequest request,
+			Model model) throws Exception{
+		/* 페이징을 위한 변수 */
+		int pageSize = 2; // 페이지당 출력할 상품의 수
+		int START = 1;
+		int END = pageSize;
+		int currentPage = 1; // 현재 페이지
 
-	
-		for(Map<String, Object> mapObject : list) {
+		int countProductAll; // 전체 상품의 수
+		int pageBlock = 5; // 표시할 페이지의 수
 		
+		/* 기본 페이지가 아닐 경우 */
+		if(request.getParameter("page")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+			START = 1 + pageSize*(currentPage-1); 
+			END = pageSize*currentPage;
+		}
+		
+		List<Map<String, Object>> list = productService.allListPaging(START, END);
+		List<ProductBean> productBeanList = new ArrayList<ProductBean>();
+		for(Map<String, Object> mapObject : list) {
 			productBeanList.add(MapToBean.mapToProduct(mapObject));
 		}
+		
 		model.addAttribute("productBeanList", productBeanList);
+		
+		/* 페이징을 위한 값 계산 */
+		countProductAll = productService.allListCount();
+		
+		Paging paging = new Paging(countProductAll,	pageBlock,
+				pageSize ,currentPage, "allList.al");
+
+		/* 페이징을 위한 값 삽입 */
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("paging", paging);
 		
 		return "allList";
 	}
@@ -50,13 +76,15 @@ public class ProductController {
 			@RequestParam("pDegreeMax") int pDegreeMax,
 			@RequestParam("pPriceMin") int pPriceMin,
 			@RequestParam("pPriceMax") int pPriceMax,
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
 			ProductBean product, Model model) throws Exception{
 		
 		List<ProductBean> searchList = new ArrayList<ProductBean>();
 		
-		List<Map<String, Object>> list = productService.allListSearch(
+		List<Map<String, Object>> list = productService.allListSearchPaging(
 				product, pDegreeMin, pDegreeMax, pPriceMin,
-				pPriceMax, pOrder);
+				pPriceMax, pOrder, START, END);
 		
 		for(Map<String, Object> mapObject : list) {
 			searchList.add(MapToBean.mapToProduct(mapObject));
@@ -74,14 +102,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/aclList.al")
-	public String aclList(ProductBean product, Model model) throws Exception{
+	public String aclList(ProductBean product,
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception{
 		
-		List<Map<String, Object>> list = productService.aclList();
+		List<Map<String, Object>> list = productService.aclListPaging(START, END);
 		
 		List<ProductBean> productBeanList = new ArrayList<ProductBean>();
 		
 		for(Map<String, Object> mapObject : list) {
-			
 			productBeanList.add(MapToBean.mapToProduct(mapObject));
 		}
 		model.addAttribute("productBeanList", productBeanList);
@@ -96,13 +126,15 @@ public class ProductController {
 			@RequestParam("pDegreeMax") int pDegreeMax,
 			@RequestParam("pPriceMin") int pPriceMin,
 			@RequestParam("pPriceMax") int pPriceMax,
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
 			ProductBean product, Model model) throws Exception{
 		
 		List<ProductBean> searchList = new ArrayList<ProductBean>();
 		
-		List<Map<String, Object>> list = productService.aclListSearch(
+		List<Map<String, Object>> list = productService.aclListSearchPaging(
 				product, pDegreeMin, pDegreeMax, pPriceMin,
-				pPriceMax, pOrder);
+				pPriceMax, pOrder, START, END);
 		
 		for(Map<String, Object> mapObject : list) {
 			searchList.add(MapToBean.mapToProduct(mapObject));
@@ -119,9 +151,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/etcList.al")
-	public String etcList(ProductBean product, Model model) throws Exception{
+	public String etcList(ProductBean product, 
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception{
 		
-		List<Map<String, Object>> list = productService.etcList();
+		List<Map<String, Object>> list = productService.etcListPaging(START, END);
 		
 		List<ProductBean> productBeanList = new ArrayList<ProductBean>();
 		
@@ -137,10 +172,12 @@ public class ProductController {
 	@RequestMapping(value="/etcList.al", method=RequestMethod.POST)
 	public String etcListSearch(
 			@RequestParam("pOrder") String pOrder ,
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
 			ProductBean product, Model model) throws Exception{
 		
-		List<Map<String, Object>> list = productService.etcListSearch(
-				product, pOrder);
+		List<Map<String, Object>> list = productService.etcListSearchPaging(
+				product, pOrder, START, END);
 		List<ProductBean> etcBeanList = new ArrayList<ProductBean>();
 		
 		for(Map<String, Object> mapObject : list) {

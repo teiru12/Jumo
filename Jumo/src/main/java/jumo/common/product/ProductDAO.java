@@ -78,4 +78,71 @@ public class ProductDAO {
 			throws Exception {
 		sqlSessionTemplate.insert("community.insertReview");
 	}	
+	
+	/* 페이징 */
+	public List<Map<String, Object>> allListPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.allListPaging", map);
+	}
+	
+	public List<Map<String, Object>> allListSearchPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.allListSearchPaging", map);
+	}
+	
+	public List<Map<String, Object>> aclListPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.aclListPaging", map);
+	}	
+	
+	public List<Map<String, Object>> aclListSearchPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.aclListSearchPaging", map);
+	}
+	
+	public List<Map<String, Object>> etcListPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.etcListPaging", map);
+	}	
+	
+	public List<Map<String, Object>> etcListSearchPaging(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectList(
+			"product.etcListSearchPaging", map);
+	}	
+	
+	public Map<String, Object> allListCount()
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"product.allListCount");
+	}
+	
+	public Map<String, Object> allListSearchCount(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"product.allListSearchCount", map);
+	}	
+	
+	public Map<String, Object> aclListCount()
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"product.aclListCount");
+	}
+	
+	public Map<String, Object> aclListSearchCount(Map<String, Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"product.aclListSearchCount", map);
+	}	
+	
+	public Map<String, Object> etcListCount()
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"product.etcListCount");
+	}	
 }

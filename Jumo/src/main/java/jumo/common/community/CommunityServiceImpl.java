@@ -64,4 +64,37 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		communityDAO.insertQna(map);
 	}
+	
+	/* 페이징 */
+	@Override
+	public List<Map<String, Object>> noticeListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return communityDAO.noticeListPaging(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> qnaListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return communityDAO.qnaListPaging(map);		
+	}
+	
+	@Override
+	public int noticeListCount() throws Exception {
+		Map<String,Object> mapCount = communityDAO.noticeListCount();
+		return Integer.parseInt(String.valueOf(mapCount.get("COUNT")));
+	}
+	
+	@Override
+	public int qnaListCount() throws Exception {
+		Map<String,Object> mapCount = communityDAO.qnaListCount();
+		return Integer.parseInt(String.valueOf(mapCount.get("COUNT")));
+	}
 }

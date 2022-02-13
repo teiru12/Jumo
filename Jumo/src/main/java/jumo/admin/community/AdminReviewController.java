@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
@@ -20,8 +21,11 @@ public class AdminReviewController {
 	private AdminCommunityService adminCommunityService;
 
 	@RequestMapping(value="/adminReviewList.al")
-	public String adminReviewList(Model model) throws Exception{
-		List<Map<String, Object>> list = adminCommunityService.reviewList();
+	public String adminReviewList(
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception{
+		List<Map<String, Object>> list = adminCommunityService.reviewListPaging(START, END);
 		
 		List<CommunityBean> reviewList = new ArrayList<CommunityBean>();
 		
@@ -34,12 +38,9 @@ public class AdminReviewController {
 		return "adminReviewList";
 	}
 	
-	
 	@RequestMapping(value="/adminReviewDelete.al")
 	public String adminReviewDelete(CommunityBean community, Model model) throws Exception{
 		adminCommunityService.deleteCommunityId(community);
 		return "admin/community/adminReviewDelete";
-	}
-	
-	
+	}	
 }

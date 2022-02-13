@@ -19,4 +19,13 @@ public interface CommunityService {
 	public List<Map<String, Object>> commentListId(CommentBean comment) throws Exception;
 	
 	public void insertQna(CommunityBean community) throws Exception;
+	
+	/* 페이징 */
+	public List<Map<String, Object>> noticeListPaging(int START, int END) throws Exception;
+
+	public List<Map<String, Object>> qnaListPaging(int START, int END) throws Exception;
+	
+	public int noticeListCount() throws Exception;
+	
+	public int qnaListCount() throws Exception;
 }

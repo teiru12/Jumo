@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
 import jumo.model.CommentBean;
@@ -21,10 +22,12 @@ public class AdminQnaController {
 	@Resource(name="adminCommunityService")
 	private AdminCommunityService adminComService;
 	
-	@RequestMapping(value="/adminQnaList.al")
-	public String adminQnaList(Model model) throws Exception {
+	public String adminQnaList(
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception {
 		
-		List<Map<String, Object>> list = adminComService.qnaList();
+		List<Map<String, Object>> list = adminComService.qnaListPaging(START, END);
 		List<CommunityBean> qnaList = new ArrayList<CommunityBean>();
 		
 		for(Map<String, Object> mapObject : list) {

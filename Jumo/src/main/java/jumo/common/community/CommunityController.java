@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
@@ -24,11 +25,14 @@ public class CommunityController {
 
 
 	@RequestMapping(value="/noticeList.al")
-	public String noticeList(Model model) throws Exception {
+	public String noticeList(
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception {
 		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<CommunityBean> noticeBeanList = new ArrayList<CommunityBean>();
-		list = communityService.noticeList(); 
+		list = communityService.noticeListPaging(START, END); 
 	    
 		for(Map<String, Object> mapObject : list) {
 			noticeBeanList.add(MapToBean.mapToCommunity(mapObject));
@@ -55,18 +59,19 @@ public class CommunityController {
 	
 	
 	@RequestMapping(value="/qnaList.al")
-	public String qnaList(Model model) throws Exception {
+	public String qnaList(
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<CommunityBean> qnaBeanList = new ArrayList<CommunityBean>();
-		list = communityService.qnaList();
-		
+		list = communityService.qnaListPaging(START, END);
 		
 		for(Map<String, Object> mapObject : list) {
 			 qnaBeanList.add(	 MapToBean.mapToCommunity(mapObject) ); 
 		}		
-		
+
 		model.addAttribute("qnaBeanList", qnaBeanList);
-		
 		return "qnaList";
 	}
 	

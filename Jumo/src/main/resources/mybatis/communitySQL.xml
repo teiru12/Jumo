@@ -60,7 +60,7 @@
 			FROM COMMUNITY
 			WHERE CTYPE= 'Q'
 	   ]]>
-        </select>
+	</select>
      
           
 	<!-- selectQnaId(고객센터 게시판 상세보기) -->
@@ -204,5 +204,74 @@
 			WHERE CIDX=#{CIDX}
 	]]>
 	</delete>
+	
+	<!-- noticeListPaging(공지 게시판 리스트 페이징) -->
+	<select id="noticeListPaging" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+				SELECT * 
+				FROM
+					COMMUNITY
+				WHERE
+					CTYPE = 'N'
+					AND CIDX BETWEEN #{START} AND #{END}
+	 	]]>
+     </select>
+     
+	<!-- qnaListPaging(고객센터 게시판 리스트 페이징) -->
+	<select id="qnaListPaging" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT *
+			FROM
+				COMMUNITY
+			WHERE 
+				CTYPE= 'Q'
+				AND CIDX BETWEEN #{START} AND #{END}
+		]]>
+	</select>
+	
+	<!-- reviewListPaging(후기 게시판 리스트 페이징) -->
+	<select id="reviewListPaging" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM 
+			COMMUNITY 
+		WHERE 
+			CTYPE='R'
+			AND CIDX BETWEEN #{START} AND #{END}
+	]]>
+	</select>
+
+	<!-- noticeListCount(공지 게시판 게시글수) -->
+	<select id="noticeListCount" resultType="hashmap">
+        <![CDATA[
+				SELECT COUNT(*) 
+				FROM
+					COMMUNITY
+				WHERE
+					CTYPE = 'N'
+	 	]]>
+	</select>
+
+	<!-- qnaListCount(고객센터 게시판 게시글수) -->
+	<select id="qnaListCount" resultType="hashmap">
+        <![CDATA[
+				SELECT COUNT(*) 
+				FROM
+					COMMUNITY
+				WHERE
+					CTYPE = 'Q'
+	 	]]>
+	</select>
+
+	<!-- reviewListCount(후기 게시판 게시글수) -->
+	<select id="reviewListCount" resultType="hashmap">
+        <![CDATA[
+				SELECT COUNT(*) 
+				FROM
+					COMMUNITY
+				WHERE
+					CTYPE = 'R'
+	 	]]>
+	</select>
 
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
@@ -22,15 +23,17 @@ public class AdminNoticeController {
 	private AdminCommunityService adminComService;
 
 	@RequestMapping(value="/adminNoticeList.al")
-	public String adminNoticeList(Model model) throws Exception {
-		
-		List<Map<String, Object>> list = adminComService.noticeList();
+	public String adminNoticeList(
+			@RequestParam("START") int START,
+			@RequestParam("END") int END,
+			Model model) throws Exception {
+		List<Map<String, Object>> list = adminComService.noticeListPaging(START, END);
 		List<CommunityBean> noticeList = new ArrayList<CommunityBean>();
 		
 		for(Map<String, Object> mapObject : list) {
 			noticeList.add( MapToBean.mapToCommunity(mapObject) );
 		}
-		
+
 		model.addAttribute("noticeList", noticeList);
 		
 		return "adminNoticeList";

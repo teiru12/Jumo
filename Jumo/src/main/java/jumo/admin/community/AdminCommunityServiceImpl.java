@@ -123,5 +123,53 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 		
 		adminCommunityDAO.deleteCommunityId(map);
 	}
+	
+	/* 페이징 */
+	@Override
+	public List<Map<String, Object>> noticeListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminCommunityDAO.noticeListPaging(map);
+	}
 
+	@Override
+	public List<Map<String, Object>> reviewListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminCommunityDAO.reviewListPaging(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> qnaListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminCommunityDAO.qnaListPaging(map);		
+	}
+	
+	@Override
+	public int noticeListCount() throws Exception {
+		Map<String,Object> mapCount = adminCommunityDAO.noticeListCount();
+		return Integer.parseInt(String.valueOf(mapCount.get("COUNT")));
+	}
+	
+	@Override
+	public int qnaListCount() throws Exception {
+		Map<String,Object> mapCount = adminCommunityDAO.qnaListCount();
+		return Integer.parseInt(String.valueOf(mapCount.get("COUNT")));
+	}
+	
+	@Override
+	public int reviewListCount() throws Exception {
+		Map<String,Object> mapCount = adminCommunityDAO.reviewListCount();
+		return Integer.parseInt(String.valueOf(mapCount.get("COUNT")));
+	}
 }
