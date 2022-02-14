@@ -226,8 +226,7 @@ public class MemberController {
 		memberBean = MapToBean.mapToMember(map);
 		
 		model.addAttribute("memberBean", memberBean);
-		
-		return "myInfoModifyForm";
+		return "member/myInfoModifyForm";
 	}
 	
 	@RequestMapping(value = "/myInfoModify.al")
@@ -240,16 +239,39 @@ public class MemberController {
 			return "/myInfoModifyForm.al";
 		}
 		
-		myInfoService.updateMember(member);
+		System.out.println(member.getEMAIL());
+		System.out.println(member.getPASSWORD());
+		System.out.println(member.getNAME());
+		System.out.println(member.getJUMIN1());
+		System.out.println(member.getJUMIN2());
+		System.out.println(member.getADDRESS1());
+		System.out.println(member.getADDRESS2());
+		System.out.println(member.getPOSTCODE());
+		System.out.println(member.getPHONE());
+		System.out.println(member.getMOBILE());
 		
+	
+		myInfoService.updateMember(member);
+		model.addAttribute("msg", "회원정보가 수정되었습니다.");
+		model.addAttribute("url", "/myPage.al");
 		return "/member/myInfoModify";
 	}
 	
 	@RequestMapping(value = "/myInfoDelete.al")
-	public String myInfoDelete (MemberBean member, Model model) throws Exception {
-		
+	public String myInfoDelete (MemberBean member,HttpServletRequest request, BindingResult result, Model model) throws Exception {
+
+		String LoginId = (String) request.getSession().getAttribute("EMAIL");
+		MemberBean loginMember = new MemberBean();
+		loginMember.setEMAIL(LoginId);
+		Map<String, Object> mapMember = loginService.selectMemberId(loginMember);
+		member = MapToBean.mapToMember(mapMember);
+
 		myInfoService.deleteMember(member);
 		
+		request.getSession().invalidate();
+		
+		model.addAttribute("msg", "이용해주셔서 감사합니다.");
+		model.addAttribute("url", "/main.al");
 		return "/member/myInfoDelete";
 	}
 	
