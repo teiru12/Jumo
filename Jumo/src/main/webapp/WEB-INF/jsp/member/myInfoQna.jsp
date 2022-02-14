@@ -33,8 +33,10 @@
     	<tr> 
     		<td>${qna.CIDX}</td> 
     		<td> 
-    			${qna.CTITLE}<br>
+    			<a href="qnaDetail.jsp">${qna.CTITLE}
+    			<br>
     			${qna.CCONTENT}
+    			</a>
    			</td>
    			<td>${qna.CDATE}</td>	
     	</tr> 
