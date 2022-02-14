@@ -146,21 +146,22 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Map<String, Object>> allListSearchPaging(ProductBean product, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX, String PORDER, int START, int END)
+	public List<Map<String, Object>> allListSearchPaging(String PKIND, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX, String PORDER, String PSELL, String PDATE, int START, int END)
 			throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PKIND",product.getPKIND());
+		map.put("PKIND", PKIND);
 		
 		map.put("PDEGREEMIN", PDEGREEMIN);
 		map.put("PDEGREEMAX", PDEGREEMAX);
+
 		map.put("PPRICEMIN", PPRICEMIN);
 		map.put("PPRICEMAX", PPRICEMAX);
-		
-		map.put("PSELL", product.getPSELL());
-		map.put("PPRICE", product.getPPRICE());
-		map.put("PDATE", product.getPDATE());
+
 		map.put("PORDER", PORDER);
+		
+		map.put("PSELL", PSELL);
+		map.put("PDATE", PDATE);
 		
 		map.put("START",START);
 		map.put("END",END);
@@ -179,22 +180,23 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public List<Map<String, Object>> aclListSearchPaging(ProductBean product, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX, String PORDER, int START, int END)
+	public List<Map<String, Object>> aclListSearchPaging(String PKIND, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX, String PORDER, String PSELL, String PDATE, int START, int END)
 			throws Exception {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PKIND",product.getPKIND());
+		map.put("PKIND", PKIND);
 		
 		map.put("PDEGREEMIN", PDEGREEMIN);
 		map.put("PDEGREEMAX", PDEGREEMAX);
+
 		map.put("PPRICEMIN", PPRICEMIN);
 		map.put("PPRICEMAX", PPRICEMAX);
-		
-		map.put("PSELL", product.getPSELL());
-		map.put("PPRICE", product.getPPRICE());
-		map.put("PDATE", product.getPDATE());
+
 		map.put("PORDER", PORDER);
+		
+		map.put("PSELL", PSELL);
+		map.put("PDATE", PDATE);
 		
 		map.put("START",START);
 		map.put("END",END);
@@ -213,13 +215,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public List<Map<String, Object>> etcListSearchPaging(ProductBean product, String PORDER, int START, int END) throws Exception {
+	public List<Map<String, Object>> etcListSearchPaging(String PORDER, String PSELL, String PDATE, int START, int END) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PSELL", product.getPSALE());
-		map.put("PPRICE", product.getPPRICE());
-		map.put("PDATE", product.getPDATE());
-		map.put("PORDER",PORDER);
+		map.put("PORDER", PORDER);
+		map.put("PSELL", PSELL);
+		map.put("PDATE", PDATE);
 		
 		map.put("START",START);
 		map.put("END",END);
@@ -234,10 +235,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public int allListSearchCount(ProductBean product, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX) throws Exception {
+	public int allListSearchCount(String PKIND, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PKIND",product.getPKIND());
+		map.put("PKIND", PKIND);
 		
 		map.put("PDEGREEMIN", PDEGREEMIN);
 		map.put("PDEGREEMAX", PDEGREEMAX);
@@ -255,10 +256,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public int aclListSearchCount(ProductBean product, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX) throws Exception {
+	public int aclListSearchCount(String PKIND, int PDEGREEMIN, int PDEGREEMAX, int PPRICEMIN, int PPRICEMAX) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PKIND",product.getPKIND());
+		map.put("PKIND", PKIND);
 		
 		map.put("PDEGREEMIN", PDEGREEMIN);
 		map.put("PDEGREEMAX", PDEGREEMAX);

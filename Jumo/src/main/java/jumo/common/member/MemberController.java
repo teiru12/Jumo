@@ -238,18 +238,6 @@ public class MemberController {
 		if(result.hasErrors()) {
 			return "/myInfoModifyForm.al";
 		}
-		
-		System.out.println(member.getEMAIL());
-		System.out.println(member.getPASSWORD());
-		System.out.println(member.getNAME());
-		System.out.println(member.getJUMIN1());
-		System.out.println(member.getJUMIN2());
-		System.out.println(member.getADDRESS1());
-		System.out.println(member.getADDRESS2());
-		System.out.println(member.getPOSTCODE());
-		System.out.println(member.getPHONE());
-		System.out.println(member.getMOBILE());
-		
 	
 		myInfoService.updateMember(member);
 		model.addAttribute("msg", "회원정보가 수정되었습니다.");
@@ -276,7 +264,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/myInfoQna.al")
-	public String myInfoQna (MemberBean member, Model model) throws Exception {
+	public String myInfoQna (Model model, HttpServletRequest request) throws Exception {
+		String email = (String) request.getSession().getAttribute("EMAIL");
+	    MemberBean member = new MemberBean();
+	    member.setEMAIL(email);
+
+
 		List<Map<String, Object>> list = myInfoService.selectQnaMemberId(member);
 	
 		List<CommunityBean> qnaBeanList = new ArrayList<CommunityBean>();
@@ -284,14 +277,21 @@ public class MemberController {
 		for(Map<String, Object> mapObject : list) {
 			qnaBeanList.add(MapToBean.mapToCommunity(mapObject));
 		}
+		
+		int qnaCount = list.size();
 	
 		model.addAttribute("qnaBeanList", qnaBeanList);
+		model.addAttribute("qnaCount", qnaCount);
 		
 		return "myInfoQna";
 	}
 	
 	@RequestMapping(value = "/myInfoReview.al")
-	public String myInfoReview (MemberBean member, Model model) throws Exception {
+	public String myInfoReview (Model model, HttpServletRequest request) throws Exception {
+		String email = (String) request.getSession().getAttribute("EMAIL");
+	    MemberBean member = new MemberBean();
+	    member.setEMAIL(email);
+	    
 		List<Map<String, Object>> list = myInfoService.selectReviewMemberId(member);
 	
 		List<CommunityBean> reviewBeanList = new ArrayList<CommunityBean>();
@@ -299,23 +299,35 @@ public class MemberController {
 		for(Map<String, Object> mapObject : list) {
 			reviewBeanList.add(MapToBean.mapToCommunity(mapObject));
 		}
+		
+		int reviewCount = list.size();
 
 		model.addAttribute("reviewBeanList", reviewBeanList);
+		model.addAttribute("reviewCount", reviewCount);
 		
 		return "myInfoReview";
 	}
 	
 	@RequestMapping(value = "/myInfoOrder.al")
-	public String myInfoOrder (MemberBean member, Model model) throws Exception {
+	public String myInfoOrder (Model model, HttpServletRequest request) throws Exception {
+		
+		
+		String email = (String) request.getSession().getAttribute("EMAIL");
+	    MemberBean member = new MemberBean();
+	    member.setEMAIL(email);
+	    System.out.println(email);
+	    
 		List<Map<String, Object>> list = myInfoService.selectOrderMemberId(member);
-	
 		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();
 
 		for(Map<String, Object> mapObject : list) {
 			orderBeanList.add(MapToBean.mapToOrder(mapObject));
 		}
+		
+		int orderCount = list.size();
 
 		model.addAttribute("orderBeanList", orderBeanList);
+		model.addAttribute("orderCount", orderCount);
 		
 		return "myInfoOrder";
 	}

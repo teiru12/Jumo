@@ -68,7 +68,7 @@ public class MyInfoServiceImpl implements MyInfoService {
 		
 		map.put("EMAIL", member.getEMAIL());
 		
-		return memberDAO.selectQnaMemberId(map);
+		return memberDAO.selectReviewMemberId(map);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class MyInfoServiceImpl implements MyInfoService {
 		
 		map.put("EMAIL", member.getEMAIL());
 		
-		return memberDAO.selectQnaMemberId(map);
+		return memberDAO.selectOrderMemberId(map);
 	}
 	
 	
