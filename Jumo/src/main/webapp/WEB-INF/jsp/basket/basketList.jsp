@@ -140,8 +140,8 @@
     				</div>
     				</tr>
     				<div style="text-align:center">
-    				<p><a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">전체 상품 주문</a></p>
-    				<p><a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a></p>
+    				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">전체 상품 주문</a>
+    				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a>
     				</div>
     			</div>
     		</div>
