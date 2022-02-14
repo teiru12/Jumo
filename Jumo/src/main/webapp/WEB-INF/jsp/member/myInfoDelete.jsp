@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-myInfoDelete
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 <a href="/Jumo/main.al">메인페이지</a><br>
 </body>
 </html>

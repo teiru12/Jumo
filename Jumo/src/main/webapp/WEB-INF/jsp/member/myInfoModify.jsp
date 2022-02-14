@@ -1,13 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>주모</title>
 </head>
-<body>
-myInfoModify
-<a href="/Jumo/myPage.al">마이페이지 기본 페이지</a><br>
+<body> 
+
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
+
 </body>
 </html>
