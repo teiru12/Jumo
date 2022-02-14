@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,11 @@ public class BasketController {
 	private BasketService basketService;
 	
 	@RequestMapping(value="/basketList.al")
-	public String basketList(BasketBean basket, Model model) throws Exception {
+	public String basketList(BasketBean basket, HttpServletRequest request, Model model) throws Exception {
+		
+		// basket에 세션에서 사용자 아이디를 가져와서 저장
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		basket.setBEMAIL(email);
 		
 		List<Map<String, Object>> list = basketService.basketList(basket); 
 		
