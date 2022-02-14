@@ -243,141 +243,197 @@
 	<!-- [allListPaging]전체상품 게시판 페이징-->
 	<select id="allListPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * 
-		FROM 
-			PRODUCT
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM (
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT
+				ORDER BY PID
+			)
+			ORDER BY R
+		)
 		WHERE
-			PID BETWEEN #{START} AND #{END}
+			R BETWEEN #{START} AND #{END}
 	]]>
 	</select> 
 	
 	<!-- [allListSearchPaging]전체상품 게시판 리스트 검색 -->
 	<select id="allListSearchPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * 
-		FROM 
-			PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-		AND PID BETWEEN #{START} AND #{END}
-	</trim>
-	<trim prefix="ORDER BY">
-		<if test="#{PSELL}!=NULL">
-			PSELL DESC  
-		</if>
-	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	             </if>
-	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	             </if>
-	             <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	             </if>
-	</trim>
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM ( 	
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT 
+				]]>
+			 	<trim prefix="WHERE" prefixOverrides="AND">
+					
+					<if test='PKIND!=NULL'>
+						AND PKIND = #{PKIND} 
+					</if>
+					
+					<if test="PDEGREEMIN != -1">
+						AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+					</if>
+					
+				    <if test="PPRICEMIN != -1">
+						AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+					</if>
+				</trim>
+				<trim prefix="ORDER BY">
+			 		<if test="PSELL!=null">
+						PSELL DESC  
+					</if>
+					<if test="PORDER!=null and PORDER.equals('LOW')">
+						PPRICE ASC 
+					</if>
+					<if test="PORDER!=null and PORDER.equals('HIGH')">
+						PPRICE DESC 
+					</if>
+					<if test="PDATE!=null">
+						PDATE DESC 
+					</if>
+				</trim>
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
 	</select>
 	
 	<!-- [aclListPaging] 주류상품 게시판 페이징 -->
 	<select id="aclListPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * 
-		FROM
-			PRODUCT 
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM (
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT
+				WHERE PTYPE ='ALCOHOL'
+				ORDER BY PID
+			)
+			ORDER BY R
+		)
 		WHERE
-			PTYPE ='ALCOHOL'
-			AND PID BETWEEN #{START} AND #{END}
+			R BETWEEN #{START} AND #{END}
 	]]>
 	</select> 
 	
 	<!-- [aclListSearchPaging] 주류상품 게시판 검색 페이징 -->
 	<select id="aclListSearchPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * 
-			FROM PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-	
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-			AND PTYPE='ALCOHOL' 
-			AND PID BETWEEN #{START} AND #{END}
-	</trim>
-	<trim prefix="ORDER BY">
-	    <if test="#{PSELL}!=NULL">
-			PSELL DESC 
-		</if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	    </if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	    </if>
-	    <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	    </if>
-	</trim>
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM ( 	
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT 
+				]]>
+			 	<trim prefix="WHERE" prefixOverrides="AND">
+					
+					<if test='PKIND!=NULL'>
+						AND PKIND = #{PKIND} 
+					</if>
+					
+					<if test="PDEGREEMIN != -1">
+						AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+					</if>
+					
+				    <if test="PPRICEMIN != -1">
+						AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+					</if>
+						AND PTYPE ='ALCOHOL'
+				</trim>
+				<trim prefix="ORDER BY">
+			 		<if test="PSELL!=null">
+						PSELL DESC  
+					</if>
+					<if test="PORDER!=null and PORDER.equals('LOW')">
+						PPRICE ASC 
+					</if>
+					<if test="PORDER!=null and PORDER.equals('HIGH')">
+						PPRICE DESC 
+					</if>
+					<if test="PDATE!=null">
+						PDATE DESC 
+					</if>
+				</trim>
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
 	</select>
 	
 	<!-- [etcListPaging] 기타상품 게시판 페이징-->
 	<select id="etcListPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT *
-		FROM
-			PRODUCT
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM (
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT
+				WHERE PTYPE ='ETC'
+				ORDER BY PID
+			)
+			ORDER BY R
+		)
 		WHERE
-			PTYPE ='ETC'
-			AND PID BETWEEN #{START} AND #{END}
+			R BETWEEN #{START} AND #{END}
 	]]>
 	</select> 
 	
 	<!-- [etcListSearchPaging] 기타상품 게시판 검색 페이징-->
 	<select id="etcListSearchPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * 
-			FROM PRODUCT 
-			WHERE PID BETWEEN #{START} AND #{END}
-		]]>	
-	<trim prefix="ORDER BY">
-		<if test="#{PSELL}!=NULL">
-			PSELL DESC  
-		</if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	    </if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	    </if>
-	    <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	    </if>
-	</trim>
-	</select>
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, ROWNUM R
+			FROM ( 	
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE
+				FROM 
+					PRODUCT
+				WHERE PTYPE = 'ETC' 
+				]]>
+
+				<trim prefix="ORDER BY">
+			 		<if test="PSELL!=null">
+						PSELL DESC  
+					</if>
+					<if test="PORDER!=null and PORDER.equals('LOW')">
+						PPRICE ASC 
+					</if>
+					<if test="PORDER!=null and PORDER.equals('HIGH')">
+						PPRICE DESC 
+					</if>
+					<if test="PDATE!=null">
+						PDATE DESC 
+					</if>
+				</trim>
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select> 
 	
-	<!-- [allListCount] 전체상품 수량 -->
+	<!-- [allListCount] 주류상품 수량 -->
 	<select id="allListCount" resultType="hashmap">
 	<![CDATA[
 		SELECT COUNT(*) COUNT
 		FROM 
 			PRODUCT
 	]]>
-	</select> 
+	</select>
 	
 	<!-- [allListSearchCount] 전체상품 검색 수량 -->
 	<select id="allListSearchCount" parameterType="hashmap" resultType="hashmap">
@@ -385,19 +441,20 @@
 		SELECT COUNT(*) COUNT
 		FROM 
 			PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-	</trim>
+		]]>
+	 	<trim prefix="WHERE" prefixOverrides="AND">
+			<if test='PKIND!=NULL'>
+				AND PKIND = #{PKIND} 
+			</if>
+			
+			<if test="PDEGREEMIN != -1">
+				AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+			</if>
+			
+		    <if test="PPRICEMIN != -1">
+				AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+			</if>
+		</trim>
 	</select>
 		
 	<!-- [aclListCount] 주류상품 수량 -->
@@ -415,27 +472,29 @@
 	<select id="aclListSearchCount" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT COUNT(*) COUNT
-			FROM PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-	
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-			AND PTYPE='ALCOHOL' 
-	</trim>
+		FROM 
+			PRODUCT 
+		]]>
+	 	<trim prefix="WHERE" prefixOverrides="AND">
+			<if test='PKIND!=NULL'>
+				AND PKIND = #{PKIND} 
+			</if>
+			
+			<if test="PDEGREEMIN != -1">
+				AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+			</if>
+			
+		    <if test="PPRICEMIN != -1">
+				AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+			</if>
+			AND PTYPE ='ALCOHOL'
+		</trim>
 	</select>
 	
 	<!-- [etcListCount] 기타상품 수량 -->
 	<select id="etcListCount" resultType="hashmap">
 	<![CDATA[
-		SELECT COUNT(*) 
+		SELECT COUNT(*) COUNT
 		FROM 
 			PRODUCT
 		WHERE

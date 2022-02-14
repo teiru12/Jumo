@@ -46,7 +46,7 @@ public class MemberDAO {
 	
 	//고객센터
 	public List<Map<String,Object>> selectQnaMemberId(Map<String,Object> map) throws Exception{
-		return sqlSessionTemplate.selectList("community.selectQnaId",map);
+		return sqlSessionTemplate.selectList("community.selectQnaMemberId",map);
 	}
 	
 	//후기

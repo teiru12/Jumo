@@ -14,107 +14,103 @@
 	<div>
 		<div>
 			<div>
-				<form action="" method="post">
+				<form action="allList.al">
 				<div style="text-align:center">
 					<table style="margin-left:auto; margin-right:auto; width:32%">
 						<tr>
-							<td style="width:10%;">
-								<b>주종</b>
+							<td style="text-align:left;">
+								<b>주종</b>&emsp;
+								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="증류주">증류주</label>
 							</td>
-							<td style="text-align:left;" colspan="6">
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="PKIND" id="PKIND" value="증류주">
-									<label class="form-check-label" for="PKIND">증류주</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="PKIND" id="PKIND" value="막걸리">
-									<label class="form-check-label" for="PKIND">막걸리</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="PKIND" id="PKIND" value="약주">
-									<label class="form-check-label" for="PKIND">약주</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="PKIND" id="PKIND" value="과실주">
-									<label class="form-check-label" for="PKIND">과실주</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="PKIND" id="PKIND" value="기타주류">
-									<label class="form-check-label" for="PKIND">기타주류</label>
-								</div>
+							<td style="text-align:left;">
+								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="막걸리">막걸리</label>
+							</td>
+							<td style="text-align:left;">						
+								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="약주">약주</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="과실주">과실주</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="기타주류">기타주류</label>
 							</td>
 						</tr>
-						
 						<tr>
-							<td style="width:10%;" rowspan="2">
-								<b>도수</b>
+							<td style="text-align:left;">
+								<b>도수</b>&emsp;
+								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="0">0-10</label>
 							</td>
-							<td style="text-align:left;" colspan="6">		
-								<label for="PDEGREE" class="form-label"></label>
-								<input type="range" class="custom-range" 
-									style="width:90%; cursor:pointer; " 
-									min="0" max="5" id="PDEGREE" name="PDEGREE"><br>
+							<td style="text-align:left;">
+								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="1">10-20</label>
 							</td>
-						<tr>
-							<td style="text-align:left; width:10%;">&nbsp; 0</td>
-							<td style="width:15%;">20</td>
-							<td style="width:15%;">&nbsp;&nbsp;40</td>
-							<td style="width:15%;">&emsp;60</td>
-							<td style="width:15%;">&emsp;&nbsp;80</td>
-							<td style="width:20%;">100</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="2">20-30</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="3">30-40</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="4">40이상</label>
+							</td>
 						</tr>
-						
 						<tr>
-							<td style="width:10%;" rowspan="2">
-								<b>가격</b>
+							<td style="text-align:left;">
+								<b>가격</b>&emsp;
+								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="0"> 0-5천원</label>
 							</td>
-							<td style="text-align:left;" colspan="6">		
-								<label for="PPRICE" class="form-label"></label>
-								<input type="range" class="custom-range" 
-									style="width:90%; cursor:pointer; " 
-									min="0" max="5" id="PPRICE" name="PPRICE"><br>
+							<td style="text-align:left;">
+								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="1">5천-1만원</label>
 							</td>
-						<tr>
-							<td style="text-align:left; width:10%;">&nbsp; 0원</td>
-							<td style="width:15%;">5천원</td>
-							<td style="width:15%;">1만원</td>
-							<td style="width:15%;">2만원</td>
-							<td style="width:15%;">3만원</td>
-							<td style="width:20%;">3만원이상</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="2">1만-2만원</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="3">2만-3만원</label>
+							</td>
+							<td style="text-align:left;">
+								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="4">3만원이상</label>
+							</td>
 						</tr>
-			
 					 </table>
 				</div>	
 			
 				<div class="info bg-white p-4" style="text-align:center;">
 					<input type="submit" value="검색" class="btn btn-primary py-3 px-5">
 				</div>
+				<div class="text text-center">
+					${searchPrint}
+				</div>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<table>
-	     <tbody>
-     
-    	 </tbody>	
-	</table>
-
     <section class="ftco-section">
+       	<div class="row justify-content-center">
+   			<div class="col-md-10 mb-5 text-center">
+   				<ul class="product-category">
+   					<li><a href="allList.al">전체</a></li>
+   					<li><a href="allList.al?PSELL=A">인기도순</a></li>
+   					<li><a href="allList.al?pOrder=LOW">낮은가격순</a></li>
+   					<li><a href="allList.al?pOrder=HIGH">높은가격순</a></li>
+   					<li><a href="allList.al?PDATE=A">최신순</a></li>
+   				</ul>
+   			</div>
+   		</div>
     	<div class="container">
     		<div class="row">
     		
     			<c:forEach var="product" items="${productBeanList}">
     			<div class="col-md-6 col-lg-3">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="img/${product.PIMAGE}" alt="이미지 없음">
+    					<a href="pDetail.al?PID=${product.PID}" class="img-prod"><img class="img-fluid" src="img/${product.PIMAGE}" alt="이미지 없음">
     						<c:if test="${product.PSALE != 0}">
     						<span class="status">${product.PSALE}%</span>
     						</c:if>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#" >${product.PNAME}</a></h3>
+    						<h3><a href="pDetail.al?PID=${product.PID}" >${product.PNAME}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
     								<c:if test="${product.PSALE == 0}">
@@ -130,10 +126,10 @@
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    							<a href="putBasket.al?PID=${product.PID}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+	    							<a href="pOrderForm.al?PID=${product.PID}" class="buy-now d-flex justify-content-center align-items-center mx-1">
 	    								<span><i class="ion-ios-cart"></i></span>
 	    							</a>
     							</div>
