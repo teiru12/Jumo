@@ -6,6 +6,101 @@
 <meta charset="UTF-8">
 <title>주모</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	function checks() {
+		var EMAIL = document.getElementById("EMAIL");
+		var PASSWORD = document.getElementById("PASSWORD");
+		var PASSWORD2 = document.getElementById("PASSWORD2");
+		var NAME = document.getElementById("NAME");
+		var JUMIN1 = document.getElementById("JUMIN1");
+		var JUMIN2 = document.getElementById("JUMIN2");
+		var ADDRESS1 = document.getElementById("ADDRESS1");
+		var ADDRESS2 = document.getElementById("ADDRESS2");
+		var POSTCODE = document.getElementById("POSTCODE");
+		var MOBILE = document.getElementById("MOBILE");
+		
+		if(EMAIL.value == ""){
+			alert("아이디를 입력해주세요.");
+			EMAIL.focus();
+			return false;
+		}
+		
+		if(PASSWORD.value == ""){
+			alert("비밀번호를 입력해주세요.");
+			PASSWORD.focus();
+			return false;
+		}
+		
+		if(PASSWORD2.value != PASSWORD.value){
+			alert("비밀번호가 일치하지 않습니다.");
+			PASSWORD2.focus();
+			return false;
+		}
+		
+		if(NAME.value == ""){
+			alert("이름을 입력해주세요.");
+			NAME.focus();
+			return false;
+		}
+		
+		if(JUMIN1.value == ""){
+			alert("주민등록번호를 입력해주세요.");
+			JUMIN1.focus();
+			return false;
+		}
+		
+		if(JUMIN1.value.length<6) {
+			alert("주민등록번호 앞자리를 모두 입력해주세요.");
+			JUMIN1.focus();
+			return false;
+		}
+		
+		if(JUMIN2.value == ""){
+			alert("주민등록번호를 입력해주세요.");
+			JUMIN2.focus();
+			return false;
+		}
+		
+		if(JUMIN2.value.length<7) {
+			alert("주민등록번호 뒷자리를 모두 입력해주세요.");
+			JUMIN2.focus();
+			return false;
+		}
+		
+		if(ADDRESS1.value == ""){
+			alert("주소를 입력해주세요.");
+			ADDRESS1.focus();
+			return false;
+		}
+		
+		if(ADDRESS2.value == ""){
+			alert("상세 주소를 입력해주세요.");
+			ADDRESS2.focus();
+			return false;
+		}
+		
+		if(POSTCODE.value == ""){
+			alert("우편번호를 입력해주세요.");
+			POSTCODE.focus();
+			return false;
+		}
+
+		if(MOBILE.value == ""){
+			alert("핸드폰 번호를 입력해주세요.");
+			MOBILE.focus();
+			return false;
+		}
+		
+		document.joinForm.submit();
+	}
+</script>
+
+<script>
+    $(document).ready(function() {
+    	   var EMAIL=$('#email').val();
+    	   
+    	});
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -56,26 +151,20 @@
         }).open();
     }
 </script>
-<script>
-    $(document).ready(function() {
-    	   var EMAIL=$('#email').val();
-    	   $(document).ready(function() {
-    		   var EMAIL=$('#email').val();
-    		});
-    	});
-    
-</script>
+
+
 </head>
 <body>
 <div class="container" align="center">
 	<h4>회원가입</h4>
-	<form id="joinForm" method="POST" action="/Jumo/joinSuccess.al">
+	<form id="joinForm" name="joinForm" method="POST" action="/Jumo/joinSuccess.al">
 		
 		<!-- 이메일 -->
 		<div>
-			<label for="uerId">아이디</label>
-			<input type="text" id="EMAIL" name="EMAIL">
-			<input type="button" value="중복확인" onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()"/>
+			<label for="EMAIL">아이디
+				<input type="text" id="EMAIL" name="EMAIL">
+				<input type="button" value="중복확인" onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()"/>
+			</label>
 		</div>
 		<!-- 비밀번호 -->
 		<div>
@@ -84,8 +173,8 @@
 		</div>
 		<!-- 비밀번호 확인 -->
 		<div>
-			<label for="userPwCheck">비밀번호</label>
-			<input type="password" id="PASSWORD" name="PASSWORD">
+			<label for="userPwCheck">비밀번호 확인</label>
+			<input type="password" id="PASSWORD2" name="PASSWORD2">
 		</div>
 		<br/>
 		<!-- 이름 -->
@@ -95,20 +184,25 @@
 		</div>
 		<!-- 주민등록번호 -->
 		<div>
-			<label for="userJumin">주민등록번호</label>
-			<input type="text" name="JUMIN1" size="12" onkeypress="gNumCheck()" maxlength="6"/>-	
-			<input type="text" name="JUMIN2" size="12" onkeypress="gNumCheck()" maxlength="7"/>
+			<label for="JUMIN">주민등록번호</label>
+			<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"
+			onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>-	
+			<input type="text" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"
+			onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 		</div>
 		<!-- 전화번호 -->
 		<div>
-			<label for=phone">전화번호</label>
-			<input type="text" name="PHONE" size="24"/>
+			<label for="PHONE">전화번호</label>
+			<input type="text" id="PHONE" name="PHONE" size="24"
+				onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 		</div>
 
 		<!-- 핸드폰 번호 -->
 		<div>
-			<label for="MOBILE">핸드폰번호</label>
-			<input type="text" name="MOBILE" size="24"/>
+			<label for="MOBILE">핸드폰번호
+				<input type="text" id="MOBILE" name="MOBILE" 
+					onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24"/> '-'는 빼고 숫자만 입력해주세요.
+			</label>
 		</div>
 		<br/>
 		<!-- 주소 -->
@@ -124,10 +218,10 @@
 		
 		<!-- 버튼 -->
 		<div>
-		 	<input type="submit" value="확인">
+		 	<button type="button" onClick="checks(this.form)">회원가입</button>
             
             &emsp;&emsp;
-            <input class="btn" type="reset" value="재입력">
+            <button type="reset">다시 입력</button>
 
             &emsp;&emsp;
             <button type="button" onclick="location.href='loginForm.al'">취소</button>
