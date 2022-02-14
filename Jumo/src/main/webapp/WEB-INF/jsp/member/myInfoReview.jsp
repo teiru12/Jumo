@@ -1,13 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-myInfoReview
-<a href="/Jumo/myPage.al">마이페이지 기본 페이지</a><br>
+
+<br>
+	<div style="text-align:center">
+		<h3> 내후기 </h3>
+	</div>
+		<br>
+			<!-- 후기 목록 부분 -->
+		<div style="text-align:center" id="board" >
+		<table id="rList" width="900" border="1" bordercolor="darkgray" align="center" > 
+		
+    	<thead> 
+    		<tr bgcolor="lightgray"> 
+    			<th scope="col" width="10%">번호</th> 
+    			<th scope="col">내용</th> 
+    			<th scope="col" width="15%">작성일</th> 
+    		</tr> 
+    	</thead>
+     
+    <tbody> 
+    <c:choose> 
+    	<c:when test="${reviewCount!=0}"> 
+    		<c:forEach var="review" items="${reviewBeanList}" varStatus="status"> 
+    	<tr> 
+    		<td>${review.CIDX}</td> 
+    		<td> 
+    			${review.CTITLE}<br>
+    			${review.CCONTENT}
+   			</td>
+   			<td>${review.CDATE}</td>
+    	</tr> 
+		    </c:forEach>
+   	 </c:when>
+    
+    <c:otherwise> 
+   		<tr>
+			<td colspan="4">조회된 결과가 없습니다.</td> 
+		</tr>
+	</c:otherwise>
+	
+	</c:choose> 
+	</tbody> 
+		</table>
+</div>
+
+<br>
+
 </body>
 </html>
