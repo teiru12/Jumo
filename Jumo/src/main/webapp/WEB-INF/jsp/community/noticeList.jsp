@@ -34,7 +34,7 @@
     	<tr> 
     		<td>${notice.CIDX}</td> 
     		<td> 
-    			<a href="noticeDetail.al">${notice.CTITLE}</a>
+    			<a href="noticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a>
    			</td>
    			<td>${notice.CWRITER}</td> 
    			<td>${notice.CDATE}</td>	

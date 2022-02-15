@@ -70,8 +70,8 @@ public class CommunityController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		CommunityBean communityBean = new CommunityBean();
 		
-		communityBean = MapToBean.mapToCommunity(map); 
 		map = communityService.selectNoticeId(community);
+		communityBean = MapToBean.mapToCommunity(map); 
 		
 		model.addAttribute("communityBean", communityBean);
 

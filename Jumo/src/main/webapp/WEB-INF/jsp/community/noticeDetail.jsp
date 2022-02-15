@@ -18,23 +18,24 @@
 		<tbody>
 	
 			<tr>
-				<td >글제목${notice.CTITLE}</td>
+				<td>글제목</td>
+				<td>${communityBean.CTITLE}</td>
 			</tr>
 			<tr>
-				<td >작성자${notice.CWRITER}</td>
+				<td>작성자</td>
+				<td>${communityBean.CWRITER}</td>
 			</tr>
 			<tr>
-				<td >작성일${notice.CDATE}</td>
+				<td>작성일</td>
+				<td>${communityBean.CDATE}</td>
 			</tr>
 			<tr>
-				<td >내용${notice.CCONTENT}</td>
+				<td>내용</td>
+				<td>${communityBean.CCONTENT}</td>
 			</tr>
 
 		</tbody>
 		</table>
-	
- 		<br>
-	<!-- 	<a href="noticeList.al" class="btn" id="noticelist">목록으로</a> -->
 
 </div>
 
