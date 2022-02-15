@@ -1,18 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head> 
 <meta charset="UTF-8">
 <title>주모</title>
-</head>
-<body onload="init()">
-	<title>유저 상세정보</title>
-
 	<style type="text/css">
 	table {margin-left: auto; margin-right: auto; border: 3px solid skyblue;}
 	td {border: 1px solid skyblue}
 	#title {background-color: skyblue}
 	</style>
+</head>
+<body onload="init()">
 
 <script type="text/javascript">
 	function changeForm(val) {
@@ -39,7 +38,9 @@ function submit2(del) {
 
 	<br>
 	<br>
+	<p style="text-align:center">
 	<b><font size="6" color="gray">회원정보 수정</font></b>
+	</p>
 	<br>
 	<br>
 	<br>
@@ -53,10 +54,22 @@ function submit2(del) {
 	<table>
 		<tr>
 			<td id="title">등급</td>
-			<td><select id="RANK" name="RANK">
-			<option value="${memberBean.RANK }">브론즈</option>
-			<option value="${memberBean.RANK }">실버</option>
-			<option value="${memberBean.RANK }">골드</option>
+			<td> 
+			<c:if test="${memberBean.RANK == 'B'}">
+			브론즈
+			</c:if>
+			<c:if test="${memberBean.RANK == 'S'}">
+			실버
+			</c:if>
+			<c:if test="${memberBean.RANK == 'G'}">
+			골드
+			</c:if>			
+			
+			&emsp; 변경  			
+			<select id="RANK" name="RANK">
+				<option value="B">브론즈</option>
+				<option value="S">실버</option>
+				<option value="G">골드</option>
 			</select>
 		</tr>
 		<tr>
@@ -94,16 +107,25 @@ function submit2(del) {
 
 		<tr>
 			<td id="title">회원정지(정지시 체크)</td>
-			<td><input type="checkbox"  size="100" name="BLOCK" value="${memberBean.BLOCK }" /></td>
+			<td>
+				<c:if test="${memberBean.BLOCK == 'N'}">
+					<input type="checkbox" size="100" name="BLOCK" value="Y"> 
+				</c:if>
+				<c:if test="${memberBean.BLOCK == 'Y'}">
+					<input type="checkbox" size="100" name="BLOCK" value="Y" checked> 
+				</c:if>
+			</td>
 		</tr>
 	</table>
 	<br>
 	<br>
+	<p style="text-align:center">
 	<input type="button" value="뒤로" onclick="changeForm(-1)">
-	<input type="button" value="수정" onclick="changeForm(0)">
+	<input type="submit" value="수정" onclick="changeForm(0)">
 	<input type="button" value="회원삭제" onclick="return submit2(this.form);">
 	<br>
 	<br>
+	</p>
 	<br>
 	</form>
 </body>

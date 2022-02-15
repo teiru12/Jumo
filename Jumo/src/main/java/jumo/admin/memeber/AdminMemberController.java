@@ -71,34 +71,30 @@ public class AdminMemberController {
 	public String memberModify (MemberBean member, Model model)
 			throws Exception {
 		
-		System.out.println(member.getEMAIL());
-		System.out.println(member.getADDRESS1());
-		System.out.println(member.getADDRESS2());
-		System.out.println(member.getPOSTCODE());
-		System.out.println(member.getBLOCK());
-		System.out.println(member.getRANK());
-		System.out.println(member.getPHONE());
-		System.out.println(member.getMOBILE());
+		// BlOCK값이 체크가 되지 않으면 null로 입력되어 넘어오게 된다.
+		// 따라서 BlOCK을 하지 않음을 설정하기 위해 "N"값을 입력하여 넘겨준다.
+		// 체크가 되었을 경우 "Y"값이 넘어오게 된다.
+		if(member.getBLOCK() == null) {
+			member.setBLOCK("N");
+		}
 		
 		adminMemberService.updateMemberAdmin(member);
 		
-		model.addAttribute("msg", "회원정보가 수정되었습니다.");
+		model.addAttribute("msg", member.getEMAIL() + "회원의 정보가 수정되었습니다.");
 		model.addAttribute("url", "/memberList.al");
 		return "admin/member/memberModify";
 	}
 	
 	@RequestMapping(value = "/memberDelete.al")
-	public String memberDelete (Model model, HttpServletRequest request, MemberBean member) throws Exception {
+	public String memberDelete (Model model, MemberBean member) throws Exception {
 		
-		String memberData = (String)request.getAttribute("EMAIL");
-		MemberBean memberBean = new MemberBean();
-		memberBean.setEMAIL(memberData);
-		Map<String, Object> memberId = adminMemberService.selectMemberId(memberBean);
-		member = MapToBean.mapToMember(memberId);
+		// 선택한 계정을 삭제하기 위해서 파라미터로 계정의 이메일값을 입력해 MemberBean으로 받는다.
 		
 		adminMemberService.deleteMember(member);
 		
+		model.addAttribute("msg", member.getEMAIL() + "회원이 삭제 되었습니다.");
+		model.addAttribute("url", "/memberList.al");
+		
 		return "admin/member/memberDelete";
 	}
-	
 }
