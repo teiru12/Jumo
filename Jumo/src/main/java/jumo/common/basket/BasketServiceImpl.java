@@ -34,6 +34,7 @@ public class BasketServiceImpl implements BasketService {
 		map.put("BSALE", basket.getBSALE());
 		map.put("BEMAIL", basket.getBEMAIL());
 		map.put("BCOUNT", basket.getBCOUNT());
+		map.put("BNUMBER", basket.getBNUMBER());
 						
 		basketDAO.updateBasket(map);	
 	}
@@ -43,7 +44,8 @@ public class BasketServiceImpl implements BasketService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("BNUMBER", basket.getBNUMBER());
+		System.out.println(map.get("BNUMBER"));
 						
-		basketDAO.updateBasket(map);			
+		basketDAO.deleteBasket(map);			
 	}
 }

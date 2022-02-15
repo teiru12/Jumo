@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-basketModify
-<br>
-<a href="/Jumo/basketList.al">장바구니 리스트로 이동</a><br>
-
+<meta http-equiv="refresh" content="0; url=/Jumo/basketList.al"></meta>
 </body>
 </html>

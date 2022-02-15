@@ -4,6 +4,34 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+  <script>
+function getCount() {
+	var count = document.getElementById('BCOUNT').value;
+	var price = document.getElementById('PPRICE').value;
+	var sale = document.getElementById('PSALE').value;
+	var salePrice = price * (100-sale) / 100;
+	var totalPrice = salePrice * count;
+	
+	document.getElementById("totalPrice").innerText = totalPrice + '원';
+	return count;
+}
+
+function basketModify() {
+	var bNumber = document.getElementById('BNUMBER').value;
+	var count = document.getElementById('BCOUNT').value;		
+	location.href="basketModify.al?BNUMBER=" + bNumber + "&BCOUNT=" + count;
+}
+
+function pOrderForm() {
+	var pId = document.getElementById('PID').value;
+	var count = document.getElementById('BCOUNT').value;		
+	location.href="pOrderForm.al?OPID=" + pId + "&OCOUNT=" + count;	
+}
+
+window.onload = function() {
+	getCount();
+};
+</script>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,31 +74,40 @@
 						        <th>상품 금액</th>
 						        <th>수량</th>
 						        <th>주문 금액</th>
+						        <th>수정/삭제</th>
 						      </tr>
 						    </thead>
 						    
+						    
+						    <c:forEach var="basket" items="${basketBeanList}">
 						  <tbody>
 						      <tr class="text-center">
+						     
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url(img/${product.PIMAGE});"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url(img/product-${basket.BID}.png);"></div></td>
     						
 						        <td class="product-name">
-						        	<h3><a href="#" >${basket.BNAME}</a></h3>
-						        	<p>${basket.BNAME}</p>
+						        	<h3>${basket.BNAME}</h3>
+						        	
 						        </td>
 						        
-						        <td class="price">$4.90</td>
+						        <td class="price">${basket.BPRICE}원</td>
 		    						
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
+						        <td>
+						        	<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="1" onChange="getCount()">
 					          </td>
 						        
-						        <td class="total">$4.90</td>
+						        <td class="total">${basket.BPRICE} 원</td>
+						        
+						        <td>
+				
+								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify()" value="수정">
+								
+						        <a href="/Jumo/basketDelete.al?BNUMBER=${basket.BNUMBER}" class="btn btn-primary py-3 px-4">삭제</a>
+						        </td>
 						      </tr>
-
+							</c:forEach>
 						      <!-- <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
@@ -89,10 +126,11 @@
 					          	</div>
 					          </td>
 						        
-						        <td class="total">$15.70</td> -->
-						      </tr>
+						        <td class="total">$15.70</td>
+						      </tr> -->
 						    </tbody>
 						  </table>
+						  
 				<div style="text-align:right">
 				<a href="/Jumo/allList.al" class="btn btn-primary py-3 px-4">쇼핑 계속하기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 				</div>
@@ -103,20 +141,20 @@
     					<h2>결제 금액</h2><br>
     					<p class="d-flex">
     						<span>주문금액</span>
-    						<span>$20.60</span>
+    						<span>미구현</span>
     					</p>
     					<p class="d-flex">
     						<span>할인금액</span>
-    						<span>$0.00</span>
+    						<span>미구현</span>
     					</p>
     					<p class="d-flex">
     						<span>배송비</span>
-    						<span>$3.00</span>
+    						<span>3000원</span>
     					</p>
     					<hr>
     					<p class="d-flex total-price">
     						<span>총 금액</span>
-    						<span>$17.60</span>
+    						<span>미구현</span>
     					</p>
     				</div>
     				</tr>
@@ -125,9 +163,6 @@
     				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a>
     				</div>
     			</div>
-    		</div>
-			</div>
-		</section>
 		
 		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
