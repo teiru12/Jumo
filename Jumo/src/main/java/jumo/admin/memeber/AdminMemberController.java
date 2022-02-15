@@ -54,18 +54,25 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value = "/memberDetail.al")
-	public String memberDetail (MemberBean member, Model model) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		MemberBean memberBean = new MemberBean();
-		
-		map = adminMemberService.selectMemberId(member);
-		
-		memberBean = MapToBean.mapToMember(map);
-		
-		model.addAttribute("memberBean", memberBean);
-		
-		return "memberDetail";
-	}
+	   public String memberDetail (MemberBean member,HttpServletRequest request, BindingResult result, Model model) throws Exception {
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      MemberBean memberBean = new MemberBean();
+	      
+	      String LoginId = (String) request.getSession().getAttribute("EMAIL");
+	      MemberBean loginMember = new MemberBean();
+	      loginMember.setEMAIL(LoginId);
+	      Map<String, Object> mapMember = loginService.selectMemberId(loginMember);
+	      member = MapToBean.mapToMember(mapMember);
+	      
+	      
+	      map = adminMemberService.selectMemberId(member);
+	      
+	      memberBean = MapToBean.mapToMember(map);
+	      
+	      model.addAttribute("memberBean", memberBean);
+	      
+	      return "memberDetail";
+	   }
 	
 	@RequestMapping(value = "/memberModify.al")
 	public String memberModify (MemberBean member, BindingResult result)
