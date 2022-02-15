@@ -12,6 +12,7 @@
    <script>
    if(${! empty msg}) {
       alert('${msg}');
+      history.go(-1);
    }
     location.href='${pageContext.request.contextPath}${url}';
     </script>
