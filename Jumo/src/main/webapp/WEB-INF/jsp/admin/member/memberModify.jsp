@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-memberModify
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 <br>
 <a href="/Jumo/memberList.al">회원정보 리스트 페이지로 이동</a><br>
 </body>
