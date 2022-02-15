@@ -401,21 +401,45 @@ public class ProductController {
 	}
 
 
-	@RequestMapping(value="/putBasket.al", method=RequestMethod.POST)
-	public String putBasket(BasketBean basket, BindingResult result,
+	@RequestMapping(value="/putBasket.al")
+	public String putBasket(BasketBean basket, HttpServletRequest request,
 			Model model) throws Exception{
 		
-		new BasketValidator().validate(basket, result);
+		// BID와 BCOUNT를 파라미터로 넘겨받음
+		// BID를 이용해서 상품 정보를 읽어옴
+		ProductBean pro = new ProductBean();
+		pro.setPID(basket.getBID()); // BID의 값을 PID로 갖는 상품 객체
+		Map<String, Object> mapProduct = productService.selectProductId(pro); // BID값을 이용하여 DB에서 MAP객체를 가져옴 
+		ProductBean productInfo = MapToBean.mapToProduct(mapProduct); // MAP객체를 상품 객체로 변환, PID값이 BID인 상품 정보를 갖고 있다.
+
+		// 장바구니에 담을 수량이 상품의 재고 수량보다 많을 경우 오류 메세지 출력 후 돌아간다.
+		if(basket.getBCOUNT()>productInfo.getPSTOCK()) {
+			model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다.");
+			String urlParam = "/pDetail.al?PID=" + basket.getBID();
+			model.addAttribute("url", urlParam);	
+			return "/product/putBasket";
+		}		
 		
-		if(result.hasErrors()) {
-			return "/allList.al";
-			// pDetail 페이지로 넘어가기 위해서는 ProductBean, CommunityBean 객체를 넘겨줘야하는데
-			// 바로 리턴하면 오류발생
-			// 자바 스크립트로 오류체크
-			// return "pDetail";
-		}
+		// 만약 장바구니에 이미 상품이 존재한다면 상품의 수량만 변경한다
+		// 이 때 합계 상품 수량이 재고 수량보다 많을 경우 오류 메시지 출력 후 돌아간다.
+		
+		
+		
+		
+		basket.setBNAME(productInfo.getPNAME());
+		basket.setBPRICE(productInfo.getPPRICE());
+		basket.setBSALE(productInfo.getPSALE());
+		
+		// 상품에 입력할 EMAIL값은 세션으로부터 읽어온다.
+		String email = (String)request.getSession().getAttribute("EMAIL");
+		basket.setBEMAIL(email);
 		
 		productService.insertBasket(basket);
+		
+		model.addAttribute("msg", "장바구니에 넣었습니다.");
+		// /pDetail.al은 파라미터값을 필요로 하기 때문에 url에 파라미터를 추가
+		String urlParam = "/pDetail.al?PID=" + basket.getBID();
+		model.addAttribute("url", urlParam);		
 		
 		return "/product/putBasket";
 	}

@@ -71,12 +71,12 @@ public class ProductDAO {
 	
 	public void insertBasket(Map<String, Object> map) 
 			throws Exception {
-		sqlSessionTemplate.insert("basket.insertBeasket");
+		sqlSessionTemplate.insert("basket.insertBasket", map);
 	}
 
 	public void insertReview(Map<String, Object> map)
 			throws Exception {
-		sqlSessionTemplate.insert("community.insertReview");
+		sqlSessionTemplate.insert("community.insertReview", map);
 	}	
 	
 	/* 페이징 */

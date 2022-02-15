@@ -109,16 +109,15 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void insertBasket(BasketBean basket) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
-		
+
 		map.put("BNAME", basket.getBNAME());
 		map.put("BID", basket.getBID());
 		map.put("BPRICE", basket.getBPRICE());
 		map.put("BSALE", basket.getBSALE());
 		map.put("BEMAIL", basket.getBEMAIL());
-		map.put("BECOUNT", basket.getBCOUNT());
+		map.put("BCOUNT", basket.getBCOUNT());
 		
-		productDAO.insertBasket(map);
-		
+		productDAO.insertBasket(map);		
 	}
 
 	@Override

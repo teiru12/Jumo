@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-putBasket
-<br>
-<a href="/Jumo/pDetail.al">쇼핑 계속하기</a><br>
-<a href="/Jumo/basketList.al">장바구니 가기</a><br>
+   <script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 </body>
 </html>

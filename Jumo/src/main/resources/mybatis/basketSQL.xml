@@ -20,6 +20,18 @@
 	]]>
 	</insert>
 	
+	<!-- 상품ID BID를 갖는 basket 정보  -->
+	<select id="selectBasketBID" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			BASKET 
+		WHERE
+			BID=#{BID}
+	]]>
+	</select>
+	
 	<!-- basketList 장바구니 리스트) -->
 	<select id="basketList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[

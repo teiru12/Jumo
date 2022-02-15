@@ -21,9 +21,13 @@ function getCount() {
 }
 
 function putBasket() {
-	var pId = document.getElementById('PID').value;
-	var count = document.getElementById('BCOUNT').value;		
-	location.href="putBasket.al?BID=" + pId + "&BCOUNT=" + count;
+	if(confirm("장바구니에 넣으시겠습니까?") == true) {
+		var pId = document.getElementById('PID').value;
+		var count = document.getElementById('BCOUNT').value;		
+		location.href="putBasket.al?BID=" + pId + "&BCOUNT=" + count;
+	} else {
+		return;
+	}
 }
 
 function pOrderForm() {
