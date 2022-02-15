@@ -207,7 +207,7 @@ window.onload = function() {
 						<tr>
 							<td style="width:80%; text-align:right" colspan="2">
 				   				<ul class="product-category">
-				   					<li><a href="pReview.al?PID=${pid}">글쓰기</a></li>
+				   					<li><a href="pReviewForm.al?PID=${pid}">글쓰기</a></li>
 				   				</ul>
 							</td>
 						</tr>

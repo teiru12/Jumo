@@ -127,7 +127,7 @@ public class ProductServiceImpl implements ProductService{
 		map.put("CTITLE", community.getCTITLE());
 		map.put("CWRITER",community.getCWRITER());
 		map.put("PID",community.getPID());
-		map.put("CCOUNT", community.getCCOUNT());
+		map.put("CCONTENT", community.getCCONTENT());
 	
 		productDAO.insertReview(map);
 	}

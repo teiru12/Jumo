@@ -16,6 +16,10 @@
 	
 			<!-- 로그인을 했을 경우 -->
 			<c:if test="${! empty EMAIL }">
+				<span class="text-light" style="font-size:small;">
+				<%= session.getAttribute("EMAIL") %>님
+				</span>
+					<span class="text-light px-2">|</span>
 				<a class="text-light" href="/Jumo/myPage.al" style="font-size:small;">마이페이지</a> 
 					<span class="text-light px-2">|</span> 
 				<a class="text-light" href="/Jumo/basketList.al" style="font-size:small;">장바구니</a>

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.common.basket.BasketService;
@@ -17,7 +16,6 @@ import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
 import jumo.util.MapToBean;
-import jumo.util.validator.CommunityValidator;
 import jumo.util.Paging;
 
 @Controller
@@ -443,7 +441,7 @@ public class ProductController {
 			if( (basket.getBCOUNT() + selectBasket.getBCOUNT()) > productInfo.getPSTOCK() ) {
 				model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다.");
 				String urlParam = "/pDetail.al?PID=" + basket.getBID();
-				model.addAttribute("url", urlParam);	
+				model.addAttribute("url", urlParam);
 				return "/product/putBasket";
 			}
 			
@@ -473,22 +471,33 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/pReviewForm.al")
-	public String pReviewForm(Model model) throws Exception{
+	public String pReviewForm(HttpServletRequest request, Model model) throws Exception{
+
+		int PID = Integer.parseInt(request.getParameter("PID"));
+		String CWRITER = (String) request.getSession().getAttribute("EMAIL");
+		
+		// 상품 정보를 출력하기 위한 PID의 상품 정보를 가져옴
+		ProductBean pro = new ProductBean();
+		pro.setPID(PID); // PID만를 갖는 상품 객체 
+		Map<String, Object> map = productService.selectProductId(pro);
+		ProductBean productBean = MapToBean.mapToProduct(map);
+		
+		model.addAttribute("PID", PID);
+		model.addAttribute("CWRITER", CWRITER);
+		model.addAttribute("productBean", productBean);		
 		
 		return "pReviewForm";
 	}
 	
 	@RequestMapping("/pReview.al")
-	public String pReview(CommunityBean community, BindingResult result,
-			Model model) throws Exception{
-		
-		new CommunityValidator().validate(community, result);
-		
-		if(result.hasErrors()) {
-			return "pReviewForm";
-		}
+	public String pReview(CommunityBean community,
+			HttpServletRequest request, Model model) throws Exception{
 		
 		productService.insertReview(community);
+		
+		model.addAttribute("msg", "후기를 등록하였습니다.");
+		String urlParam = "/pDetail.al?PID=" + request.getParameter("PID");
+		model.addAttribute("url", urlParam);
 		
 		return "/product/pReview";
 	}

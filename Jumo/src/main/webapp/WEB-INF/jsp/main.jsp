@@ -9,9 +9,6 @@
 </head>
 <body class="goto-here">
 
-<%= session.getAttribute("EMAIL") %>
-
-
     <section id="home-section" class="hero">
 		  <div class="home-slider owl-carousel">
 	      <div class="slider-item" style="background-image: url(img/bg_1.jfif);">
