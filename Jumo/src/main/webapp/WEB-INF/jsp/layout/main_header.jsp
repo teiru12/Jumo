@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <html>
 <body>
-	<div class="py-1" style="background-color:#606060; height:150px;">
+	<div class="py-1" style="background-color:#82ae46; height:150px;">
 		<div class="container" style="text-align:right;">
 		
 			<!-- 로그인을 하지 않았을 경우 -->
@@ -31,12 +31,12 @@
 		</div>
 	</div>
 
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" style="background-color:#606060;" id="ftco-navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	       <ul class="navbar-nav ml-auto">
-			<li class="nav-item active"><a href="/Jumo/allList.al" class="nav-link" style="font-size:xx-large;">전체상품</a></li>
-	          <li class="nav-item active"><a href="/Jumo/aclList.al" class="nav-link" style="font-size:xx-large;">주류상품</a></li>
-	          <li class="nav-item active"><a href="/Jumo/etcList.al" class="nav-link" style="font-size:xx-large;">기타상품</a></li>
+			<li class="nav-item active"><a href="/Jumo/allList.al" class="nav-link" style="font-size:xx-large; color:#82ae46;">전체상품</a></li>
+	          <li class="nav-item active"><a href="/Jumo/aclList.al" class="nav-link" style="font-size:xx-large; color:#82ae46;">주류상품</a></li>
+	          <li class="nav-item active"><a href="/Jumo/etcList.al" class="nav-link" style="font-size:xx-large; color:#82ae46;">기타상품</a></li>
 	         </ul>
 	               
 	      <div class="collapse navbar-collapse" id="ftco-nav">
@@ -53,4 +53,8 @@
 	      </div>
 	    </div>
 	  </nav>
+	  <div>
+	  	<hr color="#82ae46;">
+	  </div>
+	 
 </body>
