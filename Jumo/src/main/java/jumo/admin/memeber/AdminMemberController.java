@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,6 @@ public class AdminMemberController {
 
 	@Resource(name="adminMemberService")
 	private AdminMemberService adminMemberService;
-
 	
 	@RequestMapping(value = "/memberList.al")
 	public String memberList (Model model) throws Exception {
@@ -54,19 +54,11 @@ public class AdminMemberController {
 	}
 	
 	@RequestMapping(value = "/memberDetail.al")
-	   public String memberDetail (MemberBean member,HttpServletRequest request, BindingResult result, Model model) throws Exception {
+	   public String memberDetail (MemberBean member, Model model) throws Exception {
 	      Map<String, Object> map = new HashMap<String, Object>();
 	      MemberBean memberBean = new MemberBean();
 	      
-	      String LoginId = (String) request.getSession().getAttribute("EMAIL");
-	      MemberBean loginMember = new MemberBean();
-	      loginMember.setEMAIL(LoginId);
-	      Map<String, Object> mapMember = loginService.selectMemberId(loginMember);
-	      member = MapToBean.mapToMember(mapMember);
-	      
-	      
 	      map = adminMemberService.selectMemberId(member);
-	      
 	      memberBean = MapToBean.mapToMember(map);
 	      
 	      model.addAttribute("memberBean", memberBean);

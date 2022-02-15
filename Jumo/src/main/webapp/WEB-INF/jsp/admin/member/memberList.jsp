@@ -39,7 +39,7 @@ memberList.jsp
 <c:forEach var="member" items="${memberBeanList}"> 
     <tr> 
     	<td><a href="memberDetail.al">${member.RANK}</a></td>
-    	<td><a href="memberDetail.al">${member.EMAIL}</a></td>
+    	<td><a href="memberDetail.al?EMAIL=${member.EMAIL}">${member.EMAIL}</a></td>
     	<td><a href="memberDetail.al">${member.NAME}</a></td>
     	<td><a href="memberDetail.al">${member.PHONE}</a></td> 
     	<td><a href="memberDetail.al">${member.MOBILE}</a></td>
