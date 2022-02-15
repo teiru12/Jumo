@@ -34,7 +34,7 @@
     	<tr> 
     		<td>${notice.CIDX}</td> 
     		<td> 
-    			<a href="noticeDetail.jsp">${notice.CTITLE}</a>
+    			<a href="noticeDetail.al">${notice.CTITLE}</a>
    			</td>
    			<td>${notice.CWRITER}</td> 
    			<td>${notice.CDATE}</td>	
@@ -53,7 +53,7 @@
 		</table>
 </div>
 	<!-- 공지사항 페이징 -->
-
+		${paging.pageHtml}
 <br>
 </body>
 </html>
