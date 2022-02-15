@@ -29,6 +29,8 @@
 			BASKET 
 		WHERE
 			BID=#{BID}
+			AND
+			BEMAIL=#{BEMAIL}
 	]]>
 	</select>
 	

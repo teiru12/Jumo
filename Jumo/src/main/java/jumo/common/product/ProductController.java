@@ -11,14 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import jumo.common.basket.BasketService;
 import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
 import jumo.util.MapToBean;
-import jumo.util.validator.BasketValidator;
 import jumo.util.validator.CommunityValidator;
 import jumo.util.Paging;
 
@@ -27,6 +25,9 @@ public class ProductController {
 	
 	@Resource(name="productService")
 	private ProductService productService;
+	
+	@Resource(name="basketService")
+	private BasketService basketService;
 	
 	@RequestMapping("/allList.al")
 	public String allList(HttpServletRequest request, Model model) throws Exception{
@@ -413,33 +414,60 @@ public class ProductController {
 		ProductBean productInfo = MapToBean.mapToProduct(mapProduct); // MAP객체를 상품 객체로 변환, PID값이 BID인 상품 정보를 갖고 있다.
 
 		// 장바구니에 담을 수량이 상품의 재고 수량보다 많을 경우 오류 메세지 출력 후 돌아간다.
-		if(basket.getBCOUNT()>productInfo.getPSTOCK()) {
+		if(basket.getBCOUNT() > productInfo.getPSTOCK()) {
 			model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다.");
 			String urlParam = "/pDetail.al?PID=" + basket.getBID();
 			model.addAttribute("url", urlParam);	
 			return "/product/putBasket";
-		}		
-		
-		// 만약 장바구니에 이미 상품이 존재한다면 상품의 수량만 변경한다
-		// 이 때 합계 상품 수량이 재고 수량보다 많을 경우 오류 메시지 출력 후 돌아간다.
-		
-		
-		
-		
-		basket.setBNAME(productInfo.getPNAME());
-		basket.setBPRICE(productInfo.getPPRICE());
-		basket.setBSALE(productInfo.getPSALE());
+		}	
+		// 장바구니에 담을 수량이 0개일 경우 오류 메세지 출력 후 돌아간다.
+		if(basket.getBCOUNT() == 0) {
+			model.addAttribute("msg", "장바구니에 상품을 담을 수 없습니다.");
+			String urlParam = "/pDetail.al?PID=" + basket.getBID();
+			model.addAttribute("url", urlParam);	
+			return "/product/putBasket";
+		}
 		
 		// 상품에 입력할 EMAIL값은 세션으로부터 읽어온다.
 		String email = (String)request.getSession().getAttribute("EMAIL");
 		basket.setBEMAIL(email);
 		
-		productService.insertBasket(basket);
+		// 만약 장바구니에 이미 상품이 존재한다면 상품의 수량만 변경한다
+		// 이 때 합계 상품 수량이 재고 수량보다 많을 경우 오류 메시지 출력 후 돌아간다.
+		Map<String, Object> selectBasketMap = basketService.selectBasketBID(basket); 
+		/* 장바구니에 같은 상품이 담겨 있을 경우 */
+		if(selectBasketMap != null) {
+			BasketBean selectBasket = MapToBean.mapToBasket(selectBasketMap);
+
+			// 장바구니에 담을 수량과 기존 담겨있던 수량의 합이 상품의 재고 수량보다 많을 경우 오류 메세지 출력 후 돌아간다.
+			if( (basket.getBCOUNT() + selectBasket.getBCOUNT()) > productInfo.getPSTOCK() ) {
+				model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다.");
+				String urlParam = "/pDetail.al?PID=" + basket.getBID();
+				model.addAttribute("url", urlParam);	
+				return "/product/putBasket";
+			}
+			
+			// 장바구니 수량 수정에 BCOUNT와 BNUMBER 필요
+			// BCOUNT는 파라미터로 넘겨받은 bakset의 BCOUNT와 selectBasket의 BCOUNT를 합한다.
+			basket.setBCOUNT(basket.getBCOUNT() + selectBasket.getBCOUNT());
+			
+			// BNUMBER는 검색한 selectBasket의 BNUMBER를 사용
+			basket.setBNUMBER(selectBasket.getBNUMBER());
+			
+			basketService.updateBasket(basket);			
+		/* 장바구니에 같은 상품이 없을 경우 */			
+		} else { // 장바구니에 해당 상품이 존재하지 않음.
+			basket.setBNAME(productInfo.getPNAME());
+			basket.setBPRICE(productInfo.getPPRICE());
+			basket.setBSALE(productInfo.getPSALE());
+			
+			productService.insertBasket(basket);
+		}
 		
 		model.addAttribute("msg", "장바구니에 넣었습니다.");
 		// /pDetail.al은 파라미터값을 필요로 하기 때문에 url에 파라미터를 추가
 		String urlParam = "/pDetail.al?PID=" + basket.getBID();
-		model.addAttribute("url", urlParam);		
+		model.addAttribute("url", urlParam);
 		
 		return "/product/putBasket";
 	}
