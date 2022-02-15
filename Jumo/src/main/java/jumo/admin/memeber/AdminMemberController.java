@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,24 +66,35 @@ public class AdminMemberController {
 	      
 	      return "memberDetail";
 	   }
-	
+	 
 	@RequestMapping(value = "/memberModify.al")
-	public String memberModify (MemberBean member, BindingResult result)
+	public String memberModify (MemberBean member, Model model)
 			throws Exception {
-
-		new MemberValidator().validate(member, result);
 		
-		if(result.hasErrors()) {
-			return "./memberList.al";
-		}
+		System.out.println(member.getEMAIL());
+		System.out.println(member.getADDRESS1());
+		System.out.println(member.getADDRESS2());
+		System.out.println(member.getPOSTCODE());
+		System.out.println(member.getBLOCK());
+		System.out.println(member.getRANK());
+		System.out.println(member.getPHONE());
+		System.out.println(member.getMOBILE());
 		
 		adminMemberService.updateMemberAdmin(member);
 		
+		model.addAttribute("msg", "회원정보가 수정되었습니다.");
+		model.addAttribute("url", "/memberList.al");
 		return "admin/member/memberModify";
 	}
 	
 	@RequestMapping(value = "/memberDelete.al")
-	public String memberDelete (Model model, MemberBean member) throws Exception {
+	public String memberDelete (Model model, HttpServletRequest request, MemberBean member) throws Exception {
+		
+		String memberData = (String)request.getAttribute("EMAIL");
+		MemberBean memberBean = new MemberBean();
+		memberBean.setEMAIL(memberData);
+		Map<String, Object> memberId = adminMemberService.selectMemberId(memberBean);
+		member = MapToBean.mapToMember(memberId);
 		
 		adminMemberService.deleteMember(member);
 		
