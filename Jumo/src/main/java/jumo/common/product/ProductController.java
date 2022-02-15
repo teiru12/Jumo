@@ -390,11 +390,10 @@ public class ProductController {
 		List<Map<String, Object>> list = productService.selectReviewProduct(community);
 		List<CommunityBean> reviewBeanList = new ArrayList<CommunityBean>();
 
-	
 		for(Map<String, Object> mapObject : list) {
 			reviewBeanList.add(MapToBean.mapToCommunity(mapObject));
 		}
-		
+
 		model.addAttribute("productBean", productBean);
 		model.addAttribute("reviewBeanList", reviewBeanList);
 		
