@@ -20,10 +20,10 @@ public class BasketDAO {
 	}
 	
 	public void updateBasket(Map<String,Object> map)throws Exception{
-		sqlSessionTemplate.update("basket.updateBasket");
+		sqlSessionTemplate.update("basket.updateBasket", map);
 	}
 	
 	public void deleteBasket(Map<String,Object> map) throws Exception{
-		sqlSessionTemplate.delete("basket.deleteBasket");
+		sqlSessionTemplate.delete("basket.deleteBasket", map);
 	}
 }
