@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
+import jumo.util.Paging;
 import jumo.util.validator.CommunityValidator;
 
 @Controller
@@ -22,18 +23,42 @@ public class AdminNoticeController {
 	@Resource(name="adminCommunityService")
 	private AdminCommunityService adminComService;
 
+
+	
 	@RequestMapping(value="/adminNoticeList.al")
 	public String adminNoticeList(
-			@RequestParam("START") int START,
-			@RequestParam("END") int END,
+	/*		@RequestParam("START") int START,
+			@RequestParam("END") int END	*/	
 			Model model) throws Exception {
+		
+		/* 페이징을 위한 변수 */
+		int pageSize = 20; // 페이지당 출력할 공지의 수
+		int START = 1;
+		int END = pageSize;
+		int currentPage = 1; // 현재 페이지
+
+		int noticeListCount; // 전체 공지글의 수
+		int pageBlock = 5; // 표시할 페이지의 수
+		String url = "noticeList.al";
+		String searchUrl = "";
+		
 		List<Map<String, Object>> list = adminComService.noticeListPaging(START, END);
 		List<CommunityBean> noticeList = new ArrayList<CommunityBean>();
 		
 		for(Map<String, Object> mapObject : list) {
 			noticeList.add( MapToBean.mapToCommunity(mapObject) );
 		}
-
+		
+		noticeListCount = adminComService.noticeListCount();
+		
+		Paging paging = new Paging(noticeListCount,	pageBlock,
+				pageSize ,currentPage, url, searchUrl);
+	
+		/* 페이징을 위한 값 삽입 */
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("paging", paging);
+		
+		
 		model.addAttribute("noticeList", noticeList);
 		
 		return "adminNoticeList";
