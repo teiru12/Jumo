@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +20,13 @@
 		var POSTCODE = document.getElementById("POSTCODE");
 		var MOBILE = document.getElementById("MOBILE");
 		
-		if(EMAIL.value == ""){
+		if(EMAIL.value.trim() == ""){
 			alert("아이디를 입력해주세요.");
 			EMAIL.focus();
 			return false;
 		}
 		
-		if(PASSWORD.value == ""){
+		if(PASSWORD.value.trim() == ""){
 			alert("비밀번호를 입력해주세요.");
 			PASSWORD.focus();
 			return false;
@@ -37,13 +38,13 @@
 			return false;
 		}
 		
-		if(NAME.value == ""){
+		if(NAME.value.trim() == ""){
 			alert("이름을 입력해주세요.");
 			NAME.focus();
 			return false;
 		}
 		
-		if(JUMIN1.value == ""){
+		if(JUMIN1.value.trim() == ""){
 			alert("주민등록번호를 입력해주세요.");
 			JUMIN1.focus();
 			return false;
@@ -55,7 +56,7 @@
 			return false;
 		}
 		
-		if(JUMIN2.value == ""){
+		if(JUMIN2.value.trim() == ""){
 			alert("주민등록번호를 입력해주세요.");
 			JUMIN2.focus();
 			return false;
@@ -67,25 +68,25 @@
 			return false;
 		}
 		
-		if(ADDRESS1.value == ""){
+		if(ADDRESS1.value.trim() == ""){
 			alert("주소를 입력해주세요.");
 			ADDRESS1.focus();
 			return false;
 		}
 		
-		if(ADDRESS2.value == ""){
+		if(ADDRESS2.value.trim() == ""){
 			alert("상세 주소를 입력해주세요.");
 			ADDRESS2.focus();
 			return false;
 		}
 		
-		if(POSTCODE.value == ""){
+		if(POSTCODE.value.trim() == ""){
 			alert("우편번호를 입력해주세요.");
 			POSTCODE.focus();
 			return false;
 		}
 
-		if(MOBILE.value == ""){
+		if(MOBILE.value.trim() == ""){
 			alert("핸드폰 번호를 입력해주세요.");
 			MOBILE.focus();
 			return false;
@@ -154,79 +155,116 @@
 
 
 </head>
-<body>
-<div class="container" align="center">
-	<h4>회원가입</h4>
-	<form id="joinForm" name="joinForm" method="POST" action="/Jumo/joinSuccess.al">
+<body class="goto-here">
+<section class="ftco-section">
+<div class="container" style="text-align:center;">
+	<div class="row justify-content-center">
+		<div class="col-xl-7 ftco-animate">
+			<form id="joinForm" name="joinForm" method="POST" action="/Jumo/joinSuccess.al" class="billing-form" >
+			<h2 class="mb-4 billing-heading">회원가입</h2>
+				<div class="row align-items-end" style="padding-left:150px;">
+					
+					<!-- 이메일 -->
+					<h6 class="mb-4" style="text-align:left;">아이디</h6>
+					<div class="w-100"></div>
+					<div class="form-group d-flex">
+						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;">
+						<input type="button" value="중복확인" class="submit px-3" onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()">
+					</div>
+					<div class="w-100"></div>
+           
+					<!-- 비밀번호 -->
+					
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">비밀번호</h6>
+						<input type="password" id="PASSWORD" name="PASSWORD" class="form-control" style="width:400px;">
+					</div>
+					<div class="w-100"></div>
+					
+					<!-- 비밀번호 확인 -->
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">비밀번호 확인</h6>
+						<input type="password" id="PASSWORD2" name="PASSWORD2"  class="form-control" style="width:400px;">
+					</div>
+					<div class="w-100"></div>
+					<br/><br/>
 		
-		<!-- 이메일 -->
-		<div>
-			<label for="EMAIL">아이디
-				<input type="text" id="EMAIL" name="EMAIL">
-				<input type="button" value="중복확인" onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()"/>
-			</label>
-		</div>
-		<!-- 비밀번호 -->
-		<div>
-			<label for="userPw">비밀번호</label>
-			<input type="password" id="PASSWORD" name="PASSWORD">
-		</div>
-		<!-- 비밀번호 확인 -->
-		<div>
-			<label for="userPwCheck">비밀번호 확인</label>
-			<input type="password" id="PASSWORD2" name="PASSWORD2">
-		</div>
-		<br/>
-		<!-- 이름 -->
-		<div>
-			<label for="name">이름</label>
-			<input type="text" id="NAME" name="NAME">
-		</div>
-		<!-- 주민등록번호 -->
-		<div>
-			<label for="JUMIN">주민등록번호</label>
-			<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"
-			onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>-	
-			<input type="text" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"
-			onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
-		</div>
-		<!-- 전화번호 -->
-		<div>
-			<label for="PHONE">전화번호</label>
-			<input type="text" id="PHONE" name="PHONE" size="24"
-				onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
-		</div>
+					<!-- 이름 -->
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">이름</h6>
+						<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;">
+					</div>
+					<div class="w-100"></div>
+					
+					<!-- 주민등록번호 -->
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
+						<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:190px;">
+					</div>
+					&emsp;
+					<div class="form-group">
+						<input type="text" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:190px;">
+					</div>
+					<div class="w-100"></div>
+					
+					<!-- 전화번호 -->
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
+						<input type="text" id="PHONE" name="PHONE" size="24"  class="form-control"
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;">
+						<div class="w-100"></div>
+						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
+					</div>
+					<div class="w-100"></div>
 
-		<!-- 핸드폰 번호 -->
-		<div>
-			<label for="MOBILE">핸드폰번호
-				<input type="text" id="MOBILE" name="MOBILE" 
-					onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24"/> '-'는 빼고 숫자만 입력해주세요.
-			</label>
+					<!-- 핸드폰 번호 -->
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
+						<input type="text" id="MOBILE" name="MOBILE" class="form-control"
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"> 
+						<div class="w-100"></div>
+						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
+					</div>
+					<div class="w-100"></div>
+					<br/><br/>
+					
+					<!-- 주소 -->
+					<h6 class="mb-4" style="text-align:left;">우편번호</h6>
+					<div class="w-100"></div>
+					<div class="form-group d-flex">
+						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;">
+						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+					</div>
+					<div class="w-100"></div>
+					<div class="form-group">
+						<h6 class="mb-4" style="text-align:left;">주소</h6>
+						<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;">
+					</div>
+					&emsp;
+					<div class="form-group">
+						<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" class="form-control" style="width:190px;">
+					</div>			
+					<div class="w-100"></div>
+					<br/><br/><br/><br/>
+					</div>
+			</form>
+					
+				<!-- 버튼 -->
+					<div class="form-group" align="center">
+						 <button type="button" class="btn btn-primary py-3 px-5" onClick="checks(this.form)">회원가입</button>
+				            
+				          &emsp;&emsp;
+				          <button type="reset" class="btn btn-black py-3 px-5">다시 입력</button>
+				
+				          &emsp;&emsp;
+				          <button type="button" class="btn btn-black py-3 px-5" onclick="location.href='loginForm.al'">취소</button>
+				     
+			</div>
 		</div>
-		<br/>
-		<!-- 주소 -->
-		<div>
-			<label for="POSTCODE">우편번호</label>
-			<input type="text" name="POSTCODE" id="POSTCODE" placeholder="우편번호">
-			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			<label for="ADDRESS1">주소</label>
-			<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소"><br>
-			<label for="ADDRESS2">상세주소</label>
-			<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소">
-		</div>
-		
-		<!-- 버튼 -->
-		<div>
-		 	<button type="button" onClick="checks(this.form)">회원가입</button>
-            
-            &emsp;&emsp;
-            <button type="reset">다시 입력</button>
-
-            &emsp;&emsp;
-            <button type="button" onclick="location.href='loginForm.al'">취소</button>
-         </div>
-	</form>
+	</div>
 </div>
+</section>
 </body>
 </html>
