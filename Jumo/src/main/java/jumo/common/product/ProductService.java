@@ -26,6 +26,12 @@ public interface ProductService {
 	public List<Map<String, Object>> selectReviewProduct(CommunityBean community) throws Exception;
 
 	public void insertBasket(BasketBean basket) throws Exception;
+	
+	public Map<String, Object> selectBasketBID(BasketBean basket) throws Exception;
+	
+	public Map<String, Object> selectBasketBnumberMaxBemail(BasketBean basket) throws Exception;
+	
+	public int selectBasketBnumberMax() throws Exception;	
 
 	public void insertReview(CommunityBean community) throws Exception;
 	

@@ -9,7 +9,8 @@
 		INSERT INTO
 			BASKET
 		VALUES(
-			BNUMBER_SEQ.NEXTVAL,
+			BIDX_SEQ.NEXTVAL,
+			#{BNUMBER},
 			#{BNAME},
 			#{BID},
 			#{BPRICE},
@@ -34,6 +35,28 @@
 	]]>
 	</select>
 	
+	<!-- BEMAIL 사용자가 가진 장바구니의 수 -->
+	<select id="selectBasketBnumberMaxBemail" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			MAX(BNUMBER) MAX
+		FROM
+			BASKET 
+		WHERE
+			BEMAIL=#{BEMAIL}
+	]]>
+	</select>
+	
+	<!-- 장바구니의 테이블의 BNUMBER 최대값 -->
+	<select id="selectBasketBnumberMax" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			MAX(BNUMBER) MAX
+		FROM
+			BASKET
+	]]>
+	</select>
+	
 	<!-- basketList 장바구니 리스트) -->
 	<select id="basketList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -54,7 +77,7 @@
 		SET
 			BCOUNT = #{BCOUNT} 
 		WHERE
-			BNUMBER = #{BNUMBER}
+			BIDX = #{BIDX}
 	]]>
 	</update>
 

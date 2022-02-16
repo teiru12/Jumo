@@ -12,6 +12,4 @@ public interface BasketService {
 	public void updateBasket(BasketBean basket) throws Exception;
 
 	public void deleteBasket(BasketBean basket) throws Exception;
-	
-	public Map<String, Object> selectBasketBID(BasketBean basket) throws Exception;
 }

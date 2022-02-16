@@ -110,6 +110,7 @@ public class ProductServiceImpl implements ProductService{
 	public void insertBasket(BasketBean basket) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 
+		map.put("BNUMBER", basket.getBNUMBER());
 		map.put("BNAME", basket.getBNAME());
 		map.put("BID", basket.getBID());
 		map.put("BPRICE", basket.getBPRICE());
@@ -119,6 +120,36 @@ public class ProductServiceImpl implements ProductService{
 		
 		productDAO.insertBasket(map);		
 	}
+	
+	@Override
+	public Map<String, Object> selectBasketBID(BasketBean basket) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("BID", basket.getBID());
+		map.put("BEMAIL", basket.getBEMAIL());
+		
+		return productDAO.selectBasketBID(map);
+	}
+	
+	@Override
+	public Map<String, Object> selectBasketBnumberMaxBemail(BasketBean basket) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("BEMAIL", basket.getBEMAIL());
+		
+		return productDAO.selectBasketBnumberMaxBemail(map);
+	}
+	
+	@Override
+	public int selectBasketBnumberMax() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = productDAO.selectBasketBnumberMax();
+		
+		int maxBnumber = Integer.parseInt(String.valueOf(map.get("MAX")));
+		
+		return maxBnumber;
+	}		
 
 	@Override
 	public void insertReview(CommunityBean community) throws Exception {

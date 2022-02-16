@@ -1,7 +1,8 @@
 package jumo.model;
 
 public class BasketBean {
-	private int BNUMBER;
+	private int BIDX; // 장바구니를 구분
+	private int BNUMBER; // 같은 장바구니일때 같은 번호 
 	private String BNAME;
 	private int BID;
 	private int BPRICE;
@@ -9,6 +10,12 @@ public class BasketBean {
 	private String BEMAIL;
 	private int BCOUNT;
 	
+	public int getBIDX() {
+		return BIDX;
+	}
+	public void setBIDX(int bIDX) {
+		BIDX = bIDX;
+	}
 	
 	public int getBNUMBER() {
 		return BNUMBER;
@@ -51,6 +58,5 @@ public class BasketBean {
 	}
 	public void setBCOUNT(int bCOUNT) {
 		BCOUNT = bCOUNT;
-	}
-	
+	}	
 }
