@@ -69,6 +69,9 @@ public class MapToBean {
 	public static BasketBean mapToBasket(Map<String, Object> map) {
 		BasketBean basketBean = new BasketBean();
 		
+		if(map.get("BIDX") != null) {
+			basketBean.setBIDX(Integer.parseInt(String.valueOf(map.get("BIDX"))));
+		}
 		if(map.get("BNUMBER") != null) {
 			basketBean.setBNUMBER(Integer.parseInt(String.valueOf(map.get("BNUMBER"))));
 		}

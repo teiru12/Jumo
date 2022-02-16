@@ -419,7 +419,7 @@ public class ProductController {
 			return "/product/putBasket";
 		}	
 		// 장바구니에 담을 수량이 0개 이하일 경우 오류 메세지 출력 후 돌아간다.
-		if(basket.getBCOUNT() < 0) {
+		if(basket.getBCOUNT() <= 0) {
 			model.addAttribute("msg", "장바구니에 상품을 담을 수 없습니다.");
 			String urlParam = "/pDetail.al?PID=" + basket.getBID();
 			model.addAttribute("url", urlParam);	
@@ -430,9 +430,20 @@ public class ProductController {
 		String email = (String)request.getSession().getAttribute("EMAIL");
 		basket.setBEMAIL(email);
 		
+		// 만약 장바구니에 아무것도 담겨져 있지 않다면 BNUMBER = 장바구니 테이블에서 BNUMBER의 최대값 + 1
+		Map<String, Object> maxMap = productService.selectBasketBnumberMaxBemail(basket);
+		int newBnumber = 0;
+		if(maxMap == null) {
+			newBnumber = productService.selectBasketBnumberMax() + 1;
+		} else {
+		// 내 장바구니에 상품이 담겨져있다면 BNUMBER = 내 장바구니의 BNUMBER
+			newBnumber = Integer.parseInt(String.valueOf(maxMap.get("MAX")));
+		}
+		basket.setBNUMBER(newBnumber);		
+		
 		// 만약 장바구니에 이미 상품이 존재한다면 상품의 수량만 변경한다
 		// 이 때 합계 상품 수량이 재고 수량보다 많을 경우 오류 메시지 출력 후 돌아간다.
-		Map<String, Object> selectBasketMap = basketService.selectBasketBID(basket); 
+		Map<String, Object> selectBasketMap = productService.selectBasketBID(basket); 
 		/* 장바구니에 같은 상품이 담겨 있을 경우 */
 		if(selectBasketMap != null) {
 			BasketBean selectBasket = MapToBean.mapToBasket(selectBasketMap);
@@ -449,8 +460,8 @@ public class ProductController {
 			// BCOUNT는 파라미터로 넘겨받은 bakset의 BCOUNT와 selectBasket의 BCOUNT를 합한다.
 			basket.setBCOUNT(basket.getBCOUNT() + selectBasket.getBCOUNT());
 			
-			// BNUMBER는 검색한 selectBasket의 BNUMBER를 사용
-			basket.setBNUMBER(selectBasket.getBNUMBER());
+			// BIDX는 검색한 selectBasket의 BIDX를 사용
+			basket.setBIDX(selectBasket.getBIDX());
 			
 			basketService.updateBasket(basket);			
 		/* 장바구니에 같은 상품이 없을 경우 */			

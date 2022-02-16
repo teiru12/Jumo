@@ -9,23 +9,23 @@
 <meta charset="UTF-8">
 <title>주모</title>
 <script>
+var form = document.getElementById("reviewForm");
+var PID = document.getElementById("PID");
+var CWRITER = document.getElementById("CWRITER");
+var CCONTENT = document.getElementById("CCONTENT");
+var CTITLE = document.getElementById("CTITLE");
+
 function confirmReview() {
+	
 	if(confirm("후기를 등록하시겠습니까?") == true) {
-		var form = document.getElementById("reviewForm");
-		var PID = document.getElementById("PID");
-		var CWRITER = document.getElementById("CWRITER");
-		var CCONTENT = document.getElementById("CCONTENT");
-		var CTITLE = document.getElementById("CTITLE");
-		
-		form.action = "pReview.al";
-		form.method = "GET";
+
+
 		form.submit();
 	} else {
-		return;
 	}
 }
 window.onload = function() {
-	 document.getElementById("CTITLE").focus();
+	document.getElementById("CTITLE").focus();
 }
 </script>
 </head>
@@ -129,7 +129,7 @@ window.onload = function() {
 		<div>
 			<div>
 				<section>
-					<form id="reviewForm" onSubmit="return confirmReview()" method="post">
+					<form id="reviewForm" action="pReview.al" method="post">
 					<table style="text-align:center; margin-left:auto; margin-right:auto; width:80%;">
 						<tr>
 							<td style="width:80%; text-align:left">
@@ -156,7 +156,8 @@ window.onload = function() {
 						</tr>
 						<tr>
 							<td style="width:100%; text-align:left;" colspan="2">
-								<input type="submit" class="btn btn-primary py-2 px-3" value="작성">
+								<input type="button" class="btn btn-primary py-2 px-3"
+									onClick="return confirmReview()" value="작성">
 								<a href="pDetail.al?PID=${PID}" class="btn btn-primary py-2 px-3">취소</a>
 							</td>
 						</tr>

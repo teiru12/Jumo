@@ -25,26 +25,11 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public Map<String, Object> selectBasketBID(BasketBean basket) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("BID", basket.getBID());
-		map.put("BEMAIL", basket.getBEMAIL());
-		
-		return basketDAO.selectBasketBID(map);
-	}
-	
-	@Override
 	public void updateBasket(BasketBean basket) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("BNAME", basket.getBNAME());
-		map.put("BID", basket.getBID());
-		map.put("BPRICE", basket.getBPRICE());
-		map.put("BSALE", basket.getBSALE());
-		map.put("BEMAIL", basket.getBEMAIL());
+
 		map.put("BCOUNT", basket.getBCOUNT());
-		map.put("BNUMBER", basket.getBNUMBER());
+		map.put("BIDX", basket.getBIDX());
 						
 		basketDAO.updateBasket(map);	
 	}
@@ -53,8 +38,7 @@ public class BasketServiceImpl implements BasketService {
 	public void deleteBasket(BasketBean basket) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("BNUMBER", basket.getBNUMBER());
-		System.out.println(map.get("BNUMBER"));
+		map.put("BIDX", basket.getBIDX());
 						
 		basketDAO.deleteBasket(map);			
 	}

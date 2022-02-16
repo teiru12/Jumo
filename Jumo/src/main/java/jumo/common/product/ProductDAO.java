@@ -73,6 +73,23 @@ public class ProductDAO {
 			throws Exception {
 		sqlSessionTemplate.insert("basket.insertBasket", map);
 	}
+	
+	public Map<String,Object> selectBasketBID(Map<String,Object> map)
+			throws Exception{
+		return sqlSessionTemplate.selectOne("basket.selectBasketBID", map);
+	}
+	
+	public Map<String, Object> selectBasketBnumberMaxBemail(Map<String,Object> map)
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"basket.selectBasketBnumberMaxBemail", map);
+	}
+	
+	public Map<String, Object> selectBasketBnumberMax()
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"basket.selectBasketBnumberMax");
+	}
 
 	public void insertReview(Map<String, Object> map)
 			throws Exception {
