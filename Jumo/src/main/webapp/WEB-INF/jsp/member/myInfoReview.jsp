@@ -16,10 +16,10 @@
 		<br>
 			<!-- 후기 목록 부분 -->
 		<div style="text-align:center" id="board" >
-		<table id="rList" width="900" border="1" bordercolor="darkgray" align="center" > 
+		<table id="rList" width="60%" border="1" bordercolor="darkgray" align="center" > 
 		
     	<thead> 
-    		<tr bgcolor="lightgray"> 
+    		<tr bgcolor="gainsboro"> 
     			<th scope="col" width="10%">번호</th> 
     			<th scope="col">내용</th> 
     			<th scope="col" width="15%">작성일</th> 
@@ -43,7 +43,7 @@
     
     <c:otherwise> 
    		<tr>
-			<td colspan="4">조회된 결과가 없습니다.</td> 
+			<td colspan="3">조회된 결과가 없습니다.</td> 
 		</tr>
 	</c:otherwise>
 	

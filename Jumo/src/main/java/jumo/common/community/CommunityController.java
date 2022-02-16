@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
 import jumo.model.MemberBean;
 import jumo.util.MapToBean;
@@ -27,7 +28,7 @@ public class CommunityController {
 	private CommunityService communityService;
 
 	@RequestMapping(value = "/noticeList.al")
-	public String noticeList(Model model,HttpServletRequest request) throws Exception {
+	public String noticeList(Model model, HttpServletRequest request) throws Exception {
 		
 		/* 페이징을 위한 변수 */
 		int pageSize = 20; // 페이지당 출력할 공지의 수
@@ -79,30 +80,59 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/qnaList.al")
-	public String qnaList(@RequestParam("START") int START, @RequestParam("END") int END, Model model)
+	public String qnaList(Model model, HttpServletRequest request)
 			throws Exception {
+		/* 페이징을 위한 변수 */
+		int pageSize = 20; // 페이지당 출력할 공지의 수
+		int START = 1;
+		int END = pageSize;
+		int currentPage = 1; // 현재 페이지
+
+		int qnaListCount; // 전체 공지글의 수
+		int pageBlock = 5; // 표시할 페이지의 수
+		String url = "qnaList.al";
+		String searchUrl = "";
+
+		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<CommunityBean> qnaBeanList = new ArrayList<CommunityBean>();
 		list = communityService.qnaListPaging(START, END);
+		
+		qnaListCount = communityService.qnaListCount();
 
 		for (Map<String, Object> mapObject : list) {
 			qnaBeanList.add(MapToBean.mapToCommunity(mapObject));
 		}
+		// 페이징할 아이템의 총 수, 페이지의 수 ex> 1~5 6~10, 한 페이지에 표시할 공지의 수, 현재 페이지, 이동주소, 검색시 사용할 주소 입력
+		Paging paging = new Paging(qnaListCount,pageBlock,
+				pageSize ,currentPage, url, searchUrl);
+		
 
 		model.addAttribute("qnaBeanList", qnaBeanList);
+		/* 페이징을 위한 값 삽입 */
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("paging", paging);
+		
+		
 		return "qnaList";
 	}
 
 	@RequestMapping(value = "/qnaDetail.al")
-	public String qnaDetail(Model model, CommunityBean community) throws Exception {
+	public String qnaDetail(CommunityBean community, CommentBean comment, Model model, HttpServletRequest request) throws Exception {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		CommunityBean communityBean = new CommunityBean();
-
+		CommentBean commentBean = new CommentBean();
+		
 		map = communityService.selectQnaId(community);
-
 		communityBean = MapToBean.mapToCommunity(map);
+		
+		/* 댓글..? */
+		communityService.commentListId(comment);
+		commentBean = MapToBean.mapToComment(map);
 
 		model.addAttribute("communityBean", communityBean);
+		model.addAttribute("commentBean", commentBean);
 
 		return "qnaDetail";
 	}
