@@ -418,8 +418,8 @@ public class ProductController {
 			model.addAttribute("url", urlParam);	
 			return "/product/putBasket";
 		}	
-		// 장바구니에 담을 수량이 0개일 경우 오류 메세지 출력 후 돌아간다.
-		if(basket.getBCOUNT() == 0) {
+		// 장바구니에 담을 수량이 0개 이하일 경우 오류 메세지 출력 후 돌아간다.
+		if(basket.getBCOUNT() < 0) {
 			model.addAttribute("msg", "장바구니에 상품을 담을 수 없습니다.");
 			String urlParam = "/pDetail.al?PID=" + basket.getBID();
 			model.addAttribute("url", urlParam);	
