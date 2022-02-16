@@ -47,6 +47,6 @@ public class MainController {
 	
 	@RequestMapping(value="/adminMain.al")
 	public String adminMain(Model model) {
-		return "adminMain";
+		return "admin_layout";
 	}
 }
