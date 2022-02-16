@@ -2,30 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-  <script>
+    <title>주모</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script>
 function getCount() {
-	var count = document.getElementById('BCOUNT').value;
-	var price = document.getElementById('BPRICE').value;
-	var sale = document.getElementById('BSALE').value;
-	var salePrice = price * (100-sale) / 100;
-	var totalPrice = salePrice * count;
-	
-	document.getElementById("totalPrice").innerText = totalPrice + '원';
-	return count;
+	var size = document.getElementById('listSize').value;
+	for(var i=0;i<size;i++){
+		var count = document.getElementById('BCOUNT'+i).value;
+		var price = document.getElementById('BPRICE'+i).value;
+		var sale = document.getElementById('BSALE'+i).value;
+		var salePrice = price * (100-sale) / 100;
+		var totalPrice = salePrice * count;
+		
+		document.getElementById("totalPrice"+i).innerText = totalPrice + '원';
+	}
+	return;
 }
 
-function basketModify() {
-	var bNumber = document.getElementById('BNUMBER').value;
-	var count = document.getElementById('BCOUNT').value;		
+function basketModify(i) {
+	var bNumber = document.getElementById('BNUMBER'+i).value;
+	var count = document.getElementById('BCOUNT'+i).value;		
 	location.href="basketModify.al?BNUMBER=" + bNumber + "&BCOUNT=" + count;
 }
 
-function basketOrderForm() {
-	var bId = document.getElementById('BID').value;
-	var count = document.getElementById('BCOUNT').value;		
+function basketOrderForm(i) {
+	var bId = document.getElementById('BID'+i).value;
+	var count = document.getElementById('BCOUNT'+i).value;		
 	location.href="basketOrderForm.al?BID=" + bId + "&BCOUNT=" + count;	
 }
 
@@ -33,32 +41,8 @@ window.onload = function() {
 	getCount();
 };
 </script>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
-    <link rel="stylesheet" href="css/aos.css">
-
-    <link rel="stylesheet" href="css/ionicons.min.css">
-
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
   </head>
+  
   <body>
   <hr>
 		<h2>
@@ -79,42 +63,41 @@ window.onload = function() {
 						        <th>수정/삭제</th>
 						      </tr>
 						    </thead>
-						    
-						    
-						    <c:forEach var="basket" items="${basketBeanList}">
+
+						  <c:forEach var="i" begin="0" end="${Size-1}">
 						  <tbody>
 						      <tr class="text-center">
 						     
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div id="BID" class="img" style="background-image:url(img/product-${basket.BID}.png);"></div></td>
+						        <td class="image-prod"><div id="BID" class="img" style="background-image:url(img/product-${basketBeanList[i].BID}.png);"></div></td>
     						
 						        <td class="product-name">
-						        	<h3>${basket.BNAME}</h3>
-				          			<h3>${basket.BSALE}%</h3>
-				          				<input type="hidden" id="BSALE" name="BSALE" value="${basket.BSALE}">
+						        	<h3>${basketBeanList[i].BNAME}</h3>
+				          			<h3>${basketBeanList[i].BSALE}%</h3>
+				          				<input type="hidden" id="BSALE${i}" name="BSALE${i}" value="${basketBeanList[i].BSALE}">
 						        	
 						        </td>
 						        
-						        <td class="price" >${basket.BPRICE}원</td>
+						        <td class="price" >${basketBeanList[i].BPRICE}원</td>
 						        
 						        <td>
-						        <c:set var="salePrice" value="${basket.BPRICE * (100-basket.BSALE) * 0.01}" />
+						        <c:set var="salePrice" value="${basketBeanList[i].BPRICE * (100-basketBeanList[i].BSALE) * 0.01}" />
 		    					<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
-		    					<input type="hidden" id="BPRICE" name="BPRICE" value="${basket.BPRICE}">
+		    					<input type="hidden" id="BPRICE${i}" name="BPRICE${i}" value="${basketBeanList[i].BPRICE}">
 				          		</td>
 				          		
 						        <td>
-						        	<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="${basket.BCOUNT}" onChange="getCount()">
+						        	<input type="number" min="0" max="${proInfoList[i].PSTOCK}" id="BCOUNT${i}" value="${basketBeanList[i].BCOUNT}" onChange="getCount()">
 					          </td>
 						        
-						        <td id="totalPrice">
+						        <td id="totalPrice${i}">
 						        </td>
 						    
 						        <td>
-								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify()" value="수정">
+								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify(${i})" value="수정">
 								
-						        <a href="/Jumo/basketDelete.al?BNUMBER=${basket.BNUMBER}" class="btn btn-primary py-3 px-4">삭제</a>
+						        <a href="/Jumo/basketDelete.al?BNUMBER=${basketBeanList[i].BNUMBER}" class="btn btn-primary py-3 px-4">삭제</a>
 						        </td>
 						      </tr>
 							</c:forEach>
@@ -140,6 +123,7 @@ window.onload = function() {
 						      </tr> -->
 						    </tbody>
 						  </table>
+						  <input type="hidden" id="listSize" name="listSize" value="${Size}">
 						  
 				<div style="text-align:right">
 				<a href="/Jumo/allList.al" class="btn btn-primary py-3 px-4">쇼핑 계속하기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
@@ -174,43 +158,9 @@ window.onload = function() {
     				</div>
     			</div>
 		
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </section>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
-
-  <script>
+<!--   <script>
 		$(document).ready(function(){
 
 		var quantitiy=0;
@@ -245,7 +195,7 @@ window.onload = function() {
 		    });
 		    
 		});
-	</script>
+	</script> -->
     
   </body>
 </html>
