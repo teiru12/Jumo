@@ -9,19 +9,25 @@
 <meta charset="UTF-8">
 <title>주모</title>
 <script>
-var form = document.getElementById("reviewForm");
-var PID = document.getElementById("PID");
-var CWRITER = document.getElementById("CWRITER");
-var CCONTENT = document.getElementById("CCONTENT");
-var CTITLE = document.getElementById("CTITLE");
-
 function confirmReview() {
+	var form = document.getElementById("reviewForm");
+	var PID = document.getElementById("PID");
+	var CWRITER = document.getElementById("CWRITER");
+	var CCONTENT = document.getElementById("CCONTENT");
+	var CTITLE = document.getElementById("CTITLE");
 	
 	if(confirm("후기를 등록하시겠습니까?") == true) {
-
-
-		form.submit();
-	} else {
+		if(CTITLE.value.trim()=="") {
+			alert("제목을 입력해주세요.");
+			CTITLE.focus();	
+			return false;
+		} else if(CCONTENT.value.trim()=="") {
+			alert("내용을 입력해주세요.");
+			CCONTENT.focus();
+			return false;
+		} else {	
+			form.submit();
+		}
 	}
 }
 window.onload = function() {

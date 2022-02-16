@@ -48,11 +48,11 @@
 	        
 	          <!-- 관리자일 경우 관리 탭 추가 -->
 	          <c:if test="${ EMAIL == 'ADMIN' }">
-	        	<li class="nav-item"><a href="/Jumo/adminMain.al" class="nav-link" style="font-size:large;">관리</a></li>
+	        	<li class="nav-item"><a href="/Jumo/adminMain.al" class="nav-link" style="font-size:x-large; color:#466093">관리</a></li>
 	          </c:if>
 	        
-	          <li class="nav-item"><a href="/Jumo/noticeList.al" class="nav-link" style="font-size:large;">공지</a></li>
-	          <li class="nav-item"><a href="/Jumo/qnaList.al" class="nav-link" style="font-size:large;">고객센터</a></li>
+	          <li class="nav-item"><a href="/Jumo/noticeList.al" class="nav-link" style="font-size:x-large; color:#466093">공지</a></li>
+	          <li class="nav-item"><a href="/Jumo/qnaList.al" class="nav-link" style="font-size:x-large; color:#466093">고객센터</a></li>
 	        </ul>
 	      </div>
 	    </div>

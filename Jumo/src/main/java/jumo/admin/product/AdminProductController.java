@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jumo.model.ProductBean;
 import jumo.util.MapToBean;
@@ -64,16 +66,32 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value="/adminPWrite.al")
-	public String adminPWrite(ProductBean product, BindingResult result,
+	public String adminPWrite(ProductBean product, 
+			MultipartHttpServletRequest request,
 			Model model) throws Exception {
 		
-		new ProductValidator().validate(product, result);
+		String image1 = request.getParameter("image1");
+		String image2 = request.getParameter("image2");
+		String image3 = request.getParameter("image3");
+		String image4 = request.getParameter("image4");
 		
-		if(result.hasErrors()) {
-			return "/adminPWriteForm.al";
-		}
 		
-		adminProductService.insertProduct(product);
+		System.out.println("PNAME : " + product.getPNAME());
+		System.out.println("PIMAGE : " + product.getPIMAGE());
+		System.out.println("PPRICE : " + product.getPPRICE());
+		System.out.println("PSALE : " + product.getPSALE());
+		System.out.println("PSTOCK : " + product.getPSTOCK());
+		System.out.println("PCOM : " + product.getPCOM());
+		System.out.println("PLOC : " + product.getPLOC());
+		System.out.println("PDEGREE : " + product.getPDEGREE());
+		System.out.println("PKIND : " + product.getPKIND());
+		System.out.println("PTYPE : " + product.getPTYPE());
+		System.out.println("image1 : " + image1);
+		System.out.println("image2 : " + image2);
+		System.out.println("image3 : " + image3);
+		System.out.println("image4 : " + image4);
+		
+		//adminProductService.insertProduct(product);
 		
 		return "/admin/product/adminPWrite";
 	}

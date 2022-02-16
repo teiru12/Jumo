@@ -14,13 +14,13 @@
 </header>
 
 
-<nav style="width: 40%; float: left; margin-top: 70px">
+<nav style="width: 15%; float: left; margin-top: 70px">
 <tiles:insertAttribute name="left"/> 
 </nav>
 <article>
 
 
-<div style="width: 60%; float: left;">
+<div style="width: 85%; float: left;">
 <tiles:insertAttribute name="body" ignore="true"/> 
 </div>
 </article>
