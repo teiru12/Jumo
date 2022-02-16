@@ -14,12 +14,13 @@
  		<h3>공지 사항</h3>
 	</div> 		
   	    <br>
+  	      <br>
   		<!-- 공지사항 목록 부분 -->
 		<div style="text-align:center" id="board" >
-    	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
+    	<table id="rList" width="70%" border="1" bordercolor="lightgray" align="center" > 
 		
     	<thead> 
-    		<tr bgcolor="lightgray"> 
+    		<tr bgcolor="gainsboro"> 
     			<th scope="col" width="10%">번호</th> 
     			<th scope="col">내용</th> 
     			<th scope="col" width="15%">작성자</th> 

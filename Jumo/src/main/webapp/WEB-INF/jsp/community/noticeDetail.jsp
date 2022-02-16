@@ -14,30 +14,28 @@
   	    <br>
   		<!-- 공지사항 부분 -->
 		<div style="text-align:center" id="noticeDetail" >
-    	<table id="noticeDetail" width="900" border="2" bordercolor="lightgray" align="center" > 
+    	<table id="noticeDetail" width="70%" border="1" cellpadding="5" bordercolor="lightgray" frame="void" align="center" > 
 		<tbody>
 	
-			<tr>
-				<td>글제목</td>
-				<td>${communityBean.CTITLE}</td>
+			<tr></tr>
+			<tr>				
+				<td colspan="2" bgcolor="gainsboro">${communityBean.CTITLE}</td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td>${communityBean.CWRITER}</td>
+				
+				<td width="50%">${communityBean.CWRITER}</td>
+				<td width="*%">${communityBean.CDATE}</td>
 			</tr>
+			
 			<tr>
-				<td>작성일</td>
-				<td>${communityBean.CDATE}</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td>${communityBean.CCONTENT}</td>
+				<td colspan="2"><br>${communityBean.CCONTENT}</td>
 			</tr>
 
 		</tbody>
 		</table>
 
 </div>
-
+<br>
+<hr width="70%" bordercolor="lightgray">
 </body>
 </html>

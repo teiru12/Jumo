@@ -16,10 +16,10 @@
  
       <!--주문 목록 부분 -->
       <div style="text-align:center" id="board">
-    	<table id="order" width="900" border="1" bordercolor="darkgray" align="center" > 
+    	<table id="order" width="60%" border="1" bordercolor="darkgray" align="center" > 
 			
     	<thead> 
-    		<tr bgcolor="lightgray"> 
+    		<tr bgcolor="gainsboro"> 
     			<th scope="col">주문번호</th>
     			<th scope="col">운송장번호</th> 
     			<th scope="col">상품명/수량</th> 
@@ -45,7 +45,7 @@
     
     <c:otherwise> 
    		<tr>
-			<td colspan="4">주문한 상품이 없습니다.</td> 
+			<td colspan="5">주문한 상품이 없습니다.</td> 
 		</tr>
 	</c:otherwise>
 	
