@@ -38,7 +38,11 @@
    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
 		<property name="order" value="1"></property> 
-	</bean> 
+	</bean>
+	
+	<!-- 브라우저가 multipart/form-data 데이터로 보내는 파일을 처리하기 위한 MultipartResolver 클래스를 bean으로 등록 -->
+	<bean id="multipartResolver" 
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean> 
 		
 	<!-- Tiles  -->
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
