@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="ko">
   <head>
   <script>
 function getCount() {
 	var count = document.getElementById('BCOUNT').value;
-	var price = document.getElementById('PPRICE').value;
-	var sale = document.getElementById('PSALE').value;
+	var price = document.getElementById('BPRICE').value;
+	var sale = document.getElementById('BSALE').value;
 	var salePrice = price * (100-sale) / 100;
 	var totalPrice = salePrice * count;
 	
@@ -22,10 +23,10 @@ function basketModify() {
 	location.href="basketModify.al?BNUMBER=" + bNumber + "&BCOUNT=" + count;
 }
 
-function pOrderForm() {
-	var pId = document.getElementById('PID').value;
+function basketOrderForm() {
+	var bId = document.getElementById('BID').value;
 	var count = document.getElementById('BCOUNT').value;		
-	location.href="pOrderForm.al?OPID=" + pId + "&OCOUNT=" + count;	
+	location.href="basketOrderForm.al?BID=" + bId + "&BCOUNT=" + count;	
 }
 
 window.onload = function() {
@@ -72,6 +73,7 @@ window.onload = function() {
 						        <!-- <th>&nbsp;</th> -->
 						        <th>상품명/옵션</th>
 						        <th>상품 금액</th>
+						        <th>할인 금액</th>
 						        <th>수량</th>
 						        <th>주문 금액</th>
 						        <th>수정/삭제</th>
@@ -85,23 +87,31 @@ window.onload = function() {
 						     
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url(img/product-${basket.BID}.png);"></div></td>
+						        <td class="image-prod"><div id="BID" class="img" style="background-image:url(img/product-${basket.BID}.png);"></div></td>
     						
 						        <td class="product-name">
 						        	<h3>${basket.BNAME}</h3>
+				          			<h3>${basket.BSALE}%</h3>
+				          				<input type="hidden" id="BSALE" name="BSALE" value="${basket.BSALE}">
 						        	
 						        </td>
 						        
-						        <td class="price">${basket.BPRICE}원</td>
-		    						
+						        <td class="price" >${basket.BPRICE}원</td>
+						        
 						        <td>
-						        	<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="1" onChange="getCount()">
+						        <c:set var="salePrice" value="${basket.BPRICE * (100-basket.BSALE) * 0.01}" />
+		    					<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
+		    					<input type="hidden" id="BPRICE" name="BPRICE" value="${basket.BPRICE}">
+				          		</td>
+				          		
+						        <td>
+						        	<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="${basket.BCOUNT}" onChange="getCount()">
 					          </td>
 						        
-						        <td class="total">${basket.BPRICE} 원</td>
-						        
+						        <td id="totalPrice">
+						        </td>
+						    
 						        <td>
-				
 								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify()" value="수정">
 								
 						        <a href="/Jumo/basketDelete.al?BNUMBER=${basket.BNUMBER}" class="btn btn-primary py-3 px-4">삭제</a>
@@ -159,7 +169,7 @@ window.onload = function() {
     				</div>
     				</tr>
     				<div style="text-align:center">
-    				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">전체 상품 주문</a>
+    				<input type="button" class="btn btn-primary py-3 px-4" onClick="basketOrderForm()" value="전체 상품 구매">
     				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a>
     				</div>
     			</div>

@@ -3,10 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" >
 <title>Insert title here</title>
 </head>
 <body>
-<meta http-equiv="refresh" content="0; url=/Jumo/basketList.al"></meta>
+<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 </body>
 </html>
