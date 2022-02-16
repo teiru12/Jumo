@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-adminMainModify
+<script>
+    $(document).ready(function () {
+        if(${not empty result}){
+            alert('${result} 파일 저장 성공');
+        } else {
+            alert('파일 저장 실패');
+        }
+    })
+</script>
 </body>
 </html>
