@@ -6,24 +6,30 @@
 	<!-- [selectProductBest]전체상품 게시판 리스트 -->
 	<select id="selectProductBest" resultType="hashmap">
 	<![CDATA[
-		SELECT 
+		SELECT PNAME,
+	     	  PSELL,
+	     	  PIMAGE,
+	   	 	  PPRICE,
+	     	  PSALE,
+              R
+        FROM (SELECT 
 	    	  PNAME,
 	     	  PSELL,
 	     	  PIMAGE,
 	   	 	  PPRICE,
 	     	  PSALE,
-	     	  R
+	     	  ROWNUM R
 		FROM (SELECT 
-		     	   PNAME,
+                   PNAME,
 			 	   PSELL,
 			  	   PIMAGE,
 			  	   PPRICE,
-			   	   PSALE,
-					RANK() OVER(
-								ORDER BY PSELL DESC) AS R
-								FROM PRODUCT) 
+			   	   PSALE
+                   FROM PRODUCT
+                   ORDER BY PSELL DESC
+                   )) 
 				WHERE 
-					R BETWEEN 1 AND 3   
+					R BETWEEN 1 AND 3  
 	    ]]>
 	</select>
 	
