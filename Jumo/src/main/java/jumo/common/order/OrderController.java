@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jumo.common.basket.BasketService;
 import jumo.common.member.MyInfoService;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
@@ -30,6 +31,9 @@ public class OrderController {
 	@Resource(name="myInfoService")
 	private MyInfoService myInfoService;
 	
+	@Resource(name="basketService")
+	private BasketService basketService;
+	
 	
 	@RequestMapping("/pOrderForm.al")
 	public String pOrderForm (MemberBean member, Model model) throws Exception {
@@ -46,17 +50,16 @@ public class OrderController {
 	
 	
 	@RequestMapping("/basketOrderForm.al")
-	public String basketOrderForm (MemberBean member, Model model) throws Exception {
+	public String basketOrderForm (BasketBean basket, Model model) throws Exception {
 		
-			// memberBean을 세션으로 입력하면 파라미터를 생략할 수 있음
+		List<Map<String, Object>> list = basketService.basketList(basket); 
+		List<BasketBean> basketBeanList = new ArrayList<BasketBean>();
+		for(Map<String, Object> mapObject : list) {
+			basketBeanList.add(MapToBean.mapToBasket(mapObject));
+		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		MemberBean memberBean = new MemberBean();
-	
-		map = myInfoService.selectMemberId(member);
+		model.addAttribute("basketBeanList",basketBeanList);
 		
-		memberBean = MapToBean.mapToMember(map);
-		model.addAttribute("memberBean", memberBean);
 		
 		return "basketOrderForm";
 	}
