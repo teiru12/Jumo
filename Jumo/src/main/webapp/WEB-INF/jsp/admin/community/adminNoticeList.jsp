@@ -17,7 +17,7 @@
   		<!-- 공지사항 목록 부분 -->
 		<div style="text-align:center" id="board" >
     	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-		
+		 
     	<thead> 
     		<tr bgcolor="lightgray"> 
     			<th scope="col" width="10%">번호</th> 

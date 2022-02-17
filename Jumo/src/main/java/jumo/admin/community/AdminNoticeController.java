@@ -19,7 +19,7 @@ import jumo.model.MemberBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
 import jumo.util.validator.CommunityValidator;
-
+ 
 @Controller
 public class AdminNoticeController {
 

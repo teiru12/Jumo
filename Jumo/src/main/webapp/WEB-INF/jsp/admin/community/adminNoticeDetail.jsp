@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
-<br>
+<br> 
 	<div style="text-align:center">
  		<h3>공지 내용</h3>
 	</div> 		

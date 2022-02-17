@@ -26,7 +26,7 @@
 			<td id="title">글번호</td>
 			<td><input type="text" name="CIDX" maxlength="7" value="${noticeBean.CIDX}">
 			</td>
-		</tr>
+		</tr> 
 		<tr>
 			<td id="title">작성자</td>
 			<td><input type="text" name="CWRITER" maxlength="7" value="${noticeBean.CWRITER}">

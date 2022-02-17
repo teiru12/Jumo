@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
-<body>
+<body> 
 	<script>
    if(${! empty msg}) {
       alert('${msg}');
