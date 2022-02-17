@@ -36,7 +36,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	public void insertNotice(CommunityBean community) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CIDX", community.getCTITLE());
+		map.put("CTITLE", community.getCTITLE());
 		map.put("CWRITER", community.getCWRITER());
 		map.put("CCONTENT", community.getCCONTENT());
 		
@@ -47,7 +47,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	public void updateNoticeId(CommunityBean community) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CIDX", community.getCTITLE());
+		map.put("CTITLE", community.getCTITLE());
 		map.put("CCONTENT", community.getCCONTENT());
 		map.put("CIDX", community.getCIDX());
 		
