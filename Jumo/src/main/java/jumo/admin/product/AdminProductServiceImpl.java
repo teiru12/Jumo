@@ -16,16 +16,34 @@ public class AdminProductServiceImpl implements AdminProductService {
 	private AdminProductDAO adminProductDAO; 
 	
 	@Override
-	public List<Map<String, Object>> allList() throws Exception {
-		return adminProductDAO.allList();
+	public List<Map<String, Object>> allListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminProductDAO.allListPaging(map);
 	}
 
 	@Override
-	public List<Map<String, Object>> allListKeyWordSearch(String keyword, String isNumber) throws Exception {
+	public List<Map<String, Object>> allListSearchPaging(String PSELL, int START, int END) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("PSELL", PSELL);
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminProductDAO.allListSearchPaging(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> allListKeyWordSearch(String KEYWORD, String ISNUMBER) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("KEYWORD", keyword);
-		map.put("ISNUMBER", isNumber);		
+// KEYWORD가 숫자인지 아닌지를 검사해서 ISNUMBER값 설정
+// KEYWORD가 숫자이면 map에 KEYWORD값 숫자로 변환해서 입력
+		map.put("KEYWORD", KEYWORD);
+		map.put("ISNUMBER", ISNUMBER);		
 						
 		return adminProductDAO.allListKeyWordSearch(map);		
 	}

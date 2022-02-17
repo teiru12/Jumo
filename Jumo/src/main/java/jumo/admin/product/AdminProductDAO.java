@@ -15,8 +15,12 @@ public class AdminProductDAO {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public List<Map<String, Object>> allList() throws Exception{
-		return sqlSessionTemplate.selectList("product.allList");
+	public List<Map<String, Object>> allListPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("product.allListPaging", map);
+	}
+	
+	public List<Map<String, Object>> allListSearchPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("product.allListSearchPaging", map);
 	}
 	
 	public List<Map<String, Object>> allListKeyWordSearch(Map<String, Object> map) throws Exception{
@@ -29,8 +33,7 @@ public class AdminProductDAO {
 
 	public Map<String, Object> selectPIDMax() throws Exception{
 		return sqlSessionTemplate.selectOne("product.selectPIDMax");
-	}
-	
+	}	
 	
 	public Map<String, Object> selectProductId(Map<String, Object> map) throws Exception{
 		return sqlSessionTemplate.selectOne("product.selectProductId",map);

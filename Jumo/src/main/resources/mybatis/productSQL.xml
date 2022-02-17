@@ -179,10 +179,10 @@
 		]]>
 	<trim prefix="WHERE" prefixOverrides="AND">
 		
-		<if test="#{KEYWORD}=='ALCOHOL'">
+		<if test="KEYWORD!=NULL and #{KEYWORD}=='ALCOHOL'">
 			AND PTYPE='ALCOHOL' 
 		</if>
-		<if test="#{KEYWORD}=='ETC'">
+		<if test="KEYWORD!=NULL and #{KEYWORD}=='ETC'">
 			AND PTYPE='ETC' 
 		</if>
 		<if test="KEYWORD!=NULL and ISNUMBER==NULL">
