@@ -11,11 +11,11 @@
 		<div class="form-group">
 		<%-- ${memberBean.EMAIL } --%>
 			<label for="exampleFormControlInput1">작성자</label>
-			<input type="text" class="form-control" id="Ctitle" name="CTITLE" >
+			<input type="text" class="form-control" id="Cwriter" name="CWRITER" >
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">제목</label>
-			<input type="text" class="form-control" id="Cwriter" name="CWRITER" placeholder="제목을 작성해주세요.">
+			<input type="text" class="form-control" id="Ctitle" name="CTITLE" placeholder="제목을 작성해주세요.">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">내용</label>

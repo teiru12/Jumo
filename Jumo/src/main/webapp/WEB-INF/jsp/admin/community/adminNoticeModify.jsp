@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-adminNoticeModify
-<br>
-<a href="/Jumo/adminNoticeList.al">공지사항 리스트</a><br>
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 </body>
 </html>
