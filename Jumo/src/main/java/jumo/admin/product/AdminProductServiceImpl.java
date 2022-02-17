@@ -32,11 +32,6 @@ public class AdminProductServiceImpl implements AdminProductService {
 		map.put("START", START);
 		map.put("END", END);
 		
-		System.out.println("-------Service--------");		
-		System.out.println("map.get(START) : " + map.get("START"));
-		System.out.println("map.get(END) : " + map.get("END"));
-		System.out.println("-------Service--------");		
-		
 		return adminProductDAO.allListPSELLDescPaging(map);
 	}
 	

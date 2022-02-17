@@ -265,11 +265,6 @@ public class AdminProductController {
 		
 		countProductAll = productService.allListCount();
 		
-System.out.println("-------Controller--------");		
-System.out.println("START : " + START);
-System.out.println("END : " + END);
-System.out.println("-------Controller--------");
-		
 		List<Map<String, Object>> list = adminProductService.allListPSELLDescPaging(START, END);
 		List<ProductBean> sellList = new ArrayList<ProductBean>();
 		for(Map<String, Object> mapObject : list) {
