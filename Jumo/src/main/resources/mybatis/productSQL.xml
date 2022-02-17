@@ -6,13 +6,16 @@
 	<!-- [selectProductBest]전체상품 게시판 리스트 -->
 	<select id="selectProductBest" resultType="hashmap">
 	<![CDATA[
-		SELECT PNAME,
+		SELECT
+			PID, 
+			PNAME,
 	     	  PSELL,
 	     	  PIMAGE,
 	   	 	  PPRICE,
 	     	  PSALE,
               R
-        FROM (SELECT 
+        FROM (SELECT
+        			PID,
 	    	  PNAME,
 	     	  PSELL,
 	     	  PIMAGE,
@@ -20,6 +23,7 @@
 	     	  PSALE,
 	     	  ROWNUM R
 		FROM (SELECT 
+			PID,
                    PNAME,
 			 	   PSELL,
 			  	   PIMAGE,
@@ -194,7 +198,6 @@
 	
 	<!-- [insertProduct]상품 입력 기능 -->
 	<insert id="insertProduct" parameterType="hashmap">
-	<![CDATA[	
 		INSERT INTO 
 			PRODUCT
 		VALUES(
@@ -208,12 +211,29 @@
 			0,
 			#{PCOM},
 			#{PLOC},
+			<if test="PDEGREE != null">
 			#{PDEGREE},
+			</if>
+			<if test="PDEGREE == null">
+			null,
+			</if>
+			<if test="PKIND != null">
 			#{PKIND},
+			</if>
+			<if test="PKIND == null">
+			null,
+			</if>
 			#{PTYPE}
 		)
-	]]>
 	</insert>
+	
+	<!-- [selectPIDMax] 상품 테이블의 PID 최대값 -->
+	<select id="selectPIDMax" resultType="hashmap">
+		SELECT
+			MAX(PID) PIDMAX
+		FROM
+			PRODUCT	
+	</select>
 	
 	<!-- [updateProduct]상품 수정 기능 -->
 	<update id="updateProduct" parameterType="hashmap">

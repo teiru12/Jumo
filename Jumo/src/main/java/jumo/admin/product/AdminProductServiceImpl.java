@@ -55,6 +55,15 @@ public class AdminProductServiceImpl implements AdminProductService {
 						
 		adminProductDAO.insertProduct(map);		
 	}
+	
+	@Override
+	public int selectPIDMax() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = adminProductDAO.selectPIDMax();
+		
+		return Integer.parseInt(String.valueOf(map.get("PIDMAX")));		
+	}	
 
 	@Override
 	public Map<String, Object> selectProductId(ProductBean product) throws Exception {

@@ -14,6 +14,9 @@ public interface AdminProductService {
 	
 	//관리자 상품 입력 기능
 	public void insertProduct(ProductBean product) throws Exception;
+	
+	//상품 PID최대값 구하기
+	public int selectPIDMax() throws Exception;
 	   
 	//관리자 상품 수정폼
 	public Map<String, Object> selectProductId(ProductBean product) throws Exception;
