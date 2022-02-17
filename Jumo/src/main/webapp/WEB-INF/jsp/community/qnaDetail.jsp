@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 	
 			<tr></tr>
 			<tr>				
-				<td colspan="2" bgcolor="gainsboro">${communityBean.CTITLE}</td>
+				<th colspan="2" bgcolor="gainsboro">${communityBean.CTITLE}</th>
 			</tr>
 			<tr>
 				
@@ -31,14 +32,30 @@
 				<td colspan="2"><br>${communityBean.CCONTENT}<br><br></td>
 			</tr>
 			<tr>
-				<td colspan="2"><br>${commentBean.COMMENTT}</td>
+				<th colspan="2">관리자 답변</th>
 			</tr>
-
+	 <c:choose> 
+    	<c:when test="${comCount!=0}"> 
+    		<c:forEach var="comment" items="${commentBeanList}" varStatus="status"> 
+			<tr>
+				<td colspan="2"><br>${comment.COMMENTT}<br><br></td>
+			</tr>
+   		 	</c:forEach>
+  	 	</c:when>
+   	 
+    	<c:otherwise> 
+   			<tr>
+				<td colspan="2">조회된 결과가 없습니다.</td> 
+			</tr>
+		</c:otherwise>
+	
+	</c:choose> 
 		</tbody>
 		</table>
+	
+	
 
 </div>
-<br>
 <hr width="70%" bordercolor="lightgray">
 </body>
 </html>

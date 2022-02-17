@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
 import jumo.model.MemberBean;
+import jumo.model.OrderBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
 import jumo.util.validator.CommunityValidator;
@@ -118,27 +119,48 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/qnaDetail.al")
-	public String qnaDetail(CommunityBean community, CommentBean comment, Model model, HttpServletRequest request) throws Exception {
+	public String qnaDetail(CommunityBean community, 
+			CommentBean comment,
+			Model model, HttpServletRequest request) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		CommunityBean communityBean = new CommunityBean();
-		CommentBean commentBean = new CommentBean();
 		
 		map = communityService.selectQnaId(community);
+		
 		communityBean = MapToBean.mapToCommunity(map);
 		
-		/* 댓글..? */
-		communityService.commentListId(comment);
-		commentBean = MapToBean.mapToComment(map);
-
 		model.addAttribute("communityBean", communityBean);
-		model.addAttribute("commentBean", commentBean);
+		
+		/* 댓글-CIDX값을 받아오지 못함 */
+	
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<CommentBean> commentBeanList = new ArrayList<CommentBean>();
+		comment.setARTICLEIDX(community.getCIDX());
+		list= communityService.commentListId(comment);
+	
+		for(Map<String, Object> mapObject : list) {
+			commentBeanList.add( MapToBean.mapToComment(mapObject) );
+		}
+		int comCount = list.size();
+		
+		
+		model.addAttribute("commentBeanList", commentBeanList);
+		model.addAttribute("comCount", comCount);
 
 		return "qnaDetail";
 	}
 
 	@RequestMapping(value = "/qnaForm.al")
-	public String qnaForm(Model model) {
+	public String qnaForm(Model model, HttpServletRequest request) {
+		
+		// member에 세션에서 사용자 아이디를 가져와서 저장
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		MemberBean member = new MemberBean();
+		member.setEMAIL(email);
+
+		
 		return "qnaForm";
 	}
 
