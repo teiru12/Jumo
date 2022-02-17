@@ -60,6 +60,19 @@ function basketOrderForm(i) {
 	location.href="basketOrderForm.al?BID=" + bId + "&BCOUNT=" + count;	
 }
 
+function orderConfirm(){
+	var email = document.getElementById('EMAIL').value;
+	var size = document.getElementById('listSize').value;
+	if(confirm("구매하시겠습니까?") == true){
+		if(size<=0){
+			alert("구매할 수 없습니다.");
+			return false;
+		}
+		location.href="/Jumo/basketOrderForm.al?BEMAIL=" + email;
+	}
+	return;
+}
+
 window.onload = function() {
 	getCount();
 };
@@ -67,6 +80,7 @@ window.onload = function() {
   </head>
   
   <body>
+  	 <input type="hidden" id="EMAIL" name="EMAIL" value="<%=request.getSession().getAttribute("EMAIL")%>">
   <hr>
 		<h2>
 		<div style="text-align:center">장바구니</div>
@@ -87,7 +101,7 @@ window.onload = function() {
 						        <th>수정/삭제</th>
 						      </tr>
 						    </thead>
-
+							<c:if test="${Size>=1}">
 						  <c:forEach var="i" begin="0" end="${Size-1}">
 						  <tbody>
 						      <tr class="text-center">
@@ -130,26 +144,10 @@ window.onload = function() {
 						        </td>
 						      </tr>
 							</c:forEach>
-						      <!-- <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url(img/product-4.png);"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$15.70</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$15.70</td>
-						      </tr> -->
+							</c:if>
+							<c:if test="${Size<=0}">
+						<tr><td style="text-align:center" colspan="9">장바구니에 상품이 없어요</td></tr>
+							</c:if>
 						    </tbody>
 						  </table>
 						  <input type="hidden" id="listSize" name="listSize" value="${Size}">
@@ -182,49 +180,11 @@ window.onload = function() {
     				</div>
     				</tr>
     				<div style="text-align:center">
-    				<input type="button" class="btn btn-primary py-3 px-4" onClick="basketOrderForm()" value="전체 상품 구매">
-    				<a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a>
+    				<input type="button" class="btn btn-primary py-3 px-4"
+    				 onClick="return orderConfirm()" value="구매하기">
+    				<!--선택주문 나중에 구현 -->
+    				<!-- <a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a> -->
     				</div>
     			</div>
-		
-    </section>
-
-<!--   <script>
-		$(document).ready(function(){
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            
-		            $('#quantity').val(quantity + 1);
-
-		          
-		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-		    
-		});
-	</script> -->
-    
   </body>
 </html>
