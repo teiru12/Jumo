@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,47 +15,47 @@
           			<div class="col-md-12 heading-section text-center ftco-animate">
 						<h3 class="mb-4">메인페이지 등록</h3>
 					</div>	
-					<form action="adminModify.jsp" method="post" enctype="Multipart/form-data" 
+					<form action="adminMainModify.al" method="post" enctype="Multipart/form-data" 
             			class="bg-white p-5 contact-form">
             			
-            			<h6 class="mb-4" style="text-align:left;">메인1</h6>
+            			<h5 class="mb-4" style="text-align:left;">메인1</h5>
 						<div class="form-group">
-                			<input type="file" class="form-control" name="bg">
+                			<input type="file" id="file1" name="file1" class="form-control">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="내용을 입력하세요.">
+							<input type="text" id="text1" name="text1" class="form-control" placeholder="내용을 입력하세요.">
 						</div>
 						
 						<h5 class="mb-4" style="text-align:left;">메인2</h5>
 						<div class="form-group">
-                			<input type="file" class="form-control" name="bg">
+                			<input type="file" id="file2" name="file2" class="form-control">
               			</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="내용을 입력하세요.">
+							<input type="text" id="text2" name="text2" class="form-control" placeholder="내용을 입력하세요.">
 						</div>
 						
 						<h5 class="mb-4" style="text-align:left;">메인3</h5>
 						<div class="form-group">
-                			<input type="file" class="form-control" name="bg">
+                			<input type="file" id="file3" name="file3" class="form-control">
               			</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="내용을 입력하세요.">
+							<input type="text" id="text3" name="text3" class="form-control" placeholder="내용을 입력하세요.">
 						</div>
 						
 						<h5 class="mb-4" style="text-align:left;">메인4</h5>
 						<div class="form-group">
-                			<input type="file" class="form-control" name="bg">
+                			<input type="file" id="file4" name="file4" class="form-control">
               			</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="내용을 입력하세요.">
+							<input type="text" id="text4" name="text4" class="form-control" placeholder="내용을 입력하세요.">
 						</div>
 						
 						<h5 class="mb-4" style="text-align:left;">메인5</h5>
 						<div class="form-group">
-                			<input type="file" class="form-control" name="bg">
+                			<input type="file" id="file5" name="file5" class="form-control">
               			</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="내용을 입력하세요.">
+							<input type="text" id="text5" name="text5" class="form-control" placeholder="내용을 입력하세요.">
 						</div>
 						
 						<div class="form-group">
