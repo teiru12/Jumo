@@ -14,12 +14,14 @@
 	var PTYPE_ACL = $('input[type=radio][id="PTYPE_ACL"]:checked').val();
 	var PTYPE_ETC = $('input[type=radio][id="PTYPE_ETC"]:checked').val();
 	var PNAME = document.getElementById("PNAME");
-	var PIMAGE = document.getElementById("PIMAGE");
+	var PIMAGE = document.getElementById("main_image");
 	var PSTOCK = document.getElementById("PSTOCK");
 	var PPRICE = document.getElementById("PPRICE");
 	var PSALE = document.getElementById("PSALE");
 	var PCOM = document.getElementById("PCOM");
 	var PLOC = document.getElementById("PLOC");
+	
+	var PDEGREE = document.getElementById("PDEGREE");
 	
 	if(confirm("상품을 등록하시겠습니까?") == true) {
 		if(PTYPE_ACL == null && PTYPE_ETC == null) {
@@ -52,10 +54,33 @@
 			alert("생산지를 입력해주세요.");
 			PLOC.focus();
 			return false;
+		} else if(PTYPE_ACL=='ALCOHOL' && PDEGREE.value.trim()=="") {
+			alert("도수를 입력해주세요.");
+			PDEGREE.focus();
+			return false;
 		} else {	
 			form.submit();
 		}
 	}
+}
+/* 이미지 미리보기 스크립트 */
+function readImage(input) {
+	// 인풋 태그에 파일이 있는 경우
+	if(input.files && input.files[0]) {
+		// 이미지 파일인지 검사 (생략)
+		
+		// FileReader 인스턴스 생성
+		const reader = new FileReader();
+		
+		// 이미지가 로드가 된 경우
+		reader.onload = e => {
+			const previewImage = document.getElementById("preview-image");
+			previewImage.src = e.target.result;
+		};
+		
+		// reader가 이미지 읽도록 하기
+		reader.readAsDataURL(input.files[0]);
+	}	
 }
 window.onload = function() {
 	document.getElementById("PNAME").focus();
@@ -114,8 +139,8 @@ $(function (){
 		<div class="row align-items-end" style="background-color: ivory;">
 			<div class="col-md-5">
 				<div class="form-group">
-					<label for="PIMAGE">상품 이미지</label>
-					<input type="file" id="PIMAGE" name="PIMAGE" class="form-control">
+					<label for="main_image">상품 이미지</label>
+					<input type="file" id="main_image" name="main_image" class="form-control">
 				</div>
 			</div>
 			<div class="col-md-5">
@@ -126,6 +151,25 @@ $(function (){
 				</div>
 			</div>
 		</div>
+		
+		<!-- 파일 이미지 출력  -->
+		<div class="row align-items-end" style="background-color: ivory;">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label style="color:slategray">상품 이미지 미리보기</label>
+					<img src="img/logo_white.png" width="300" border="0"
+						id="preview-image">
+					<script>
+					// input file에 change 이벤트 부여
+					const inputImage = document.getElementById("main_image");
+					inputImage.addEventListener("change", e=> {
+						readImage(e.target)	
+					});
+					</script>
+				</div>
+			</div>
+		</div>
+		<!-- 파일 이미지 -->
 
 		<div class="row align-items-end" style="background-color: ivory;">
 			<div class="col-md-5">
@@ -143,12 +187,6 @@ $(function (){
 						onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 				</div>
 			</div>
-		</div>
-
-		<div class="row align-items-end" style="background-color: ivory;">
-
-		<!-- 파일 이미지 출력 공간? -->
-
 		</div>
 		
 		<!-- ect_view start -->

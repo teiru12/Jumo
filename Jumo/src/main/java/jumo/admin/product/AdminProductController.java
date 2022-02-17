@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jumo.model.ProductBean;
@@ -42,24 +43,6 @@ public class AdminProductController {
 		return "adminPList";
 	}
 	
-	@RequestMapping(value="/adminPList.al", method=RequestMethod.POST)
-	public String adminPListSearch(
-			@RequestParam("keyword") String keyword ,
-			@RequestParam("isNumber") String isNumber ,Model model) throws Exception {
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		List<ProductBean> adminPsearchList = new ArrayList<ProductBean>();
-		
-		list= adminProductService.allListKeyWordSearch(keyword, isNumber);
-		
-		for(Map<String, Object> mapObject : list) {
-			adminPsearchList.add(MapToBean.mapToProduct(mapObject));
-		}
-		
-		model.addAttribute("adminPsearchList", adminPsearchList);
-		
-		return "adminPList";
-	}
-
 	@RequestMapping(value="/adminPWriteForm.al")
 	public String adminPWriteForm(Model model) throws Exception {
 		return "adminPWriteForm";
@@ -70,11 +53,59 @@ public class AdminProductController {
 			MultipartHttpServletRequest request,
 			Model model) throws Exception {
 		
-		String image1 = request.getParameter("image1");
-		String image2 = request.getParameter("image2");
-		String image3 = request.getParameter("image3");
-		String image4 = request.getParameter("image4");
+		MultipartFile main_imageFile = request.getFile("main_image");
+		MultipartFile detail_imageFile1 = request.getFile("image2");
+		MultipartFile detail_imageFile2 = request.getFile("image3");
+		MultipartFile detail_imageFile3 = request.getFile("image4");
+		MultipartFile detail_imageFile4 = request.getFile("image5");
 		
+		String mainImageName = main_imageFile.getOriginalFilename();
+		String detailName1 = "";
+		String detailName2 = "";
+		String detailName3 = "";
+		String detailName4 = "";
+		if(detail_imageFile1 != null) {
+			detailName1 = detail_imageFile1.getOriginalFilename();
+		}
+		if(detail_imageFile2 != null) {		
+			detailName2 = detail_imageFile2.getOriginalFilename();
+		}
+		if(detail_imageFile3 != null) {
+			detailName3 = detail_imageFile3.getOriginalFilename();
+		}
+		if(detail_imageFile4 != null) {
+			detailName4 = detail_imageFile4.getOriginalFilename();
+		}
+		
+		System.out.println(mainImageName);
+		if(detail_imageFile1 != null) {
+			System.out.println(detailName1);
+		}
+		if(detail_imageFile2 != null) {		
+			System.out.println(detailName2);
+		}
+		if(detail_imageFile3 != null) {
+			System.out.println(detailName3);
+		}
+		if(detail_imageFile4 != null) {
+			System.out.println(detailName4);
+		}
+		
+		
+		
+	
+		
+
+		
+		// 상품의 종류가 ETC인 경우 주종과 도수를 null로 설정
+		if(product.getPTYPE().equals("ETC")) {
+			product.setPKIND(null);
+			product.setPDEGREE(-1);
+		}
+		
+				
+		// 메인 이미지 이름을 product의 PIMAGE에 입력
+		product.setPIMAGE(mainImageName);
 		
 		System.out.println("PNAME : " + product.getPNAME());
 		System.out.println("PIMAGE : " + product.getPIMAGE());
@@ -86,13 +117,19 @@ public class AdminProductController {
 		System.out.println("PDEGREE : " + product.getPDEGREE());
 		System.out.println("PKIND : " + product.getPKIND());
 		System.out.println("PTYPE : " + product.getPTYPE());
-		System.out.println("image1 : " + image1);
-		System.out.println("image2 : " + image2);
-		System.out.println("image3 : " + image3);
-		System.out.println("image4 : " + image4);
 		
-		//adminProductService.insertProduct(product);
+		adminProductService.insertProduct(product);
 		
+		// 마지막에 입력한 상품의 정보로부터 상품번호를 가져옴 (selectProductMax)
+		
+		// 상품번호를 사용해 메인 이미지를 등록
+		
+		// 만약 상세 이미지가 존재하면 상세 이미지를 등록
+		
+		// 메시지와 url 설정
+		model.addAttribute("msg", "상품을 등록하였습니다.");
+		model.addAttribute("url", "/adminPlist.al");
+	   
 		return "/admin/product/adminPWrite";
 	}
 	
