@@ -22,42 +22,40 @@ public class AdminPageController {
 	public String adminMainForm(Model model) {
 		return "adminMainForm";
 	}
-
-	
-	  @RequestMapping(value="/adminMainModify.al")
-	  public String adminMainModify(MultipartRequest multipartRequest, HttpServletRequest request, Model model) 
+		
+	@RequestMapping(value="/adminMainModify.al")
+	public String adminMainModify(MultipartRequest multipartRequest, HttpServletRequest request, Model model) 
 			throws IOException { 
-		  MultipartFile bg_imageFile1 = multipartRequest.getFile("file1");
-		  MultipartFile bg_imageFile2 = multipartRequest.getFile("file2");
-		  MultipartFile bg_imageFile3 = multipartRequest.getFile("file3");
-		  MultipartFile bg_imageFile4 = multipartRequest.getFile("file4");
-		  MultipartFile bg_imageFile5 = multipartRequest.getFile("file5");
+		MultipartFile bg_imageFile1 = multipartRequest.getFile("file1");
+		MultipartFile bg_imageFile2 = multipartRequest.getFile("file2");
+		MultipartFile bg_imageFile3 = multipartRequest.getFile("file3");
+		MultipartFile bg_imageFile4 = multipartRequest.getFile("file4");
+		MultipartFile bg_imageFile5 = multipartRequest.getFile("file5");
 		  
-		  String saveName1 = "bg_1.jfif";
-		  String saveName2 = "bg_2.jfif";
-		  String saveName3 = "bg_3.jfif";
-		  String saveName4 = "bg_4.jfif";
-		  String saveName5 = "bg_5.jfif";
+		String saveName1 = "bg_1.jfif";
+		String saveName2 = "bg_2.jfif";
+		String saveName3 = "bg_3.jfif";
+		String saveName4 = "bg_4.jfif";
+		String saveName5 = "bg_5.jfif";
 		  
-		  String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
+		String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
 		  
-		  //String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
-		  FileUpload.fileUpload(bg_imageFile1, path, saveName1);
-		  FileUpload.fileUpload(bg_imageFile2, path, saveName2);
-		  FileUpload.fileUpload(bg_imageFile3, path, saveName3);
-		  FileUpload.fileUpload(bg_imageFile4, path, saveName4);
-		  FileUpload.fileUpload(bg_imageFile5, path, saveName5);
+		//String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
+		FileUpload.fileUpload(bg_imageFile1, path, saveName1);
+		FileUpload.fileUpload(bg_imageFile2, path, saveName2);
+		FileUpload.fileUpload(bg_imageFile3, path, saveName3);
+		FileUpload.fileUpload(bg_imageFile4, path, saveName4);
+		FileUpload.fileUpload(bg_imageFile5, path, saveName5);
 		  
 		  
-		  model.addAttribute("msg", "메인 이미지를 등록하였습니다."); 
-		  model.addAttribute("url", "/main.al");
+		model.addAttribute("msg", "메인 이미지를 등록하였습니다."); 
+		model.addAttribute("url", "/main.al");
 		  
-		  return "/admin/adminMainModify"; 
-		  }
-	 
-	
+		return "/admin/adminMainModify"; 
+}
 	
 	/*
+	 * 
 	 * @RequestMapping(value="/adminMainModify.al") public String
 	 * adminMainModify(Model model, MultipartHttpServletRequest request) {
 	 * MultipartFile multipartFile = request.getFile("file"); String filename =

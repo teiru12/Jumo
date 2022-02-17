@@ -40,6 +40,7 @@
 }
 </style>
 <script>
+/* 로그인 유효성 체크 */
 function formCheck() {
 	var form = document.getElementById("loginForm");
 	var EMAIL = document.getElementById("EMAIL");
@@ -56,6 +57,13 @@ function formCheck() {
 		form.submit();
 	}
 }
+
+/* 로그인 화면에서 엔터키 입력시 로그인 시도 */
+$("#loginForm").keypress(function (e) {
+	if(e.keyCode === 13) {
+		formCheck();	
+	}	
+});
 </script>
 <body>
 

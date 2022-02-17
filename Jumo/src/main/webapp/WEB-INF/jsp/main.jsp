@@ -18,7 +18,7 @@
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">In "Alchol" there is Truth</h1>
+	              <h1 class="mb-2">In "Alchhol" there is Truth</h1>
 	              <h2 class="subheading mb-4">A gathering of alcohols, Jumo</h2>
 	            </div>
 
