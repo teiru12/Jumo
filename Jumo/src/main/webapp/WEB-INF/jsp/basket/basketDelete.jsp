@@ -10,8 +10,9 @@
 <script>
    if(${! empty msg}) {
       alert('${msg}');
+      onClick='/Jumo/basketList.al';
    }
-    location.href='${pageContext.request.contextPath}${url}';
+    location.href="/Jumo/basketList.al";
     </script>
 </body>
 </html>

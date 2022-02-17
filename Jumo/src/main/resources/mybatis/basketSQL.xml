@@ -35,6 +35,18 @@
 	]]>
 	</select>
 	
+	<!-- 상품ID BIDX를 갖는 basket 정보  -->
+	<select id="selectBasketBIDX" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			* 
+		FROM
+			BASKET 
+		WHERE
+			BIDX=#{BIDX}
+	]]>
+	</select>
+	
 	<!-- BEMAIL 사용자가 가진 장바구니의 수 -->
 	<select id="selectBasketBnumberMaxBemail" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -87,7 +99,7 @@
 		DELETE
 			FROM BASKET
 		WHERE
-			BNUMBER = #{BNUMBER}
+			BIDX = #{BIDX}
 	]]>
 	</delete>
 

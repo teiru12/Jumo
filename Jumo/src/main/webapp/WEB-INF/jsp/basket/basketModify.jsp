@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모 수정</title>
 </head>
 <body>
 <script>
    if(${! empty msg}) {
       alert('${msg}');
+      onClick='/Jumo/basketList.al';
    }
-    location.href='${pageContext.request.contextPath}${url}';
+    location.href='/Jumo/basketList.al';
     </script>
 </body>
 </html>

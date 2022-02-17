@@ -13,23 +13,46 @@
 <script>
 function getCount() {
 	var size = document.getElementById('listSize').value;
+	var sum = 0; //원가의 전체 합
+	var saleSum = 0; //할인된 총 전체 합
 	for(var i=0;i<size;i++){
 		var count = document.getElementById('BCOUNT'+i).value;
 		var price = document.getElementById('BPRICE'+i).value;
 		var sale = document.getElementById('BSALE'+i).value;
 		var salePrice = price * (100-sale) / 100;
-		var totalPrice = salePrice * count;
+		var totalPrice = salePrice * count; // 할인된 상품 가격
 		
+		sum += price * count;
+		saleSum += (price*sale/100)*count;// 상품이 할인받은 가격
 		document.getElementById("totalPrice"+i).innerText = totalPrice + '원';
+		document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원';
 	}
+	document.getElementById("originalSum").innerText = sum + '원'; // 페이지의 sum값 출력
+	document.getElementById("saleSum").innerText = saleSum + '원'; // 페이지의 saleSum값 출력
+	
+	var finalSum = sum - saleSum + 3000;
+	document.getElementById("finalSum").innerText = finalSum + '원'; // 페이지의 finalSum값 출력
+	
 	return;
 }
 
 function basketModify(i) {
-	var bNumber = document.getElementById('BNUMBER'+i).value;
+	var bIdx = document.getElementById('BIDX'+i).value;
 	var count = document.getElementById('BCOUNT'+i).value;		
-	location.href="basketModify.al?BNUMBER=" + bNumber + "&BCOUNT=" + count;
+	location.href="basketModify.al?BIDX=" + bIdx + "&BCOUNT=" + count;
 }
+
+function basketDelete(i) {
+if(confirm("정말 삭제하시겠습니까?")==true){
+		var bIdx = document.getElementById('BIDX'+i).value;
+		location.href="basketDelete.al?BIDX=" + bIdx;
+}	
+return;
+}
+/* function basketDelete(i) {
+	var bIdx = document.getElementById('BIDX'+i).value;
+	location.href="basketDelete.al?BIDX=" + bIdx;
+} */
 
 function basketOrderForm(i) {
 	var bId = document.getElementById('BID'+i).value;
@@ -57,8 +80,9 @@ window.onload = function() {
 						        <!-- <th>&nbsp;</th> -->
 						        <th>상품명/옵션</th>
 						        <th>상품 금액</th>
-						        <th>할인 금액</th>
+						        <th>판매 금액</th>
 						        <th>수량</th>
+						        <th>할인된 금액</th>
 						        <th>주문 금액</th>
 						        <th>수정/삭제</th>
 						      </tr>
@@ -73,9 +97,10 @@ window.onload = function() {
 						        <td class="image-prod"><div id="BID" class="img" style="background-image:url(img/product-${basketBeanList[i].BID}.png);"></div></td>
     						
 						        <td class="product-name">
-						        	<h3>${basketBeanList[i].BNAME}</h3>
-				          			<h3>${basketBeanList[i].BSALE}%</h3>
-				          				<input type="hidden" id="BSALE${i}" name="BSALE${i}" value="${basketBeanList[i].BSALE}">
+						        	<h3><a href="pDetail.al?PID=${basketBeanList[i].BID}">${basketBeanList[i].BNAME}</a></h3>
+				          			<%-- <h3>${basketBeanList[i].BSALE}%</h3> --%>
+				          			<input type="hidden" id="BIDX${i}" name="BIDX${i}" value="${basketBeanList[i].BIDX}">
+				          			<input type="hidden" id="BSALE${i}" name="BSALE${i}" value="${basketBeanList[i].BSALE}">
 						        	
 						        </td>
 						        
@@ -83,21 +108,25 @@ window.onload = function() {
 						        
 						        <td>
 						        <c:set var="salePrice" value="${basketBeanList[i].BPRICE * (100-basketBeanList[i].BSALE) * 0.01}" />
-		    					<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
+		    					<b><fmt:formatNumber value="${salePrice}" pattern="#.#" />원</b>
 		    					<input type="hidden" id="BPRICE${i}" name="BPRICE${i}" value="${basketBeanList[i].BPRICE}">
 				          		</td>
 				          		
 						        <td>
 						        	<input type="number" min="0" max="${proInfoList[i].PSTOCK}" id="BCOUNT${i}" value="${basketBeanList[i].BCOUNT}" onChange="getCount()">
-					          </td>
+					          	</td>
+					          
+								<td id="saled${i}" style="color:red">
+
+				          		</td>
 						        
-						        <td id="totalPrice${i}">
+						        <td id="totalPrice${i}" style="font-weight : bold;">
+
 						        </td>
 						    
 						        <td>
 								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify(${i})" value="수정">
-								
-						        <a href="/Jumo/basketDelete.al?BNUMBER=${basketBeanList[i].BNUMBER}" class="btn btn-primary py-3 px-4">삭제</a>
+						        <input type="button" class="btn btn-primary py-3 px-4" onClick="basketDelete(${i})" value="삭제">
 						        </td>
 						      </tr>
 							</c:forEach>
@@ -135,11 +164,11 @@ window.onload = function() {
     					<h2>결제 금액</h2><br>
     					<p class="d-flex">
     						<span>주문금액</span>
-    						<span>미구현</span>
+    						<span id="originalSum"></span>
     					</p>
     					<p class="d-flex">
     						<span>할인금액</span>
-    						<span>미구현</span>
+    						<span id="saleSum"></span>
     					</p>
     					<p class="d-flex">
     						<span>배송비</span>
@@ -148,7 +177,7 @@ window.onload = function() {
     					<hr>
     					<p class="d-flex total-price">
     						<span>총 금액</span>
-    						<span>미구현</span>
+    						<span id="finalSum"></span>
     					</p>
     				</div>
     				</tr>
