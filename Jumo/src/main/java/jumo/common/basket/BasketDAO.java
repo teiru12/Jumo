@@ -26,4 +26,8 @@ public class BasketDAO {
 	public void deleteBasket(Map<String,Object> map) throws Exception{
 		sqlSessionTemplate.delete("basket.deleteBasket", map);
 	}
+	
+	public Map<String, Object> selectBasketBIDX(Map<String,Object> map) throws Exception{
+		return sqlSessionTemplate.selectOne("basket.selectBasketBIDX", map);
+	}
 }

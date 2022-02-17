@@ -12,4 +12,6 @@ public interface BasketService {
 	public void updateBasket(BasketBean basket) throws Exception;
 
 	public void deleteBasket(BasketBean basket) throws Exception;
+	
+	public Map<String, Object> selectBasketBIDX(BasketBean basket) throws Exception;
 }
