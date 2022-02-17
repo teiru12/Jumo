@@ -19,7 +19,7 @@ import jumo.model.MemberBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
 import jumo.util.validator.CommunityValidator;
-
+ 
 @Controller
 public class AdminNoticeController {
 
@@ -105,20 +105,21 @@ public class AdminNoticeController {
 	public String adminNoticeModify(CommunityBean community, BindingResult result,
 			Model model) throws Exception {
 		
-		// Validator로 유효성 검사
-		new CommunityValidator().validate(community, result);
+//		// Validator로 유효성 검사
+//		new CommunityValidator().validate(community, result);
+//		
+//		if(result.hasErrors()) {
+//			return "adminNoticeList";
+//			// adminNoticeModifyForm 페이지로 넘어가기 위해서는 CommunityBean 객체를 넘겨줘야하는데
+//			// 바로 리턴하면 오류발생
+//			// 자바 스크립트로 오류체크
+//			// return "adminNoticeModifyForm";
+//		}	
 		
-		if(result.hasErrors()) {
-			return "adminNoticeList";
-			// adminNoticeModifyForm 페이지로 넘어가기 위해서는 CommunityBean 객체를 넘겨줘야하는데
-			// 바로 리턴하면 오류발생
-			// 자바 스크립트로 오류체크
-			// return "adminNoticeModifyForm";
-		}	
-		
-		model.addAttribute("msg", "게시글 작성이 완료되었습니다.");
-		model.addAttribute("url", "/adminNoticeList.al");
+
 		adminComService.updateNoticeId(community);
+		model.addAttribute("msg", "게시글 수정이 완료되었습니다.");
+		model.addAttribute("url", "/adminNoticeList.al");
 		
 		return "admin/community/adminNoticeModify";
 	}

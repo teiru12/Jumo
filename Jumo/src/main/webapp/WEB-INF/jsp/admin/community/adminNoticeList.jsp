@@ -17,11 +17,11 @@
   		<!-- 공지사항 목록 부분 -->
 		<div style="text-align:center" id="board" >
     	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-		
+		 
     	<thead> 
     		<tr bgcolor="lightgray"> 
     			<th scope="col" width="10%">번호</th> 
-    			<th scope="col">내용</th> 
+    			<th scope="col">제목</th> 
     			<th scope="col" width="15%">작성자</th> 
     			<th scope="col" width="15%">작성일</th> 
     		</tr> 
@@ -31,7 +31,7 @@
     <c:choose> 
     	<c:when test="${noticeCount!=0}"> 
     		<c:forEach var="notice" items="${noticeList}" varStatus="status"> 
-    	<tr> 
+    	<tr>
     		<td>${notice.CIDX}</td>
     		<td> 
     			<a href="adminNoticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a>
