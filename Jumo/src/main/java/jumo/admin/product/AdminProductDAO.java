@@ -26,6 +26,11 @@ public class AdminProductDAO {
 	public void insertProduct(Map<String, Object> map) throws Exception{
 		sqlSessionTemplate.insert("product.insertProduct", map);
 	}
+
+	public Map<String, Object> selectPIDMax() throws Exception{
+		return sqlSessionTemplate.selectOne("product.selectPIDMax");
+	}
+	
 	
 	public Map<String, Object> selectProductId(Map<String, Object> map) throws Exception{
 		return sqlSessionTemplate.selectOne("product.selectProductId",map);
