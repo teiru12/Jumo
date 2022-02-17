@@ -1,10 +1,12 @@
 package jumo.admin.community;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommunityBean;
+import jumo.model.MemberBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
 import jumo.util.validator.CommunityValidator;
@@ -66,21 +69,19 @@ public class AdminNoticeController {
 	
 	@RequestMapping(value="/adminNoticeWriteForm.al")
 	public String adminNoticeWriteForm(Model model) {
+		
+		
 		return "adminNoticeWriteForm";
 	}
 	
 	
 	@RequestMapping(value="/adminNoticeWrite.al")
-	public String adminNoticeWrite(CommunityBean community, BindingResult result,
-			Model model) throws Exception {
+	public String adminNoticeWrite(CommunityBean community, Model model) throws Exception {
 		
-		// Validator로 유효성 검사
-		new CommunityValidator().validate(community, result);
 		
-		if(result.hasErrors()) {
-			return "adminNoticeWriteForm";
-		}		
 		
+		model.addAttribute("msg", "게시글 작성이 완료되었습니다.");
+		model.addAttribute("url", "/adminNoticeList.al");
 		adminComService.insertNotice(community);
 		
 		return "admin/community/adminNoticeWrite";
@@ -115,6 +116,8 @@ public class AdminNoticeController {
 			// return "adminNoticeModifyForm";
 		}	
 		
+		model.addAttribute("msg", "게시글 작성이 완료되었습니다.");
+		model.addAttribute("url", "/adminNoticeList.al");
 		adminComService.updateNoticeId(community);
 		
 		return "admin/community/adminNoticeModify";
@@ -124,7 +127,9 @@ public class AdminNoticeController {
 	@RequestMapping(value="/adminNoticeDelete.al")
 	public String adminNoticeDelete(CommunityBean community, Model model)
 			throws Exception {
-		
+
+		model.addAttribute("msg", "게시글 삭제가 완료되었습니다.");
+		model.addAttribute("url", "/adminNoticeList.al");
 		adminComService.deleteCommunityId(community);
 		
 		return "admin/community/adminNoticeDelete";
@@ -137,6 +142,9 @@ public class AdminNoticeController {
 		
 		Map<String, Object> noticeMap = adminComService.selectNoticeId(community);
 		CommunityBean noticeBean = MapToBean.mapToCommunity(noticeMap);
+		
+		noticeMap = adminComService.selectNoticeId(community);
+		noticeBean = MapToBean.mapToCommunity(noticeMap);
 		
 		model.addAttribute("noticeBean", noticeBean);	
 		

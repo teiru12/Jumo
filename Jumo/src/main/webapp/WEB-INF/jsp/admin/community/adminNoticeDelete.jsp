@@ -7,8 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-adminNoticeDelete
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 <br>
-<a href="/Jumo/adminNoticeList.al">공지사항 리스트</a><br>
 </body>
 </html>
