@@ -8,7 +8,6 @@
 <title>주모</title>
 </head>
 <body>
-
 <br>
 	<div style="text-align:center">
  		<h3>공지 사항</h3>
@@ -17,7 +16,6 @@
   		<!-- 공지사항 목록 부분 -->
 		<div style="text-align:center" id="board" >
     	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-		 
     	<thead> 
     		<tr bgcolor="lightgray"> 
     			<th scope="col" width="10%">번호</th> 
@@ -26,7 +24,6 @@
     			<th scope="col" width="15%">작성일</th> 
     		</tr> 
     	</thead>
-     
     <tbody> 
     <c:choose> 
     	<c:when test="${noticeCount!=0}"> 
@@ -64,9 +61,5 @@
 <div style="text-align:center;" id="btn_group">
 <button id="test_btn1"  onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
 </div>
-
-
-<a href="/Jumo/adminNoticeWriteForm.al">글쓰기</a><br>
-<a href="/Jumo/adminNoticeDetail.al">공지사항 상세보기</a><br>
 </body>
 </html>
