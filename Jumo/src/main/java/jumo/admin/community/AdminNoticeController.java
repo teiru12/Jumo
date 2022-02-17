@@ -76,9 +76,18 @@ public class AdminNoticeController {
 	
 	
 	@RequestMapping(value="/adminNoticeWrite.al")
-	public String adminNoticeWrite(CommunityBean community, Model model) throws Exception {
+	public String adminNoticeWrite(CommunityBean community, BindingResult result, Model model) throws Exception {
 		
+		// Validator로 유효성 검사
+		new CommunityValidator().validate(community, result);
 		
+		if(result.hasErrors()) {
+			return "adminNoticeWriteForm";
+			// adminNoticeModifyForm 페이지로 넘어가기 위해서는 CommunityBean 객체를 넘겨줘야하는데
+			// 바로 리턴하면 오류발생
+			// 자바 스크립트로 오류체크
+			// return "adminNoticeModifyForm";
+		}	
 		
 		model.addAttribute("msg", "게시글 작성이 완료되었습니다.");
 		model.addAttribute("url", "/adminNoticeList.al");
@@ -102,20 +111,7 @@ public class AdminNoticeController {
 	
 	
 	@RequestMapping(value="/adminNoticeModify.al")
-	public String adminNoticeModify(CommunityBean community, BindingResult result,
-			Model model) throws Exception {
-		
-//		// Validator로 유효성 검사
-//		new CommunityValidator().validate(community, result);
-//		
-//		if(result.hasErrors()) {
-//			return "adminNoticeList";
-//			// adminNoticeModifyForm 페이지로 넘어가기 위해서는 CommunityBean 객체를 넘겨줘야하는데
-//			// 바로 리턴하면 오류발생
-//			// 자바 스크립트로 오류체크
-//			// return "adminNoticeModifyForm";
-//		}	
-		
+	public String adminNoticeModify(CommunityBean community, Model model) throws Exception {
 
 		adminComService.updateNoticeId(community);
 		model.addAttribute("msg", "게시글 수정이 완료되었습니다.");

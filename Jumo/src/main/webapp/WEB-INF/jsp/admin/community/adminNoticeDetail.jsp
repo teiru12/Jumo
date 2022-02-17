@@ -5,10 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<script>
+function deleteCheck() {
+	var CIDX = document.getElementById('CIDX').value;
+	if(confirm("삭제하시겠습니까?") == true) {
+		location.href="adminNoticeDelete.al?CIDX=" + CIDX;
+	}
+}
+</script>
 </head>
 <br> 
 	<div style="text-align:center">
  		<h3>공지 내용</h3>
+ 		<input type="hidden" id="CIDX" name="CIDX" value="${noticeBean.CIDX }">
 	</div> 		
   	    <br>
   		<!-- 공지사항 부분 -->
@@ -46,7 +55,7 @@
 </style>
 <p style="text-align:center;" id="btn_group">
 <button id="test_btn1"  onclick="location.href='adminNoticeModifyForm.al?CIDX=${noticeBean.CIDX}'">수정</button>
-<button id="test_btn2"  onclick="location.href='adminNoticeDelete.al?CIDX=${noticeBean.CIDX}'">삭제</button>
+<button id="test_btn2"  onclick="return deleteCheck()">삭제</button>
 </p>
 </body>
 </html>
