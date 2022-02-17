@@ -10,7 +10,7 @@ public interface AdminProductService {
 	public List<Map<String, Object>> allListPaging(int START, int END) throws Exception;
 	
 	// 판매량을 조건으로 정렬하기 위해 상품 리스트 조건 검색
-	public List<Map<String, Object>> allListSearchPaging(String PSELL, int START, int END) throws Exception;
+	public List<Map<String, Object>> allListPSELLDescPaging(int START, int END) throws Exception;
     
 	//관리자 상품 리스트 검색
 	public List<Map<String, Object>> allListKeyWordSearch(String KEYWORD, String ISNUMBER) throws Exception;

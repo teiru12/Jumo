@@ -285,6 +285,25 @@
 	]]>
 	</select> 
 	
+	<!-- [allListPSELLDescPaging]전체상품 게시판 페이징-->
+	<select id="allListPSELLDescPaging" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSELL, ROWNUM R
+			FROM (
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSELL
+				FROM 
+					PRODUCT
+				ORDER BY PSELL DESC
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	]]>
+	</select> 
+	
 	<!-- [allListSearchPaging]전체상품 게시판 리스트 검색 -->
 	<select id="allListSearchPaging" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[

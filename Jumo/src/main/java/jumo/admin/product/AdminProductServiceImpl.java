@@ -26,14 +26,18 @@ public class AdminProductServiceImpl implements AdminProductService {
 	}
 
 	@Override
-	public List<Map<String, Object>> allListSearchPaging(String PSELL, int START, int END) throws Exception {
+	public List<Map<String, Object>> allListPSELLDescPaging(int START, int END) throws Exception {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("PSELL", PSELL);
 		map.put("START", START);
 		map.put("END", END);
 		
-		return adminProductDAO.allListSearchPaging(map);
+		System.out.println("-------Service--------");		
+		System.out.println("map.get(START) : " + map.get("START"));
+		System.out.println("map.get(END) : " + map.get("END"));
+		System.out.println("-------Service--------");		
+		
+		return adminProductDAO.allListPSELLDescPaging(map);
 	}
 	
 	@Override

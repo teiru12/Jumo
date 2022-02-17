@@ -19,8 +19,8 @@ public class AdminProductDAO {
 		return sqlSessionTemplate.selectList("product.allListPaging", map);
 	}
 	
-	public List<Map<String, Object>> allListSearchPaging(Map<String, Object> map) throws Exception{
-		return sqlSessionTemplate.selectList("product.allListSearchPaging", map);
+	public List<Map<String, Object>> allListPSELLDescPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("product.allListPSELLDescPaging", map);
 	}
 	
 	public List<Map<String, Object>> allListKeyWordSearch(Map<String, Object> map) throws Exception{

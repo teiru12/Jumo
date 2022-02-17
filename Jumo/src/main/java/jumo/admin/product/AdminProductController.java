@@ -255,8 +255,6 @@ public class AdminProductController {
 		int pageBlock = 5; // 표시할 페이지의 수
 		String url = "adminSellList.al";
 		String searchUrl = "";
-	
-		String PSELL = "D"; // PSELL로 아무 값이나 넘겨주면 내림차순 정렬이 된다.
 		
 		/* 기본 페이지가 아닐 경우 */
 		if(request.getParameter("page")!=null) {
@@ -267,7 +265,12 @@ public class AdminProductController {
 		
 		countProductAll = productService.allListCount();
 		
-		List<Map<String, Object>> list = adminProductService.allListSearchPaging(PSELL, START, END);
+System.out.println("-------Controller--------");		
+System.out.println("START : " + START);
+System.out.println("END : " + END);
+System.out.println("-------Controller--------");
+		
+		List<Map<String, Object>> list = adminProductService.allListPSELLDescPaging(START, END);
 		List<ProductBean> sellList = new ArrayList<ProductBean>();
 		for(Map<String, Object> mapObject : list) {
 			sellList.add(MapToBean.mapToProduct(mapObject));
