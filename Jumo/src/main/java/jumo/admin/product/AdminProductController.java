@@ -45,12 +45,39 @@ public class AdminProductController {
 		String url = "adminPList.al";
 		String searchUrl = "";
 		
+		/* 검색 조건일 경우 사용 변수 */
+		// -1, null일 경우 검색 조건에서 빠진다.
+		String KEYWORD = request.getParameter("keyword"); // 검색 키워드 문자일때
+		int KEYNUMBER = -1;
+		String searchPrint = ""; // 검색 조건이 있을 경우 출력해줄 메세지
+		
 		/* 기본 페이지가 아닐 경우 */
 		if(request.getParameter("page")!=null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 			START = 1 + pageSize*(currentPage-1); 
 			END = pageSize*currentPage;
 		}
+		
+		/* KEYWORD를 입력받았을 때 숫자로 이루어져있는지 검사 */
+		boolean isNumber = false; // isNumber가 false이면 문자 포함, true이면 수
+		if(KEYWORD!=null) {
+			for(int i=0;i<KEYWORD.length();i++) {
+				if(!Character.isDigit(KEYWORD.charAt(i))) {
+					System.out.println("수가 아닙니다.");
+					break;
+				}
+			}
+			// 모든 검사 루프를 통과하면 수
+			System.out.println("수입니다.");
+			isNumber = true;
+		}
+		
+		//Character.Isdi
+		/* 검색 조건을 받고 만약 숫자로 이루어져 있다면 숫자로 변환*/
+//		if(문자열이 수인지 검사) {
+//			// 문자열을 수로 변환
+//			KEYNUMBER = Integer.parseInt(KEYWORD);				
+//		}
 		
 		countProductAll = productService.allListCount();
 		

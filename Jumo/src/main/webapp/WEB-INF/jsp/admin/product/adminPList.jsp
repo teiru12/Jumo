@@ -7,6 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<script>
+function deleteCheck(e) {
+	if(confirm("삭제하시겠습니까?") == true) {
+		var PID = document.getElementById('del'+e).value;
+		location.href = "adminPDelete.al?PID=" + PID;
+	}
+}
+</script>
+<script>
+window.onload = function() {
+	document.getElementById("keyword").focus();	
+}
+</script>
 </head>
 <body class="goto-here">
 <section class="ftco-section ftco-cart">
@@ -38,10 +51,11 @@
 										<th>상품종류</th>
 										<th>주류종류</th>
 										<th>도수</th>
-										<th>&nbsp;상품명</th>
 										<th>&nbsp;</th>
+										<th>&nbsp;상품명</th>										
 										<th>가격</th>
 										<th>재고량</th>
+										<th>&nbsp;</th>
 									</tr>
 								</thead>
 								 
@@ -57,7 +71,7 @@
 											</c:if>
 										</td>
 										<td>
-										   	<div style="width:70px; height:70px;">
+										   	<div style="width:90px; height:70px;">
 												<a href="pDetail.al?PID=${product.PID}" class="img-prod"><img class="img-fluid" src="img/${product.PIMAGE}"></a>
 											</div> 
 										</td>
@@ -66,6 +80,10 @@
 										</td>
 										<td>${product.PPRICE}</td>
 										<td>${product.PSTOCK}</td>
+										<td>
+											<input type="hidden" id="del${product.PID}" value="${product.PID}">
+											<a href="javascript:deleteCheck(${product.PID});">삭제</a>
+										</td>
 									</tr>
 									</c:forEach>
 								</tbody>
