@@ -32,7 +32,7 @@ public class CommunityController {
 	public String noticeList(Model model, HttpServletRequest request) throws Exception {
 		
 		/* 페이징을 위한 변수 */
-		int pageSize = 20; // 페이지당 출력할 공지의 수
+		int pageSize = 10; // 페이지당 출력할 공지의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지
@@ -41,6 +41,13 @@ public class CommunityController {
 		int pageBlock = 5; // 표시할 페이지의 수
 		String url = "noticeList.al";
 		String searchUrl = "";
+		
+		/* 기본 페이지가 아닐 경우 */
+		if(request.getParameter("page")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+			START = 1 + pageSize*(currentPage-1); 
+			END = pageSize*currentPage;
+		}
 
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<CommunityBean> noticeBeanList = new ArrayList<CommunityBean>();
@@ -84,16 +91,23 @@ public class CommunityController {
 	public String qnaList(Model model, HttpServletRequest request)
 			throws Exception {
 		/* 페이징을 위한 변수 */
-		int pageSize = 20; // 페이지당 출력할 공지의 수
+		int pageSize = 10; // 페이지당 출력할 qna의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지
 
-		int qnaListCount; // 전체 공지글의 수
+		int qnaListCount; // 전체 qna글의 수
 		int pageBlock = 5; // 표시할 페이지의 수
 		String url = "qnaList.al";
 		String searchUrl = "";
 
+		/* 기본 페이지가 아닐 경우 */
+		if(request.getParameter("page")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+			START = 1 + pageSize*(currentPage-1); 
+			END = pageSize*currentPage;
+		}
+		
 		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<CommunityBean> qnaBeanList = new ArrayList<CommunityBean>();
@@ -132,12 +146,10 @@ public class CommunityController {
 		
 		model.addAttribute("communityBean", communityBean);
 		
-		/* 댓글-CIDX값을 받아오지 못함 */
-	
 		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		List<CommentBean> commentBeanList = new ArrayList<CommentBean>();
-		comment.setARTICLEIDX(community.getCIDX());
+		List<CommentBean> commentBeanList = new ArrayList<CommentBean>(); 
+		comment.setARTICLEIDX(community.getCIDX()); //CIDX값을 받아옴
 		list= communityService.commentListId(comment);
 	
 		for(Map<String, Object> mapObject : list) {
@@ -153,28 +165,22 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/qnaForm.al")
-	public String qnaForm(Model model, HttpServletRequest request) {
-		
-		// member에 세션에서 사용자 아이디를 가져와서 저장
-		String email = (String) request.getSession().getAttribute("EMAIL");
-		MemberBean member = new MemberBean();
-		member.setEMAIL(email);
-
+	public String qnaForm(Model model) {
 		
 		return "qnaForm";
 	}
 
 	@RequestMapping(value = "/qna.al")
-	public String qna(Model model, CommunityBean community, BindingResult result) throws Exception {
-		CommunityBean communityBean = new CommunityBean();
+	public String qna( CommunityBean community, Model model, HttpServletRequest request) throws Exception {
+		
+		// member에 세션에서 사용자 아이디를 가져와서 저장
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		
+		community.setCWRITER(email);
 
-		new CommunityValidator().validate(community, result);
-
-		if (result.hasErrors()) {
-			return "/qnaForm.al";
-		}
-
-		communityService.insertQna(communityBean);
+		model.addAttribute("msg", "게시글 작성이 완료되었습니다.");
+		model.addAttribute("url", "/qnaList.al");
+		communityService.insertQna(community);
 
 		return "/community/qna";
 	}

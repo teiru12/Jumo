@@ -58,7 +58,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public void insertQna(CommunityBean community) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CIDX", community.getCTITLE());
+		map.put("CTITLE", community.getCTITLE());
 		map.put("CWRITER", community.getCWRITER());
 		map.put("CCONTENT", community.getCCONTENT());
 		
