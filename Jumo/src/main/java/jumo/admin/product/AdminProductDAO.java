@@ -40,10 +40,10 @@ public class AdminProductDAO {
 	}
 	
 	public void updateProduct(Map<String, Object> map) throws Exception{
-		sqlSessionTemplate.update("product.updateProduct");
+		sqlSessionTemplate.update("product.updateProduct", map);
 	}
 	
 	public void deleteProduct(Map<String, Object> map) throws Exception{
-		sqlSessionTemplate.delete("product.deleteProduct");
+		sqlSessionTemplate.delete("product.deleteProduct", map);
 	}	
 }

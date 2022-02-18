@@ -103,10 +103,14 @@ public class AdminProductServiceImpl implements AdminProductService {
 		
 		map.put("PCOM", product.getPCOM());
 		map.put("PLOC", product.getPLOC());
-		map.put("PDEGREE", product.getPDEGREE());
+		// PDEGREE가 -1이면 null을 입력
+		if(product.getPDEGREE() == -1) {
+			map.put("PDEGREE", null);
+		} else {
+			map.put("PDEGREE", product.getPDEGREE());
+		}
 		map.put("PKIND", product.getPKIND());
 		map.put("PTYPE", product.getPTYPE());
-		
 		map.put("PID", product.getPID());
 						
 		adminProductDAO.updateProduct(map);
