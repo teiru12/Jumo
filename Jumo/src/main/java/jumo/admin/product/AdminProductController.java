@@ -35,7 +35,7 @@ public class AdminProductController {
 			Model model) throws Exception{
 		
 		/* 페이징을 위한 변수 */
-		int pageSize = 20; // 페이지당 출력할 상품의 수
+		int pageSize = 10; // 페이지당 출력할 상품의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지
@@ -49,7 +49,6 @@ public class AdminProductController {
 		// -1, null일 경우 검색 조건에서 빠진다.
 		String KEYWORD = request.getParameter("keyword"); // 검색 키워드 문자일때
 		int KEYNUMBER = -1;
-		String searchPrint = ""; // 검색 조건이 있을 경우 출력해줄 메세지
 		
 		/* 기본 페이지가 아닐 경우 */
 		if(request.getParameter("page")!=null) {
@@ -298,7 +297,7 @@ public class AdminProductController {
 		// mybatis allListSearchPaging에서 PSELL값을 이용하여 내림차순 정렬 사용
 		
 		/* 페이징을 위한 변수 */
-		int pageSize = 20; // 페이지당 출력할 상품의 수
+		int pageSize = 10; // 페이지당 출력할 상품의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지

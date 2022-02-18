@@ -33,4 +33,15 @@ public class AdminMemberDAO {
 	public void deleteMember(Map<String, Object> map) throws Exception {
 		sqlSessionTemplate.delete("member.deleteMember", map);
 	}
+	
+	// 회원 전체목록 페이징
+	public List<Map<String, Object>> memberListPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("member.memberListPaging", map);
+	}
+	
+	// 전체 회원의 수
+	public Map<String, Object> memberCount() throws Exception {
+		return sqlSessionTemplate.selectOne("member.memberCount");
+	}
+	
 }

@@ -101,4 +101,30 @@
    			MEMBER
 	]]>
 	</select>
+	
+   	<!-- memberListPaging(회원리스트 페이징) -->
+   	<select id="memberListPaging" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
+			FROM (
+				SELECT
+					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
+				FROM
+					MEMBER
+				ORDER BY MDATE ASC		
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>	
+	
+	<!-- memberCount(회원 수) -->
+   	<select id="memberCount" resultType="hashmap">
+   		SELECT
+   			COUNT(*) COUNT
+   		FROM 
+   			MEMBER
+	</select>		
 </mapper>

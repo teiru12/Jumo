@@ -8,67 +8,81 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
+
 <body>
-memberList.jsp
-<h3> 회원정보 </h3>
-	<form action="memberList.al" method="get"> <%-- <c:if test="${condition eq 'titlename' }">selected</c:if>	 --%>
-		<label for="condition">검색조건</label>
-		<select name="condition" id="condition">
-			<option value="titlename" <c:if test="${memberBean eq 'EMAIL' }">selected</c:if>>이메일</option>
-			<option value="title" <c:if test="${memberBean eq 'NAME' }">selected</c:if>>이름</option>
-			<option value="writer" <c:if test="${memberBean eq 'RANK' }">selected</c:if>>랭크</option>
-		</select>
-		<input type="text" name="keyword" id="keyword"
-			placeholder="검색어 ..." value="${keyword }"/>
-		<button type="submit">검색</button>
-	</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
-
-
-<div id=title  align="center" >
-	<h2> 회원정보 </h2>
-</div>
-	<div  align="center" >
-<table id =table2  border=1 > 
-	<tr>
-		<td>랭크</td>
-		<td>이메일</td>
-		<td>이름</td>
-		<td>전화번호</td>
-		<td>핸드폰번호</td>
-		<td>주소</td>
-	</tr>
-<c:forEach var="member" items="${memberBeanList}"> 
-    <tr> 
-    	<td><a href="memberDetail.al">${member.RANK}</a></td>
-    	<td><a href="memberDetail.al?EMAIL=${member.EMAIL}">${member.EMAIL}</a></td>
-    	<td><a href="memberDetail.al">${member.NAME}</a></td>
-    	<td><a href="memberDetail.al">${member.PHONE}</a></td> 
-    	<td><a href="memberDetail.al">${member.MOBILE}</a></td>
-   		<td><a href="memberDetail.al">${member.ADDRESS1} / ${member.ADDRESS2}</a></td>   		
-   	</tr>  
-</c:forEach>
-</table>
-</div>
-
-<br>
-<a href="/Jumo/memberDetail.al">회원이메일 클릭 - 회원정보</a><br>
-
-  <script src="resource/js/jquery.min.js"></script>
-  <script src="resource/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="resource/js/popper.min.js"></script>
-  <script src="resource/js/bootstrap.min.js"></script>
-  <script src="resource/js/jquery.easing.1.3.js"></script>
-  <script src="resource/js/jquery.waypoints.min.js"></script>
-  <script src="resource/js/jquery.stellar.min.js"></script>
-  <script src="resource/js/owl.carousel.min.js"></script>
-  <script src="resource/js/jquery.magnific-popup.min.js"></script>
-  <script src="resource/js/aos.js"></script>
-  <script src="resource/js/jquery.animateNumber.min.js"></script>
-  <script src="resource/js/bootstrap-datepicker.js"></script>
-  <script src="resource/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="resource/js/google-map.js"></script>
-  <script src="resource/js/main.js"></script>
+	
+<section class="ftco-section ftco-cart">
+	<div style="text-align:center"><h2>회원 정보</h2></div>
+	<br/>
+		<div class="container">
+			<div class="row">
+			<pre>                                                                               </pre>
+				<form action="memberList.al">
+				<div class="form-group d-flex">
+					<select name="condition" id="condition">
+						<option value="titlename" <c:if test="${memberBean eq 'EMAIL' }">selected</c:if>>이 메 일</option>
+						<option value="title" <c:if test="${memberBean eq 'NAME' }">selected</c:if>>이 &emsp; 름</option>
+						<option value="writer" <c:if test="${memberBean eq 'RANK' }">selected</c:if>>회원등급</option>
+					</select>
+					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;"
+						placeholder="검색어 ..." value="${keyword }"/>
+					<button type="submit" class="btn btn-primary px-4">검색</button>
+				</div>
+				</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
+				<div>
+				</div>
+				<br>
+				<div class="container" style="padding-right:70px;">				
+					<div class="col-md-12 ftco-animate">
+						<div class="cart-list">
+							<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
+									<th>회원 등급</th>
+									<th>이메일</th>
+									<th>이름</th>
+									<th>전화번호</th>
+									<th>핸드폰번호</th>
+									<th>주소</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+								<c:forEach var="member" items="${memberBeanList}"> 
+								<tr class="text-center">
+									<td>
+										<c:if test="${member.RANK == 'B'}">
+											브론즈
+										</c:if>
+										<c:if test="${member.RANK == 'S'}">
+											실버
+										</c:if>									
+										<c:if test="${member.RANK == 'G'}">
+											골드
+										</c:if>
+									</td>
+									<td><a href="memberDetail.al?EMAIL=${member.EMAIL}">${member.EMAIL}</a></td>
+									<td class="product-name">
+										${member.NAME}
+									</td>
+									<td>${member.PHONE}</td>
+									<td>
+										${member.MOBILE}
+									</td>
+									<td>${member.ADDRESS1} / ${member.ADDRESS2}</td>
+								</tr><!-- END TR-->
+								</c:forEach>
+							
+							</tbody>
+							</table>
+						</div>
+						
+						${paging.pageHtml}
+					</div>			
+				</div>
+		</div>
+	</div>
+</section>	
 
 </body>
 </html>
