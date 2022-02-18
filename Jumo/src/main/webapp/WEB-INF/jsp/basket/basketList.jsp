@@ -72,7 +72,8 @@ function orderConfirm(){
 	}
 	return;
 }
-
+</script>
+<script>
 window.onload = function() {
 	getCount();
 };

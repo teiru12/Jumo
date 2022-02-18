@@ -59,11 +59,16 @@ function formCheck() {
 }
 
 /* 로그인 화면에서 엔터키 입력시 로그인 시도 */
-$("#loginForm").keypress(function (e) {
-	if(e.keyCode === 13) {
-		formCheck();	
+function keyPress() {
+	if(window.event.keyCode ==13) {
+		return formCheck();	
 	}	
-});
+}
+
+/* 첫 화면 로딩 시 포커스 */
+window.onload = function() {
+	document.getElementById("EMAIL").focus();
+}
 </script>
 <body>
 
@@ -78,7 +83,7 @@ $("#loginForm").keypress(function (e) {
 		<input type="text" id="EMAIL" name="EMAIL">
 		
 		<label for="PASSWORD">비밀번호</label>
-		<input type="password" id="PASSWORD" name="PASSWORD">
+		<input type="password" id="PASSWORD" name="PASSWORD" onkeypress="keyPress()">
 	
 		<!-- 아이디 저장 &nbsp; <input type="checkbox" id="ID_SAVE" name="ID_SAVE"><br> -->
 		<p></p>

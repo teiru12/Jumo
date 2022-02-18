@@ -167,7 +167,20 @@ public class AdminProductController {
 	public String adminPModify(ProductBean product,
 			MultipartHttpServletRequest request,
 			Model model) throws Exception {
-	
+		// 이클립스 - 톰캣의 구동방식 때문에 상품 이미지 변경에 시간이 걸릴 수 있음
+		
+		// 상품 이미지를 입력할 폴더 설정
+		String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
+		
+		// 상품 수정이기 때문에 PID값은 폼에서 입력받음
+		int newPID = product.getPID();
+				
+		// 상품번호를 사용해 메인 이미지를 등록
+		String UploadMainImageName = "product-" + newPID +".png";
+				
+		// 메인 이미지 이름을 product의 PIMAGE에 입력
+		product.setPIMAGE(UploadMainImageName);
+				
 		MultipartFile main_imageFile = request.getFile("main_image");
 		MultipartFile detail_imageFile1 = request.getFile("image1");
 		MultipartFile detail_imageFile2 = request.getFile("image2");
@@ -178,42 +191,43 @@ public class AdminProductController {
 		if(product.getPTYPE().equals("ETC")) {
 			product.setPKIND(null);
 			product.setPDEGREE(-1);
+		}		
+		
+		// 만약 수정할 이미지 파일을 입력했으면 기존 파일을 삭제한 뒤 삽입
+		if(! main_imageFile.isEmpty()) {
+			String delMainPath = path + "/" + UploadMainImageName;
+			File delMainFile = new File(delMainPath);	
+			delMainFile.delete();
+			FileUpload.fileUpload(main_imageFile, path, UploadMainImageName);
 		}
 		
-		// 상품 수정이기 때문에 PID값은 폼에서 입력받음
-		int newPID = product.getPID();
-		
-		// 상품번호를 사용해 메인 이미지를 등록
-		String uploadMainImageName = "product-" + newPID +".png";
-		
-		// 메인 이미지 이름을 product의 PIMAGE에 입력
-		product.setPIMAGE(uploadMainImageName);
-		
-		// 상품 이미지를 입력할 폴더 설정
-		String path = request.getSession().getServletContext().getRealPath("/") + File.separator + "img";
-		
-		FileUpload.fileUpload(main_imageFile, path, uploadMainImageName);
-		
-		// 만약 상세 이미지가 존재하면 상세 이미지를 등록
-		int detailCount = 0; // 상세 이미지 등록 수, 등록할 때마다 1씩 증가, 등록할 때는 +1로 계산해서 등록 
+		// 만약 수정할 상세 이미지를 업로드했으면 기존 상세 이미지르 삭제하고 새로 등록
 		if(! detail_imageFile1.isEmpty()) {
-			String uploadDetailImageName = "product-" + newPID +"-detail" + (detailCount+1) + ".png";
-			detailCount++;
+			String delPath = path + "/" + "product-" + newPID + "-detail1.png";
+			File delFile = new File(delPath);
+			delFile.delete();
+			String uploadDetailImageName = "product-" + newPID + "-detail1.png";
 			FileUpload.fileUpload(detail_imageFile1, path, uploadDetailImageName);
 		} 
 		if(! detail_imageFile2.isEmpty()) {
-			String uploadDetailImageName = "product-" + newPID +"-detail" + (detailCount+1) + ".png";
-			detailCount++;
+			String delPath = path + "/" + "product-" + newPID + "-detail2.png";
+			File delFile = new File(delPath);
+			delFile.delete();
+			String uploadDetailImageName = "product-" + newPID + "-detail2.png";
 			FileUpload.fileUpload(detail_imageFile2, path, uploadDetailImageName);
 		} 
 		if(! detail_imageFile3.isEmpty()) {
-			String uploadDetailImageName = "product-" + newPID +"-detail" + (detailCount+1) + ".png";
-			detailCount++;
+			String delPath = path + "/" + "product-" + newPID + "-detail3.png";
+			File delFile = new File(delPath);
+			delFile.delete();
+			String uploadDetailImageName = "product-" + newPID + "-detail3.png";
 			FileUpload.fileUpload(detail_imageFile3, path, uploadDetailImageName);
 		}
 		if(! detail_imageFile4.isEmpty()) {
-			String uploadDetailImageName = "product-" + newPID +"-detail" + (detailCount+1) + ".png";
-			detailCount++;
+			String delPath = path + "/" + "product-" + newPID + "-detail4.png";
+			File delFile = new File(delPath);
+			delFile.delete();
+			String uploadDetailImageName = "product-" + newPID + "-detail4.png";
 			FileUpload.fileUpload(detail_imageFile4, path, uploadDetailImageName);
 		}		
 		
