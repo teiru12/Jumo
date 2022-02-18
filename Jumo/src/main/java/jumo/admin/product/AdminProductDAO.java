@@ -46,4 +46,12 @@ public class AdminProductDAO {
 	public void deleteProduct(Map<String, Object> map) throws Exception{
 		sqlSessionTemplate.delete("product.deleteProduct", map);
 	}	
+	
+	public List<Map<String, Object>> allListKeywordPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("product.allListKeywordPaging",map);
+	}
+	
+	public Map<String, Object> allListKeywordCount(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectOne("product.allListKeywordCount", map);
+	}	
 }
