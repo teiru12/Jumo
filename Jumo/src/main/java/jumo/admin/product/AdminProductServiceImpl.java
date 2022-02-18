@@ -124,4 +124,43 @@ public class AdminProductServiceImpl implements AdminProductService {
 						
 		adminProductDAO.deleteProduct(map);
 	}
+
+	@Override
+	public List<Map<String, Object>> allListKeywordPaging(String KEYWORD, int KEYNUMBER, int START, int END)
+			throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("KEYWORD", KEYWORD);
+		if(KEYNUMBER == -1) {
+			map.put("KEYNUMBER", null);
+		} else {
+			map.put("KEYNUMBER", KEYNUMBER);			
+		}
+		map.put("START", START);
+		map.put("END", END);
+		
+		
+		System.out.println("---- allListKeywordPaging ----");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("---- allListKeywordPaging ----");
+		
+		return adminProductDAO.allListKeywordPaging(map);
+	}
+
+	@Override
+	public int allListKeywordCount(String KEYWORD, int KEYNUMBER) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("KEYWORD", KEYWORD);
+		if(KEYNUMBER == -1) {
+			map.put("KEYNUMBER", null);
+		} else {
+			map.put("KEYNUMBER", KEYNUMBER);			
+		}
+		Map<String, Object> countMap = adminProductDAO.allListKeywordCount(map);
+		
+		int keywordCount = Integer.parseInt(String.valueOf(countMap.get("COUNT")));
+		return keywordCount;
+	}
 }

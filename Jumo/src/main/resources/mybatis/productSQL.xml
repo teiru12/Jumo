@@ -172,7 +172,7 @@
 	</select>
 	
 	<!-- [allListKeywordSearch]전체상품 게시판 키워드 검색 -->
-	<select id="allListKeyWordSearch" parameterType="hashmap" resultType="hashmap">
+	<select id="allListKeywordSearch" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[	
 		SELECT * 
 		FROM PRODUCT 
@@ -545,6 +545,64 @@
 		WHERE
 			PTYPE ='ETC'
 	]]>
-	</select> 
+	</select>
+	
+	<!-- [allListKeywordPaging]전체상품 게시판 키워드 검색 -->
+	<select id="allListKeywordPaging" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE, ROWNUM R
+			FROM ( 	
+				SELECT 
+					PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE
+				FROM 
+					PRODUCT 
+				<trim prefix="WHERE" prefixOverrides="OR">
+					<if test="KEYWORD!=NULL">	
+						<if test="KEYNUMBER!=NULL">	
+							OR PNAME LIKE '%'||#{KEYWORD}||'%'
+							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+							OR PKIND LIKE '%'||#{KEYWORD}||'%'	
+							OR PPRICE = #{KEYNUMBER}
+							OR PSTOCK = #{KEYNUMBER}
+							OR PDEGREE = #{KEYNUMBER}
+						</if>
+						<if test="KEYNUMBER==NULL">				
+							OR PNAME LIKE '%'||#{KEYWORD}||'%'
+							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+							OR PKIND LIKE '%'||#{KEYWORD}||'%'		
+						</if>
+					</if>
+				</trim>
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>
+	
+	<!-- [allListKeywordCount] 주류상품 검색 수량 -->
+	<select id="allListKeywordCount" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) COUNT
+		FROM 
+			PRODUCT 
+		<trim prefix="WHERE" prefixOverrides="OR">
+			<if test="KEYWORD!=NULL">	
+				<if test="KEYNUMBER!=NULL">	
+					OR PNAME LIKE '%'||#{KEYWORD}||'%'
+					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+					OR PKIND LIKE '%'||#{KEYWORD}||'%'
+					OR PPRICE = #{KEYNUMBER}
+					OR PSTOCK = #{KEYNUMBER}
+					OR PDEGREE = #{KEYNUMBER}
+				</if>
+				<if test="KEYNUMBER==NULL">				
+					OR PNAME LIKE '%'||#{KEYWORD}||'%'
+					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+					OR PKIND LIKE '%'||#{KEYWORD}||'%'		
+				</if>
+			</if>
+		</trim>
+	</select>
 
 </mapper>

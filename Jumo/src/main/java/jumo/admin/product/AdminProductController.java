@@ -58,28 +58,37 @@ public class AdminProductController {
 			END = pageSize*currentPage;
 		}
 		
+		/* KEYWORD값이 null이 아닌 ""일 때 null로 설정 */
+		if(KEYWORD!=null && KEYWORD.equals("")) {
+			KEYWORD = null;
+		}
+		
 		/* KEYWORD를 입력받았을 때 숫자로 이루어져있는지 검사 */
 		boolean isNumber = false; // isNumber가 false이면 문자 포함, true이면 수
 		if(KEYWORD!=null) {
-			for(int i=0;i<KEYWORD.length();i++) {
+			int i = 0;
+			while(i<KEYWORD.length()) {
 				if(!Character.isDigit(KEYWORD.charAt(i))) {
-					System.out.println("수가 아닙니다.");
 					break;
 				}
+				i++;
 			}
+			System.out.println("i    : " + i);
 			// 모든 검사 루프를 통과하면 수
-			System.out.println("수입니다.");
-			isNumber = true;
+			if(i==KEYWORD.length()) {
+				isNumber = true;
+			}
+		}
+		/* 만약 KEYWORD가 숫자로 이루어져있으면 KEYNUMBER값에 KEYWORD를 숫자로 변환한 값을 입력 */
+		if(isNumber == true) {
+			KEYNUMBER = Integer.parseInt(KEYWORD);				
 		}
 		
-		//Character.Isdi
-		/* 검색 조건을 받고 만약 숫자로 이루어져 있다면 숫자로 변환*/
-//		if(문자열이 수인지 검사) {
-//			// 문자열을 수로 변환
-//			KEYNUMBER = Integer.parseInt(KEYWORD);				
-//		}
-		
-		countProductAll = productService.allListCount();
+		if(KEYWORD == null) {
+			countProductAll = productService.allListCount();
+		} else {
+			countProductAll = adminProductService.allListKeywordCount(KEYWORD, KEYNUMBER);
+		}
 		
 		// 페이징할 아이템의 총 수, 페이지의 수 ex> 1~5 6~10, 한 페이지에 표시할 아이템의 수, 현재 페이지, 이동주소, 검색시 사용할 주소 입력
 		Paging paging = new Paging(countProductAll,	pageBlock,
@@ -87,11 +96,13 @@ public class AdminProductController {
 				
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<ProductBean> adminPBeanList = new ArrayList<ProductBean>();
-		
-// 검색 조건에 따라(키워드가 널이 아니면?) allListKeyWordSearching으로 list설정
-// 검색 조건이면 paging을 넣지 않는다.
-		list = adminProductService.allListPaging(START, END);
-		
+
+		// 검색 조건에 따라(키워드가 null이 아니면) allListKeywordPaging으로 list설정
+		if(KEYWORD == null) {
+			list = adminProductService.allListPaging(START, END);
+		} else {
+			list = adminProductService.allListKeywordPaging(KEYWORD, KEYNUMBER, START, END);
+		}
 		for(Map<String, Object> mapObject : list) {
 			adminPBeanList.add(MapToBean.mapToProduct(mapObject));
 		}
