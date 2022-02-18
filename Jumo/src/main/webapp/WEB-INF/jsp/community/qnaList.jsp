@@ -12,12 +12,13 @@
 	<div style="text-align:center">
  		<h3>고객 센터</h3>
 	</div> 		
-  	    <br>
+  	     <br>
   	    <!-- 글쓰기 버튼 -->
-  	    <div style='width:20%;float: right;'>
-			<!-- <input type="button" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/> -->
-			<a href="/Jumo/qnaForm.al">글쓰기</a>
+  	    <div style='width:20%; float: right;'>
+			<input type="button" class="btn btn-primary py-0 px-2.5" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/>
+			<!-- <a href="/Jumo/qnaForm.al">글쓰기</a> -->
 		</div>
+		<br>
   		<!-- 고객센터 목록 부분 -->
   		
 		<div style="text-align:center" id="board" >
@@ -61,6 +62,7 @@
 	<!-- 공지사항 페이징 -->
 		${paging.pageHtml}
 <br>
-
+<br>
+<br>
 </body>
 </html>
