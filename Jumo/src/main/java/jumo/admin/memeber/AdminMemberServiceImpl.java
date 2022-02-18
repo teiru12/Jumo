@@ -54,8 +54,22 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		map.put("EMAIL", member.getEMAIL());
 		
 		adminMemberDAO.deleteMember(map);
-		
 	}
-	
-	
+
+	@Override
+	public List<Map<String, Object>> memberListPaging(int START, int END) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminMemberDAO.memberListPaging(map);
+	}
+
+	@Override
+	public int memberCount() throws Exception {
+		Map<String, Object> countMap = adminMemberDAO.memberCount();
+		
+		return Integer.parseInt(String.valueOf(countMap.get("COUNT")));
+	}
 }

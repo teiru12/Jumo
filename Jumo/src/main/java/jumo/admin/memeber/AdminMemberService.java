@@ -14,4 +14,8 @@ public interface AdminMemberService {
 	public void updateMemberAdmin(MemberBean member) throws Exception;
 	
 	public void deleteMember(MemberBean member) throws Exception;	
+	
+	public List<Map<String, Object>> memberListPaging(int START, int END) throws Exception;
+	
+	public int memberCount() throws Exception;
 }
