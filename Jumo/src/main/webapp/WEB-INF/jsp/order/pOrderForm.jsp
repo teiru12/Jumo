@@ -25,6 +25,16 @@ function orderCheck() {
 			NAME.focus();
 			return false;
 		}
+		if(MOBILE.value.trim() == ""){
+			alert("핸드폰 번호를 입력해주세요.");
+			MOBILE.focus();
+			return false;
+		}
+		if(POSTCODE.value.trim() == ""){
+			alert("우편번호를 입력해주세요.");
+			POSTCODE.focus();
+			return false;
+		}
 		if(ADDRESS1.value.trim() == ""){
 			alert("주소를 입력해주세요.");
 			ADDRESS1.focus();
@@ -35,20 +45,42 @@ function orderCheck() {
 			ADDRESS2.focus();
 			return false;
 		}
-		if(POSTCODE.value.trim() == ""){
-			alert("우편번호를 입력해주세요.");
-			POSTCODE.focus();
-			return false;
-		}
-		if(MOBILE.value.trim() == ""){
-			alert("핸드폰 번호를 입력해주세요.");
-			MOBILE.focus();
-			return false;
-		}
 		
 		pOrderForm.submit();
 	}
 }
+
+/* 체크박스 체크 여부에 따라 값 입력/지우기 */
+$(document).ready(function() {
+	$('#infoCheck').change(function() {
+		var NAME = document.getElementById("NAME");
+		var MOBILE = document.getElementById("MOBILE");
+		var POSTCODE = document.getElementById("POSTCODE");
+		var ADDRESS1 = document.getElementById("ADDRESS1");
+		var ADDRESS2 = document.getElementById("ADDRESS2");
+		
+		var ONAME = document.getElementById("ONAME");
+		var OMOBILE = document.getElementById("OMOBILE");
+		var OPOSTCODE = document.getElementById("OPOSTCODE");
+		var OADDRESS1 = document.getElementById("OADDRESS1");
+		var OADDRESS2 = document.getElementById("OADDRESS2");
+		
+		if($('#infoCheck').is(":checked")) {
+			NAME.value = ONAME.value;
+			MOBILE.value = OMOBILE.value;
+			POSTCODE.value = OPOSTCODE.value;
+			ADDRESS1.value = OADDRESS1.value;
+			ADDRESS2.value = OADDRESS2.value;
+		} else {
+			NAME.value = "";
+			MOBILE.value = "";
+			POSTCODE.value = "";
+			ADDRESS1.value = "";
+			ADDRESS2.value = "";
+		}		
+	});
+})
+
 </script>
 <!-- 우편번호 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -144,12 +176,13 @@ function orderCheck() {
 									<td class="price">${productBean.PSALE}%</td>
 									
 									<td class="price">
-				          				<c:set var="salePrice" value="${productBean.PPRICE * (100-productBean.PSALE) * 0.01}" />
+				          				<c:set var="salePrice" value="${productBean.PPRICE * (100-productBean.PSALE) / 100}" />
 				          				<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
 									</td>
 									
 									<td class="total">
-										<c:set var="totalPrice" value="${salePrice*PCOUNT}" />
+										<c:set var="total" value="${salePrice*PCOUNT}" />
+										<fmt:parseNumber var="totalPrice" integerOnly="true" value="${total}"/>
 										<b><fmt:formatNumber value="${totalPrice}" pattern="#.#" />원</b>
 									</td>
 								</tr><!-- END TR-->
@@ -172,6 +205,12 @@ function orderCheck() {
 <input type="hidden" name="OTOTAL" value="${totalPrice}">
 
 <input type="hidden" name="OMAIL" value="${memberBean.EMAIL}">
+
+<input type="hidden" id="ONAME" value="${memberBean.NAME}">
+<input type="hidden" id="OMOBILE" value="${memberBean.MOBILE}">
+<input type="hidden" id="OPOSTCODE" value="${memberBean.POSTCODE}">
+<input type="hidden" id="OADDRESS1" value="${memberBean.ADDRESS1}">
+<input type="hidden" id="OADDRESS2" value="${memberBean.ADDRESS2}">
 	
 	<section class="ftco-section">
 		<div class="container" style="text-align:center;">
@@ -202,6 +241,20 @@ function orderCheck() {
 					</div>
 						
 					<hr>
+					
+					<!-- 주문자 정보와 동일한지 체크-->
+					<div class="row align-items-end" style="padding-left:150px;">
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">
+							주문자 정보와 동일
+							<input type="checkbox" style="width:50px;"
+								id="infoCheck" name="infoCheck" checked>
+							</h6>
+						</div>
+						<div class="w-100"></div>
+					</div>
+						
+					<hr>
 						
 					<!-- 받는 사람 정보 -->
 					<h2 class="mb-4 billing-heading">배송 정보</h2>
@@ -210,15 +263,15 @@ function orderCheck() {
 						<!-- 받는 사람 이름 -->
 						<div class="form-group">
 							<h6 class="mb-4" style="text-align:left;">받으시는 분</h6>
-							<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;"
-								value="${memberBean.NAME}" readonly>
+							<input type="text" id="NAME" name="ONAME"  class="form-control" style="width:400px;"
+								value="${memberBean.NAME}">
 						</div>
 						<div class="w-100"></div>
 	
 						<!-- 핸드폰 번호 -->
 						<div class="form-group">
 							<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
-							<input type="text" id="MOBILE" name="MOBILE" class="form-control"
+							<input type="text" id="MOBILE" name="OMOBILE" class="form-control"
 								onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
 								value="${memberBean.MOBILE}"> 
 							<div class="w-100"></div>
@@ -231,8 +284,9 @@ function orderCheck() {
 						<h6 class="mb-4" style="text-align:left;">우편번호</h6>
 						<div class="w-100"></div>
 						<div class="form-group d-flex">
-							<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;"
-								value="${memberBean.POSTCODE}">
+							<input type="text" class="form-control" name="OPOSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;"
+								value="${memberBean.POSTCODE}" maxlength="7"
+								onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 							<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 						</div>
 						<div class="w-100"></div>

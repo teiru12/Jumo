@@ -68,11 +68,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Map<String, Object> selectOrderOId(OrderBean order) throws Exception {
+	public Map<String, Object> selectOrderOID(OrderBean order) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OID", order.getOID());
-		return orderDAO.selectOrderOId(map);
-
+		
+		return orderDAO.selectOrderOID(map);
 	}
 
 	@Override
@@ -81,6 +81,12 @@ public class OrderServiceImpl implements OrderService {
 		map.put("OBNUMBER", order.getOBNUMBER());
 		return orderDAO.selectOrderOBNumber(map);
 	}
-	
 
+	@Override
+	public int selectOIDMax() throws Exception {
+		Map<String, Object> maxMap = new HashMap<String, Object>();
+		maxMap = orderDAO.selectOIDMax();
+				
+		return Integer.parseInt(String.valueOf(maxMap.get("MAX")));
+	}
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.common.basket.BasketService;
 import jumo.common.member.MyInfoService;
@@ -23,7 +22,6 @@ import jumo.model.ProductBean;
 import jumo.model.BasketBean;
 
 import jumo.util.MapToBean;
-import jumo.util.validator.OrderValidator;
 
 @Controller
 public class OrderController {
@@ -85,35 +83,18 @@ public class OrderController {
 	
 	
 	@RequestMapping("/pOrder.al")
-	public String pOrder (MemberBean member, BindingResult result,
-			@RequestParam("oPid") int oPid,
-			@RequestParam("oProduct") String oProduct,
-			@RequestParam("oCount") int oCount,
-			@RequestParam("oPrice") int oPrice,
-			@RequestParam("oSale") int oSale,
-			@RequestParam("oTotal") int oTotal,
-			Model model) throws Exception {
+	public String pOrder(OrderBean order, Model model) throws Exception {
 		
-		OrderBean orderBean = new OrderBean();
+		orderService.insertOrderDirect(order);
 		
-		orderBean.setOMAIL(member.getEMAIL());
-		orderBean.setOPID(oPid);
-		orderBean.setOPRODUCT(oProduct);
-		orderBean.setOCOUNT(oCount);
-		orderBean.setOPRICE(oPrice);
-		orderBean.setOSALE(oSale);
-		orderBean.setOTOTAL(oTotal);
-		orderBean.setOADDRESS1(member.getADDRESS1());
-		orderBean.setOADDRESS2(member.getADDRESS2());
-
-		new OrderValidator().validate(orderBean, result);
+		/* 입력한 주문 번호를 구한다 */
+		int OID = orderService.selectOIDMax();
 		
-		if(result.hasErrors()) {
-			// basketOrderForm의 MemberBean을 파라미터로 받으면 오류발생 가능성 있음
-			return "/basketOrderForm.al";
-		}
+		model.addAttribute("msg", "주문을 완료했습니다.");
+		model.addAttribute("url", "");
 		
-		orderService.insertOrderDirect(orderBean);
+		String urlParam = "/orderResult.al?OID=" + OID;
+		model.addAttribute("url", urlParam);
 		
 		return "/order/pOrder";
 	}
@@ -146,28 +127,47 @@ public class OrderController {
 	
 	
 	@RequestMapping("/orderResult.al")
-	public String orderResult (OrderBean order, Model model) throws Exception {
+	public String orderResult (HttpServletRequest request, 
+			OrderBean order, Model model) throws Exception {
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		OrderBean orderBean = new OrderBean();
-		
-		
-		map = orderService.selectOrderOId(order);
-		orderBean  = MapToBean.mapToOrder(map);
-		
-		model.addAttribute("orderBean", orderBean);
-		
-		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();
 		
-		list = orderService.selectOrderOBNumber(order);
-		
-		for(Map<String, Object> mapToOrder : list) {
-			orderBeanList.add(MapToBean.mapToOrder(mapToOrder));
-		}
-		
-		model.addAttribute("orderBeanList", orderBeanList);
-	
+		if(order.getOBNUMBER() == 0) {
+			// 만약 OBNUMBER가 null일 경우 직접 주문의 결과
+			// 파라미터로 넘겨받은 OID를 이용해서 주문정보를 구한다.
+			map = orderService.selectOrderOID(order);
+			orderBean  = MapToBean.mapToOrder(map);
+			
+			/* 주문정보의 OMAIL을 이용해서 주문자 정보를 구함*/
+			MemberBean member = new MemberBean();
+			member.setEMAIL(orderBean.getOMAIL());
+			Map<String, Object> mMap = new HashMap<String, Object>();
+			mMap = myInfoService.selectMemberId(member);
+			MemberBean memberBean = MapToBean.mapToMember(mMap); 			
+			
+			model.addAttribute("orderBean", orderBean);
+			model.addAttribute("memberBean", memberBean);			
+		} else {
+			// OBNUMBER가 null이 아닐 경우 장바구니 주문의 결과
+			// 파라미터로 넘겨받은 OBNUMBER를 이용해 주문정보의 리스트를 구한다.
+			list = orderService.selectOrderOBNumber(order);
+			for(Map<String, Object> mapToOrder : list) {
+				orderBeanList.add(MapToBean.mapToOrder(mapToOrder));
+			}
+			
+			/* orderBeanList의 첫번째 주문정보의 OMAIL을 이용해서 주문자 정보를 구함 */
+			MemberBean member = new MemberBean();
+			member.setEMAIL(orderBeanList.get(0).getOMAIL());
+			Map<String, Object> mMap = new HashMap<String, Object>();
+			mMap = myInfoService.selectMemberId(member);
+			MemberBean memberBean = MapToBean.mapToMember(mMap);
+			
+			model.addAttribute("orderBeanList", orderBeanList);
+			model.addAttribute("memberBean", memberBean);			
+		}		
 		return "orderResult";
 	}
 }

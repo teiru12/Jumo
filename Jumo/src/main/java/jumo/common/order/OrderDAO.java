@@ -30,8 +30,8 @@ public class OrderDAO {
 	}
 	
 	//상품 구매 결과(selectOrderOId)
-	public Map<String, Object> selectOrderOId(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectOrderOId", map);
+	public Map<String, Object> selectOrderOID(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("order.selectOrderOID", map);
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)
@@ -39,4 +39,8 @@ public class OrderDAO {
 		return sqlSessionTemplate.selectList("order.selectOrderOBNumber", map);
 	}
 	
+	//가장 마지막에 주문한 주문의 OID값
+	public Map<String, Object> selectOIDMax() throws Exception {
+		return sqlSessionTemplate.selectOne("order.selectOIDMax");
+	}	
 }

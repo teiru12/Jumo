@@ -48,17 +48,20 @@
 			OID_SEQ.NEXTVAL,
 			NULL,
 			#{OMAIL},
+			#{ONAME},
 			SYSDATE,
 			#{OPID},
 			#{OPRODUCT},
 			#{OCOUNT},
 			#{OPRICE},
 			#{OSALE},
-			#{OTOTAL}, 
+			#{OTOTAL},
+			#{OMOBILE},
+			#{OPOSTCODE},
 			#{OADDRESS1},
 			#{OADDRESS2},
 			'배송전',
-			 '100254889564'
+			'100254889564'
 		)
 	]]>
 	</insert>
@@ -133,5 +136,15 @@
 			OID=#{OID}
 	]]>
 	</update>
+	
+	<!-- selectOIDMax (가장 마지막에 주문한 주문의 OID값) -->
+	<select id="selectOIDMax" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			MAX(OID) MAX
+		FROM
+			ORDERCOMMAND
+	]]>
+	</select>
 
 </mapper>

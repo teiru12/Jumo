@@ -107,6 +107,7 @@ public class MapToBean {
 		}
 		
 		orderBean.setOMAIL((String) map.get("OMAIL"));
+		orderBean.setONAME((String) map.get("ONAME"));
 		orderBean.setODATE((Date) map.get("ODATE"));
 		if(map.get("OPID") != null) {
 			orderBean.setOPID(Integer.parseInt(String.valueOf(map.get("OPID"))));
@@ -125,6 +126,9 @@ public class MapToBean {
 		if(map.get("OPRICE") != null) {
 			orderBean.setOPRICE(Integer.parseInt(String.valueOf(map.get("OPRICE"))));
 		}
+		
+		orderBean.setOMOBILE((String) map.get("OMOBILE"));		
+		orderBean.setOPOSTCODE((String) map.get("OPOSTCODE"));
 		
 		orderBean.setOADDRESS1((String) map.get("OADDRESS1"));
 		orderBean.setOADDRESS2((String) map.get("OADDRESS2"));
