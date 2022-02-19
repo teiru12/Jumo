@@ -18,4 +18,8 @@ public interface AdminMemberService {
 	public List<Map<String, Object>> memberListPaging(int START, int END) throws Exception;
 	
 	public int memberCount() throws Exception;
+	
+	public List<Map<String, Object>> memberListSearchPaging(String CONDITION, String KEYWORD, int START, int END) throws Exception;
+	
+	public int memberSearchCount(String CONDITION, String KEYWORD) throws Exception;
 }

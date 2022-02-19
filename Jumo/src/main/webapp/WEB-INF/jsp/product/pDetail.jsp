@@ -33,7 +33,7 @@ function putBasket() {
 function pOrderForm() {
 	var pId = document.getElementById('PID').value;
 	var count = document.getElementById('BCOUNT').value;		
-	location.href="pOrderForm.al?OPID=" + pId + "&OCOUNT=" + count;	
+	location.href="pOrderForm.al?PID=" + pId + "&PCOUNT=" + count;	
 }
 
 window.onload = function() {

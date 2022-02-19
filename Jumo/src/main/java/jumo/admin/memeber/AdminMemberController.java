@@ -43,7 +43,31 @@ public class AdminMemberController {
 			END = pageSize*currentPage;
 		}
 		
-		countMemberAll = adminMemberService.memberCount();
+		/* 검색 조건일 경우 사용 변수 */
+		String condition = null; // 검색 종류 : 이메일('EMAIL'), 이름('NAME'), 회원등급('RANK')
+		String keyword = null; // 검색어
+		
+		condition = request.getParameter("condition");
+		keyword = request.getParameter("keyword");
+		if(keyword!=null && keyword.equals("")) {
+			keyword = null;
+		}
+		if(condition!=null && condition.equals("RANK") && keyword!=null && keyword.equals("브론즈")) {
+			keyword = "B";
+		}
+		if(condition!=null && condition.equals("RANK") && keyword!=null && keyword.equals("실버")) {
+			keyword = "S";
+		}
+		if(condition!=null && condition.equals("RANK") && keyword!=null && keyword.equals("골드")) {
+			keyword = "G";
+		}
+		
+		/* 페이징을 위한 값 계산 */
+		if(keyword == null) { // 검색 조건이 아닐 때
+			countMemberAll = adminMemberService.memberCount();
+		} else { // 검색어를 입력했을 때
+			countMemberAll = adminMemberService.memberSearchCount(condition, keyword);
+		}
 		
 		// 페이징할 아이템의 총 수, 페이지의 수 ex> 1~5 6~10, 한 페이지에 표시할 아이템의 수, 현재 페이지, 이동주소, 검색시 사용할 주소 입력
 		Paging paging = new Paging(countMemberAll,	pageBlock,
@@ -52,7 +76,12 @@ public class AdminMemberController {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<MemberBean> memberBeanList = new ArrayList<MemberBean>();
 		
-		list = adminMemberService.memberListPaging(START, END); 
+		/* 페이징 리스트를 가져옴 */
+		if(keyword == null) {
+			list = adminMemberService.memberListPaging(START, END);
+		} else {
+			list = adminMemberService.memberListSearchPaging(condition, keyword, START, END);
+		}
 		
 		for(Map<String, Object> mapObject : list) {
 			memberBeanList.add(MapToBean.mapToMember(mapObject));
@@ -63,6 +92,9 @@ public class AdminMemberController {
 		/* 페이징을 위한 값 삽입 */
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("paging", paging);
+		
+		/* SELECT 태그에서 검색 조건 유지를 위한 값 */
+		model.addAttribute("condition", condition);
 		
 		return "memberList";
 	}

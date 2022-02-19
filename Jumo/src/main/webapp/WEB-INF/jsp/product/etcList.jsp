@@ -56,7 +56,7 @@
 	    							<a href="putBasket.al?BID=${product.PID}&BCOUNT=1" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-cart"></i></span>
 	    							</a>
-	    							<a href="pOrderForm.al?PID=${product.PID}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+	    							<a href="pOrderForm.al?PID=${product.PID}&PCOUNT=1" class="buy-now d-flex justify-content-center align-items-center mx-1">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
     							</div>

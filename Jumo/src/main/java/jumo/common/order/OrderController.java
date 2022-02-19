@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.common.basket.BasketService;
 import jumo.common.member.MyInfoService;
+import jumo.common.product.ProductService;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
+import jumo.model.ProductBean;
 import jumo.model.BasketBean;
 
 import jumo.util.MapToBean;
@@ -28,6 +31,9 @@ public class OrderController {
 	@Resource(name="orderService")
 	private OrderService orderService;
 	
+	@Resource(name="productService")
+	private ProductService productService;
+	
 	@Resource(name="myInfoService")
 	private MyInfoService myInfoService;
 	
@@ -36,14 +42,27 @@ public class OrderController {
 	
 	
 	@RequestMapping("/pOrderForm.al")
-	public String pOrderForm (MemberBean member, Model model) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		MemberBean memberBean = new MemberBean();
-	
-		map = myInfoService.selectMemberId(member);
+	public String pOrderForm (ProductBean product, HttpServletRequest request, Model model) throws Exception {
+		/* PID를 넘겨받아 상품 정보를 읽어옴 */
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		ProductBean productBean = new ProductBean();
+		pMap = productService.selectProductId(product);
+		productBean = MapToBean.mapToProduct(pMap);
 		
-		memberBean = MapToBean.mapToMember(map);
+		/* 로그인한 사용자의 정보를 세션을 이용해서 읽어옴 */
+		String loginEmail = (String) request.getSession().getAttribute("EMAIL");
+		MemberBean member = new MemberBean();
+		member.setEMAIL(loginEmail);
+		Map<String, Object> mMap = new HashMap<String, Object>();
+		mMap = myInfoService.selectMemberId(member);
+		MemberBean memberBean = MapToBean.mapToMember(mMap); 
+		
+		/* 주문 수량 정보를 읽어옴 */
+		String PCOUNT = request.getParameter("PCOUNT");
+		
+		model.addAttribute("productBean", productBean);
 		model.addAttribute("memberBean", memberBean);
+		model.addAttribute("PCOUNT", PCOUNT);
 		
 		return "pOrderForm";
 	}

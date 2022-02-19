@@ -103,7 +103,7 @@
 	</select>
 	
    	<!-- memberListPaging(회원리스트 페이징) -->
-   	<select id="memberListPaging" resultType="hashmap">
+   	<select id="memberListPaging" parameterType="hashmap" resultType="hashmap">
 		SELECT *
 		FROM (
 			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
@@ -127,4 +127,57 @@
    		FROM 
    			MEMBER
 	</select>		
+	
+	<!-- memberListSearchPaging(회원리스트 검색페이징) -->
+   	<select id="memberListSearchPaging" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
+			FROM (
+				SELECT
+					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
+				FROM
+					MEMBER
+		   		<where>
+		   			<if test="KEYWORD!=NULL">
+		   				<if test="CONDITION.equals('EMAIL')">
+		   					EMAIL LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+						<if test="CONDITION.equals('NAME')">
+		   					NAME LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+						<if test="CONDITION.equals('RANK')">
+		   					RANK LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+		   			</if>
+		   		</where>					
+				ORDER BY MDATE ASC		
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>	
+	
+	<!-- memberSearchCount(회원 수) -->
+   	<select id="memberSearchCount" parameterType="hashmap" resultType="hashmap">
+   		SELECT
+   			COUNT(*) COUNT
+   		FROM 
+   			MEMBER
+   		<where>
+   			<if test="KEYWORD!=NULL">
+   				<if test="CONDITION.equals('EMAIL')">
+   					EMAIL LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+				<if test="CONDITION.equals('NAME')">
+   					NAME LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+				<if test="CONDITION.equals('RANK')">
+   					RANK LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+   			</if>
+   		</where>
+	</select>		
+	
 </mapper>
