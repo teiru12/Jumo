@@ -234,7 +234,8 @@
 					<h6 class="mb-4" style="text-align:left;">우편번호</h6>
 					<div class="w-100"></div>
 					<div class="form-group d-flex">
-						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;">
+						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호"
+							maxlength="7" style="width:270px;">
 						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<div class="w-100"></div>
