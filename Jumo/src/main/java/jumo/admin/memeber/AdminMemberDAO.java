@@ -44,4 +44,13 @@ public class AdminMemberDAO {
 		return sqlSessionTemplate.selectOne("member.memberCount");
 	}
 	
+	// 회원 검색 페이징
+	public List<Map<String, Object>> memberListSearchPaging(Map<String, Object> map) throws Exception{
+		return sqlSessionTemplate.selectList("member.memberListSearchPaging", map);
+	}
+	
+	// 검색된 회원의 수
+	public Map<String, Object> memberSearchCount(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("member.memberSearchCount", map);
+	}
 }

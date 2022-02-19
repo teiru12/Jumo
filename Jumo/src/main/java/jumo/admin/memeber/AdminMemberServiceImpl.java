@@ -72,4 +72,29 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		
 		return Integer.parseInt(String.valueOf(countMap.get("COUNT")));
 	}
+
+	@Override
+	public List<Map<String, Object>> memberListSearchPaging(String CONDITION, String KEYWORD, int START, int END)
+			throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("CONDITION", CONDITION);
+		map.put("KEYWORD", KEYWORD);
+		map.put("START", START);
+		map.put("END", END);
+		
+		return adminMemberDAO.memberListSearchPaging(map);
+	}
+
+	@Override
+	public int memberSearchCount(String CONDITION, String KEYWORD) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("CONDITION", CONDITION);
+		map.put("KEYWORD", KEYWORD);		
+		
+		Map<String, Object> countMap = adminMemberDAO.memberSearchCount(map);
+		
+		return Integer.parseInt(String.valueOf(countMap.get("COUNT")));
+	}
 }

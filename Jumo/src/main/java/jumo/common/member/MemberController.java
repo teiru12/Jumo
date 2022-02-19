@@ -111,6 +111,13 @@ public class MemberController {
 			if(member.getPASSWORD().equals(memberBean.getPASSWORD())) {
 				// 로그인 성공
 				
+				// 정지유무 체크
+				if(memberBean.getBLOCK().equals("Y")) {
+					model.addAttribute("msg", "정지된 회원입니다.");
+					model.addAttribute("url", "/loginForm.al");
+					return "/member/login";
+				}
+				
 				// 세션 등록
 				session.setAttribute("EMAIL", memberBean.getEMAIL());
 				

@@ -7,6 +7,7 @@ public class OrderBean {
 	private int OID;
 	private int OBNUMBER;
 	private String OMAIL;
+	private String ONAME;
 	private Date ODATE;
 	private int OPID;
 	private String OPRODUCT;
@@ -14,26 +15,13 @@ public class OrderBean {
 	private int OTOTAL;
 	private int OCOUNT;
 	private int OPRICE;
+	private String OMOBILE;
+	private String OPOSTCODE;
 	private String OADDRESS1;
 	private String OADDRESS2;
 	private String OSTATUS;
 	private String OWAYBILL;
 	
-	
-	
-	
-	public int getOCOUNT() {
-		return OCOUNT;
-	}
-	public void setOCOUNT(int oCOUNT) {
-		OCOUNT = oCOUNT;
-	}
-	public int getOPRICE() {
-		return OPRICE;
-	}
-	public void setOPRICE(int oPRICE) {
-		OPRICE = oPRICE;
-	}
 	public int getOID() {
 		return OID;
 	}
@@ -51,6 +39,12 @@ public class OrderBean {
 	}
 	public void setOMAIL(String oMAIL) {
 		OMAIL = oMAIL;
+	}
+	public String getONAME() {
+		return ONAME;
+	}
+	public void setONAME(String oNAME) {
+		ONAME = oNAME;
 	}
 	public Date getODATE() {
 		return ODATE;
@@ -82,6 +76,30 @@ public class OrderBean {
 	public void setOTOTAL(int oTOTAL) {
 		OTOTAL = oTOTAL;
 	}
+	public int getOCOUNT() {
+		return OCOUNT;
+	}
+	public void setOCOUNT(int oCOUNT) {
+		OCOUNT = oCOUNT;
+	}
+	public int getOPRICE() {
+		return OPRICE;
+	}
+	public void setOPRICE(int oPRICE) {
+		OPRICE = oPRICE;
+	}
+	public String getOMOBILE() {
+		return OMOBILE;
+	}
+	public void setOMOBILE(String oMOBILE) {
+		OMOBILE = oMOBILE;
+	}
+	public String getOPOSTCODE() {
+		return OPOSTCODE;
+	}
+	public void setOPOSTCODE(String oPOSTCODE) {
+		OPOSTCODE = oPOSTCODE;
+	}
 	public String getOADDRESS1() {
 		return OADDRESS1;
 	}
@@ -105,7 +123,5 @@ public class OrderBean {
 	}
 	public void setOWAYBILL(String oWAYBILL) {
 		OWAYBILL = oWAYBILL;
-	}
-	
-	
+	}	
 }

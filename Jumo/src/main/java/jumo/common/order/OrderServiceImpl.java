@@ -25,12 +25,15 @@ public class OrderServiceImpl implements OrderService {
 	public void insertOrderDirect(OrderBean order) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OMAIL", order.getOMAIL());
+		map.put("ONAME", order.getONAME());
 		map.put("OPID", order.getOPID());
 		map.put("OPRODUCT", order.getOPRODUCT());
 		map.put("OCOUNT", order.getOCOUNT());
 		map.put("OPRICE", order.getOPRICE());
 		map.put("OSALE", order.getOSALE());
 		map.put("OTOTAL", order.getOTOTAL());
+		map.put("OMOBILE", order.getOMOBILE());
+		map.put("OPOSTCODE", order.getOPOSTCODE());
 		map.put("OADDRESS1", order.getOADDRESS1());
 		map.put("OADDRESS2", order.getOADDRESS2());
 		
@@ -49,12 +52,15 @@ public class OrderServiceImpl implements OrderService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("OBNUMBER", order.getOBNUMBER());
 		map.put("OMAIL", order.getOMAIL());
+		map.put("ONAME", order.getONAME());
 		map.put("OPID", order.getOPID());
 		map.put("OPRODUCT", order.getOPRODUCT());
 		map.put("OCOUNT", order.getOCOUNT());
 		map.put("OPRICE", order.getOPRICE());
 		map.put("OSALE", order.getOSALE());
 		map.put("OTOTAL", order.getOTOTAL());
+		map.put("OMOBILE", order.getOMOBILE());
+		map.put("OPOSTCODE", order.getOPOSTCODE());
 		map.put("OADDRESS1", order.getOADDRESS1());
 		map.put("OADDRESS2", order.getOADDRESS2());
 		

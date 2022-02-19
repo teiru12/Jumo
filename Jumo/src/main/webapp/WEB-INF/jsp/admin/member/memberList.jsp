@@ -20,12 +20,12 @@
 				<form action="memberList.al">
 				<div class="form-group d-flex">
 					<select name="condition" id="condition">
-						<option value="titlename" <c:if test="${memberBean eq 'EMAIL' }">selected</c:if>>이 메 일</option>
-						<option value="title" <c:if test="${memberBean eq 'NAME' }">selected</c:if>>이 &emsp; 름</option>
-						<option value="writer" <c:if test="${memberBean eq 'RANK' }">selected</c:if>>회원등급</option>
+						<option value="EMAIL" <c:if test="${condition=='EMAIL'}">selected</c:if>>이 메 일</option>
+						<option value="NAME" <c:if test="${condition=='NAME'}">selected</c:if>>이 &emsp; 름</option>
+						<option value="RANK" <c:if test="${condition=='RANK'}">selected</c:if>>회원등급</option>
 					</select>
 					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;"
-						placeholder="검색어 ..." value="${keyword }"/>
+						placeholder="검색어 ..." value="${keyword}"/>
 					<button type="submit" class="btn btn-primary px-4">검색</button>
 				</div>
 				</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
