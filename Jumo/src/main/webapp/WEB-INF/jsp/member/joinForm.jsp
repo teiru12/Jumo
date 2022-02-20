@@ -95,12 +95,10 @@
 		document.joinForm.submit();
 	}
 </script>
-
 <script>
-    $(document).ready(function() {
-    	   var EMAIL=$('#email').val();
-    	   
-    	});
+$(document).ready(function() {
+	var EMAIL=$('#email').val();
+});
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -152,8 +150,12 @@
         }).open();
     }
 </script>
-
-
+<script>
+/* 첫 화면 로딩 시 포커스 */
+window.onload = function() {
+	document.getElementById("EMAIL").focus();
+}
+</script>
 </head>
 <body class="goto-here">
 <section class="ftco-section">
@@ -213,7 +215,8 @@
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
 						<input type="text" id="PHONE" name="PHONE" size="24"  class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;">
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;"
+							maxlength="11">
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 					</div>
@@ -223,7 +226,8 @@
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 						<input type="text" id="MOBILE" name="MOBILE" class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"> 
+							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
+							maxlength="11"> 
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 					</div>
@@ -250,7 +254,7 @@
 					<div class="w-100"></div>
 					<br/><br/><br/><br/>
 					</div>
-			</form>
+
 					
 				<!-- 버튼 -->
 					<div class="form-group" align="center">
@@ -262,7 +266,8 @@
 				          &emsp;&emsp;
 				          <button type="button" class="btn btn-black py-3 px-5" onclick="location.href='loginForm.al'">취소</button>
 				     
-			</div>
+					</div>
+			</form>
 		</div>
 	</div>
 </div>

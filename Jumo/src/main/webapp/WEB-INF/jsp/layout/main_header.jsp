@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <html>
+<script>
+function logoutCheck() {
+	if(confirm("로그아웃 하시겠습니까?") == true) {
+		location.href = "/Jumo/logout.al";	
+	} 
+}
+</script>
 <body>
 	<div class="py-1" style="background-color:#fff; height:150px;">
 		<div class="container" style="text-align:right;">
@@ -24,7 +31,7 @@
 					<span class="text-dark px-2">|</span> 
 				<a class="text-dark" href="/Jumo/basketList.al" style="font-size:small;">장바구니</a>
 					<span class="text-dark px-2">|</span> 
-				<a class="text-dark" href="/Jumo/logout.al" style="font-size:small;">로그아웃</a> 
+				<a class="text-dark" href="javascript:logoutCheck()" style="font-size:small;">로그아웃</a> 
 			</c:if>
 			
 		</div>

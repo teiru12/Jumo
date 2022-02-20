@@ -86,7 +86,14 @@ public class OrderServiceImpl implements OrderService {
 	public int selectOIDMax() throws Exception {
 		Map<String, Object> maxMap = new HashMap<String, Object>();
 		maxMap = orderDAO.selectOIDMax();
+		
+		int maxOID;
+		if(maxMap == null) {
+			maxOID = 0;
+		} else {
+			maxOID = Integer.parseInt(String.valueOf(maxMap.get("MAX")));
+		}
 				
-		return Integer.parseInt(String.valueOf(maxMap.get("MAX")));
+		return maxOID;
 	}
 }

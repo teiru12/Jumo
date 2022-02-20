@@ -43,17 +43,24 @@ public class MemberController {
 	public String conformId(MemberBean member, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		/* 공백을 입력 받았을 경우 */
+		if(member.getEMAIL().trim().equals("")) {
+			model.addAttribute("msg", "아이디를 입력해주세요");
+			model.addAttribute("url", "/joinForm.al");		
+			return "/member/confirmId";
+		}
+		
 		map = joinService.selectMemberId(member);
 		
-		   if(map != null) {
-		         // 중복된 아이디 있음
-		         model.addAttribute("msg", "이 아이디는 사용하실 수 없습니다.");
-		         model.addAttribute("url", "/joinForm.al");
-		   } else {
-			   //중복된 아이디 없음
-			   model.addAttribute("msg", "사용할 수 있는 아이디입니다.");
-			   model.addAttribute("url", "/joinForm.al");
-		   }
+		if(map != null) {
+			// 중복된 아이디 있음
+			model.addAttribute("msg", "이 아이디는 사용하실 수 없습니다.");
+			model.addAttribute("url", "/joinForm.al");
+		} else {
+			//중복된 아이디 없음
+			model.addAttribute("msg", "사용할 수 있는 아이디입니다.");
+			model.addAttribute("url", "/joinForm.al");
+		}
 		
 		return "/member/confirmId";
 	}
@@ -172,7 +179,7 @@ public class MemberController {
 				  model.addAttribute("Find","invalidName");
 			  }
 		  }
-		return "/member/findIdResult";
+		return "findIdResult";
 	}
 	
 	@RequestMapping(value = "/findPw.al")
@@ -187,29 +194,31 @@ public class MemberController {
 		
 		map = loginService.selectMemberJumin(member);
 		
+		// 주민번호 일치 여부를 검사
 		if(map == null) {
+			// 주민번호가 일치하지 않으므로 회원이 검색되지 않음
 			model.addAttribute("Find","notFound");
-		  }
-		  else {
-			  memberBean = MapToBean.mapToMember(map);
-	
-			  if(member.getEMAIL().equals(memberBean.getEMAIL())) {
-				  model.addAttribute("memberBean", memberBean);
-			  }
-			  else {
-				  model.addAttribute("invalidEMAIL","invalidEMAIL");
-			  }
-			  if(member.getNAME().equals(memberBean.getEMAIL())) {
-				  model.addAttribute("memberBean", memberBean);
-			  }
-			  else {
-				  model.addAttribute("invalidNAME","invalidNAME");
-			  }
-		  }
-		
+		} else {
+			memberBean = MapToBean.mapToMember(map);
+			// 아이디(EMAIL) 일치 여부를 검사
+			if(member.getEMAIL().equals(memberBean.getEMAIL())) {
+				// 이름 일치 여부를 검사
+				if(member.getNAME().equals(memberBean.getNAME())) {
+					// 일치한 회원을 찾음
+					model.addAttribute("memberBean", memberBean);
+				} else {
+					// 이름이 일치하지 않음
+					model.addAttribute("invalidNAME","invalidNAME");					
+				}				
+			} else {
+				// 이메일이 일치하지 않음
+				model.addAttribute("invalidEMAIL","invalidEMAIL");
+			}
+		}
+			
 		model.addAttribute("memberBean", memberBean);
 		
-		return "/member/findPwResult";
+		return "findPwResult";
 	}
 		
 	@RequestMapping(value = "/myPage.al")
@@ -233,7 +242,7 @@ public class MemberController {
 		memberBean = MapToBean.mapToMember(map);
 		
 		model.addAttribute("memberBean", memberBean);
-		return "member/myInfoModifyForm";
+		return "myInfoModifyForm";
 	}
 	
 	@RequestMapping(value = "/myInfoModify.al")
@@ -248,7 +257,7 @@ public class MemberController {
 	
 		myInfoService.updateMember(member);
 		model.addAttribute("msg", "회원정보가 수정되었습니다.");
-		model.addAttribute("url", "/myPage.al");
+		model.addAttribute("url", "/myInfoModifyForm.al");
 		return "/member/myInfoModify";
 	}
 	

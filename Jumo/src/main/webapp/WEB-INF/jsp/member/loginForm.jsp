@@ -76,7 +76,7 @@ window.onload = function() {
 	<br>
 	<span style="font-size:xx-large; color:#82ae46;"><b>로 그 인</b></span>
 </div>
-
+<hr>
 <div style="text-align:center">
 	<form id="loginForm" action="/Jumo/login.al" method="post">
 		<label for="EMAIL">이메일 주소</label>

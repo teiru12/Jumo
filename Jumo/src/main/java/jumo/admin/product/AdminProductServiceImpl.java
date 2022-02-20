@@ -79,7 +79,14 @@ public class AdminProductServiceImpl implements AdminProductService {
 		
 		map = adminProductDAO.selectPIDMax();
 		
-		return Integer.parseInt(String.valueOf(map.get("PIDMAX")));		
+		int maxPID;
+		if(map == null) {
+			maxPID = 0;
+		} else {
+			maxPID = Integer.parseInt(String.valueOf(map.get("PIDMAX")));	
+		}
+		
+		return maxPID;
 	}	
 
 	@Override

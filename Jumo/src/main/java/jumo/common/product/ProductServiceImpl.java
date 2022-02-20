@@ -146,7 +146,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		map = productDAO.selectBasketBnumberMax();
 		
-		int maxBnumber = Integer.parseInt(String.valueOf(map.get("MAX")));
+		int maxBnumber;
+		if(map!=null) {
+			maxBnumber = Integer.parseInt(String.valueOf(map.get("MAX")));
+		} else {
+			maxBnumber = 0;
+		}
 		
 		return maxBnumber;
 	}		
