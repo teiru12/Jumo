@@ -1,18 +1,18 @@
 package jumo.admin.community;
 
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import jumo.model.CommunityBean;
 import jumo.model.CommentBean;
+import jumo.model.CommunityBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
 import jumo.util.validator.CommentValidator;
@@ -64,9 +64,10 @@ public class AdminQnaController {
 	@RequestMapping(value="/adminQnaDelete.al")
 	public String adminQnaDelete(CommunityBean community,
 			Model model) throws Exception{
+
 		
 		model.addAttribute("msg", "게시글 삭제가 완료되었습니다.");
-		model.addAttribute("url", "/adminNoticeList.al");
+		model.addAttribute("url", "/adminQnaList.al?CIDX="+community.getCIDX());
 		adminComService.deleteCommunityId(community);
 		
 		return "/admin/community/adminQnaDelete";
@@ -86,7 +87,8 @@ public class AdminQnaController {
 		for(Map<String, Object> mapObject : list) {
 			comList.add( MapToBean.mapToComment(mapObject) );
 		}
-		
+//		model.addAttribute("msg", "게시글 삭제가 완료되었습니다.");
+//		model.addAttribute("url", "/adminQnaList.al");
 		model.addAttribute("qnaBean", qnaBean);
 		model.addAttribute("comList", comList);		
 		
@@ -105,29 +107,24 @@ public class AdminQnaController {
 		
 		
 		model.addAttribute("msg", "댓글 작성이 완료되었습니다.");
-		model.addAttribute("url", "/adminQnaDetail.al");
+		model.addAttribute("url", "/adminQnaDetail.al?CIDX="+comment.getARTICLEIDX());
 		adminComService.insertComment(comment);		
 		
 		return "/admin/community/adminQnaComWrite";
 	}
 
 	@RequestMapping(value="/adminQnaComModify.al")
-	public String adminQnaComModify(CommentBean comment, BindingResult result, 
-			Model model) throws Exception {
+	public String adminQnaComModify(CommentBean comment, Model model) throws Exception {
 		
-		// Validator로 유효성 검사
-		new CommentValidator().validate(comment, result);
+		System.out.println(comment.getARTICLEIDX());
+		System.out.println(comment.getCOMMENTIDX());
+		System.out.println(comment.getCOMMENTT());
+		System.out.println(comment.getCOMMENTWRITER());
+		System.out.println(comment.getCOMMENTDATE());
 		
-		if(result.hasErrors()) {
-			return "adminQnaList";
-			// adminQnaDetail 페이지로 넘어가기 위해서는 CommunityBean, CommentBean 객체를 넘겨줘야하는데
-			// 바로 리턴하면 오류발생
-			// 자바 스크립트로 오류체크
-			// return "adminQnaDetail";
-		}	
-		
+
 		model.addAttribute("msg", "댓글 수정이 완료되었습니다.");
-		model.addAttribute("url", "/adminNoticeList.al");
+		model.addAttribute("url", "/adminQnaDetail.al?CIDX="+comment.getARTICLEIDX());
 		adminComService.updateComment(comment);				
 		
 		return "/admin/community/adminQnaComModify";
@@ -136,9 +133,12 @@ public class AdminQnaController {
 	@RequestMapping(value="/adminQnaComDelete.al")
 	public String adminQnaComDelete(CommentBean comment, Model model) 
 			throws Exception {
+
+		System.out.println(comment.getARTICLEIDX());
+		System.out.println(comment.getCOMMENTIDX());
 		
 		model.addAttribute("msg", "댓글 삭제가 완료되었습니다.");
-		model.addAttribute("url", "/adminNoticeList.al");
+		model.addAttribute("url", "/adminQnaDetail.al?CIDX="+comment.getARTICLEIDX());
 		adminComService.deleteComment(comment);				
 		
 		return "/admin/community/adminQnaComDelete";
