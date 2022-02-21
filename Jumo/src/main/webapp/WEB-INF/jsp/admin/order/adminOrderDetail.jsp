@@ -31,7 +31,7 @@
 					<!-- 주문일 -->
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">주문일</h6>
-						<input type="text" id="ODATE" name="ODATE"  class="form-control" style="width:400px;"
+						<input type="text" id="ODATE"  class="form-control" style="width:400px;"
 							value="${orderBean.ODATE}" readonly>
 					</div>
 					<div class="w-100"></div>
