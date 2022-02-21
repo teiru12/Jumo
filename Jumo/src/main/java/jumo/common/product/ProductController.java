@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jumo.common.basket.BasketService;
+import jumo.common.order.OrderService;
 import jumo.model.BasketBean;
 import jumo.model.CommunityBean;
 import jumo.model.ProductBean;
@@ -26,6 +27,9 @@ public class ProductController {
 	
 	@Resource(name="basketService")
 	private BasketService basketService;
+	
+	@Resource(name="orderService")
+	private OrderService orderService;
 	
 	@RequestMapping("/allList.al")
 	public String allList(HttpServletRequest request, Model model) throws Exception{
@@ -434,7 +438,7 @@ public class ProductController {
 		Map<String, Object> maxMap = productService.selectBasketBnumberMaxBemail(basket);
 		int newBnumber = 0;
 		if(maxMap == null) {
-			newBnumber = productService.selectBasketBnumberMax() + 1;
+			newBnumber = orderService.selectOrderOBnumberMax() + 1;
 		} else {
 		// 내 장바구니에 상품이 담겨져있다면 BNUMBER = 내 장바구니의 BNUMBER
 			newBnumber = Integer.parseInt(String.valueOf(maxMap.get("MAX")));

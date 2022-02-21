@@ -146,5 +146,16 @@
 			ORDERCOMMAND
 	]]>
 	</select>
+	
+	<!-- 주문 테이블의 OBNUMBER 최대값 -->
+	<select id="selectOrderOBnumberMax" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			MAX(OBNUMBER) MAX
+		FROM
+			ORDERCOMMAND
+	]]>
+	</select>
+	
 
 </mapper>

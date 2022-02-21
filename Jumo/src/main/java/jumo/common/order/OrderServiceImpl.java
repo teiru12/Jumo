@@ -96,4 +96,20 @@ public class OrderServiceImpl implements OrderService {
 				
 		return maxOID;
 	}
+
+	@Override
+	public int selectOrderOBnumberMax() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = orderDAO.selectOrderOBnumberMax();
+		
+		int maxOBnumber;
+		if(map!=null) {
+			maxOBnumber = Integer.parseInt(String.valueOf(map.get("MAX")));
+		} else {
+			maxOBnumber = 0;
+		}
+		
+		return maxOBnumber;
+	}
 }

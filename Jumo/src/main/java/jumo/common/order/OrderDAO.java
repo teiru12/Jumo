@@ -43,4 +43,11 @@ public class OrderDAO {
 	public Map<String, Object> selectOIDMax() throws Exception {
 		return sqlSessionTemplate.selectOne("order.selectOIDMax");
 	}	
+	
+	//주문 테이블에서 가장 높은 ORDER값
+	public Map<String, Object> selectOrderOBnumberMax()
+			throws Exception {
+		return sqlSessionTemplate.selectOne(
+			"order.selectOrderOBnumberMax");
+	}
 }

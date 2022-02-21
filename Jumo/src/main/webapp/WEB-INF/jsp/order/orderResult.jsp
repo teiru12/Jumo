@@ -26,7 +26,7 @@
 					<div class="cart-list">
 
 						<!-- 단독 주문일 경우 주문 리스트 출력 -->
-						<c:if test="${! empty orderBean}">	
+						<c:if test="${result=='direct'}">	
 				
 						<table class="table">
 							<thead class="thead-primary">
@@ -71,12 +71,47 @@
 						</c:if>
 						
 						<!-- 장바구니일 경우 주문 리스트 출력 -->
-						<c:if test="${! empty orderBeanList}">
-						
-						
-						
-						
-						
+						<c:if test="${result=='basket'}">	
+					
+						<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
+									<th>&nbsp;</th>
+									<th>상품명</th>
+									<th>수량</th>
+									<th>원가</th>
+									<th>할인률</th>
+									<th>판매가</th>
+									<th>결제금액</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="order" items="${orderBeanList}">
+								<tr class="text-center">
+									<td class="image-prod"><div class="img" style="background-image:url(img/product-${orderBean.OPID}.png);"></div></td>
+									
+									<td class="product-name">
+										<h3><b>${order.OPRODUCT}</b></h3>
+									</td>
+									
+									<td class="count">${order.OCOUNT}</td>
+									
+									<td class="price">${order.OPRICE}원</td>
+									
+									<td class="price">${order.OSALE}%</td>
+									
+									<td class="price">
+				          				<c:set var="salePrice" value="${order.OPRICE * (100-order.OSALE) / 100}" />
+				          				<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
+									</td>
+									
+									<td class="total">
+										<b>${order.OTOTAL}원</b>
+									</td>
+								</tr><!-- END TR-->
+							</c:forEach>	
+							</tbody>
+						</table>	
 						</c:if>
 						
 						
