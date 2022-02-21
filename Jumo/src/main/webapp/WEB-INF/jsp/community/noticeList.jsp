@@ -14,13 +14,14 @@
  		<h3>공지 사항</h3>
 	</div> 		
   	    <br>
-  	      <br>
+  	    <br>
+  	    <br>
   		<!-- 공지사항 목록 부분 -->
+	<div class="container">
 		<div style="text-align:center" id="board" >
-    	<table id="rList" width="70%" border="1" bordercolor="lightgray" align="center" > 
-		
-    	<thead> 
-    		<tr bgcolor="gainsboro"> 
+			<table class="table">
+				<thead class="thead-primary">
+    		<tr> 
     			<th scope="col" width="10%">번호</th> 
     			<th scope="col">내용</th> 
     			<th scope="col" width="15%">작성자</th> 
@@ -33,7 +34,7 @@
     	<c:when test="${noticeCount!=0}"> 
     		<c:forEach var="notice" items="${noticeBeanList}" varStatus="status"> 
     	<tr> 
-    		<td>${notice.CIDX}</td> 
+    		<td>${notice.getR()}</td> 
     		<td> 
     			<a href="noticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a>
    			</td>
@@ -55,6 +56,7 @@
 </div>
 	<!-- 공지사항 페이징 -->
 		${paging.pageHtml}
-<br>
+</div>
+<br><br><br>
 </body>
 </html>

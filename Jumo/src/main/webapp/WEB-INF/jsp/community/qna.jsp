@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-qna
-<br>
-<a href="/Jumo/qnaList.al">고객센터 게시판으로 이동</a><br>
+<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 </body>
 </html>

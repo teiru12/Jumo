@@ -159,6 +159,9 @@ public class MapToBean {
 		}
 		communityBean.setCCONTENT((String) map.get("CCONTENT"));
 		communityBean.setCTYPE((String) map.get("CTYPE"));
+		if(map.get("R") != null) {
+			communityBean.setR(Integer.parseInt(String.valueOf(map.get("R"))));
+		}
 		
 		return communityBean;
 	}
