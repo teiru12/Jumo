@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
-
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -182,7 +181,7 @@ window.onload = function() {
     				</tr>
     				<div style="text-align:center">
     				<input type="button" class="btn btn-primary py-3 px-4"
-    				 onClick="return orderConfirm()" value="구매하기">
+    				 onClick="return orderConfirm()" value="구매하기"><br><br><br><br>
     				<!--선택주문 나중에 구현 -->
     				<!-- <a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a> -->
     				</div>

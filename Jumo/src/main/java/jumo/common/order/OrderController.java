@@ -67,20 +67,42 @@ public class OrderController {
 	
 	
 	@RequestMapping("/basketOrderForm.al")
-	public String basketOrderForm (BasketBean basket, Model model) throws Exception {
+	public String basketOrderForm (BasketBean basket,HttpServletRequest request, Model model) throws Exception {
 		
 		List<Map<String, Object>> list = basketService.basketList(basket); 
 		List<BasketBean> basketBeanList = new ArrayList<BasketBean>();
 		for(Map<String, Object> mapObject : list) {
 			basketBeanList.add(MapToBean.mapToBasket(mapObject));
+		} 
+		
+		List<ProductBean> proInfoList = new ArrayList<ProductBean>();
+		for(BasketBean basPro : basketBeanList) {
+			
+			ProductBean pro = new ProductBean();
+			pro.setPID(basPro.getBID());			
+			Map<String, Object> proInfoMap = productService.selectProductId(pro);
+			ProductBean proInfo = MapToBean.mapToProduct(proInfoMap);
+			
+			proInfoList.add(proInfo);			
 		}
+
+		String loginEmail = (String) request.getSession().getAttribute("EMAIL");
+		MemberBean member = new MemberBean();
+		member.setEMAIL(loginEmail);
+		Map<String, Object> mMap = new HashMap<String, Object>();
+		mMap = myInfoService.selectMemberId(member);
+		MemberBean memberBean = MapToBean.mapToMember(mMap);
+		
+		String BCOUNT = request.getParameter("BCOUNT");
 		
 		model.addAttribute("basketBeanList",basketBeanList);
-		
+		model.addAttribute("Size", basketBeanList.size());
+		model.addAttribute("memberBean", memberBean);
+		model.addAttribute("proInfoList", proInfoList);
+		model.addAttribute("BCOUNT", BCOUNT);
 		
 		return "basketOrderForm";
 	}
-	
 	
 	@RequestMapping("/pOrder.al")
 	public String pOrder(OrderBean order, Model model) throws Exception {
@@ -91,7 +113,6 @@ public class OrderController {
 		int OID = orderService.selectOIDMax();
 		
 		model.addAttribute("msg", "주문을 완료했습니다.");
-		model.addAttribute("url", "");
 		
 		String urlParam = "/orderResult.al?OID=" + OID;
 		model.addAttribute("url", urlParam);
@@ -101,30 +122,54 @@ public class OrderController {
 	
 	
 	@RequestMapping("/basketOrder.al")
-	public String basksetOrder (BasketBean basket, BindingResult result,
+	public String basksetOrder (OrderBean order, HttpServletRequest request,
 			Model model) throws Exception {
+		//사용자 이메일을 세션으로 가져온다.
+		BasketBean basket = new BasketBean();
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		basket.setBEMAIL(email);
+		//장바구니 리스트를 사용자 이메일을 이용해서 가져온다.
 		
-		int basketNumber = basket.getBNUMBER();
+		  List<Map<String,Object>> list = basketService.basketList(basket);
+		  List<BasketBean> basketBeanList = new ArrayList<BasketBean>();
+		  
+		  for(Map<String, Object> mapObject : list) {
+		  basketBeanList.add(MapToBean.mapToBasket(mapObject)); }
+		 
+		//장바구니 리스트의 크기만큼 루프를 돌면서 주문
+		// orderBean에는 주문 정보가 들어있으므로 orderBean을 사용해서 insertOrderBasket
 		
-		OrderBean orderBasket = new OrderBean();
-		orderBasket.setOBNUMBER(basketNumber);
-				
-		List<Map<String, Object>> list = orderService.selectOrderOBNumber(orderBasket);
-		
-		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();
-		
-		for(Map<String, Object> mapObject : list) {
-			orderBeanList.add(MapToBean.mapToOrder(mapObject));
-		}
-		
-		// 주문 리스트의 각 주문에 대한 주문을 각각 수행
-		for(OrderBean order : orderBeanList) {
-			orderService.insertOrderBasket(order);
-		}
-		
+		  boolean checkOBNUMBER = false; int OBNUMBER = -1; for(BasketBean infoBasket :
+		  basketBeanList) {
+		  
+		  if(checkOBNUMBER == false) { OBNUMBER= infoBasket.getBNUMBER(); checkOBNUMBER
+		  = true; }
+		 		
+			// 3. 장바구니 리스트의 정보를 insert를 할 때 사용할 orderBean에 입력 - 컨트롤러
+			//BNUMBER->OBNUMBER, BNAME-> OPRODUCT, BID-> OPID, BPRICE-> OPRICE
+			//BSALE->OSALE, BEMAIL->OMAIL, BCOUNT->OCOUNT
+			
+			  order.setOBNUMBER(infoBasket.getBNUMBER());
+			  order.setOPRODUCT(infoBasket.getBNAME()); 
+			  order.setOPID(infoBasket.getBID());
+			  order.setOPRICE(infoBasket.getBPRICE());
+			  order.setOSALE(infoBasket.getBSALE());
+			  order.setOMAIL(infoBasket.getBEMAIL());
+			  order.setOCOUNT(infoBasket.getBCOUNT());
+			 
+			// 장바구니 주문 폼에서 넘어오는 값들 (따로 설정할 필요없음) - jsp
+			// ONAME:받는사람정보, OTOTAL:상품가격*수량, OMOBILE, OPOSTCODE, OADDRESS1, OADDRESS2
+			// orderBean에는 주문 정보가 들어있으므로 
+			// orderBean을 사용해서 insertOrderBasket
+			 orderService.insertOrderBasket(order); 
+			
+			  } model.addAttribute("msg", "주문을 완료했습니다.");
+			  
+			  String urlParam = "/orderResult.al?OBNUMBER=" + OBNUMBER;
+			  model.addAttribute("url", urlParam);
+			 
 		return "/order/basketOrder";
 	}
-	
 	
 	@RequestMapping("/orderResult.al")
 	public String orderResult (HttpServletRequest request, 
@@ -148,6 +193,7 @@ public class OrderController {
 			mMap = myInfoService.selectMemberId(member);
 			MemberBean memberBean = MapToBean.mapToMember(mMap); 			
 			
+			model.addAttribute("result","direct");
 			model.addAttribute("orderBean", orderBean);
 			model.addAttribute("memberBean", memberBean);			
 		} else {
@@ -165,6 +211,7 @@ public class OrderController {
 			mMap = myInfoService.selectMemberId(member);
 			MemberBean memberBean = MapToBean.mapToMember(mMap);
 			
+			model.addAttribute("result","basket");
 			model.addAttribute("orderBeanList", orderBeanList);
 			model.addAttribute("memberBean", memberBean);			
 		}		

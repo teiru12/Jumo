@@ -25,4 +25,7 @@ public interface OrderService {
 	   
 	//가장 마지막에 주문한 주문의 OID값
 	public int selectOIDMax() throws Exception;	   
+	
+	//주문 테이블에서 가장 높은 ORDER값
+	public int selectOrderOBnumberMax() throws Exception;
 }
