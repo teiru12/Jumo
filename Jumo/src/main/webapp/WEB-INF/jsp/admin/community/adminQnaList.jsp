@@ -1,74 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
-<!-- 삭제 -->
-<script>
-function deleteCheck() {
-	var CIDX = document.getElementById('CIDX').value;
-	if(confirm("삭제하시겠습니까?") == true) {
-		location.href="adminQnaDelete.al?CIDX=" + CIDX;
-	}
-}
-</script>
-
-
 </head>
 <body>
-<br>
 	<div style="text-align:center">
- 		<h3>고객센터</h3>
-	</div> 		
-  	    <br>
-  		<!-- 공지사항 목록 부분 -->
-		<div style="text-align:center" id="board" >
-    	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-    	<thead>
-    		<tr bgcolor="lightgray"> 
-    			<th scope="col" width="10%">번호</th> 
-    			<th scope="col">내용</th> 
-    			<th scope="col" width="15%">작성자</th> 
-    			<th scope="col" width="15%">작성일</th>
-    			<th scope="col" width="15%"></th>
-    		</tr> 
-    		
-    	</thead>
-    <tbody> 
-    <c:choose>
-    	<c:when test="${qnaCount!=0}"> 
-    		<c:forEach var="qna" items="${qnaList}" varStatus="status"> 
-    	<tr>
-    		<td>${qna.CIDX}</td>
-    		<td><a href="adminQnaDetail.al?CIDX=${qna.CIDX}">${qna.CTITLE}</a></td>
-   			<td>${qna.CWRITER}</td> 
-   			<td>${qna.CDATE}</td>
-   			<td>
-   			    <form id="qnaDelete" action="adminQnaDelete.al" method="post">
-   			    <input type="hidden" id="CIDX" name="CIDX" value="${qna.CIDX }">
-   			    <input type="hidden" name="ARTICLEIDX" value="${comment.ARTICLEIDX}">
-    			<button onclick="return deleteCheck()">
-				삭제
-				</button>
-				</form>
-			</td>
-    	</tr>
-			</c:forEach>
-    </c:when>
-    <c:otherwise> 
-   		<tr>
-			<td colspan="4">조회된 결과가 없습니다.</td> 
-		</tr>
-	</c:otherwise>
+		<h1> 고객센터 </h1>
+	</div>
 	
-	</c:choose> 
-	</tbody> 
-		</table>
-</div>
-	<!-- 공지사항 페이징 -->
-		${paging.pageHtml}
-<br>
+	<section class="ftco-section ftco-cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ftco-animate">
+				
+					<div class="cart-list">
+				
+						<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+							    <c:choose>
+							    	<c:when test="${qnaCount!=0}"> 
+							    		<c:forEach var="qna" items="${qnaList}" varStatus="status"> 
+											<tr class="text-center">
+												<td>${qna.CIDX}</td>
+												
+												<td><a href="adminQnaDetail.al?CIDX=${qna.CIDX}">${qna.CTITLE}</a></td>
+												
+												<td>${qna.CWRITER}</td>
+												
+												<td>${qna.CDATE}</td>	
+												
+												<td>
+													<form id="qnaDelete" action="adminQnaDelete.al" method="post">
+										    			<button class="btn btn-primary px-3" 
+															onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaDelete.al?CIDX= + ${qna.CIDX}' } else{ return false; }">
+														삭제
+														</button>
+													</form>
+												</td>											
+												
+											</tr><!-- END TR-->
+										</c:forEach>
+							   		</c:when>
+							    <c:otherwise> 
+							   		<tr>
+										<td colspan="4">조회된 결과가 없습니다.</td> 
+									</tr>
+								</c:otherwise>
+								
+								</c:choose> 
+							
+							</tbody>
+						</table>
+						
+					</div> <!-- end cart-list div -->
+					
+					${paging.pageHtml}
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	
 </body>
 </html>
