@@ -26,58 +26,48 @@ function check() {
 }
 </script>
 
-	<style type="text/css">
-	table {margin-left: auto; margin-right: auto; border: 3px solid skyblue;}
-	td {border: 1px solid skyblue}
-	#title {background-color: skyblue}
-	</style>
 </head>
 <body>
-	<br><br>
-	<p style="text-align:center">
-	<b><font size="6" color="gray">공지사항 수정</font></b>
-	</p>
-	<br><br><br>
+<br>
+	<div style="text-align:center">
+		<h3>공지사항 수정</h3>
+	</div>
+<br>
+<br>
 	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 	<!-- 파라미터 전송은 POST 방식 -->
-<form method="post" action="adminNoticeModify.al" name="Notice">
+	<!-- 글수정 폼 -->
+<div style="text-align:center;">
+<div class="col-md-12 ftco-animate">
+	<form method="post" action="adminNoticeModify.al" style="width:50%; margin: auto;" name="Notice">
 
-	<table>
-		<tr>
-			<td id="title">글번호</td>
-			<td><input type="text" name="CIDX" value="${noticeBean.CIDX}" readonly>
-			</td>
-		</tr> 
-		<tr>
-			<td id="title">작성자</td>
-			<td><input type="text" name="CWRITER" value="${noticeBean.CWRITER}" readonly>
-			</td>
-		</tr>
-		<tr>
-			<td id="title">제목</td>
-			<td><input type="text" id="Ctitle" name="CTITLE" value="${noticeBean.CTITLE}">
-			</td>
-		</tr>
-		<tr>
-			<td id="title">날짜</td>
-			<td>${noticeBean.CDATE}
-			</td>
-		</tr>
-		<tr>
-			<td id="title">내용</td>
-			<td><textarea id="Ccontent" name="CCONTENT" >${noticeBean.CCONTENT}</textarea>
-			</td>
-		</tr>
-	</table>
+	<div class="form-group">
+		<label for="exampleFormControlInput1">글번호</label>
+		<input type="text" class="form-control" name="CIDX" value="${noticeBean.CIDX}" readonly> 
+	</div>
+	<!-- 작성자로 {CWRITER}정보를 넘겨줌 -->
+	<div class="form-group">
+		<label for="exampleFormControlInput1">작성자</label>
+		<input type="text" class="form-control" name="CWRITER" value="${noticeBean.CWRITER}" readonly> 
+	</div>
+	<div class="form-group">
+		<label for="exampleFormControlInput1">제목</label>
+		<input type="text" class="form-control" id="Ctitle" name="CTITLE" value="${noticeBean.CTITLE}"> 
+	</div>
+	<div class="form-group">
+		<label for="exampleFormControlInput1">내용</label>
+		<textarea class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10">${noticeBean.CCONTENT}</textarea>
+	</div>
+	
 	<br>
 	<br>
-		<p style="text-align:center">
-		<input type="button" value="수정" onclick="return check();">
-		<input type="button" value="뒤로" onclick="location.href='adminNoticeList.al'">
-		<br>
-		<br>
+		<p>
+			<button type="button" class="btn btn-primary py-2 px-4" onclick="return check();">수정</button>
+			<button type="button" class="btn btn-dark py-2 px-4" onclick="location.href='adminNoticeList.al'">취소</button>
 		</p>
 	<br>
 	</form>
+</div>
+</div>
 </body>
 </html>

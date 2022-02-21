@@ -17,6 +17,7 @@
   		<!-- 공지사항 부분 -->
   	<div class="container">
 		<div style="text-align:center" id="noticeDetail" >
+		<div class="col-md-12 ftco-animate">
     		<table class="table" > 
 				<thead class="thead-primary">
 					<tr>				
@@ -35,7 +36,7 @@
 
 		</tbody>
 		</table>
-
+</div>
 </div>
 </div>
 <br>

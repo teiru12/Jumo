@@ -28,16 +28,21 @@ function check() {
 
 </head>
 <body>
-	<br><br>
-	<p style="text-align:center">
-	<b><font size="6" color="gray">공지사항 작성</font></b>
-	</p>
-	<br><br><br>
-    <form  method="post" action="adminNoticeWrite.al" name="Notice">
+<br>
+	<div style="text-align:center">
+		<h3>공지사항 작성</h3>
+	</div>
+<br>
+<br>
+	<!-- 글쓰기 폼 -->
+	<div style="text-align:center;">
+	<div class="col-md-12 ftco-animate">
+    <form  method="post" action="adminNoticeWrite.al" style="width:70%; margin: auto;" name="Notice" >
 		<div class="form-group">
 		<%-- ${memberBean.EMAIL } --%>
+		<!-- 작성자로 {CWRITER}정보를 넘겨줌 -->
 			<label for="exampleFormControlInput1">작성자</label>
-			<input type="text" class="form-control" id="Cwriter" value="관리자" name="CWRITER" readonly>
+			<input type="text" class="form-control" id="Cwriter" value="ADMIN" name="CWRITER" readonly>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">제목</label>
@@ -45,13 +50,15 @@ function check() {
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">내용</label>
-			<input type="text" class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요.">
+			<textarea class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10"></textarea>
 		</div>
 		<p>
-			<button type="button" onclick="return check();">등록하기</button>
-			<button type="button" onclick="location.href='adminNoticeList.al'">목록으로</button>
+			<button type="button" class="btn btn-primary py-2 px-4" onclick="return check();">등록</button>
+			<button type="button" class="btn btn-dark py-2 px-4" onclick="location.href='adminNoticeList.al'">취소</button>
 		</p>
 	</form>
+</div>
+</div>
 <br>
 </body>
 </html>

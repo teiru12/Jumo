@@ -14,13 +14,13 @@ function escapeCheck() {
 }
 </script>
 <body>
-
+<br><br>
 <div style="text-align:center">
 
 	<div style="text-align: center;">
 		<img src="img/myPage.png" width="80px" height="80px">
 	</div>
-	
+	<br>
 	<p></p>
 	
 	<h3 style="text-align: center;">${EMAIL}님 환영합니다.</h3>
@@ -47,6 +47,6 @@ function escapeCheck() {
 		
 	<p></p>				
 </div>
-
+<br><br>
 </body>
 </html>

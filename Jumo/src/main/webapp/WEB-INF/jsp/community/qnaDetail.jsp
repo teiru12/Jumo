@@ -17,6 +17,7 @@
   		<!-- 고객센터 상세 부분 -->
   	<div class="container">
 		<div style="text-align:center" id="qnaDetail" >
+			<div class="col-md-12 ftco-animate">
     		<table class="table" > 
 				<thead class="thead-primary">
 					<tr>				
@@ -55,7 +56,7 @@
 		</table>
 	
 	</div>
-
+</div>
 </div>
 <br>
 <br>

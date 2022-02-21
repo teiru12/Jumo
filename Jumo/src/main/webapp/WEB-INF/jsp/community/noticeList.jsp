@@ -19,6 +19,7 @@
   		<!-- 공지사항 목록 부분 -->
 	<div class="container">
 		<div style="text-align:center" id="board" >
+		<div class="col-md-12 ftco-animate">
 			<table class="table">
 				<thead class="thead-primary">
     		<tr> 
@@ -56,6 +57,7 @@
 </div>
 	<!-- 공지사항 페이징 -->
 		${paging.pageHtml}
+</div>
 </div>
 <br><br><br>
 </body>
