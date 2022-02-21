@@ -33,9 +33,11 @@
 	<h3>Q&A 등록</h3>
 </div>
 <br>
+<br>
 <!-- 글쓰기 폼 -->
 <div style="text-align:center;">
-    <form  method="post" action="qna.al" style="width:70%; margin: auto;" name="Qna">
+<div class="col-md-12 ftco-animate">
+    <form  method="post" action="qna.al" style="width:50%; margin: auto;" name="Qna">
     
 		<div class="form-group">
 			<label for="exampleFormControlInput1">제목</label>
@@ -50,6 +52,7 @@
 			<button type="button" class="btn btn-dark py-2 px-4" onclick="location.href='qnaList.al'">취소</button>
 		</p>
 	</form>
+</div>
 </div>
 <br>
 <br>
