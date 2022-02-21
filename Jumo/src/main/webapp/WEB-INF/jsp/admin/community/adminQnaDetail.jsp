@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,10 +53,6 @@ $(function (){
 });
 </script>
 
-
-
-
-
 <!-- 댓글 입력 (추후에 AJAX사용할때 쓸수도..?-->
 <!-- <script>
 $(".replyAddBtn").on("click",function() {
@@ -84,19 +83,71 @@ $(".replyAddBtn").on("click",function() {
 	});
 });
 </script> -->
-
-<!--
- 	 <a href="/Jumo/adminQnaDelete.al">삭제 - 고객센터 삭제 기능</a><br>
--->
-
-<!-- 폼 스타일(나중에 지워도됨 대신 댓글쪽 스타일이 깨짐) -->
-	<style type="text/css">
-	table {margin-left: auto; margin-right: auto; border: 3px solid skyblue;}
-	td {border: 1px solid skyblue}
-	#title {background-color: skyblue}
-	</style>
-
 </head>
+	<div style="text-align:center">
+		<h1> 상세 내용 </h1>
+	</div>
+	
+	<section class="ftco-section ftco-cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ftco-animate">
+				
+					<div class="cart-list">
+				
+						<table class="table">
+							<tbody>
+							
+								<tr class="text-center">
+									<td>제목</td>
+									<td colspan="2">${qnaBean.CTITLE}</td>
+								</tr>
+								<tr class="text-center">
+									<td>작성자</td>
+									<td>${qnaBean.CWRITER}</td>
+									<td>${qnaBean.CDATE}</td>
+								</tr>
+								<tr class="text-center">
+									<td>글 내용</td>
+									<td colspan="2" style="height:10">${qnaBean.CCONTENT}</td>
+								</tr>
+							
+							</tbody>
+						</table>
+						
+					</div> <!-- end cart-list div -->
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <br> 
 	<div style="text-align:center">
  		<h3>상세 내용</h3>
