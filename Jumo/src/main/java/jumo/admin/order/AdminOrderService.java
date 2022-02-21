@@ -11,7 +11,7 @@ public interface AdminOrderService {
 	public List<Map<String, Object>> orderList() throws Exception;
 	    
 	//주문리스트 검색
-	public List<Map<String, Object>> orderListSearch(String keyword, String oStatus) throws Exception;
+	public List<Map<String, Object>> orderListSearch(String condition, String keyword) throws Exception;
 	   
 	//주문리스트 상세보기
 	public Map<String, Object> selectOrderOId(OrderBean order) throws Exception;

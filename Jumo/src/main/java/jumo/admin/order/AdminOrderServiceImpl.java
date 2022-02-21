@@ -22,11 +22,12 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 	}
 
 	@Override
-	public List<Map<String, Object>> orderListSearch(String keyword, String oStatus) throws Exception {
+	public List<Map<String, Object>> orderListSearch(String condition, String keyword) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("KEYWORD", keyword);
-		map.put("OSTATUS", oStatus);
+		map.put("CONDITION", condition);
+		map.put("KEYWORD", keyword);		
+		
 		return adminOrderDAO.orderListSearch(map);
 	}
 
@@ -44,7 +45,5 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 		map.put("OID", order.getOID());
 		adminOrderDAO.updateOrderId(map);
 	}
-	
-	
 
 }

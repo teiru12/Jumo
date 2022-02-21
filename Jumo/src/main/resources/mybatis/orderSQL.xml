@@ -16,7 +16,7 @@
 	</select>
 
 	<!-- selectOrderOID (주문번호로 주문 정보 조회) -->
-	<select id="selectOrderOID" parameterType="hashmap" resultType="hashmap">
+	<select id="selectOrderOId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT
 			* 
@@ -105,24 +105,26 @@
 
 	<!-- orderListSearch (주문 정보 리스트 검색) -->
 	<select id="orderListSearch" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
 		SELECT
-			* 
+			*
 		FROM
-			ORDERCOMMAND O, PRODUCT P
-	]]>
-	<trim prefix="WHERE"
-		prefixOverrides="AND">
-		
-		<if test="KEYWORD!=NULL">
-		AND (P.PCOM LIKE '%'||#{KEYWORD}||'%' 
-		OR P.PNAME LIKE '%'||#{KEYWORD}||'%') 
-		</if>
-		<if test="OSTATUS!=NULL">
-		AND O.OSTATUS=#{OSTATUS}
-		</if>
-		AND O.OPID=P.PID
-	</trim>
+			ORDERCOMMAND
+		<where>
+			<if test="CONDITION!=NULL">
+				<if test="CONDITION.equals('OMAIL')">
+					OMAIL LIKE '%'||#{KEYWORD}||'%'
+				</if>
+				<if test="CONDITION.equals('OID')">
+					OID = #{KEYWORD}
+				</if>
+				<if test="CONDITION.equals('OPRODUCT')">
+					OPRODUCT LIKE '%'||#{KEYWORD}||'%'
+				</if>
+				<if test="CONDITION.equals('OSTATUS')">
+					OSTATUS = #{KEYWORD}
+				</if>
+			</if>
+		</where>		
 	</select>
 
 	<!-- updateOrderId (주문 정보 수정) -->
