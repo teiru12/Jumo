@@ -130,7 +130,7 @@ function submit2(del) {
 				<div class="row align-items-end" style="padding-left:150px;">
 				
 					<!-- 회원등급 -->
-					<div class="form-group">
+					<div class="select-wrap">
 						<h6 class="mb-4" style="text-align:left;">
 						회원등급 :
 						<c:if test="${memberBean.RANK == 'B'}">
@@ -142,14 +142,15 @@ function submit2(del) {
 						<c:if test="${memberBean.RANK == 'G'}">
 							골드
 						</c:if>
-						</h6>												
-						<select id="RANK" name="RANK" class="form-contorl" style="height:6; width:400px;">
+						</h6>
+						
+						<select name="RANK" id="RANK" class="form-control" style="width:400px;">			
 							<option value="B" <c:if test="${memberBean.RANK == 'B' }">selected</c:if>>브론즈</option>
 							<option value="S" <c:if test="${memberBean.RANK == 'S' }">selected</c:if>>실버</option>
 							<option value="G" <c:if test="${memberBean.RANK == 'G' }">selected</c:if>>골드</option>
 						</select>
 					</div>
-					<div class="w-100"></div>
+					<div class="w-100"></div><br>
 					
 					<!-- 이메일 -->					
 					<div class="form-group">
