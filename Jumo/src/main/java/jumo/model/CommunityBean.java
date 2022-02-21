@@ -12,6 +12,14 @@ public class CommunityBean {
 	private int CCOUNT;
 	private String CCONTENT;
 	private String CTYPE;
+	private int R; // 게시판 출력 번호
+	
+	public int getR() {
+		return R;
+	}
+	public void setR(int r) {
+		R = r;
+	}
 	
 	public int getCIDX() {
 		return CIDX;

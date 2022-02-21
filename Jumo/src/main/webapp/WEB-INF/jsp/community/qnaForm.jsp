@@ -46,14 +46,12 @@
 			<textarea class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10"></textarea>
 		</div>
 		<p>
-			<button type="submit" class="btn btn-primary py-2 px-3" onclick="return check()">등록</button>
-			<button type="button" class="btn btn-primary py-2 px-3" onclick="location.href='qnaList.al'">취소</button>
+			<button type="submit" class="btn btn-primary py-2 px-4" onclick="return check()">등록</button>
+			<button type="button" class="btn btn-dark py-2 px-4" onclick="location.href='qnaList.al'">취소</button>
 		</p>
 	</form>
 </div>
-
 <br>
-<!-- <a href="/Jumo/qna.al">등록</a><br>
-<a href="/Jumo/qna.al">취소</a><br> -->
+<br>
 </body>
 </html>

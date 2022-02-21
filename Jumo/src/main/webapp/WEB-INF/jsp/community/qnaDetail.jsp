@@ -13,17 +13,18 @@
  		<h3>상세 내용</h3>
 	</div> 		
   	    <br>
+  	    <br>
   		<!-- 고객센터 상세 부분 -->
+  	<div class="container">
 		<div style="text-align:center" id="qnaDetail" >
-    	<table id="qnaDetail" width="70%" border="1" cellpadding="5" bordercolor="lightgray" frame="void" align="center" > 
+    		<table class="table" > 
+				<thead class="thead-primary">
+					<tr>				
+						<th colspan="2">${communityBean.CTITLE}</th>
+					</tr>
+				</thead>
 		<tbody>
-	
-			<tr></tr>
-			<tr>				
-				<th colspan="2" bgcolor="gainsboro">${communityBean.CTITLE}</th>
-			</tr>
 			<tr>
-				
 				<td width="50%">${communityBean.CWRITER}</td>
 				<td width="*%">${communityBean.CDATE}</td>
 			</tr>
@@ -32,7 +33,7 @@
 				<td colspan="2"><br>${communityBean.CCONTENT}<br><br></td>
 			</tr>
 			<tr>
-				<th colspan="2">관리자 답변</th>
+				<th colspan="2"><b>관리자 답변</b></th>
 			</tr>
 	 <c:choose> 
     	<c:when test="${comCount!=0}"> 
@@ -53,9 +54,10 @@
 		</tbody>
 		</table>
 	
-	
+	</div>
 
 </div>
-<hr width="70%" bordercolor="lightgray">
+<br>
+<br>
 </body>
 </html>

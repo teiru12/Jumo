@@ -15,18 +15,19 @@
   	     <br>
   	    <!-- 글쓰기 버튼 -->
   	    <div style='width:20%; float: right;'>
-			<input type="button" class="btn btn-primary py-0 px-2.5" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/>
+			<input type="button" class="btn btn-dark py-1 px-3" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/>
 			<!-- <a href="/Jumo/qnaForm.al">글쓰기</a> -->
 		</div>
 		<br>
+		<br>
   		<!-- 고객센터 목록 부분 -->
   		
-		<div style="text-align:center" id="board" >
-		<br>
-    	<table id="qList" width="70%" border="1" bordercolor="lightgray"  align="center" > 
-		
-    	<thead> 
-    		<tr bgcolor="gainsboro"> 
+		<div class="container">
+			<div style="text-align:center" id="board" >
+				
+			<table class="table">
+    	<thead class="thead-primary"> 
+    		<tr> 
     			<th scope="col" width="10%">번호</th> 
     			<th scope="col">내용</th> 
     			<th scope="col" width="15%">작성자</th> 
@@ -39,7 +40,7 @@
     	<c:when test="${qnaCount!=0}"> 
     		<c:forEach var="qna" items="${qnaBeanList}" varStatus="status"> 
     	<tr> 
-    		<td>${qna.CIDX}</td> 
+    		<td>${qna.getR()}</td> 
     		<td> 
     			<a href="qnaDetail.al?CIDX=${qna.CIDX}">${qna.CTITLE}</a>
    			</td>
@@ -61,6 +62,7 @@
 </div>
 	<!-- 공지사항 페이징 -->
 		${paging.pageHtml}
+</div>
 <br>
 <br>
 <br>
