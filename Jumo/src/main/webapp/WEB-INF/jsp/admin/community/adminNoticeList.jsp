@@ -8,58 +8,64 @@
 <title>주모</title>
 </head>
 <body>
-<br>
-	<div style="text-align:center">
- 		<h3>공지 사항</h3>
-	</div> 		
-  	    <br>
-  		<!-- 공지사항 목록 부분 -->
-		<div style="text-align:center" id="board" >
-    	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-    	<thead> 
-    		<tr bgcolor="lightgray"> 
-    			<th scope="col" width="10%">번호</th> 
-    			<th scope="col">제목</th> 
-    			<th scope="col" width="15%">작성자</th> 
-    			<th scope="col" width="15%">작성일</th> 
-    		</tr> 
-    	</thead>
-    <tbody> 
-    <c:choose> 
-    	<c:when test="${noticeCount!=0}"> 
-    		<c:forEach var="notice" items="${noticeList}" varStatus="status"> 
-    	<tr>
-    		<td>${notice.CIDX}</td>
-    		<td> 
-    			<a href="adminNoticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a>
-   			</td>
-   			<td>${notice.CWRITER}</td> 
-   			<td>${notice.CDATE}</td>	
-    	</tr> 
-			</c:forEach>
-    </c:when>
-    
-    <c:otherwise> 
-   		<tr>
-			<td colspan="4">조회된 결과가 없습니다.</td> 
-		</tr>
-	</c:otherwise>
 	
-	</c:choose> 
-	</tbody> 
-		</table>
-</div>
-	<!-- 공지사항 페이징 -->
-		${paging.pageHtml}
-<br>
+<section class="ftco-section ftco-cart">
+	<div style="text-align:center"><h2>공지 사항</h2></div>
+	<br/>
+		<div class="container">
+			<div class="row">
+			<pre>                                                                               </pre>
+				<div>
+				</div>
+				<br>
+				<div class="container" style="padding-right:70px;">				
+					<div class="col-md-12 ftco-animate">
+						<div class="cart-list">
+							<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="notice" items="${noticeList}"> 
+								<tr class="text-center">
+									<td>${notice.CIDX}</td>
+									<td><a href="adminNoticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a></td>
+									<td class="product-name">
+										${notice.CWRITER}
+									</td>
+									<td>${notice.CDATE}</td>
+								</tr><!-- END TR-->
+								</c:forEach>
+							</tbody>
+							</table>
+						</div>
+						
+						${paging.pageHtml}
+					</div>			
+				</div>
+		</div>
+	</div>
+</section>	
 
-<style>
-#test_btn1{ border-top-left-radius: 5px; border-bottom-left-radius: 5px; margin-right:-4px; }
-#btn_group button{ border: 1px solid skyblue; background-color: rgba(0,0,0,0); color: skyblue; padding: 5px; }
-#btn_group button:hover{ color:white; background-color: skyblue; }
-</style>
-<div style="text-align:center;" id="btn_group">
-<button id="test_btn1"  onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
-</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>
