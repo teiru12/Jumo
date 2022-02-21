@@ -88,7 +88,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	public void insertComment(CommentBean comment) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("CIDX", comment.getARTICLEIDX());
+		map.put("ARTICLEIDX", comment.getARTICLEIDX());
 		map.put("COMMENTWRITER", comment.getCOMMENTWRITER());
 		map.put("COMMENTT", comment.getCOMMENTT());
 		
@@ -109,7 +109,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	public void deleteComment(CommentBean comment) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("COMENTIDX", comment.getCOMMENTIDX());
+		map.put("COMMENTIDX", comment.getCOMMENTIDX());
 		
 		adminCommunityDAO.deleteComment(map);
 		

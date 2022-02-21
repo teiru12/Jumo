@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주모</title>
 </head>
 <body>
-adminQnaComWrite
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 <br>
 <a href="/Jumo/adminQnaDetail.al">고객센터 상세 페이지로 이동</a><br>
 </body>

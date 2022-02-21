@@ -5,6 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<!-- 삭제 -->
+<script>
+function deleteCheck() {
+	var CIDX = document.getElementById('CIDX').value;
+	if(confirm("삭제하시겠습니까?") == true) {
+		location.href="adminQnaDelete.al?CIDX=" + CIDX;
+	}
+}
+</script>
+
+
 </head>
 <body>
 <br>
@@ -15,13 +26,15 @@
   		<!-- 공지사항 목록 부분 -->
 		<div style="text-align:center" id="board" >
     	<table id="rList" width="1000" border="1" bordercolor="darkgray" align="center" > 
-    	<thead> 
+    	<thead>
     		<tr bgcolor="lightgray"> 
     			<th scope="col" width="10%">번호</th> 
     			<th scope="col">내용</th> 
     			<th scope="col" width="15%">작성자</th> 
     			<th scope="col" width="15%">작성일</th>
+    			<th scope="col" width="15%"></th>
     		</tr> 
+    		
     	</thead>
     <tbody> 
     <c:choose>
@@ -32,10 +45,18 @@
     		<td><a href="adminQnaDetail.al?CIDX=${qna.CIDX}">${qna.CTITLE}</a></td>
    			<td>${qna.CWRITER}</td> 
    			<td>${qna.CDATE}</td>
+   			<td>
+   			    <form id="qnaDelete" action="adminQnaDelete.al" method="post">
+   			    <input type="hidden" id="CIDX" name="CIDX" value="${qna.CIDX }">
+   			    <input type="hidden" name="ARTICLEIDX" value="${comment.ARTICLEIDX}">
+    			<button onclick="return deleteCheck()">
+				삭제
+				</button>
+				</form>
+			</td>
     	</tr>
 			</c:forEach>
     </c:when>
-    
     <c:otherwise> 
    		<tr>
 			<td colspan="4">조회된 결과가 없습니다.</td> 

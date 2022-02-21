@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-adminQnaDelete
+	<script>
+   if(${! empty msg}) {
+      alert('${msg}');
+   }
+    location.href='${pageContext.request.contextPath}${url}';
+    </script>
 <br>
 <a href="/Jumo/adminQnaList.al">고객센터 리스트</a><br>
 </body>
