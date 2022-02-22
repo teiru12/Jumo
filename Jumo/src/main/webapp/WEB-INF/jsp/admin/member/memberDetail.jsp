@@ -113,6 +113,18 @@ function submit2(del) {
         }).open();
     }
 </script>
+<script>
+// 특수문자 입력 방지
+function characterCheck(obj){
+var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
+// 허용할 특수문자는 여기서 삭제하면 됨
+// 지금은 띄어쓰기도 특수문자 처리됨 참고하셈
+if( regExp.test(obj.value) ){
+	alert("특수문자는 입력하실수 없습니다.");
+	obj.value = obj.value.substring( 0 , obj.value.length - 1 ); // 입력한 특수문자 한자리 지움
+	}
+}
+</script>
 <!-- 	<style type="text/css">
 	table {margin-left: auto; margin-right: auto; border: 3px solid skyblue;}
 	td {border: 1px solid skyblue}
@@ -184,7 +196,7 @@ function submit2(del) {
 					<!-- 전화번호 -->
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
-						<input type="text" id="PHONE" name="PHONE" size="24"  class="form-control"
+						<input type="text" maxlength="11" id="PHONE" name="PHONE" size="24"  class="form-control"
 							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;"
 							value="${memberBean.PHONE}">
 						<div class="w-100"></div>
@@ -195,7 +207,7 @@ function submit2(del) {
 					<!-- 핸드폰 번호 -->
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
-						<input type="text" id="MOBILE" name="MOBILE" class="form-control"
+						<input type="text" maxlength="11" id="MOBILE" name="MOBILE" class="form-control"
 							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
 							value="${memberBean.MOBILE}"> 
 						<div class="w-100"></div>
@@ -208,19 +220,19 @@ function submit2(del) {
 					<h6 class="mb-4" style="text-align:left;">우편번호</h6>
 					<div class="w-100"></div>
 					<div class="form-group d-flex">
-						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;"
+						<input type="text" maxlength="7" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호" style="width:270px;"
 							value="${memberBean.POSTCODE}">
 						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<div class="w-100"></div>
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">주소</h6>
-						<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;"
+						<input type="text" maxlength="50" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" name="ADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;"
 							value="${memberBean.ADDRESS1}">
 					</div>
 					&emsp;
 					<div class="form-group">
-						<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" class="form-control" style="width:190px;"
+						<input type="text" maxlength="50" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" class="form-control" style="width:190px;"
 							value="${memberBean.ADDRESS2}">
 					</div>			
 					<div class="w-100"></div>

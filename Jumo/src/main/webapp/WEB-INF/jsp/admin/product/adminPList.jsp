@@ -36,7 +36,7 @@ window.onload = function() {
 				</form>
 				&nbsp;
 				<div>
-					<input type="button" value="상품 추가" class="btn btn-primary px-3" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
+					<input type="button" value="상품 추가" class="btn btn-primary px-4" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
 				</div>
 				<div>
 				</div>

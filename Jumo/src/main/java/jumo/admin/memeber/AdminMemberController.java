@@ -63,9 +63,9 @@ public class AdminMemberController {
 		}
 		
 		/* 페이징을 위한 값 계산 */
-		if(keyword == null) { // 검색 조건이 아닐 때
+		if(keyword == null || keyword.trim() =="") { // 검색 조건이 아닐 때
 			countMemberAll = adminMemberService.memberCount();
-		} else { // 검색어를 입력했을 때
+		}else { // 검색어를 입력했을 때
 			countMemberAll = adminMemberService.memberSearchCount(condition, keyword);
 		}
 		
@@ -77,9 +77,9 @@ public class AdminMemberController {
 		List<MemberBean> memberBeanList = new ArrayList<MemberBean>();
 		
 		/* 페이징 리스트를 가져옴 */
-		if(keyword == null) {
+		if(keyword == null || keyword.trim() =="") {
 			list = adminMemberService.memberListPaging(START, END);
-		} else {
+		}else {
 			list = adminMemberService.memberListSearchPaging(condition, keyword, START, END);
 		}
 		

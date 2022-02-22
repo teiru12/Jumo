@@ -52,11 +52,11 @@ function check() {
 	</div>
 	<div class="form-group">
 		<label for="exampleFormControlInput1">제목</label>
-		<input type="text" class="form-control" id="Ctitle" name="CTITLE" value="${noticeBean.CTITLE}"> 
+		<input type="text" maxlength="50" class="form-control" id="Ctitle" name="CTITLE" value="${noticeBean.CTITLE}"> 
 	</div>
 	<div class="form-group">
 		<label for="exampleFormControlInput1">내용</label>
-		<textarea class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10">${noticeBean.CCONTENT}</textarea>
+		<textarea class="form-control" maxlength="500" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10">${noticeBean.CCONTENT}</textarea>
 	</div>
 	
 	<br>
