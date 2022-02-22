@@ -139,15 +139,15 @@ window.onload = function() {
 				          				<b>총 상품 금액</b>
 				          				</td>
 				          				<td style="text-align:right; width:50%">
-				          				<div id="totalPrice">
+				          				<div id="totalPrice" style="font-weight:bold; font-size:25px; color:#82AE46">
 
 				          				</div>
 				          				</td>
 				          			</tr>
 				          			<tr>
 				          				<td colspan="2" style="text-align:right;">
-				          					<p><input type="button" class="btn btn-black py-3 px-5" onClick="putBasket()" value="장바구니">
-				          					<input type="button" class="btn btn-black py-3 px-5" onClick="pOrderForm()" value="구   매"></p>
+				          					<p><input type="button" class="btn btn-primary py-2 px-4" onClick="putBasket()" value="장바구니">
+				          					<input type="button" class="btn btn-primary py-2 px-4" onClick="pOrderForm()" value="구&emsp;&emsp;매"></p>
 				          				</td>
 				          			</tr>				          			
 				          		</table>
@@ -198,11 +198,12 @@ window.onload = function() {
 			</div>
 		</div>
 	</div>
-	
-	<div>
-		<div>
-			<div>
-				<section>
+
+	<section>	
+	<div class="container">
+		<div class="row slider-text justify-content-center align-items-center">
+			<div class="col-lg-10 mb-5">
+
 					<table style="text-align:center; margin-left:auto; margin-right:auto; width:80%;">
 						<tr>
 							<td style="width:80%; text-align:right" colspan="2">
@@ -230,10 +231,11 @@ window.onload = function() {
 
 					</table>
 					<hr>				
-				</section>
+				
 			</div>
 		</div>
 	</div>
+	</section>
 
 	
 </body>

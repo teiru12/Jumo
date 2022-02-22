@@ -16,8 +16,85 @@
   display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
   color   : black;
 }
+div.custom-radio {
+  display: inline-flex;
+  align-items: center;
+}
+input[type='radio'],
+input[type='radio']:checked {
+  appearance: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 100%;
+  margin-right: 0.1rem;
+}
+
+input[type='radio'] {
+  background-color: white;
+  border: 2px solid gray;
+}
+input[type='radio']:checked {
+  background-color: #82AE46;
+}
 </style>
 <title>주모</title>
+<script>
+function radioReset(e) {
+	e.checked = false;	
+}
+</script>
+<script>
+window.onload = function() {
+	var urlStr = window.location.href;
+	const url = new URL(urlStr);
+	
+	const urlParams = url.searchParams;
+	
+	var pkind = urlParams.get("PKIND");
+	var dMax = urlParams.get("dMax");
+	var pMax = urlParams.get("pMax");
+	
+	if(pkind != null) {
+		if(pkind == '증류주') {
+			document.getElementById("PKIND1").checked = true;
+		} else if(pkind == '막걸리') {
+			document.getElementById("PKIND2").checked = true;
+		} else if(pkind == '약주') {
+			document.getElementById("PKIND3").checked = true;
+		} else if(pkind == '과실주') {
+			document.getElementById("PKIND4").checked = true;
+		} else if(pkind == '기타주류') {
+			document.getElementById("PKIND5").checked = true;
+		}
+	}
+	if(dMax != null) {
+		if(dMax == 0) {
+			document.getElementById("dMax1").checked = true;
+		} else if(dMax == 1) {
+			document.getElementById("dMax2").checked = true;
+		} else if(dMax == 2) {
+			document.getElementById("dMax3").checked = true;
+		} else if(dMax == 3) {
+			document.getElementById("dMax4").checked = true;
+		} else if(dMax == 4) {
+			document.getElementById("dMax5").checked = true;
+		}
+	}
+	if(pMax != null) {
+		if(pMax == 0) {
+			document.getElementById("pMax1").checked = true;
+		} else if(pMax == 1) {
+			document.getElementById("pMax2").checked = true;
+		} else if(pMax == 2) {
+			document.getElementById("pMax3").checked = true;
+		} else if(pMax == 3) {
+			document.getElementById("pMax4").checked = true;
+		} else if(pMax == 4) {
+			document.getElementById("pMax5").checked = true;
+		}
+	}	
+}
+</script>
 </head>
 <body>
 	<p/>
@@ -30,65 +107,81 @@
 						<tr>
 							<td style="text-align:left;">
 								<b>주종</b>&emsp;
-								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="증류주">증류주</label>
+								<label><input type="radio" id="PKIND1" name="PKIND" class="mr-2" value="증류주"
+									ondblclick="radioReset(this)">증류주</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="막걸리">막걸리</label>
+								<label><input type="radio" id="PKIND2" name="PKIND" class="mr-2" value="막걸리"
+									ondblclick="radioReset(this)">막걸리</label>
 							</td>
 							<td style="text-align:left;">						
-								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="약주">약주</label>
+								<label><input type="radio" id="PKIND3" name="PKIND" class="mr-2" value="약주"
+									ondblclick="radioReset(this)">약주</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="과실주">과실주</label>
+								<label><input type="radio" id="PKIND4" name="PKIND" class="mr-2" value="과실주"
+									ondblclick="radioReset(this)">과실주</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="PKIND" name="PKIND" class="mr-2" value="기타주류">기타주류</label>
+								<label><input type="radio" id="PKIND5" name="PKIND" class="mr-2" value="기타주류"
+									ondblclick="radioReset(this)">기타주류</label>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align:left;">
 								<b>도수</b>&emsp;
-								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="0">0-10</label>
+								<label><input type="radio" id="dMax1" name="dMax" class="mr-2" value="0"
+									ondblclick="radioReset(this)">0-10</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="1">10-20</label>
+								<label><input type="radio" id="dMax2" name="dMax" class="mr-2" value="1"
+									ondblclick="radioReset(this)">10-20</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="2">20-30</label>
+								<label><input type="radio" id="dMax3" name="dMax" class="mr-2" value="2"
+									ondblclick="radioReset(this)">20-30</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="3">30-40</label>
+								<label><input type="radio" id="dMax4" name="dMax" class="mr-2" value="3"
+									ondblclick="radioReset(this)">30-40</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="dMax" name="dMax" class="mr-2" value="4">40이상</label>
+								<label><input type="radio" id="dMax5" name="dMax" class="mr-2" value="4"
+									ondblclick="radioReset(this)">40이상</label>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align:left;">
 								<b>가격</b>&emsp;
-								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="0"> 0-5천원</label>
+								<label><input type="radio" id="pMax1" name="pMax" class="mr-2" value="0"
+									ondblclick="radioReset(this)"> 0-5천원</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="1">5천-1만원</label>
+								<label><input type="radio" id="pMax2" name="pMax" class="mr-2" value="1"
+									ondblclick="radioReset(this)">5천-1만원</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="2">1만-2만원</label>
+								<label><input type="radio" id="pMax3" name="pMax" class="mr-2" value="2"
+									ondblclick="radioReset(this)">1만-2만원</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="3">2만-3만원</label>
+								<label><input type="radio" id="pMax4" name="pMax" class="mr-2" value="3"
+									ondblclick="radioReset(this)">2만-3만원</label>
 							</td>
 							<td style="text-align:left;">
-								<label><input type="radio" id="pMax" name="pMax" class="mr-2" value="4">3만원이상</label>
+								<label><input type="radio" id="pMax5" name="pMax" class="mr-2" value="4"
+									ondblclick="radioReset(this)">3만원이상</label>
 							</td>
 						</tr>
 					 </table>
 				</div>	
 			
 				<div class="info bg-white p-4" style="text-align:center;">
-					<input type="submit" value="검색" class="btn btn-primary py-3 px-5">
+					<input type="submit" value="검색" class="btn btn-primary py-2 px-4">
+					<input type="reset" value="리셋" class="btn btn-primary py-2 px-4">
 				</div>
 				<div class="text text-center">
-					${searchPrint}
+					<%-- ${searchPrint} --%>
 				</div>
 				</form>
 			</div>
