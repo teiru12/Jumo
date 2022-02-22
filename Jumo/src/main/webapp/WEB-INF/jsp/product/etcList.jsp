@@ -8,6 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<style>
+.name{
+  width        : 225px;     /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis;  /* 위에 설정한 너비보다 길면 말줄임표처럼 표시합니다. */
+  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+  overflow     : hidden;    /* 내용이 길면 감춤니다 */
+  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+  color   : black;
+}
+</style>
 </head>
 <body>
 	<p/>
@@ -30,14 +40,14 @@
     			<c:forEach var="product" items="${productBeanList}">
     			<div class="col-md-6 col-lg-3">
     				<div class="product">
-    					<a href="pDetail.al?PID=${product.PID}" class="img-prod"><img class="img-fluid" src="img/${product.PIMAGE}" alt="이미지 없음">
+    					<a href="pDetail.al?PID=${product.PID}" class="img-prod"><img class="img-fluid" src="img/${product.PIMAGE}" alt="이미지 없음" style="height:250px;">
     						<c:if test="${product.PSALE != 0}">
     						<span class="status">${product.PSALE}%</span>
     						</c:if>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="pDetail.al?PID=${product.PID}" >${product.PNAME}</a></h3>
+    						<div class="name"><a href="pDetail.al?PID=${product.PID}" style="color:black;">${product.PNAME}</a></div>
     						<div class="d-flex">
     							<div class="pricing">
     								<c:if test="${product.PSALE == 0}">
