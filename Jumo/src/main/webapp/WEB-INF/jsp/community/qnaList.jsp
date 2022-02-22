@@ -13,18 +13,19 @@
  		<h3>고객 센터</h3>
 	</div> 		
   	     <br>
+  	     <div class="container">
   	    <!-- 글쓰기 버튼 -->
-  	    <div style='width:20%; float: right;'>
-			<input type="button" class="btn btn-dark py-1 px-3" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/>
+  	    <div style='width:100px; float: right;'>
+			<input type="button" class="btn btn-dark py-2 px-3" value="글쓰기" onclick="location.href='/Jumo/qnaForm.al'"/>
 			<!-- <a href="/Jumo/qnaForm.al">글쓰기</a> -->
 		</div>
 		<br>
 		<br>
   		<!-- 고객센터 목록 부분 -->
   		
-		<div class="container">
 			<div style="text-align:center" id="board" >
 				<div class="col-md-12 ftco-animate">
+					<div class="cart-list">
 			<table class="table">
     	<thead class="thead-primary"> 
     		<tr> 
@@ -59,11 +60,13 @@
 	</c:choose> 
 	</tbody> 
 		</table>
-</div>
+</div><!-- end cart-list div -->
+</div> 
 	<!-- 공지사항 페이징 -->
 		${paging.pageHtml}
 </div>
 </div>
+
 <br>
 <br>
 <br>

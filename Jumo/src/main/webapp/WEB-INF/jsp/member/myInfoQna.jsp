@@ -11,11 +11,15 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<h1> 내 고객센터 </h1>
+		<h3> 내 고객센터 </h3>
 	</div>
 	
-	<section class="ftco-section ftco-cart">
 		<div class="container">
+		<!-- 마이페이지 버튼 -->
+  	    <div style='width:100px; float: left;'>
+			<input type="button" class="btn btn-dark py-2 px-3" value="마이페이지" onclick="location.href='/Jumo/myPage.al'"/>
+		</div>
+		<br><br>
 			<div class="row">
 				<div class="col-md-12 ftco-animate">
 				
@@ -63,7 +67,6 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	
+<br><br><br>
 </body>
 </html>

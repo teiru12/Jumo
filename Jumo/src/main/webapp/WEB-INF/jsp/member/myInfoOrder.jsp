@@ -11,11 +11,15 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<h1> 주문 내역 </h1>
+		<h3> 주문 내역 </h3>
 	</div>
-	
-	<section class="ftco-section ftco-cart">
+
 		<div class="container">
+		<!-- 마이페이지 버튼 -->
+  	    <div style='width:100px; float: left;'>
+			<input type="button" class="btn btn-dark py-2 px-3" value="마이페이지" onclick="location.href='/Jumo/myPage.al'"/>
+		</div>
+		<br><br>
 			<div class="row">
 				<div class="col-md-12 ftco-animate">
 				
@@ -26,7 +30,6 @@
 								<tr class="text-center">
 									<th>주문번호</th>
 									<th>운송장번호</th>
-									<th>&nbsp;</th>
 									<th>상품명</th>
 									<th>수량</th>
 									<th>가격</th>
@@ -71,7 +74,6 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	
+<br><br><br>
 </body>
 </html>
