@@ -1,4 +1,4 @@
-package first.common.logger;
+package jumo.util.interceptor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
