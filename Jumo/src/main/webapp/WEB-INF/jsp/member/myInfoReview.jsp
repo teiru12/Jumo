@@ -11,11 +11,15 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<h1> 내 후기 </h1>
+		<h3> 내 후기 </h3>
 	</div>
-	
-	<section class="ftco-section ftco-cart">
+	<br><br>
 		<div class="container">
+		<!-- 마이페이지 버튼 -->
+  	    <div style='width:100px; float: left;'>
+			<input type="button" class="btn btn-dark py-2 px-3" value="마이페이지" onclick="location.href='/Jumo/myPage.al'"/>
+		</div>
+		<br><br>
 			<div class="row">
 				<div class="col-md-12 ftco-animate">
 				
@@ -24,10 +28,10 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-									<th>번호</th>
-									<th>제목</th>
+									<th scope="col" width="10%">번호</th>
+									<th scope="col" width="15%">제목</th>
 									<th>내용</th>
-									<th>작성일</th>
+									<th scope="col" width="10%">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -63,7 +67,6 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	
+<br><br><br>
 </body>
 </html>
