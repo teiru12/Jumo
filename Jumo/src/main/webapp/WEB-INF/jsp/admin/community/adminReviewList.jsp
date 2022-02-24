@@ -49,7 +49,7 @@
 												<td>${review.CDATE}</td>	
 												
 												<td>
-													<button class="btn btn-primary px-4" 
+													<button class="btn btn-dark px-4"
 														onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminReviewDelete.al?CIDX=${review.CIDX}' } else{ return false; }">삭제</button>
 												</td>											
 												

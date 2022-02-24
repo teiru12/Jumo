@@ -31,7 +31,7 @@ window.onload = function() {
 				<form action="adminPList.al">
 				<div class="form-group d-flex">
 					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}">
-					<input type="submit" value="검색" class="btn btn-primary px-4">
+					<input type="submit" value="검색" class="btn btn-dark px-4">
 				</div>
 				</form>
 				&nbsp;
