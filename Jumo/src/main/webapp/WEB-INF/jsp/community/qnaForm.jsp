@@ -41,11 +41,11 @@
     
 		<div class="form-group">
 			<label for="exampleFormControlInput1">제목</label>
-			<input type="text" class="form-control" id="Ctitle" name="CTITLE" placeholder="제목을 작성해주세요.">
+			<input type="text" class="form-control" maxlength='50' id="Ctitle" name="CTITLE" placeholder="제목을 작성해주세요.">
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">내용</label>
-			<textarea class="form-control" id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10"></textarea>
+			<textarea class="form-control" maxlength='500' id="Ccontent" name="CCONTENT" placeholder="내용을 적어주세요." rows="10"></textarea>
 		</div>
 		<p>
 			<button type="submit" class="btn btn-primary py-2 px-4" onclick="return check()">등록</button>
