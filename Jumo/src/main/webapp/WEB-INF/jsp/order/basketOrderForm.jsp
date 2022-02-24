@@ -164,12 +164,13 @@ window.onload = function() {
 </head>
 <body>
 <hr>
+<form method="post" id="basketOrderForm" action="basketOrder.al">
 	<div style="text-align:center">
 		<h3> 주문 페이지 </h3>
 	</div>
 	<br>
 	 <div class="container" style="text-align:center">
-		<form method="post" id="basketOrderForm" action="basketOrder.al">
+		
 			<table class="table">
 				<thead class="thead-primary">
 						<tr>
@@ -223,7 +224,7 @@ window.onload = function() {
 				</c:if>
 			</tbody>
 		</table>
-		</form>
+
 			</div>
 	<input type="hidden" id="listSize" name="listSize" value="${Size}">
 
@@ -367,7 +368,7 @@ window.onload = function() {
 					</div>
 			
 					<!-- 버튼 -->
-				<div style="text-align:center">
+					<div style="text-align:center">
 						<input type="button" class="btn btn-primary py-3 px-5" onClick="orderCheck()" value="주문하기"/>
 							&emsp;&emsp;
 						<input type="button" class="btn btn-dark py-3 px-5" onClick="history.back()" value="주문취소"/>
@@ -378,13 +379,17 @@ window.onload = function() {
 					</div>
 					</div>
 
+
+
 				</div>
+				
+
 			</div>
 		<br>
 	<br>
 <br><br>	
 		
-	
+</form>
 
 
 </body>
