@@ -100,6 +100,8 @@
 			* 
 		FROM
 			ORDERCOMMAND
+		ORDER BY
+		OID DESC
 	]]>
 	</select>
 

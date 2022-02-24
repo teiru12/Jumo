@@ -18,16 +18,24 @@
 <div style="text-align:center">
 	<c:choose>
          <c:when test = "${!empty invalidEMAIL}">
+         <br><br><br>
          존재하지 않는 아이디 입니다.
+         <br><br><br>
          </c:when>
          <c:when test = "${!empty invalidNAME}">
+         <br><br><br>
          존재하지 않는 회원 입니다.
+         <br><br><br>
          </c:when>
          <c:when test ="${empty Find}">
+         <br><br><br>
          고객님의 회원가입시 비밀번호는 ${memberBean.PASSWORD} 입니다.
+         <br><br><br>
          </c:when>
          <c:when test = "${!empty Find}">
+         <br><br><br>
          존재하지 않는 회원 입니다.
+         <br><br><br>
          </c:when>
 	</c:choose>
 	<p></p>		

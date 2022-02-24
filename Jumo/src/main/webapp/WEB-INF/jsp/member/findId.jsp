@@ -7,38 +7,6 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
-<style>
-#NAME {
-  display: block;
-  width: 15%;
-  height: calc(2.25rem + 2px);
-  margin : 0 auto;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-}
-#JUMIN {
-  display: block;
-  width: 15%;
-  height: calc(2.25rem + 2px);
-  margin : 0 auto;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-}
-</style>
 <script>
 /* 아이디 찾기 유효성 체크 */
 function formCheck() {
@@ -73,37 +41,55 @@ function keyPress() {
 }
 </script>
 <script>
+$(document).on("keyup", "input[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );})
+$(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val().replace(/\s/gi,"") );})
+$(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val().replace("관리자","") );})
+</script>
+<script>
 /* 첫 화면 로딩 시 포커스 */
 window.onload = function() {
 	document.getElementById("NAME").focus();
 }
 </script>
 <body>
+<div class="container" style="text-align:center;">
+	<div class="row justify-content-center">
+		<div class="col-xl-7 ftco-animate">
+			<form id="findIdForm" action="/Jumo/findIdResult.al" method="post" class="billing-form">
+			<h2 class="mb-4 billing-heading">아이디 찾기</h2><br>
+			<hr><br>
+			<div class="row align-items-end" style="padding-left:130px;">
 
-<div style="text-align:center">
-	<br>
-	<span style="font-size:xx-large; color:#82ae46;"><b>아이디 찾기</b></span>
+				
+				<div class="form-group">
+					<h6 class="mb-4" style="text-align:center;">이름</h6>
+					<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;" 
+						maxlength="8" noBlank>
+				</div>
+				<div class="w-100"></div><br>
+				<h6 class="mb-4" style="text-align:center; padding-left:150px;">주민등록번호</h6><br>
+				<div class="w-100"></div>
+				<div class="form-group">
+					<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
+							style="width:190px;" numberOnly>
+				</div>
+				&emsp;
+				<div class="form-group">
+					<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
+							style="width:190px;" onkeypress="keyPress()" numberOnly>
+				</div>
+				<div class="w-100"></div>
+			</div>
+			<p></p>
+			
+			<input type="button" value="찾기" class="btn btn-primary py-2 px-4" style="padding-right:30px;"
+				onClick="return formCheck()">
+				
+			<p></p>		
+			</form>
+		</div>
+	</div>
 </div>
-<hr>
-<div style="text-align:center">
-	<form id="findIdForm" action="/Jumo/findIdResult.al" method="post">
-		<label for="NAME">이름</label>
-		<input type="text" id="NAME" name="NAME">
-		<p></p>		
-
-		
-		<label for="JUMIN">주민번호</label><br>
-		<input type="text" id="JUMIN1" name="JUMIN1" maxlength="6">-
-		<input type="password" id="JUMIN2" name="JUMIN2" maxlength="7" onkeypress="keyPress()">
-	
-		<p></p>
-		
-		<input type="button" value="찾기" class="btn btn-primary py-2 px-4"
-			onClick="return formCheck()">
-		
-		<p></p>		
-	</form>
-</div>
-
+<br><br><br><br><br><br>
 </body>
 </html>

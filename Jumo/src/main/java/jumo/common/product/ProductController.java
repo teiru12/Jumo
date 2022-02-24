@@ -102,7 +102,7 @@ public class ProductController {
 					pPriceMax = 20000;
 					break;
 				case 3:
-					pPriceMin = 2000;
+					pPriceMin = 20000;
 					pPriceMax = 30000;
 					break;
 				case 4:
@@ -116,6 +116,11 @@ public class ProductController {
 		pOrder = request.getParameter("pOrder");
 		PSELL = request.getParameter("PSELL");
 		PDATE = request.getParameter("PDATE");
+		
+		/* 만약 가격순 검색/도수 검색일 경우 pOrder값을 설정해주어 정렬해준다 */
+		if(request.getParameter("PKIND")!=null || request.getParameter("dMax")!=null ||request.getParameter("pMax")!=null) {
+			pOrder = "LOW";
+		}
 		
 		/* url 값 설정 */
 		if(PKIND!=null) {
@@ -168,6 +173,11 @@ public class ProductController {
 		
 		/* 검색 조건 출력을 위한 메세지 삽입 */
 		model.addAttribute("searchPrint", searchPrint);
+		
+		/* 검색 체크박스 출력을 위한 조건 삽입 */
+		model.addAttribute("PKIND", request.getParameter("PKIND"));
+		model.addAttribute("dMax", request.getParameter("dMax"));
+		model.addAttribute("pMax", request.getParameter("pMax"));
 		
 		return "allList";
 	}
@@ -243,7 +253,7 @@ public class ProductController {
 					pPriceMax = 20000;
 					break;
 				case 3:
-					pPriceMin = 2000;
+					pPriceMin = 20000;
 					pPriceMax = 30000;
 					break;
 				case 4:
@@ -257,6 +267,11 @@ public class ProductController {
 		pOrder = request.getParameter("pOrder");
 		PSELL = request.getParameter("PSELL");
 		PDATE = request.getParameter("PDATE");
+		
+		/* 만약 가격순 검색/도수 검색일 경우 pOrder값을 설정해주어 정렬해준다 */
+		if(request.getParameter("PKIND")!=null || request.getParameter("dMax")!=null ||request.getParameter("pMax")!=null) {
+			pOrder = "LOW";
+		}
 		
 		/* url 값 설정 */
 		if(PKIND!=null) {

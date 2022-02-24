@@ -150,11 +150,25 @@ window.onload = function() {
 </head>
 <body class="goto-here">
 <section class="ftco-section">
+<div class="container">
+<div class="row">
+<div class="col-sm-2">
+	<div class="sidebar-box ftco-animate" id="menu" style="margin-top:30px;">
+		<ul class="categories">
+			<li><a href="/Jumo/myPage.al" style="font-size:middle;">마이페이지</a></li>
+			<li><a href="/Jumo/myInfoModifyForm.al" style="font-size:middle; color:#82ae46;">회원정보 수정</a></li>
+			<li><a href="/Jumo/myInfoOrder.al" style="font-size:middle;">주문조회</a></li>
+			<li><a href="/Jumo/myInfoReview.al" style="font-size:middle;">후기</a></li>
+			<li><a href="/Jumo/myInfoQna.al" style="font-size:middle;">고객센터</a></li>
+		</ul>
+	</div>
+</div>
+<div class="col-sm-10">
 <div class="container" style="text-align:center;">
 	<div class="row justify-content-center">
-		<div class="col-xl-7 ftco-animate">
+		<div class="col-xl-9 ftco-animate">
 			<form id="modifyForm" name="modifyForm" method="POST" action="myInfoModify.al" class="billing-form" >
-			<h2 class="mb-4 billing-heading">회원 정보 수정</h2>
+			<h2 class="mb-4 billing-heading">회원 정보 수정</h2><br><br>
 				<div class="row align-items-end" style="padding-left:150px;">
 					
 					<!-- 이메일 -->
@@ -268,6 +282,9 @@ window.onload = function() {
 			</form>
 		</div>
 	</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 </body>

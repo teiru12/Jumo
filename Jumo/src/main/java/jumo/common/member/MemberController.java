@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jumo.model.CommunityBean;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
-
 import jumo.util.MapToBean;
 import jumo.util.validator.MemberValidator;
 
@@ -49,12 +48,18 @@ public class MemberController {
 			model.addAttribute("url", "/joinForm.al");		
 			return "/member/confirmId";
 		}
+		/* 관리자 아이디를 입력 받았을 경우 */
+		if(member.getEMAIL().trim().equals("ADMIN")) {
+			model.addAttribute("msg", "이 아이디는 사용할 수 없습니다.");
+			model.addAttribute("url", "/joinForm.al");		
+			return "/member/confirmId";
+		}
 		
 		map = joinService.selectMemberId(member);
 		
 		if(map != null) {
 			// 중복된 아이디 있음
-			model.addAttribute("msg", "이 아이디는 사용하실 수 없습니다.");
+			model.addAttribute("msg", "이미 가입된 아이디입니다.");
 			model.addAttribute("url", "/joinForm.al");
 		} else {
 			//중복된 아이디 없음
@@ -163,7 +168,7 @@ public class MemberController {
 	public String findIdResult (MemberBean member, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberBean memberBean = new MemberBean();
-		
+	
 		map = loginService.selectMemberJumin(member);
 		
 		  if(map == null) {
@@ -317,7 +322,7 @@ public class MemberController {
 		}
 		
 		int reviewCount = list.size();
-
+		
 		model.addAttribute("reviewBeanList", reviewBeanList);
 		model.addAttribute("reviewCount", reviewCount);
 		

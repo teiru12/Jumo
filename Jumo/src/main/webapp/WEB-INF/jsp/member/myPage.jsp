@@ -1,5 +1,6 @@
 <%@ page import="org.springframework.web.bind.annotation.SessionAttributes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,9 +27,10 @@ function escapeCheck() {
 	<h3 style="text-align: center;">${EMAIL}님 환영합니다.</h3>
 	
 	<p></p>
-	
-	<a href="/Jumo/myInfoModifyForm.al" class="nav-link" style="font-size:large; color:#82ae46;">회원 정보 수정</a>
-	
+	<c:if test="${EMAIL != 'ADMIN'}">
+		<a href="/Jumo/myInfoModifyForm.al" class="nav-link" style="font-size:large; color:#82ae46;">회원 정보 수정</a>
+	</c:if>
+		
 	<p></p>		
 
 	<a href="/Jumo/myInfoOrder.al" class="nav-link" style="font-size:large; color:#82ae46;">주문조회</a>
@@ -41,10 +43,12 @@ function escapeCheck() {
 	
 	<a href="/Jumo/myInfoQna.al" class="nav-link" style="font-size:large; color:#82ae46;">고객센터</a>
 	
-	<p></p>		
+	<p></p>
 		
-	<a href="javascript:escapeCheck()" class="nav-link" style="font-size:large; color:#82ae46;">회원탈퇴</a>
-		
+	<c:if test="${EMAIL != 'ADMIN'}">	
+		<a href="javascript:escapeCheck()" class="nav-link" style="font-size:large; color:#82ae46;">회원탈퇴</a>
+	</c:if>
+	
 	<p></p>				
 </div>
 <br><br>

@@ -42,7 +42,7 @@ public class AdminOrderController {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();
 		
-		if(keyword == null) {
+		if(keyword == null || keyword.trim() == "") {
 			list = adminOrderService.orderList();
 		} else {
 			list = adminOrderService.orderListSearch(condition, keyword);

@@ -215,7 +215,6 @@ $(".replyAddBtn").on("click",function() {
 				
 					<table class="table">
 						<tbody>
-						
 							<tr class="text-center">
 								<td>제목</td>
 								<td colspan="2">${qnaBean.CTITLE}</td>
@@ -229,7 +228,6 @@ $(".replyAddBtn").on("click",function() {
 								<td>글 내용</td>
 								<td colspan="2" style="height:10">${qnaBean.CCONTENT}</td>
 							</tr>
-						
 						</tbody>
 					</table>
 					
@@ -241,7 +239,6 @@ $(".replyAddBtn").on("click",function() {
 	<div style="text-align:center">
 		<h3> 답변 </h3>
 	</div>
-
 	<section class="ftco-section ftco-cart">
 		<div class="container">
 			<div class="row">
@@ -259,10 +256,9 @@ $(".replyAddBtn").on("click",function() {
 												<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
 											</td>
 											<td>
-												<button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-3" >삭제</button>
+												<button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button>
 											</td>
 										</tr>
-
 						   		 	</c:forEach>
 						  	 	</c:when>
 						    	<c:otherwise>
@@ -270,11 +266,9 @@ $(".replyAddBtn").on("click",function() {
 										<td colspan="2">조회된 결과가 없습니다.</td> 
 									</tr>
 								</c:otherwise>
-							</c:choose>
-						
+							</c:choose>					
 						</tbody>
 					</table>
-					
 				</div>
 			</div>
 		</div>
@@ -304,24 +298,22 @@ $(".replyAddBtn").on("click",function() {
 							<tr class="text-center">
 								<td>
 									<div class="form-group col-sm-8">
-										<input class="form-control input-sm" id="newReplyText" name="COMMENTT" type="text" placeholder="댓글 입력...">
+										<input class="form-control input-sm" maxlength="200" id="newReplyText" name="COMMENTT" type="text" style="width:1000px;height:300px;font-size:17px;" placeholder="댓글 입력...">
 									</div>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<div class="form-group col-sm-2">
-										<button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn"
+										<button type="button" class="btn btn-primary py-3 px-4"
 											onclick="commentCheck()">
 										<i class="fa fa-save"></i>저장
 										</button>
 									</div>
 								</td>
 							</tr>
-
 						</tbody>
-					</table>
-					
+					</table>			
 				</div>
 			</div>
 		</div>

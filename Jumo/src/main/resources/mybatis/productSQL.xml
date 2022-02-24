@@ -237,7 +237,6 @@
 	
 	<!-- [updateProduct]상품 수정 기능 -->
 	<update id="updateProduct" parameterType="hashmap">
-	<![CDATA[
 		UPDATE 
 		  PRODUCT
 		SET PNAME=#{PNAME},
@@ -247,12 +246,21 @@
 			PSTOCK=#{PSTOCK},
 			PCOM=#{PCOM},
 			PLOC=#{PLOC},
-			PDEGREE=#{PDEGREE}, 
+			<if test="PDEGREE != null">
+			PDEGREE=#{PDEGREE},
+			</if>
+			<if test="PDEGREE == null">
+			PDEGREE=null,
+			</if>
+			<if test="PKIND != null">
 			PKIND=#{PKIND},
+			</if>
+			<if test="PKIND == null">
+			PKIND=null,
+			</if>
 			PTYPE=#{PTYPE}
 		WHERE 
 			PID=#{PID}
-	]]>
 	</update>
 	
 	<!-- [deleteProduct]상품 삭제 기능 -->

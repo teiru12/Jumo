@@ -114,8 +114,6 @@ $(function (){
 	<br/>
 		<div class="container">
 			<div class="row">
-			<pre>                                                                               </pre>
-
 				<div>
 				</div>
 				<br>
@@ -141,7 +139,7 @@ $(function (){
 											<b><label for="PNAME">상품명</label></b>
 										</td>
 										<td>
-											<input type="text" id="PNAME" name="PNAME" class="form-control">
+											<input type="text" maxlength="50" id="PNAME" name="PNAME" class="form-control">
 										</td>
 									</tr>
 									<tr>
@@ -174,7 +172,7 @@ $(function (){
 											<b><label for="PSTOCK">상품 수량</label></b>
 										</td>
 										<td>
-											<input type="text" id="PSTOCK" name="PSTOCK" class="form-control"
+											<input type="text" maxlength="20" id="PSTOCK" name="PSTOCK" class="form-control"
 												onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 										</td>
 									</tr>
@@ -183,7 +181,7 @@ $(function (){
 											<b><label for="PPRICE">상품 원가</label></b>
 										</td>
 										<td>
-											<input type="text" id="PPRICE" name="PPRICE" class="form-control"
+											<input type="text" maxlength="20" id="PPRICE" name="PPRICE" class="form-control"
 												onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>	
 										</td>
 									</tr>
@@ -230,7 +228,7 @@ $(function (){
 											<b><label for="PCOM">제조사</label></b>
 										</td>
 										<td>
-											<input type="text" id="PCOM" name="PCOM" class="form-control">
+											<input type="text" maxlength="20" id="PCOM" name="PCOM" class="form-control">
 										</td>
 									</tr>
 									<tr>
@@ -238,7 +236,7 @@ $(function (){
 											<b><label for="PLOC">원산지</label></b>
 										</td>
 										<td>
-											<input type="text" id="PLOC" name="PLOC" class="form-control">
+											<input type="text" maxlength="50" id="PLOC" name="PLOC" class="form-control">
 										</td>
 									</tr>
 									<tr>
@@ -275,9 +273,9 @@ $(function (){
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input type="button" value="등록" class="btn btn-primary py-3 px-5"
+											<input type="button" value="등록" class="btn btn-primary py-3 px-4"
 												onClick="return formCheck()">
-											<input type="button" value="메뉴" class="btn btn-primary py-3 px-5"
+											<input type="button" value="메뉴" class="btn btn-primary py-3 px-4"
 												onClick="adminMain">
 										</td>
 									</tr>

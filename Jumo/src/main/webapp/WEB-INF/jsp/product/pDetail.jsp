@@ -32,7 +32,14 @@ function putBasket() {
 
 function pOrderForm() {
 	var pId = document.getElementById('PID').value;
-	var count = document.getElementById('BCOUNT').value;		
+	var count = Number(document.getElementById('BCOUNT').value);
+	var stock = Number(document.getElementById('PSTOCK').value);
+	// 구매수량이 상품 재고보다 많을 경우 구매 정지
+	
+	if(count>stock) {
+		alert("상품의 재고 수량보다 많은 양을 살 수 없습니다. 재고 :" + stock + "개");
+		return false;		
+	}
 	location.href="pOrderForm.al?PID=" + pId + "&PCOUNT=" + count;	
 }
 
@@ -132,6 +139,7 @@ window.onload = function() {
 				          				</td>
 				          				<td style="text-align:right; width:50%">
 				          					<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="1" onChange="getCount()">
+				          					<input type="hidden" id="PSTOCK" value="${productBean.PSTOCK}">
 				          				</td>
 				          			</tr>
 									<tr>
@@ -139,15 +147,15 @@ window.onload = function() {
 				          				<b>총 상품 금액</b>
 				          				</td>
 				          				<td style="text-align:right; width:50%">
-				          				<div id="totalPrice">
+				          				<div id="totalPrice" style="font-weight:bold; font-size:25px; color:#82AE46">
 
 				          				</div>
 				          				</td>
 				          			</tr>
 				          			<tr>
 				          				<td colspan="2" style="text-align:right;">
-				          					<p><input type="button" class="btn btn-black py-3 px-5" onClick="putBasket()" value="장바구니">
-				          					<input type="button" class="btn btn-black py-3 px-5" onClick="pOrderForm()" value="구   매"></p>
+				          					<p><input type="button" class="btn btn-primary py-2 px-4" onClick="putBasket()" value="장바구니">
+				          					<input type="button" class="btn btn-primary py-2 px-4" onClick="pOrderForm()" value="구&emsp;&emsp;매"></p>
 				          				</td>
 				          			</tr>				          			
 				          		</table>
@@ -198,11 +206,12 @@ window.onload = function() {
 			</div>
 		</div>
 	</div>
-	
-	<div>
-		<div>
-			<div>
-				<section>
+
+	<section>	
+	<div class="container">
+		<div class="row slider-text justify-content-center align-items-center">
+			<div class="col-lg-10 mb-5">
+
 					<table style="text-align:center; margin-left:auto; margin-right:auto; width:80%;">
 						<tr>
 							<td style="width:80%; text-align:right" colspan="2">
@@ -230,10 +239,11 @@ window.onload = function() {
 
 					</table>
 					<hr>				
-				</section>
+				
 			</div>
 		</div>
 	</div>
+	</section>
 
 	
 </body>

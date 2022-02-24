@@ -10,13 +10,27 @@
 <title>주모</title>
 </head>
 <body>
-	<div style="text-align:center">
-		<h1> 주문 내역 </h1>
+<div class="container">
+<div class="row">
+<div class="col-sm-2">
+	<div class="sidebar-box ftco-animate" id="menu" style="margin-top:30px;">
+		<ul class="categories">
+			<li><a href="/Jumo/myPage.al" style="font-size:middle;">마이페이지</a></li>
+			<li><a href="/Jumo/myInfoModifyForm.al" style="font-size:middle;">회원정보 수정</a></li>
+			<li><a href="/Jumo/myInfoOrder.al" style="font-size:middle; color:#82ae46;">주문조회</a></li>
+			<li><a href="/Jumo/myInfoReview.al" style="font-size:middle;">후기</a></li>
+			<li><a href="/Jumo/myInfoQna.al" style="font-size:middle;">고객센터</a></li>
+		</ul>
 	</div>
-	
-	<section class="ftco-section ftco-cart">
-		<div class="container">
-			<div class="row">
+</div>
+<div class="col-sm-10">
+	<div style="text-align:center">
+		<h3> 주문 내역 </h3>
+	</div>
+
+	<div class="container">
+	<br><br>
+		<div class="row">
 				<div class="col-md-12 ftco-animate">
 				
 					<div class="cart-list">
@@ -26,7 +40,6 @@
 								<tr class="text-center">
 									<th>주문번호</th>
 									<th>운송장번호</th>
-									<th>&nbsp;</th>
 									<th>상품명</th>
 									<th>수량</th>
 									<th>가격</th>
@@ -71,7 +84,9 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	
+</div>
+</div>
+</div>
+<br><br><br>
 </body>
 </html>
