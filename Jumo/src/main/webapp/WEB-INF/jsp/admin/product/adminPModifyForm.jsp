@@ -306,9 +306,9 @@ window.onload = function() {
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input type="button" value="수정" class="btn btn-primary py-3 px-5"
+											<input type="button" value="수정" class="btn btn-dark py-2 px-3"
 												onClick="return formCheck()">
-											<input type="button" value="메뉴" class="btn btn-primary py-3 px-5"
+											<input type="button" value="메뉴" class="btn btn-primary py-2 px-3"
 												onClick="javascrpit:loaction.href='adminMain.al'">
 										</td>
 									</tr>

@@ -105,10 +105,9 @@
 		
 				<!-- 버튼 -->
 				<div class="form-group" align="center">
-					 <button type="submit" class="btn btn-primary py-3 px-5" >저장</button>
+					 <button type="submit" class="btn btn-black py-2 px-3" >저장</button>
 
-			          &emsp;&emsp;
-			          <button type="button" class="btn btn-black py-3 px-5" onclick="history.back()">취소</button>
+			         <button type="button" class="btn btn-primary py-2 px-3" onclick="history.back()">취소</button>
 				     
 				</div>
 			</form>	

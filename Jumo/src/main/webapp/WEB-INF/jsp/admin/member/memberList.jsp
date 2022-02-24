@@ -26,7 +26,7 @@
 					</select>
 					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;"
 						placeholder="검색어 ..." value="${keyword}"/>
-					<button type="submit" class="btn btn-primary px-4">검색</button>
+					<button type="submit" class="btn-black px-4">검색</button>
 				</div>
 				</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
 				<div>

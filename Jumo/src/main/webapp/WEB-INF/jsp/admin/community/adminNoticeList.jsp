@@ -32,6 +32,7 @@
 									<th>제목</th>
 									<th>작성자</th>
 									<th>작성일</th>
+									<th><th>
 								</tr>
 							</thead>
 							<tbody>
@@ -43,13 +44,21 @@
 										${notice.CWRITER}
 									</td>
 									<td>${notice.CDATE}</td>
+									<td>
+										<form id="qnaDelete" action="adminQnaDelete.al" method="post">
+										   	<button class="btn btn-light py-2 px-3"
+												onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaDelete.al?CIDX= + ${qna.CIDX}' } else{ return false; }">
+												삭제
+											</button>
+										</form>
+												</td>
 								</tr><!-- END TR-->
 								</c:forEach>
 							</tbody>
 							</table>
 						<br>
 						<div style="text-align:center;">
-							<button class="btn btn-primary px-4" style="height:55px;"
+							<button class="btn btn-light py-2 px-3" style="height:55px;"
 							onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
 						</div>
 						<br>

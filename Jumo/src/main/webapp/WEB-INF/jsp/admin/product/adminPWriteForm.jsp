@@ -273,9 +273,9 @@ $(function (){
 									</tr>
 									<tr>
 										<td colspan="2">
-											<input type="button" value="등록" class="btn btn-dark py-3 px-4"
+											<input type="button" value="등록" class="btn btn-dark py-2 px-3"
 												onClick="return formCheck()">
-											<input type="button" value="메뉴" class="btn btn-primary py-3 px-4"
+											<input type="button" value="메뉴" class="btn btn-primary py-2 px-3"
 												onClick="adminMain">
 										</td>
 									</tr>

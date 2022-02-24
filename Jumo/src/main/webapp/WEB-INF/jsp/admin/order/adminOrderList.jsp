@@ -27,8 +27,8 @@
 	                    <option id="OPRODUCT" <c:if test="${condition eq 'OSTATUS'}">selected</c:if> value="OSTATUS">배송상태</option>
 					</select>
 				</div>&nbsp;
-				<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}"> &nbsp; &nbsp;
-			<input type="submit" style="height:53px;" value="검색" class="btn btn-dark px-4">
+				<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}"> &nbsp;
+			<input type="submit" style="height:53px;" value="검색" class="btn-black px-4">
 			</div>
 		</form>
 	</div>
@@ -56,7 +56,7 @@
 						<c:when test="${fn:length(orderBeanList)>0}">
 							<c:forEach var="order" items="${orderBeanList}" varStatus="status">
 							<tr>
-							<td>&emsp;&emsp;&emsp;${order.OID}&emsp;&emsp;</td>
+							<td>&emsp;&emsp;${order.OID}&emsp;&emsp;</td>
 							<td>${order.ODATE}</td>
 							<td>${order.OMAIL}</td>
 							<td><a href="adminOrderDetail.al?OID=${order.OID}">${order.OPRODUCT}</a></td>
@@ -66,9 +66,9 @@
 						    <td>${order.OTOTAL}</td>
 						    <td>
 						    <c:choose>
-						    	<c:when test="${order.OSTATUS eq '배송전'}">배송전 &emsp;&emsp;</c:when>
-						    	<c:when test="${order.OSTATUS eq '배송중'}">배송중 &emsp;&emsp;</c:when>
-						    	<c:when test="${order.OSTATUS eq '배송완료'}">배송완료 &emsp;&emsp;</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송전'}">&emsp;배송전&emsp;</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송중'}">&emsp;배송중&emsp;</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송완료'}">&emsp;배송완료&emsp;</c:when>
 						    </c:choose>
 						    </td>
 							</c:forEach>
