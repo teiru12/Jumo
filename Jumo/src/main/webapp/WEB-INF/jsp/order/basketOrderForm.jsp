@@ -25,8 +25,8 @@ function getCount() {
 		
 		sum += price * count;
 		saleSum += (price*sale/100)*count;// 상품이 할인받은 가격
-		/* document.getElementById("totalPrice"+i).innerText = totalPrice + '원'; */
-		/* document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원'; */
+		/* document.getElementById("totalPrice"+i).innerText = totalPrice + '원';  */
+		document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원'; 
 	}
 	document.getElementById("originalSum").innerText = sum + '원'; // 페이지의 sum값 출력
 	document.getElementById("saleSum").innerText = saleSum + '원'; // 페이지의 saleSum값 출력
@@ -163,64 +163,80 @@ window.onload = function() {
 </script>
 </head>
 <body>
+<hr>
 	<div style="text-align:center">
 		<h3> 주문 페이지 </h3>
 	</div>
-	<form method="post" id="basketOrderForm" action="basketOrder.al">
-				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						    <th><input type="checkbox" id="check" name="check"></th>
-						        <th>&nbsp;</th>
-						        <th>상품명/옵션</th>
-						       		&nbsp; &nbsp;
-						        <th>수량</th>
-						        <th>할인가격</th>
-						        <th>결제금액</th>
-						      </tr>
-						    </thead>
-						    <c:if test="${Size>=1}">
-						  <c:forEach var="i" begin="0" end="${Size-1}">
-						    <tbody>
-						      <tr class="text-center">
-						     
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div id="OPID" class="img" style="background-image:url(img/product-${basketBeanList[i].BID}.png);"></div></td>
+	<br>
+	 <div class="container" style="text-align:center">
+		<form method="post" id="basketOrderForm" action="basketOrder.al">
+			<table class="table">
+				<thead class="thead-primary">
+						<tr>
+						   <!-- <th>&nbsp;</th> -->
+						   <th colspan="2">상품명</th>
+						   <th>수량</th>
+						   <th>할인가격</th>
+						   <th>결제금액</th>
+						</tr>
+				</thead>
+			<c:if test="${Size>=1}">
+				<c:forEach var="i" begin="0" end="${Size-1}">
+					<tbody>
+						<tr class="text-center">
+							
+							<td class="image-prod">
+								<div id="OPID" class="img" style="background-image:url(img/product-${basketBeanList[i].BID}.png);"></div>
+							</td>
     						
-						        <td class="product-name">
-						        	<h3><a href="pDetail.al?PID=${basketBeanList[i].BID}">${basketBeanList[i].BNAME}</a></h3>
-						        	<input type="hidden" id="OIDX${i}" name="OIDX" value="${basketBeanList[i].BIDX}">
-				          			<input type="hidden" id="OSALE${i}" name="OSALE" value="${basketBeanList[i].BSALE}">
-						        </td>
-
-						       <td>
-						        	<input type="number" min="0" max="${proInfoList[i].PSTOCK}" id="OCOUNT${i}" value="${basketBeanList[i].BCOUNT}" readonly>
-					          	</td>
+    						<td class="product-name">
+						    	<h3><a href="pDetail.al?PID=${basketBeanList[i].BID}">${basketBeanList[i].BNAME}</a></h3>
+						    	<input type="hidden" id="OIDX${i}" name="OIDX" value="${basketBeanList[i].BIDX}">
+				          		<input type="hidden" id="OSALE${i}" name="OSALE" value="${basketBeanList[i].BSALE}">
+						    </td>
+							
+							<td>
+						        <input type="number" style="width: 3em;" min="0" max="${proInfoList[i].PSTOCK}" id="OCOUNT${i}" value="${basketBeanList[i].BCOUNT}" readonly>
+					        </td>
 						        
-						        <td>
-						        <c:set var="salePrice" value="${basketBeanList[i].BPRICE * (100-basketBeanList[i].BSALE) * 0.01}" />
+						    <%-- <td>
+						        
 		    					<b><fmt:formatNumber value="${salePrice}" pattern="#.#" />원</b>
-		    					<input type="hidden" id="OPRICE${i}" name="OPRICE" value="${basketBeanList[i].BPRICE}">
-				          		</td>
+		    					
+				          	</td> --%>
+				          	<td id="saled${i}" style="color:Crimson">
+				          	<c:set var="salePrice" value="${basketBeanList[i].BPRICE * (100-basketBeanList[i].BSALE) * 0.01}" />
+				          	<input type="hidden" id="OPRICE${i}" name="OPRICE" value="${basketBeanList[i].BPRICE}"></td>
 						        
-						        <td style="font-weight : bold;">
+						    <td style="font-weight : bold;">
 								<c:set var="total" value="${salePrice * basketBeanList[i].BCOUNT}"/>
 								<fmt:parseNumber var="totalPrice" integerOnly="true" value="${total}"/>
 								<b><fmt:formatNumber value="${totalPrice}" pattern="#.#"/>원</b>
 								<input type="hidden" name="OTOTAL" value="${totalPrice}">
-						        </td>
-						      </tr>
-						      </c:forEach>
-						      </c:if>
-						      <c:if test="${Size<=0}">
-						<tr><td style="text-align:center" colspan="9">장바구니에 상품이 없어요</td></tr>
-							</c:if>
-						    </tbody>
-						    </table>
-						    <input type="hidden" id="listSize" name="listSize" value="${Size}">
-						    
-						    <div class="cart-total mb-3" style="text-align:center">
+						    </td>
+						      
+						</tr>
+				</c:forEach>
+			</c:if>
+				<c:if test="${Size<=0}">
+					<tr><td style="text-align:center" colspan="9">장바구니에 상품이 없습니다.</td></tr>
+				</c:if>
+			</tbody>
+		</table>
+		</form>
+			</div>
+	<input type="hidden" id="listSize" name="listSize" value="${Size}">
+
+	<input type="hidden" name="OMAIL" value="${memberBean.EMAIL}">
+	<input type="hidden" id="ONAME" value="${memberBean.NAME}">
+	<input type="hidden" id="OMOBILE" value="${memberBean.MOBILE}">
+	<input type="hidden" id="OPOSTCODE" value="${memberBean.POSTCODE}">
+	<input type="hidden" id="OADDRESS1" value="${memberBean.ADDRESS1}">
+	<input type="hidden" id="OADDRESS2" value="${memberBean.ADDRESS2}">
+	
+			<br>	
+				<div class="container">  
+					<div class="cart-total mb-3" style="text-align:center">
     					<h2>결제 금액</h2><br>
     					<p class="d-flex">
     						<span>주문금액</span>
@@ -228,7 +244,7 @@ window.onload = function() {
     					</p>
     					<p class="d-flex">
     						<span>할인금액</span>
-    						<span id="saleSum"></span>
+    						<span id="saleSum" style="color:Crimson"></span>
     					</p>
     					<p class="d-flex">
     						<span>배송비</span>
@@ -240,8 +256,10 @@ window.onload = function() {
     						<span id="finalSum"></span>
     					</p>
     				</div>
-    				
-	<section class="ftco-section">
+    				</div>
+    			
+    			
+    			 <br>
 		<div class="container" style="text-align:center;">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
@@ -262,7 +280,7 @@ window.onload = function() {
 						<div class="form-group">
 							<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 							<input type="text" class="form-control"
-								style="width:400px;" value="${memberBean.MOBILE}"> 
+								style="width:400px;" value="${memberBean.MOBILE}" readonly> 
 							<div class="w-100"></div>
 						</div>
 						<div class="w-100"></div>
@@ -271,6 +289,7 @@ window.onload = function() {
 						
 					<hr>
 					
+					<br><br>
 					<!-- 주문자 정보와 동일한지 체크-->
 					<div class="row align-items-end" style="padding-left:150px;">
 						<div class="form-group">
@@ -348,23 +367,25 @@ window.onload = function() {
 					</div>
 			
 					<!-- 버튼 -->
-					<div class="form-group" align="center">
-						<button type="button" class="btn btn-primary py-3 px-5" onClick="orderCheck()">주문하기</button>
+				<div style="text-align:center">
+						<input type="button" class="btn btn-primary py-3 px-5" onClick="orderCheck()" value="주문하기"/>
+							&emsp;&emsp;
+						<input type="button" class="btn btn-dark py-3 px-5" onClick="history.back()" value="주문취소"/>
 						
-						&emsp;&emsp;
+				<!-- 		&emsp;&emsp;
 						<button type="reset" class="btn btn-black py-3 px-5"
-				          	onClick="history.back()">주문취소</button>
+				          	onClick="history.back()">주문취소</button> -->
 					</div>
-					<br>
-					<br>
-		
+					</div>
 
 				</div>
 			</div>
-		</div>
+		<br>
+	<br>
+<br><br>	
 		
-	</section>
+	
 
-</form>
+
 </body>
 </html>
