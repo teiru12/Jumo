@@ -194,7 +194,7 @@ window.onload = function() {
 			
 				<div class="info bg-white p-4" style="text-align:center;">
 					<input type="submit" value="검색" class="btn btn-primary py-2 px-4">
-					<input type="reset" value="리셋" class="btn btn-primary py-2 px-4">
+					<input type="reset" value="리셋" class="btn btn-black py-2 px-4">
 				</div>
 				<div class="text text-center">
 					<%-- ${searchPrint} --%>

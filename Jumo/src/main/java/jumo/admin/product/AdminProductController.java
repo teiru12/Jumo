@@ -8,10 +8,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -112,7 +115,8 @@ public class AdminProductController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("paging", paging);
 		
-		return "adminPList";
+		return "adminPListAjax";
+		// return "adminPList";
 	}
 	
 	@RequestMapping(value="/adminPWriteForm.al")
@@ -290,6 +294,18 @@ public class AdminProductController {
 		
 		return "/admin/product/adminPDelete";
 	}
+	
+	@RequestMapping(value="/adminPDeleteAjax.al")
+	public String adminPDeleteAjax(String PID) throws Exception {
+		
+		ProductBean product = new ProductBean();
+		product.setPID(Integer.parseInt(PID));
+		
+		adminProductService.deleteProduct(product);		
+		
+		return "adminPList";
+	}
+	
 
 	@RequestMapping(value="/adminSellList.al")
 	public String adminSellList(HttpServletRequest request, 
