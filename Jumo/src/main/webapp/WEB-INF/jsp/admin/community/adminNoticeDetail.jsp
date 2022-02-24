@@ -57,8 +57,8 @@ function deleteCheck() {
 		</div>
 <br>
 <p style="text-align:center;">
-<button class="btn btn-primary px-1" onclick="location.href='adminNoticeModifyForm.al?CIDX=${noticeBean.CIDX}'">수정</button>
-<button class="btn btn-primary px-1" onclick="return deleteCheck()">삭제</button>
+<button class="btn btn-black py-2 px-3" onclick="location.href='adminNoticeModifyForm.al?CIDX=${noticeBean.CIDX}'">수정</button>
+<button class="btn btn-light py-2 px-3" onclick="return deleteCheck()">삭제</button>
 </p>
 </body>
 </html>

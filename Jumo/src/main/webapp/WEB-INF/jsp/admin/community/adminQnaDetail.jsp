@@ -256,7 +256,7 @@ $(".replyAddBtn").on("click",function() {
 												<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
 											</td>
 											<td>
-												<button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button>
+												<button type="submit" onclick="return deleteCheck1()" class="btn btn-light px-4" >삭제</button>
 											</td>
 										</tr>
 						   		 	</c:forEach>
@@ -305,7 +305,7 @@ $(".replyAddBtn").on("click",function() {
 							<tr>
 								<td>
 									<div class="form-group col-sm-2">
-										<button type="button" class="btn btn-primary py-3 px-4"
+										<button type="button" class="btn btn-light py-2 px-3"
 											onclick="commentCheck()">
 										<i class="fa fa-save"></i>저장
 										</button>
