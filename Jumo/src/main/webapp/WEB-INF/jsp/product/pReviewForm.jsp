@@ -130,15 +130,15 @@ window.onload = function() {
 		</div>
 	</div>
 
-	
-	<div>
-		<div>
-			<div>
-				<section>
+	<section>	
+	<div class="container">
+		<div class="row slider-text justify-content-center align-items-center">
+			<div class="col-lg-10 mb-5">
+
 					<form id="reviewForm" action="pReview.al" method="post">
 					<table style="text-align:center; margin-left:auto; margin-right:auto; width:80%;">
 						<tr>
-							<td style="width:80%; text-align:left">
+							<td style="width:10%; text-align:left">
 			   					작성자
 			   				</td>
 			   				<td>
@@ -148,16 +148,16 @@ window.onload = function() {
 							</td>
 						</tr>
 						<tr>
-							<td style="width:100%; text-align:left;">
+							<td style="width:10%; text-align:left;">
 								제목 
 							</td>
 							<td>
-								<input type="text" id="CTITLE" name="CTITLE">
+								<input type="text" id="CTITLE" name="CTITLE" style="width:90%; text-align:right;" maxlength="50">
 							</td>
 						</tr>
 						<tr>
 							<td style="width:100%; text-align:left;" colspan="2">
-								<textarea name="CCONTENT" id="CCONTENT" cols="30" rows="7" class="form-control"></textarea>
+								<textarea name="CCONTENT" id="CCONTENT" cols="30" rows="7" maxlength="500" class="form-control"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -170,10 +170,10 @@ window.onload = function() {
 					</table>
 					</form>
 					<hr>				
-				</section>
+
 			</div>
 		</div>
 	</div>
-	
+	</section>	
 </body>
 </html>

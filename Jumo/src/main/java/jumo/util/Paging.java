@@ -34,15 +34,15 @@ public class Paging {
 		pageHtml.append("<div class=\"block-27\">");
 		pageHtml.append("<ul>");
 		if(startPage>pageBlock) {
-			pageHtml.append("<li><a href=\"" + url + "?page=" + (startPage-pageBlock) + searchUrl + "\">&lt;</a></li>");
+			pageHtml.append("<li><a href=\"" + url + "?page=" + (startPage-pageBlock) + searchUrl + "\">&lt;</a></li>&nbsp;");
 		}
 		
 		for(int i=startPage;i<=endPage;i++) {
 			pageHtml.append("<li class=\"active\">");
 			if(i!=currentPage) {
-				pageHtml.append("<li><a href=\"" + url + "?page=" + i  + searchUrl + "\">" + i + "</a></li>");				
+				pageHtml.append("<li><a href=\"" + url + "?page=" + i  + searchUrl + "\">" + i + "</a></li>&nbsp;");				
 			} else {
-				pageHtml.append("<li class=\"active\"><span>" + i+ "</span>");				
+				pageHtml.append("<li class=\"active\"><span>" + i+ "</span>&nbsp;");				
 			}
 		}
 		

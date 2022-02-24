@@ -25,9 +25,9 @@
 				class="jumo.util.interceptor.LoggerInterceptor" />
 		</mvc:interceptor>
 		
-<!-- 		<mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**.al" />
-			<mvc:exclude-mapping path="/**main.al" />
+<!-- 			<mvc:exclude-mapping path="/**main.al" />
 			<mvc:exclude-mapping path="/**loginForm.al" />
 			<mvc:exclude-mapping path="/**login.al" />
 			<mvc:exclude-mapping path="/**joinForm.al" />
@@ -36,10 +36,10 @@
 			<mvc:exclude-mapping path="/**findIdResult.al" />
 			<mvc:exclude-mapping path="/**findPw.al" />
 			<mvc:exclude-mapping path="/**findPwResult.al" />
-			<mvc:exclude-mapping path="/**confirmId.al" />
+			<mvc:exclude-mapping path="/**confirmId.al" /> -->
 			<bean id="loginInterceptor"
 				class="jumo.util.interceptor.LoginInterceptor" />
-		</mvc:interceptor> -->
+		</mvc:interceptor>
 		
 	</mvc:interceptors>
 	
