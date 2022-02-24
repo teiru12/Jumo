@@ -26,6 +26,7 @@
 								<tr class="text-center">
 									<th>번호</th>
 									<th>제목</th>
+									<th>내용</th>
 									<th>작성자</th>
 									<th>작성일</th>
 									<th>&nbsp;</th>
@@ -41,12 +42,14 @@
 												
 												<td>${review.CTITLE}</td>
 												
+												<td>${review.CCONTENT}</td>
+												
 												<td>${review.CWRITER}</td>
 												
 												<td>${review.CDATE}</td>	
 												
 												<td>
-													<button class="btn btn-primary px-3" 
+													<button class="btn btn-primary px-4" 
 														onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminReviewDelete.al?CIDX=${review.CIDX}' } else{ return false; }">삭제</button>
 												</td>											
 												

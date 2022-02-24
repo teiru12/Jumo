@@ -27,11 +27,9 @@
 	                    <option id="OPRODUCT" <c:if test="${condition eq 'OSTATUS'}">selected</c:if> value="OSTATUS">배송상태</option>
 					</select>
 				</div>&nbsp;
-				<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}">
-			</div><br/>
-			<input type="submit" value="검색" class="btn btn-dark px-4">
-			<input type="reset" value="리셋" class="btn btn-outline-dark px-4">
-			<br/>
+				<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}"> &nbsp; &nbsp;
+			<input type="submit" style="height:53px;" value="검색" class="btn btn-dark px-4">
+			</div>
 		</form>
 	</div>
 	<br><hr width="80%" align="center"><br>

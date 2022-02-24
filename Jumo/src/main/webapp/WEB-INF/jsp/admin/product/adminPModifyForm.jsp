@@ -31,9 +31,6 @@
 			alert("상품 이름을 입력해주세요.");
 			PNAME.focus();
 			return false;
-		} else if(PIMAGE.value.trim()=="") {
-			alert("상품 이미지를 넣어주세요.");
-			return false;
 		} else if(PSTOCK.value.trim()=="") {
 			alert("상품 수량을 입력해주세요.");
 			PSTOCK.focus();
@@ -54,7 +51,7 @@
 			alert("생산지를 입력해주세요.");
 			PLOC.focus();
 			return false;
-		} else if(PTYPE_ACL=='ALCOHOL' && PDEGREE.value.trim()=="") {
+		} else if(PDEGREE.value.trim()=="") {
 			alert("도수를 입력해주세요.");
 			PDEGREE.focus();
 			return false;
@@ -89,6 +86,7 @@ $(function (){
 	var etcChk = $('input[type=radio][id="PTYPE_ETC"]:checked').val();
 		if(etcChk=='ETC'){
 		$('#etc_view').css('display','none');
+		document.getElementById("PDEGREE").value = 0;
 		/* $('#etc_view2').css('display','none'); */
 		} 
 	});
@@ -133,8 +131,6 @@ window.onload = function() {
 	<br/>
 		<div class="container">
 			<div class="row">
-			<pre>                                                                               </pre>
-
 				<div>
 				</div>
 				<br>
@@ -174,7 +170,7 @@ window.onload = function() {
 											<b><label for="PNAME">상품명</label></b>
 										</td>
 										<td>
-											<input type="text" id="PNAME" name="PNAME" class="form-control" value="${productBean.PNAME}">
+											<input type="text" maxlength="50" id="PNAME" name="PNAME" class="form-control" value="${productBean.PNAME}">
 										</td>
 									</tr>
 									<tr>
@@ -208,7 +204,7 @@ window.onload = function() {
 											<b><label for="PSTOCK">상품 수량</label></b>
 										</td>
 										<td>
-											<input type="text" id="PSTOCK" name="PSTOCK" class="form-control" value="${productBean.PSTOCK}"
+											<input type="text" maxlength="20" id="PSTOCK" name="PSTOCK" class="form-control" value="${productBean.PSTOCK}"
 												onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 										</td>
 									</tr>
@@ -217,7 +213,7 @@ window.onload = function() {
 											<b><label for="PPRICE">상품 원가</label></b>
 										</td>
 										<td>
-											<input type="text" id="PPRICE" name="PPRICE" class="form-control" value="${productBean.PPRICE}"
+											<input type="text" maxlength="20" id="PPRICE" name="PPRICE" class="form-control" value="${productBean.PPRICE}"
 												onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>	
 										</td>
 									</tr>
@@ -265,7 +261,7 @@ window.onload = function() {
 											<b><label for="PCOM">제조사</label></b>
 										</td>
 										<td>
-											<input type="text" id="PCOM" name="PCOM" class="form-control" value="${productBean.PCOM}">
+											<input type="text" maxlength="20" id="PCOM" name="PCOM" class="form-control" value="${productBean.PCOM}">
 										</td>
 									</tr>
 									<tr>
@@ -273,7 +269,7 @@ window.onload = function() {
 											<b><label for="PLOC">원산지</label></b>
 										</td>
 										<td>
-											<input type="text" id="PLOC" name="PLOC" class="form-control" value="${productBean.PLOC}">
+											<input type="text" maxlength="50" id="PLOC" name="PLOC" class="form-control" value="${productBean.PLOC}">
 										</td>
 									</tr>
 									<tr>
@@ -313,7 +309,7 @@ window.onload = function() {
 											<input type="button" value="수정" class="btn btn-primary py-3 px-5"
 												onClick="return formCheck()">
 											<input type="button" value="메뉴" class="btn btn-primary py-3 px-5"
-												onClick="adminMain">
+												onClick="javascrpit:loaction.href='adminMain.al'">
 										</td>
 									</tr>
 								</tbody>
