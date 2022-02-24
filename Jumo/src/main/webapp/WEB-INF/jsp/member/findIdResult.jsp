@@ -16,19 +16,32 @@
 <hr>
 <div style="text-align:center">
 	<c:if test="${empty Find}">
+		<br><br><br>
 		고객님의 회원가입시 아이디는 ${memberBean.EMAIL} 입니다.
+		
+		<p></p>
+		<br><br><br>
+		<input type="button" value="로그인" class="btn btn-primary py-2 px-4"
+			onClick="location.href='/Jumo/loginForm.al'">
+		<input type="button" value="비밀번호 찾기" class="btn btn-light py-2 px-4"
+			onClick="location.href='/Jumo/findPw.al'">
 	</c:if>
     
 	<c:if test="${!empty Find}">
+		<br><br><br>
 		존재하지 않는 회원입니다.
+		
+		<p></p>
+		<br><br><br>
+		<input type="button" value="로그인" class="btn btn-primary py-2 px-4"
+			onClick="location.href='/Jumo/loginForm.al'">
+		<input type="button" value="회원가입" class="btn btn-light py-2 px-4"
+			onClick="location.href='/Jumo/join.al'">
 	</c:if>
-	<p></p>		
+			
 
 	
-	<input type="button" value="로그인" class="btn btn-primary py-2 px-4"
-			onClick="location.href='/Jumo/loginForm.al'">
-	<input type="button" value="비밀번호 찾기" class="btn btn-primary py-2 px-4"
-			onClick="location.href='/Jumo/findPw.al'">
+	
 		
 	<p></p>		
 

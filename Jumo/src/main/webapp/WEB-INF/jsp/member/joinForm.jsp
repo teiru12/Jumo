@@ -68,6 +68,7 @@
 			return false;
 		}
 		
+		
 		if(ADDRESS1.value.trim() == ""){
 			alert("주소를 입력해주세요.");
 			ADDRESS1.focus();
@@ -94,6 +95,11 @@
 		
 		document.joinForm.submit();
 	}
+</script>
+<script>
+$(document).on("keyup", "input[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );})
+$(document).on("keyup", "input[noSpecial]", function() {$(this).val( $(this).val().replace(/[^ㄱ-힣a-zA-Z0-9@]/gi,"") );})
+$(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val().replace(/\s/gi,"") );})
 </script>
 <script>
 $(document).ready(function() {
@@ -170,23 +176,26 @@ window.onload = function() {
 					<h6 class="mb-4" style="text-align:left;">아이디</h6>
 					<div class="w-100"></div>
 					<div class="form-group d-flex">
-						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;">
-						<input type="button" value="중복확인" class="submit px-3" onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()">
+						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;" 
+							maxlength="10" noSpecial>
+						<input type="button" value="중복확인" class="submit px-3"
+						onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()">
 					</div>
 					<div class="w-100"></div>
            
 					<!-- 비밀번호 -->
-					
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">비밀번호</h6>
-						<input type="password" id="PASSWORD" name="PASSWORD" class="form-control" style="width:400px;">
+						<input type="password" id="PASSWORD" name="PASSWORD" class="form-control" style="width:400px;" 
+							maxlength="10" noBlank>
 					</div>
 					<div class="w-100"></div>
 					
 					<!-- 비밀번호 확인 -->
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">비밀번호 확인</h6>
-						<input type="password" id="PASSWORD2" name="PASSWORD2"  class="form-control" style="width:400px;">
+						<input type="password" id="PASSWORD2" name="PASSWORD2"  class="form-control" style="width:400px;" 
+							maxlength="10" noBlank>
 					</div>
 					<div class="w-100"></div>
 					<br/><br/>
@@ -194,7 +203,8 @@ window.onload = function() {
 					<!-- 이름 -->
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">이름</h6>
-						<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;">
+						<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;" 
+							maxlength="8" noBlank>
 					</div>
 					<div class="w-100"></div>
 					
@@ -202,12 +212,12 @@ window.onload = function() {
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
 						<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:190px;">
+							style="width:190px;" numberOnly>
 					</div>
 					&emsp;
 					<div class="form-group">
-						<input type="text" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:190px;">
+						<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
+							style="width:190px;" numberOnly>
 					</div>
 					<div class="w-100"></div>
 					
@@ -215,8 +225,7 @@ window.onload = function() {
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
 						<input type="text" id="PHONE" name="PHONE" size="24"  class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;"
-							maxlength="11">
+							style="width:400px;" maxlength="11" numberOnly>
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 					</div>
@@ -226,8 +235,7 @@ window.onload = function() {
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 						<input type="text" id="MOBILE" name="MOBILE" class="form-control"
-							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
-							maxlength="11"> 
+							size="24" style="width:400px;" maxlength="11" numberOnly> 
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 					</div>
@@ -239,17 +247,19 @@ window.onload = function() {
 					<div class="w-100"></div>
 					<div class="form-group d-flex">
 						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호"
-							maxlength="7" style="width:270px;">
+							maxlength="7" style="width:270px;" numberOnly>
 						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<div class="w-100"></div>
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">주소</h6>
-						<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;">
+						<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" 
+							class="form-control" style="width:190px;" maxlength="100">
 					</div>
 					&emsp;
 					<div class="form-group">
-						<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" class="form-control" style="width:190px;">
+						<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" 
+						 class="form-control" style="width:190px;" maxlength="100">
 					</div>			
 					<div class="w-100"></div>
 					<br/><br/><br/><br/>

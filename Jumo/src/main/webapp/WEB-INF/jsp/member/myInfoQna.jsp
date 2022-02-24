@@ -10,63 +10,75 @@
 <title>주모</title>
 </head>
 <body>
-	<div style="text-align:center">
-		<h3> 내 고객센터 </h3>
+<div class="container">
+<div class="row">
+<div class="col-sm-2">
+	<div class="sidebar-box ftco-animate" id="menu" style="margin-top:30px;">
+		<ul class="categories">
+			<li><a href="/Jumo/myPage.al" style="font-size:middle;">마이페이지</a></li>
+			<li><a href="/Jumo/myInfoModifyForm.al" style="font-size:middle;">회원정보 수정</a></li>
+			<li><a href="/Jumo/myInfoOrder.al" style="font-size:middle;">주문조회</a></li>
+			<li><a href="/Jumo/myInfoReview.al" style="font-size:middle;">후기</a></li>
+			<li><a href="/Jumo/myInfoQna.al" style="font-size:middle; color:#82ae46;">고객센터</a></li>
+		</ul>
 	</div>
-	
-		<div class="container">
-		<!-- 마이페이지 버튼 -->
-  	    <div style='width:100px; float: left;'>
-			<input type="button" class="btn btn-dark py-2 px-3" value="마이페이지" onclick="location.href='/Jumo/myPage.al'"/>
-		</div>
-		<br><br>
-			<div class="row">
-				<div class="col-md-12 ftco-animate">
-				
-					<div class="cart-list">
-				
-						<table class="table">
-							<thead class="thead-primary">
-								<tr class="text-center">
-									<th>번호</th>
-									<th>제목</th>
-									<th>내용</th>
-									<th>작성일</th>
-								</tr>
-							</thead>
-							<tbody>
-							
-							    <c:choose> 
-							    	<c:when test="${qnaCount!=0}"> 
-							    		<c:forEach var="qna" items="${qnaBeanList}" varStatus="status"> 
-											<tr class="text-center">
-											<td>${qna.CIDX}</td>
-											
-											<td>${qna.CTITLE}</td>
-    			
-    										<td><a href="qnaDetail.al?CIDX=${qna.CIDX}">${qna.CCONTENT}</a></td>
-											
-											<td>${qna.CDATE}</td>
-											
-										</tr><!-- END TR-->
-										</c:forEach>
-									</c:when>
-										
-									<c:otherwise> 
-										 <tr>
-											<td colspan="3">조회된 결과가 없습니다.</td> 
-										</tr>
-									</c:otherwise>
-								</c:choose> 
-							
-							</tbody>
-						</table>
+</div>
+<div class="col-sm-10">
+	<div style="text-align:center">
+		<h3> 내 고객센터 </h3><br><br>
+	</div>
+	<button type="button" class="btn btn-dark py-2 px-3" style="float:right;" onClick="location.href='/Jumo/qnaForm.al'">글쓰기</button>
+	<br><br>
+		<div class="row">
+			<div class="col-md-12 ftco-animate">
+			
+				<div class="cart-list">
+			
+					<table class="table">
+						<thead class="thead-primary">
+							<tr class="text-center">
+								<th>번호</th>
+								<th>제목</th>
+								<th>내용</th>
+								<th>작성일</th>
+							</tr>
+						</thead>
+						<tbody>
 						
-					</div> <!-- end cart-list div -->
+						    <c:choose> 
+						    	<c:when test="${qnaCount!=0}"> 
+						    		<c:forEach var="qna" items="${qnaBeanList}" varStatus="status"> 
+										<tr class="text-center">
+										<td>${qna.CIDX}</td>
+										
+										<td>${qna.CTITLE}</td>
+   			
+   										<td><a href="qnaDetail.al?CIDX=${qna.CIDX}">${qna.CCONTENT}</a></td>
+										
+										<td>${qna.CDATE}</td>
+										
+									</tr><!-- END TR-->
+									</c:forEach>
+								</c:when>
 									
-				</div>
+								<c:otherwise> 
+									 <tr>
+										<td colspan="3">조회된 결과가 없습니다.</td> 
+									</tr>
+								</c:otherwise>
+							</c:choose> 
+						
+						</tbody>
+					</table>
+					
+				</div> <!-- end cart-list div -->
+									
 			</div>
 		</div>
+	</div>
+</div>
+</div>
+</div>
 <br><br><br>
 </body>
 </html>

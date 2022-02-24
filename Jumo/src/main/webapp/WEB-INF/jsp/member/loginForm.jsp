@@ -70,6 +70,10 @@ window.onload = function() {
 	document.getElementById("EMAIL").focus();
 }
 </script>
+<script>
+$(document).on("keyup", "input[noSpecial]", function() {$(this).val( $(this).val().replace(/[^ㄱ-힣a-zA-Z0-9@]/gi,"") );})
+$(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val().replace(/\s/gi,"") );})
+</script>
 <body>
 
 <div style="text-align:center">
@@ -80,10 +84,10 @@ window.onload = function() {
 <div style="text-align:center">
 	<form id="loginForm" action="/Jumo/login.al" method="post">
 		<label for="EMAIL">이메일 주소</label>
-		<input type="text" id="EMAIL" name="EMAIL">
+		<input type="text" id="EMAIL" name="EMAIL" maxlength="10" noSpecial>
 		
 		<label for="PASSWORD">비밀번호</label>
-		<input type="password" id="PASSWORD" name="PASSWORD" onkeypress="keyPress()">
+		<input type="password" id="PASSWORD" name="PASSWORD" onkeypress="keyPress()" noBlank>
 	
 		<!-- 아이디 저장 &nbsp; <input type="checkbox" id="ID_SAVE" name="ID_SAVE"><br> -->
 		<p></p>
