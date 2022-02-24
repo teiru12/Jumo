@@ -77,41 +77,50 @@ window.onload = function() {
 	getCount();
 };
 </script>
+<script>
+    function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }//수량입력폼 글자수제한
+</script>
   </head>
   
   <body>
   	 <input type="hidden" id="EMAIL" name="EMAIL" value="<%=request.getSession().getAttribute("EMAIL")%>">
   <hr>
-		<h2>
-		<div style="text-align:center">장바구니</div>
-		</h2>
+		
+		<div style="text-align:center">
+			<h2>장바구니</h2>
+		</div>
+		
 		<br>
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						    <th><input type="checkbox" id="check" name="check"></th>
-						        <th>&nbsp;</th>
-						        <!-- <th>&nbsp;</th> -->
-						        <th>상품명/옵션</th>
-						        <th>상품 금액</th>
-						        <th>판매 금액</th>
-						        <th>수량</th>
-						        <th>할인된 금액</th>
-						        <th>주문 금액</th>
-						        <th>수정/삭제</th>
-						      </tr>
-						    </thead>
-							<c:if test="${Size>=1}">
-						  <c:forEach var="i" begin="0" end="${Size-1}">
-						  <tbody>
+		  <div class="container">
+		  	<div style="text-align:center" id="board" >
+	    		<table class="table">
+					<thead class="thead-primary">
+						<tr>
+						    <!-- <th>&nbsp;</th> -->
+							<th colspan="2">상품명</th>
+							<th>상품 금액</th>
+							<th>판매 금액</th>
+							<th>수량</th>
+							<th>할인 금액</th>
+							<th>주문 금액</th>
+							<th>수정/삭제</th>
+						</tr>
+					</thead>
+						<c:if test="${Size>=1}">
+							<c:forEach var="i" begin="0" end="${Size-1}">
+							<tbody>
 						      <tr class="text-center">
 						     
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						       <!--  <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> -->
 						        
 						        <td class="image-prod"><div id="BID" class="img" style="background-image:url(img/product-${basketBeanList[i].BID}.png);"></div></td>
     						
 						        <td class="product-name">
-						        	<h3><a href="pDetail.al?PID=${basketBeanList[i].BID}">${basketBeanList[i].BNAME}</a></h3>
+						        	<a href="pDetail.al?PID=${basketBeanList[i].BID}">${basketBeanList[i].BNAME}</a>
 				          			<%-- <h3>${basketBeanList[i].BSALE}%</h3> --%>
 				          			<input type="hidden" id="BIDX${i}" name="BIDX${i}" value="${basketBeanList[i].BIDX}">
 				          			<input type="hidden" id="BSALE${i}" name="BSALE${i}" value="${basketBeanList[i].BSALE}">
@@ -127,10 +136,11 @@ window.onload = function() {
 				          		</td>
 				          		
 						        <td>
-						        	<input type="number" min="0" max="${proInfoList[i].PSTOCK}" id="BCOUNT${i}" value="${basketBeanList[i].BCOUNT}" onChange="getCount()">
+						        	<input type="number" style="width: 3em;" maxlength="2" oninput="numberMaxLength(this);"
+						        		min="0" max="${proInfoList[i].PSTOCK}" id="BCOUNT${i}" value="${basketBeanList[i].BCOUNT}" onChange="getCount()">
 					          	</td>
 					          
-								<td id="saled${i}" style="color:red">
+								<td id="saled${i}" style="color:Crimson">
 
 				          		</td>
 						        
@@ -139,25 +149,30 @@ window.onload = function() {
 						        </td>
 						    
 						        <td>
-								<input type="button" class="btn btn-primary py-3 px-4" onClick="basketModify(${i})" value="수정">
-						        <input type="button" class="btn btn-primary py-3 px-4" onClick="basketDelete(${i})" value="삭제">
+								<input type="button" class="btn btn-primary py-1 px-2" onClick="basketModify(${i})" value="수정">
+						        <input type="button" class="btn btn-dark py-1 px-2" onClick="basketDelete(${i})" value="삭제">
 						        </td>
 						      </tr>
 							</c:forEach>
 							</c:if>
-							<c:if test="${Size<=0}">
-						<tr><td style="text-align:center" colspan="9">장바구니에 상품이 없어요</td></tr>
-							</c:if>
-						    </tbody>
-						  </table>
-						  <input type="hidden" id="listSize" name="listSize" value="${Size}">
-						  
-				<div style="text-align:right">
-				<a href="/Jumo/allList.al" class="btn btn-primary py-3 px-4">쇼핑 계속하기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-				</div>
-    			
-    			<div>
-    			<tr>
+					<c:if test="${Size<=0}">
+						<tr><td style="text-align:center" colspan="8">장바구니에 상품이 없습니다.</td></tr>
+					</c:if>
+			 </tbody>
+		</table>
+		<br>				  						  
+	<!-- 쇼핑계속버튼 -->		  
+		<div style='float: right;'>
+			<input type="button" class="btn btn-dark py-2 px-3" value="쇼핑 계속하기" onclick="location.href='/Jumo/allList.al'"/>
+    	</div>
+    	<br>
+	</div>
+</div>
+
+	<input type="hidden" id="listSize" name="listSize" value="${Size}">
+    	 
+    		<br><br><br><br>
+    		<div class="container">
     				<div class="cart-total mb-3" style="text-align:center">
     					<h2>결제 금액</h2><br>
     					<p class="d-flex">
@@ -166,7 +181,7 @@ window.onload = function() {
     					</p>
     					<p class="d-flex">
     						<span>할인금액</span>
-    						<span id="saleSum"></span>
+    						<span id="saleSum" style="color:Crimson"></span>
     					</p>
     					<p class="d-flex">
     						<span>배송비</span>
@@ -178,13 +193,15 @@ window.onload = function() {
     						<span id="finalSum"></span>
     					</p>
     				</div>
-    				</tr>
+    			
     				<div style="text-align:center">
-    				<input type="button" class="btn btn-primary py-3 px-4"
+    				<input type="button" class="btn btn-primary py-3 px-5"
     				 onClick="return orderConfirm()" value="구매하기"><br><br><br><br>
     				<!--선택주문 나중에 구현 -->
     				<!-- <a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a> -->
     				</div>
     			</div>
+    			
+    			
   </body>
 </html>
