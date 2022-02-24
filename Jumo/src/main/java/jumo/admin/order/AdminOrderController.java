@@ -65,7 +65,6 @@ public class AdminOrderController {
 		Map<String, Object> map = adminOrderService.selectOrderOId(order);
 		OrderBean orderBean = new OrderBean();
 		
-		map = adminOrderService.selectOrderOId(order);
 		orderBean = MapToBean.mapToOrder(map);
 		
 		model.addAttribute("orderBean", orderBean);
