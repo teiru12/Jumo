@@ -95,6 +95,11 @@
 			value="/WEB-INF/jsp/admin/community/adminNoticeList.jsp" />
 	</definition>
 	
+	<definition name="adminNoticeListAjax" extends="admin_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/community/adminNoticeListAjax.jsp" />
+	</definition>
+	
 	<definition name="adminNoticeModifyForm" extends="admin_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminNoticeModifyForm.jsp" />
@@ -111,10 +116,20 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminQnaDetail.jsp" />
 	</definition>
+	
+	<definition name="adminQnaDetailAjax" extends="admin_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/community/adminQnaDetailAjax.jsp" />
+	</definition>
 
 	<definition name="adminQnaList" extends="admin_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminQnaList.jsp" />
+	</definition>
+	
+	<definition name="adminQnaListAjax" extends="admin_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/community/adminQnaListAjax.jsp" />
 	</definition>
 	
 	<!-- Review -->	
@@ -122,6 +137,11 @@
 	<definition name="adminReviewList" extends="admin_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/community/adminReviewList.jsp" />
+	</definition>
+	
+	<definition name="adminReviewListAjax" extends="admin_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/community/adminReviewListAjax.jsp" />
 	</definition>
 	
 		
@@ -150,6 +170,11 @@
 	<definition name="joinForm" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/member/joinForm.jsp" />
+	</definition>
+	
+	<definition name="joinFormAjax" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/member/joinFormAjax.jsp" />
 	</definition>
 
 	<definition name="loginForm" extends="main_layout">		
@@ -205,6 +230,11 @@
 			value="/WEB-INF/jsp/product/pDetail.jsp" />
 	</definition>
 	
+	<definition name="pDetailAjax" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/product/pDetailAjax.jsp" />
+	</definition>
+	
 	<definition name="pReviewForm" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/product/pReviewForm.jsp" />
@@ -216,6 +246,11 @@
 	<definition name="basketList" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/basket/basketList.jsp" />
+	</definition>
+	
+	<definition name="basketListAjax" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/basket/basketListAjax.jsp" />
 	</definition>
 	
 	
