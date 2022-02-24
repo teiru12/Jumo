@@ -155,7 +155,7 @@ window.onload = function() {
 				          			<tr>
 				          				<td colspan="2" style="text-align:right;">
 				          					<p><input type="button" class="btn btn-primary py-2 px-4" onClick="putBasket()" value="장바구니">
-				          					<input type="button" class="btn btn-primary py-2 px-4" onClick="pOrderForm()" value="구&emsp;&emsp;매"></p>
+				          					<input type="button" class="btn btn-black py-2 px-4" onClick="pOrderForm()" value="구&emsp;&emsp;매"></p>
 				          				</td>
 				          			</tr>				          			
 				          		</table>

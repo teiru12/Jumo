@@ -164,7 +164,7 @@ window.onload = function() {
 							<td style="width:100%; text-align:left;" colspan="2">
 								<input type="button" class="btn btn-primary py-2 px-3"
 									onClick="return confirmReview()" value="작성">
-								<a href="pDetail.al?PID=${PID}" class="btn btn-primary py-2 px-3">취소</a>
+								<a href="pDetail.al?PID=${PID}" class="btn btn-black py-2 px-3">취소</a>
 							</td>
 						</tr>
 					</table>

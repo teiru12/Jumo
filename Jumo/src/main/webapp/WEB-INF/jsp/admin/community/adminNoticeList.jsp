@@ -26,6 +26,10 @@
 							<table class="table">
 							<div style="text-align:center"><h2>공지 사항</h2></div>
 							<br><br>
+							<div class="form-group d-flex">
+								<input type="button" value="글작성" class="btn btn-primary px-3" style="height:55px;"
+								onclick="location.href='adminNoticeWriteForm.al'">
+							</div>
 							<thead class="thead-primary">
 								<tr class="text-center">
 									<th>번호</th>
@@ -57,10 +61,6 @@
 							</tbody>
 							</table>
 						<br>
-						<div style="text-align:center;">
-							<button class="btn btn-light py-2 px-3" style="height:55px;"
-							onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
-						</div>
 						<br>
 						${paging.pageHtml}
 					</div>			

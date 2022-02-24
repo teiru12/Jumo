@@ -493,9 +493,25 @@ public class ProductController {
 		}
 		
 		model.addAttribute("msg", "장바구니에 넣었습니다.");
-		// /pDetail.al은 파라미터값을 필요로 하기 때문에 url에 파라미터를 추가
-		String urlParam = "/pDetail.al?PID=" + basket.getBID();
-		model.addAttribute("url", urlParam);
+	
+		/* list parameter를 넘겨받았을 경우는 list에서 직접 한개의 상품을 넣어줌 */
+		// 이 경우 리스트로 돌아가게 url을 설정
+		// all : allList, acl : aclList, etc : etcList
+		String urlBack = request.getParameter("list");
+		if(urlBack == null) {
+			// /pDetail.al은 파라미터값을 필요로 하기 때문에 url에 파라미터를 추가
+			String urlParam = "/pDetail.al?PID=" + basket.getBID();
+			model.addAttribute("url", urlParam);			
+		} else if(urlBack != null && urlBack.equals("all")) {
+			// allList.al로 보내준다.
+			model.addAttribute("url", "/allList.al");
+		} else if(urlBack != null && urlBack.equals("acl")) {
+			// aclList.al로 보내준다.
+			model.addAttribute("url", "/aclList.al");
+		} else if(urlBack != null && urlBack.equals("etc")) {
+			// etcList.al로 보내준다.
+			model.addAttribute("url", "/etcList.al");
+		}
 		
 		return "/product/putBasket";
 	}
