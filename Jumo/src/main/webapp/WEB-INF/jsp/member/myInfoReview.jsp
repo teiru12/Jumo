@@ -49,7 +49,7 @@
 									
 									<td>
 										<a href="pDetail.al?PID=${review.PID}"class="img-prod">
-										<img class="img-fluid" src="img/" style="height:70px;">
+										<img class="img-fluid" src="img/product-${review.PID}.png" style="height:70px;">
 										</a>
 									</td>
 									
