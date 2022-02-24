@@ -44,12 +44,12 @@ window.onload = function() {
 				<form action="adminPList.al">
 				<div class="form-group d-flex">
 					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}">
-					<input type="submit" value="검색" class="btn btn-dark px-4">
+					<input type="submit" value="검색" class="btn btn-black py-2 px-4">
 				</div>
 				</form>
 				&nbsp;
 				<div>
-					<input type="button" value="상품 추가" class="btn btn-primary px-4" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
+					<input type="button" value="상품 추가" class="btn btn-primary py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
 				</div>
 				<div>
 				</div>
