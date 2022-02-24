@@ -16,7 +16,9 @@
 	<div class="sidebar-box ftco-animate" id="menu" style="margin-top:30px;">
 		<ul class="categories">
 			<li><a href="/Jumo/myPage.al" style="font-size:middle;">마이페이지</a></li>
+			<c:if test="${EMAIL != 'ADMIN'}">
 			<li><a href="/Jumo/myInfoModifyForm.al" style="font-size:middle;">회원정보 수정</a></li>
+			</c:if>
 			<li><a href="/Jumo/myInfoOrder.al" style="font-size:middle;">주문조회</a></li>
 			<li><a href="/Jumo/myInfoReview.al" style="font-size:middle; color:#82ae46;">후기</a></li>
 			<li><a href="/Jumo/myInfoQna.al" style="font-size:middle;">고객센터</a></li>

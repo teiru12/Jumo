@@ -8,6 +8,9 @@
 <title>주모</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
+</script>
+<script>
 	function checks() {
 		var EMAIL = document.getElementById("EMAIL");
 		var PASSWORD = document.getElementById("PASSWORD");
@@ -19,12 +22,26 @@
 		var ADDRESS2 = document.getElementById("ADDRESS2");
 		var POSTCODE = document.getElementById("POSTCODE");
 		var MOBILE = document.getElementById("MOBILE");
+		var now = new Date();
+		var year1 = now.getFullYear().toString().substr(2,4);
+		var jumin1 = JUMIN1.value.toString().substr(0,2);
+		var year = Number(year1);
+		var jumin = Number(jumin1);
+		var result = year - jumin;
+	
+		
+		if(result < 19 && result >= 0) {
+			alert("미성년자는 가입할 수 없습니다.");
+			JUMIN1.focus();
+			return false;
+		}
 		
 		if(EMAIL.value.trim() == ""){
 			alert("아이디를 입력해주세요.");
 			EMAIL.focus();
 			return false;
 		}
+
 		
 		if(PASSWORD.value.trim() == ""){
 			alert("비밀번호를 입력해주세요.");
@@ -68,7 +85,6 @@
 			return false;
 		}
 		
-		
 		if(ADDRESS1.value.trim() == ""){
 			alert("주소를 입력해주세요.");
 			ADDRESS1.focus();
@@ -91,8 +107,7 @@
 			alert("핸드폰 번호를 입력해주세요.");
 			MOBILE.focus();
 			return false;
-		}
-		
+		}		
 		document.joinForm.submit();
 	}
 </script>
@@ -178,7 +193,7 @@ window.onload = function() {
 					<div class="form-group d-flex">
 						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;" 
 							maxlength="10" noSpecial>
-						<input type="button" value="중복확인" class="submit px-3"
+						<input type="button" value="중복확인" class="submit px-3" name="check_id"
 						onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()">
 					</div>
 					<div class="w-100"></div>
