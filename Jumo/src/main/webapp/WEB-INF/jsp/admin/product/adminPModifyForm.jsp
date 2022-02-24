@@ -31,9 +31,6 @@
 			alert("상품 이름을 입력해주세요.");
 			PNAME.focus();
 			return false;
-		} else if(PIMAGE.value.trim()=="") {
-			alert("상품 이미지를 넣어주세요.");
-			return false;
 		} else if(PSTOCK.value.trim()=="") {
 			alert("상품 수량을 입력해주세요.");
 			PSTOCK.focus();
@@ -54,7 +51,7 @@
 			alert("생산지를 입력해주세요.");
 			PLOC.focus();
 			return false;
-		} else if(PTYPE_ACL=='ALCOHOL' && PDEGREE.value.trim()=="") {
+		} else if(PDEGREE.value.trim()=="") {
 			alert("도수를 입력해주세요.");
 			PDEGREE.focus();
 			return false;
@@ -89,6 +86,7 @@ $(function (){
 	var etcChk = $('input[type=radio][id="PTYPE_ETC"]:checked').val();
 		if(etcChk=='ETC'){
 		$('#etc_view').css('display','none');
+		document.getElementById("PDEGREE").value = 0;
 		/* $('#etc_view2').css('display','none'); */
 		} 
 	});
@@ -311,7 +309,7 @@ window.onload = function() {
 											<input type="button" value="수정" class="btn btn-primary py-3 px-5"
 												onClick="return formCheck()">
 											<input type="button" value="메뉴" class="btn btn-primary py-3 px-5"
-												onClick="adminMain">
+												onClick="javascrpit:loaction.href='adminMain.al'">
 										</td>
 									</tr>
 								</tbody>
