@@ -45,13 +45,20 @@ function radioReset(e) {
 }
 </script>
 <script>
-	function pOrderCheck(stock, pid) {
-		if(stock<=0) {
-			alert("재고가 없습니다.");
-			return false;
-		}
-		location.href = "pOrderForm.al?PID=" + pid + "&PCOUNT=1"
-	}	    							
+function pOrderCheck(stock, pid) {		
+	if(stock<=0) {
+		alert("재고가 없습니다.");
+		return false;
+	}
+	location.href = "pOrderForm.al?PID=" + pid + "&PCOUNT=1"
+}	    			
+function putBasketConfirm(PID) {
+	let BID = PID;
+	if(confirm("장바구니에 넣으시겠습니까?") == true) {
+		location.href = "putBasket.al?BID=" + BID + "&BCOUNT=1&list=all";
+	}	
+	return false;
+}
 </script>	
 <script>
 window.onload = function() {
@@ -188,7 +195,7 @@ window.onload = function() {
 			
 				<div class="info bg-white p-4" style="text-align:center;">
 					<input type="submit" value="검색" class="btn btn-primary py-2 px-4">
-					<input type="reset" value="리셋" class="btn btn-primary py-2 px-4">
+					<input type="reset" value="리셋" class="btn btn-black py-2 px-4">
 				</div>
 				<div class="text text-center">
 					<%-- ${searchPrint} --%>
@@ -238,7 +245,7 @@ window.onload = function() {
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="putBasket.al?BID=${product.PID}&BCOUNT=1" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    							<a href="javascript:putBasketConfirm(${product.PID});" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-cart"></i></span>
 	    							</a>
 	    							<a href="javascript:pOrderCheck(${product.PSTOCK}, ${product.PID});" class="buy-now d-flex justify-content-center align-items-center mx-1">

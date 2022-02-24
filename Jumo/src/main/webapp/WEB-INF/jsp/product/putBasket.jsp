@@ -7,11 +7,15 @@
 <title>주모</title>
 </head>
 <body>
-   <script>
-   if(${! empty msg}) {
-      alert('${msg}');
-   }
-    location.href='${pageContext.request.contextPath}${url}';
-    </script>
+	<script>
+	if(${! empty msg}) {
+		alert('${msg}');
+	}
+	if(confirm("장바구니로 가시겠습니까?") == true) {
+		location.href='basketList.al';
+	} else {
+		location.href='${pageContext.request.contextPath}${url}';
+	}
+	 </script>
 </body>
 </html>
