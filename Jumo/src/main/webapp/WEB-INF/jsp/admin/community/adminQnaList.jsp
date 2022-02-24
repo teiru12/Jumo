@@ -47,7 +47,7 @@
 												
 												<td>
 													<form id="qnaDelete" action="adminQnaDelete.al" method="post">
-										    			<button class="btn btn-primary px-4" 
+										    			<button class="btn btn-dark px-4"
 															onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaDelete.al?CIDX= + ${qna.CIDX}' } else{ return false; }">
 														삭제
 														</button>

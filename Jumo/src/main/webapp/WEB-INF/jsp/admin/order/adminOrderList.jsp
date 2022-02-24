@@ -33,7 +33,7 @@
 		</form>
 	</div>
 	<br><hr width="80%" align="center"><br>
-	<div class="container">				
+	<div style="white-space:nowrap;overflow:auto;" class="container">				
 		<div class="col-md-12 ftco-animate">
 		<div class="overlay"></div>
 			<table class="table">
@@ -56,7 +56,7 @@
 						<c:when test="${fn:length(orderBeanList)>0}">
 							<c:forEach var="order" items="${orderBeanList}" varStatus="status">
 							<tr>
-							<td>&emsp;&emsp;${order.OID}&emsp;&emsp;</td>
+							<td>&emsp;&emsp;&emsp;${order.OID}&emsp;&emsp;</td>
 							<td>${order.ODATE}</td>
 							<td>${order.OMAIL}</td>
 							<td><a href="adminOrderDetail.al?OID=${order.OID}">${order.OPRODUCT}</a></td>
@@ -66,9 +66,9 @@
 						    <td>${order.OTOTAL}</td>
 						    <td>
 						    <c:choose>
-						    	<c:when test="${order.OSTATUS eq '배송전'}">배송전</c:when>
-						    	<c:when test="${order.OSTATUS eq '배송중'}">배송중</c:when>
-						    	<c:when test="${order.OSTATUS eq '배송완료'}">배송완료</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송전'}">배송전 &emsp;&emsp;</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송중'}">배송중 &emsp;&emsp;</c:when>
+						    	<c:when test="${order.OSTATUS eq '배송완료'}">배송완료 &emsp;&emsp;</c:when>
 						    </c:choose>
 						    </td>
 							</c:forEach>
@@ -83,7 +83,7 @@
 			</table>
 		</div>
 		</div>			
-	</div>
 </section>
+<br>
 </body>
 </html>
