@@ -83,6 +83,126 @@ $(".replyAddBtn").on("click",function() {
 	});
 });
 </script> -->
+
+<!-- 제목 -->
+</head>
+	<div style="text-align:center"><h2>공지 사항</h2></div>
+	<!-- 글 상세내용 -->
+		<div class="container">
+			<div class="row">
+			<pre>                                                                               </pre>
+				<div>
+				</div>
+				<br>
+		    	<div style="text-align:center" style="padding-right:70px;"" >
+		    		<div class="col-md-12 ftco-animate">
+			    		<table class="table" >
+				    		<thead class="thead-primary">
+								<tr class="text-center">
+										<td colspan="1">제목</td>
+										<td colspan="3">${qnaBean.CTITLE}</td>
+								</tr>
+								</thead>
+								<tbody>
+									<tr class="text-center">
+										<td>작성자</td>
+										<td class="product-name" width="50%">${qnaBean.CWRITER}</td>
+										<td class="product-name" width="*%">${qnaBean.CDATE}</td>
+									</tr>
+									<tr class="text-center">
+										<td colspan="1"><br>글 내용</td>
+										<td colspan="3"><br>${qnaBean.CCONTENT}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 답변 -->
+				<div style="text-align:center"><h2>댓글</h2></div>
+					<div class="container" id="noticeDetail" action="adminNoticeDelete.al" >
+						<div class="row">
+							<pre>                                                                               </pre>
+							<div>
+							</div>
+							<br>
+						    	<div style="text-align:center" style="padding-right:70px;" id="noticeDetail" >
+						    		<div class="col-md-12 ftco-animate">
+							    		<table class="table" >
+							    		<thead class="thead-primary">
+									<tr class="text-center">
+								<tbody>
+								<c:choose>
+								<c:when test="${comCount!=0}">
+									<c:forEach var="comment" items="${comList}" varStatus="status">
+										<tr class="text-center">
+											<td>
+												${comment.COMMENTT}
+												<input type="hidden" id="COMMENTIDX" name="COMMENTIDX" value="${comment.COMMENTIDX }">
+												<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
+											</td>
+											<td>
+												<button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-3" >삭제</button>
+											</td>
+										</tr>
+						   		 	</c:forEach>
+						  	 	</c:when>
+						    	<c:otherwise>
+						   			<tr>
+										<td colspan="2">조회된 결과가 없습니다.</td> 
+									</tr>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	<form class="container" id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post" >
+			<div class="row">
+				<div style="text-align:center" style="padding-right:70px;">
+					<div class="col-md-12 ftco-animate">
+					<table class="table">
+			    		<thead class="thead-primary">
+							<tr class="text-center">					
+							<tbody>
+							<tr class="text-center">
+								<td>
+									<div style="text-align:center"><h2>댓글 작성</h2></div>
+									<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
+								</td>
+							</tr>
+							<tr class="text-center">
+								<td>
+									<div class="form-group col-sm-2">
+										<input class="form-control input-sm" id="newReplyWriter" name="COMMENTWRITER" type="text" value="관리자" readonly>
+									</div>
+								</td>
+							</tr>
+							<tr class="text-center">
+								<td>
+									<div class="form-group col-sm-8">
+										<input class="form-control input-sm" id="newReplyText" name="COMMENTT" type="text" placeholder="댓글 입력...">
+									</div>
+									<div class="form-group col-sm-2">
+										<button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn"
+											onclick="commentCheck()">
+										<i class="fa fa-save"></i>저장
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</html>
+
+
+<%-- 
 </head>
 	<div style="text-align:center">
 		<h1> 상세 내용 </h1>
@@ -199,4 +319,4 @@ $(".replyAddBtn").on("click",function() {
 		</div>
 	</section>
 	</form>
-</html>
+</html> --%>
