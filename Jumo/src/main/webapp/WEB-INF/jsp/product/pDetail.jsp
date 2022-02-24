@@ -32,7 +32,14 @@ function putBasket() {
 
 function pOrderForm() {
 	var pId = document.getElementById('PID').value;
-	var count = document.getElementById('BCOUNT').value;		
+	var count = Number(document.getElementById('BCOUNT').value);
+	var stock = Number(document.getElementById('PSTOCK').value);
+	// 구매수량이 상품 재고보다 많을 경우 구매 정지
+	
+	if(count>stock) {
+		alert("상품의 재고 수량보다 많은 양을 살 수 없습니다. 재고 :" + stock + "개");
+		return false;		
+	}
 	location.href="pOrderForm.al?PID=" + pId + "&PCOUNT=" + count;	
 }
 
@@ -132,6 +139,7 @@ window.onload = function() {
 				          				</td>
 				          				<td style="text-align:right; width:50%">
 				          					<input type="number" min="0" max="${productBean.PSTOCK}" id="BCOUNT" value="1" onChange="getCount()">
+				          					<input type="hidden" id="PSTOCK" value="${productBean.PSTOCK}">
 				          				</td>
 				          			</tr>
 									<tr>

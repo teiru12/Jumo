@@ -30,8 +30,8 @@ public class OrderDAO {
 	}
 	
 	//상품 구매 결과(selectOrderOId)
-	public Map<String, Object> selectOrderOID(Map<String, Object> map) throws Exception {
-		return sqlSessionTemplate.selectOne("order.selectOrderOID", map);
+	public Map<String, Object> selectOrderOId(Map<String, Object> map) throws Exception {
+		return sqlSessionTemplate.selectOne("order.selectOrderOId", map);
 	}
 	
 	//상품 구매 결과(selectOrderOBNumber)

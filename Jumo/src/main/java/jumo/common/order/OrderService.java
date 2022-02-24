@@ -18,7 +18,7 @@ public interface OrderService {
 	public void insertOrderBasket(OrderBean order) throws Exception;
 	   
 	//상품 구매 결과(selectOrderOId)
-	public Map<String, Object> selectOrderOID(OrderBean order) throws Exception;
+	public Map<String, Object> selectOrderOId(OrderBean order) throws Exception;
 	   
 	//상품 구매 결과(selectOrderOBNumber)
 	public List<Map<String, Object>> selectOrderOBNumber(OrderBean order) throws Exception;
