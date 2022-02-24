@@ -1,5 +1,7 @@
 package jumo.util.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;  
 
@@ -56,8 +58,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			/* 로그인하지 않았을 때 사용할 수 없는 페이지에 접근할 경우 */
 			System.out.println("- 로그인하지않았는데 사용할 수 없는 페이지에 접근 -");
-			response.sendRedirect("/Jumo/main.al");
-			return false;	
+			
+			/* 성인인증 메시지 출력 후 주소로 이동 */
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('성인 인증을 해주세요.'); location.href='/Jumo/loginForm.al';</script>");
+			out.flush();
+			
+			// response.sendRedirect("/Jumo/loginForm.al"); return false;
+			 
+			return false;
 		}
 	}
 }
