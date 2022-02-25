@@ -11,6 +11,8 @@ function logoutCheck() {
 }
 </script>
 <body>
+<div class="col-sm-12">
+	<div style="text-align:center">
 	<div class="py-1" style="background-color:#fff; height:150px;">
 		<div class="container" style="text-align:right;">
 		
@@ -41,29 +43,31 @@ function logoutCheck() {
 			</a>
 		</div>
 	</div>
+</div>
+</div>
 
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	       <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+	<div class="container">
+		<ul class="navbar-nav ml-auto">
 			<li class="nav-item active"><a href="/Jumo/allList.al" class="nav-link" style="font-size:x-large; color:#82ae46;">전체상품</a></li>
-	          <li class="nav-item active"><a href="/Jumo/aclList.al" class="nav-link" style="font-size:x-large; color:#82ae46;">주류상품</a></li>
-	          <li class="nav-item active"><a href="/Jumo/etcList.al" class="nav-link" style="font-size:x-large; color:#82ae46;">기타상품</a></li>
-	         </ul>
-	               
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	        
-	          <!-- 관리자일 경우 관리 탭 추가 -->
-	          <c:if test="${ EMAIL == 'ADMIN' }">
-	        	<li class="nav-item"><a href="/Jumo/adminMain.al" class="nav-link" style="font-size:large; color:dark;">관리</a></li>
-	          </c:if>
-	        
-	          <li class="nav-item"><a href="/Jumo/noticeList.al" class="nav-link" style="font-size:large; color:dark;">공지</a></li>
-	          <li class="nav-item"><a href="/Jumo/qnaList.al" class="nav-link" style="font-size:large; color:dark;">고객센터</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
+			<li class="nav-item active"><a href="/Jumo/aclList.al" class="nav-link" style="font-size:x-large; color:#82ae46;">주류상품</a></li>
+			<li class="nav-item active"><a href="/Jumo/etcList.al" class="nav-link" style="font-size:x-large; color:#82ae46;">기타상품</a></li>
+		</ul>
+	         
+		<div class="navbar-nav navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+		  
+				<!-- 관리자일 경우 관리 탭 추가 -->
+				<c:if test="${ EMAIL == 'ADMIN' }">
+					<li class="nav-item"><a href="/Jumo/adminMain.al" class="nav-link" style="font-size:large; color:dark;">관리</a></li>
+				</c:if>
+		
+				<li class="nav-item"><a href="/Jumo/noticeList.al" class="nav-link" style="font-size:large; color:dark;">공지</a></li>
+				<li class="nav-item"><a href="/Jumo/qnaList.al" class="nav-link" style="font-size:large; color:dark;">고객센터</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
 	 
 
 	 
