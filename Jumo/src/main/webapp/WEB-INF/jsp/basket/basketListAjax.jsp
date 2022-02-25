@@ -42,17 +42,12 @@ function basketModify(i) {
 }
 
 function basketDelete(i) {
-if(confirm("정말 삭제하시겠습니까?")==true){
-		var bIdx = document.getElementById('BIDX'+i).value;
-		location.href="basketDelete.al?BIDX=" + bIdx;
-}	
-return;
+	if(confirm("정말 삭제하시겠습니까?")==true){
+			var bIdx = document.getElementById('BIDX'+i).value;
+			location.href="basketDelete.al?BIDX=" + bIdx;
+	}	
+	return;
 }
-/* function basketDelete(i) {
-	var bIdx = document.getElementById('BIDX'+i).value;
-	location.href="basketDelete.al?BIDX=" + bIdx;
-} */
-
 function basketOrderForm(i) {
 	var bId = document.getElementById('BID'+i).value;
 	var count = document.getElementById('BCOUNT'+i).value;		
@@ -70,6 +65,47 @@ function orderConfirm(){
 		location.href="/Jumo/basketOrderForm.al?BEMAIL=" + email;
 	}
 	return;
+}
+
+/* Ajax */
+function deleteCheckAjax(bidx, index) {
+	if(confirm("삭제하시겠습니까?") == true) {
+		
+		$.ajax({
+			url			: "basketDelete.al",
+			data		: Number({"BIDX" : bidx}),
+			contentType	: "application/json",
+			success		: function(data) {
+				alert("삭제하였습니다.");
+				$("#bas"+index).remove();
+			},
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
+function modifyCheckAjax(bidx, index) {
+	if(confirm("수정하시겠습니까?") == true) {
+
+		let count = document.getElementById("BCOUNT"+index).value;
+		
+		$.ajax({
+			url			: "basketModifyAjax.al",
+			data		: {"BIDX" : Number(bidx), "BCOUNT" : Number(count), "message" : "" },
+			contentType	: "application/json",
+			success		: function(data) {
+				alert(data.message);
+			},
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
 }
 </script>
 <script>
@@ -113,7 +149,7 @@ window.onload = function() {
 						<c:if test="${Size>=1}">
 							<c:forEach var="i" begin="0" end="${Size-1}">
 							<tbody>
-						      <tr class="text-center">
+						      <tr class="text-center" id="bas${i}">
 						     
 						       <!--  <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> -->
 						        
@@ -149,8 +185,11 @@ window.onload = function() {
 						        </td>
 						    
 						        <td>
-								<input type="button" class="btn btn-primary py-1 px-2" onClick="basketModify(${i})" value="수정">
-						        <input type="button" class="btn btn-dark py-1 px-2" onClick="basketDelete(${i})" value="삭제">
+								<input type="button" class="btn btn-primary py-1 px-2"
+									onClick="modifyCheckAjax(${basketBeanList[i].BIDX}, ${i}).value " value="수정">
+								<%-- <input type="button" class="btn btn-primary py-1 px-2" onClick="basketModify(${i})" value="수정"> --%>
+								<input type="button" class="btn btn-dark py-1 px-2" onClick="deleteCheckAjax(${basketBeanList[i].BIDX} ,${i});" value="삭제">
+						        <%-- <input type="button" class="btn btn-dark py-1 px-2" onClick="basketDelete(${i})" value="삭제"> --%>
 						        </td>
 						      </tr>
 							</c:forEach>

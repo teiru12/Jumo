@@ -2,13 +2,16 @@ package jumo.common.basket;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jumo.common.product.ProductService;
 import jumo.model.BasketBean;
@@ -54,33 +57,66 @@ public class BasketController {
 		model.addAttribute("Size", basketBeanList.size());
 		model.addAttribute("proInfoList", proInfoList);
 		
-		return "basketList";
+		return "basketListAjax";
 	}
 	
 	@RequestMapping(value="/basketModify.al")
 	public String basketModify(BasketBean basket, HttpServletRequest request,
 			Model model) throws Exception {
+
+		Map<String, Object> map = basketService.selectBasketBIDX(basket);
+		BasketBean basketInfo = MapToBean.mapToBasket(map);
 		
-		  Map<String, Object> map = basketService.selectBasketBIDX(basket);
-		  BasketBean basketInfo = MapToBean.mapToBasket(map);
-		
-		  ProductBean product = new ProductBean(); 
-		  product.setPID(basketInfo.getBID());
-		  Map<String, Object> mapProduct = productService.selectProductId(product);
-		  ProductBean productInfo = MapToBean.mapToProduct(mapProduct);
+		ProductBean product = new ProductBean(); 
+		product.setPID(basketInfo.getBID());
+		Map<String, Object> mapProduct = productService.selectProductId(product);
+		ProductBean productInfo = MapToBean.mapToProduct(mapProduct);
 		  
-		  if(basket.getBCOUNT() > productInfo.getPSTOCK()) {
-		model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다."); 
-		  return "/basket/basketModify";
-		  }
+		if(basket.getBCOUNT() > productInfo.getPSTOCK()) {
+			model.addAttribute("msg", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다."); 
+			return "/basket/basketModify";
+		}
 		  
-		  if(basket.getBCOUNT() <= 0) {
-		model.addAttribute("msg", "장바구니에 상품을 담을 수 없습니다."); 
-		  return "/basket/basketModify";
-		  }
+		if(basket.getBCOUNT() <= 0) {
+			model.addAttribute("msg", "장바구니에 상품을 담을 수 없습니다."); 
+			return "/basket/basketModify";
+		}
 		 
-		  basketService.updateBasket(basket);	 	
+		basketService.updateBasket(basket);	 	
 		return "/basket/basketModify";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/basketModifyAjax.al")
+	public Map<String,String> basketModifyAjax(BasketBean basket, HttpServletRequest request,
+			@RequestBody String message) throws Exception {
+		
+		System.out.println("basket bidx : " + basket.getBIDX());
+		System.out.println("basket BCOUNT : " + basket.getBCOUNT());
+		
+		Map<String, String> msg = new HashMap<String, String>();
+
+		Map<String, Object> map = basketService.selectBasketBIDX(basket);
+		BasketBean basketInfo = MapToBean.mapToBasket(map);
+		
+		ProductBean product = new ProductBean(); 
+		product.setPID(basketInfo.getBID());
+		Map<String, Object> mapProduct = productService.selectProductId(product);
+		ProductBean productInfo = MapToBean.mapToProduct(mapProduct);
+		  
+		if(basket.getBCOUNT() > productInfo.getPSTOCK()) {
+			msg.put("message", "재고 수량보다 많은 상품을 장바구니에 담을 수 없습니다.");
+			return msg;
+		}
+		  
+		if(basket.getBCOUNT() <= 0) {
+			msg.put("message", "0 이하로 수정할 수 없습니다.");
+			return msg;
+		}
+		 
+		basketService.updateBasket(basket);	 	
+		msg.put("message", "수정하였습니다.");
+		return msg;
 	}
 	
 	@RequestMapping(value="/basketDelete.al")
@@ -89,6 +125,14 @@ public class BasketController {
 		basketService.deleteBasket(basket);
 		
 		return "/basket/basketDelete";
+	}
+	
+	@RequestMapping(value="/basketDeleteAjax.al")
+	public String basketDeleteAjax(BasketBean basket) throws Exception {
+		
+		basketService.deleteBasket(basket);
+		
+		return "success";
 	}
 	
 }

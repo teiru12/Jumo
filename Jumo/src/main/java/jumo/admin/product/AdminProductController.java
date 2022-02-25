@@ -296,6 +296,7 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value="/adminPDeleteAjax.al")
+	@ResponseBody
 	public String adminPDeleteAjax(String PID) throws Exception {
 		
 		ProductBean product = new ProductBean();
