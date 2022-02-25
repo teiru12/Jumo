@@ -415,7 +415,8 @@ public class ProductController {
 		model.addAttribute("productBean", productBean);
 		model.addAttribute("reviewBeanList", reviewBeanList);
 		
-		return "pDetail";
+		// return "pDetail";
+		return "pDetailAjax";
 	}
 
 

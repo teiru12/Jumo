@@ -58,7 +58,7 @@ public class AdminQnaController {
 		
 		model.addAttribute("qnaList", qnaList);
 		
-		return "adminQnaList";
+		return "adminQnaListAjax";
 	}
 	
 	@RequestMapping(value="/adminQnaDelete.al")
@@ -92,7 +92,7 @@ public class AdminQnaController {
 		model.addAttribute("qnaBean", qnaBean);
 		model.addAttribute("comList", comList);		
 		
-		return "adminQnaDetail";
+		return "adminQnaDetailAjax";
 	}
 
 	@RequestMapping(value="/adminQnaComWrite.al")
