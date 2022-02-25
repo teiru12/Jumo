@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jumo.model.CommunityBean;
 import jumo.model.MemberBean;
@@ -64,7 +66,7 @@ public class AdminNoticeController {
 		
 		model.addAttribute("noticeList", noticeList);
 		
-		return "adminNoticeList";
+		return "adminNoticeListAjax";
 	}
 	
 	@RequestMapping(value="/adminNoticeWriteForm.al")
@@ -130,6 +132,16 @@ public class AdminNoticeController {
 		adminComService.deleteCommunityId(community);
 		
 		return "admin/community/adminNoticeDelete";
+	}
+	
+	@RequestMapping(value="/adminNoticeDeleteAjax.al")
+	public String adminNoticeDeleteAjax(String CIDX) throws Exception {
+		CommunityBean community = new CommunityBean();
+		community.setCIDX(Integer.parseInt(CIDX));
+		
+		adminComService.deleteCommunityId(community);
+		
+		return "adminNoticeList";
 	}
 	
 	
