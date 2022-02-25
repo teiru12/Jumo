@@ -9,6 +9,71 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 
+/* 아이디 중복 체크 */
+function checkId() {
+    
+    var EMAIL = $("#EMAIL").val();
+    
+    if(EMAIL.search(/\s/) != -1) { 
+        alert("아이디에는 공백이 들어갈 수 없습니다.");        
+    } else {             
+        if(EMAIL.trim().length != 0) {
+        	
+        	
+        	
+            $.ajax({
+                url: "confirmIdAjax.al", //통신할 url
+                data: { "EMAIL" : EMAIL, "message" : "" }, // 좌항-변수, 우항-입력된 데이터
+                contentType: "application/json",
+                success: function(data) {   
+                	if(data.message == "사용할 수 있는 아이디입니다.") {
+                		alert(data.message);
+                		$("#submit").removeAttr("EMAIL");
+                	} else {
+                		alert(data.message);
+                        $("#submit").attr("EMAIL", "EMAIL");
+                        window.location.reload();
+                	}
+                },
+        		error:function(request, error) {
+        			alert("fail");
+        			// error 발생 이유를 알려준다.
+        		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        		}      
+            });
+        } else {
+            alert("아이디를 입력해주세요.");
+        }        
+    }
+}
+
+
+/* 
+$(function confirmIdAjax(){
+		
+			//ajax 동기화
+			$.ajax({
+				url: "/confirmIdAjax.al", //통신할 url
+				method: "POST", //통신할 메서드 타입
+				data: { EMAIL : EMAIL }, // 좌항-변수, 우항-입력된 데이터
+				dataType: "application/json"
+				success : function(data) {
+						if(EMAIL =="") {
+							alert("EMAIL 아이디 입력 요망");
+							
+						} else if (data == '0') {
+							$("#checkId").html('사용할 수 없는 아이디입니다.');
+						} else if (data =="1") {
+							$("#checkId").html('사용할 수 있는 아이디입니다.');
+						}
+					}
+				
+			});	 
+
+		
+		} */
+		
+
 </script>
 <script>
 	function checks() {
@@ -194,7 +259,7 @@ window.onload = function() {
 						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;" 
 							maxlength="10" noSpecial>
 						<input type="button" value="중복확인" class="submit px-3" name="check_id"
-						onClick="location.href='/Jumo/confirmId.al?EMAIL='+$('#EMAIL').val()">
+						onClick="checkId()">
 					</div>
 					<div class="w-100"></div>
            

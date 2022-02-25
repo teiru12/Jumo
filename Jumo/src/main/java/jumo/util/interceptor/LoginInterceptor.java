@@ -32,7 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					uri.equals("/Jumo/findIdResult.al") || uri.equals("/Jumo/findPw.al") || uri.equals("/Jumo/findPwResult.al") ||
 					uri.equals("/Jumo/confirmId.al") || uri.equals("/Jumo/allList.al") || uri.equals("/Jumo/aclList.al") ||
 					uri.equals("/Jumo/etcList.al") || uri.equals("/Jumo/noticeList.al") || uri.equals("/Jumo/noticeDetail.al") ||
-					uri.equals("/Jumo/qnaList.al") || uri.equals("/Jumo/qnaDetail.al")
+					uri.equals("/Jumo/qnaList.al") || uri.equals("/Jumo/qnaDetail.al") || uri.equals("/Jumo/confirmIdAjax.al")
 				)) {
 			System.out.println("- 로그인하지 않음 -");
 			return true;
