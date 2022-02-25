@@ -83,160 +83,111 @@ $(".replyAddBtn").on("click",function() {
 	});
 });
 </script> -->
-
-<!-- 제목 -->
 </head>
-	<div style="text-align:center"><h2>공지 사항</h2></div>
-	<!-- 글 상세내용 -->
-		<div class="container">
-			<div class="row">
-			<pre>                                                                               </pre>
-				<div>
-				</div>
-				<br>
-		    	<div style="text-align:center" style="padding-right:70px;"" >
-		    		<div class="col-md-12 ftco-animate">
-			    		<table class="table" >
-				    		<thead class="thead-primary">
-								<tr class="text-center">
-										<td colspan="1">제목</td>
-										<td colspan="3">${qnaBean.CTITLE}</td>
-								</tr>
-								</thead>
-								<tbody>
-									<tr class="text-center">
-										<td>작성자</td>
-										<td class="product-name" width="50%">${qnaBean.CWRITER}</td>
-										<td class="product-name" width="*%">${qnaBean.CDATE}</td>
-									</tr>
-									<tr class="text-center">
-										<td colspan="1"><br>글 내용</td>
-										<td colspan="3"><br>${qnaBean.CCONTENT}</td>
-									</tr>
-								</tbody>
-							</table>
+<div style="text-align:center">
+	<h1> 상세 내용 </h1>
+</div>
+
+<%-- <section class="ftco-section ftco-cart">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 ftco-animate">
+			
+				<table class="table">
+					<tbody>
+						<tr class="text-center">
+							<td>제목</td>
+							<td colspan="2">${qnaBean.CTITLE}</td>
+						</tr>
+						<tr class="text-center">
+							<td>작성자</td>
+							<td>${qnaBean.CWRITER}</td>
+							<td>${qnaBean.CDATE}</td>
+						</tr>
+						<tr class="text-center">
+							<td>글 내용</td>
+							<td colspan="2" style="height:10">${qnaBean.CCONTENT}</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div> --%>
+
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
+			<div class="blog-entry align-self-stretch d-md-flex">
+				<div class="text d-block pl-md-4">
+					<h3>${qnaBean.CTITLE}</h3>
+					<div class="meta mb-3">
+						<div>${qnaBean.CWRITER}</div>
+						<div>${qnaBean.CDATE}</div>
+					</div><hr>
+      				<p class="mt-5" style="font-size:large;">${qnaBean.CCONTENT}</p>
+    			</div>
+			</div>
+		</div>
+		
+		<div class="col-md-12"><hr>
+		    <p class="mb-5 mt-5">댓글</p>
+		    <c:choose>
+		    	<c:when test="${comCount!=0}">
+					<c:forEach var="comment" items="${comList}" varStatus="status">
+					    <ul class="comment-list">
+							<li class="comment">
+								<div class="vcard bio">
+                    				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
+                  				</div>
+								<div class="comment-body">
+									<div class="meta">${comment.COMMENTDATE}</div><!-- 답변 작성 날짜 -->
+									<p style="font-size:middle;">
+									 	${comment.COMMENTT}
+									 	<input type="hidden" id="COMMENTIDX" name="COMMENTIDX" value="${comment.COMMENTIDX }">
+										<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
+									 </p>
+									<p><a onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaComDelete.al?COMMENTIDX=${comment.COMMENTIDX}&ARTICLEIDX=${comment.ARTICLEIDX }' } else{ return false; }"
+										class="reply">삭제</a></p>
+									<!-- <button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button> -->
+								</div>
+						     </li>
+						</ul>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+		  
+				</c:otherwise>
+			</c:choose>
+			</div>
+			
+			<div class="col-md-12 comment-form-wrap">
+			
+			<form id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post"><hr>
+				<p>댓글 쓰기</p>
+				<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
+				<input class="form-control input-sm" id="newReplyWriter" 
+								name="COMMENTWRITER" type="hidden" value="관리자" readonly>
+					<div class="row">
+						<div class="form-group">
+							<textarea class="form-control input-sm" maxlength="200" id="newReplyText" name="COMMENTT" 
+								style="text-align:left; width:1000px;"></textarea>
+						</div> &nbsp;&nbsp;
+						<div class="form-group">
+							<input type="button" class="btn py-3 px-4 btn-primary btn-outline-primary" onClick="commentCheck()" value="저장">
 						</div>
 					</div>
-				</div>
-				
-				<!-- 답변 -->
-				<div style="text-align:center"><h2>댓글</h2></div>
-					<div class="container" id="noticeDetail" action="adminNoticeDelete.al" >
-						<div class="row">
-							<pre>                                                                               </pre>
-							<div>
-							</div>
-							<br>
-						    	<div style="text-align:center" style="padding-right:70px;" id="noticeDetail" >
-						    		<div class="col-md-12 ftco-animate">
-							    		<table class="table" >
-							    		<thead class="thead-primary">
-									<tr class="text-center">
-								<tbody>
-								<c:choose>
-								<c:when test="${comCount!=0}">
-									<c:forEach var="comment" items="${comList}" varStatus="status">
-										<tr class="text-center">
-											<td>
-												${comment.COMMENTT}
-												<input type="hidden" id="COMMENTIDX" name="COMMENTIDX" value="${comment.COMMENTIDX }">
-												<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
-											</td>
-											<td>
-												<button type="submit" onclick="return deleteCheck1()" class="btn btn-black px-3" >삭제</button>
-											</td>
-										</tr>
-						   		 	</c:forEach>
-						  	 	</c:when>
-						    	<c:otherwise>
-						   			<tr>
-										<td colspan="2">조회된 결과가 없습니다.</td> 
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-				</div>
+				</form>
 			</div>
-		</div>
-	<form class="container" id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post" >
-			<div class="row">
-				<div style="text-align:center" style="padding-right:70px;">
-					<div class="col-md-12 ftco-animate">
-					<table class="table">
-			    		<thead class="thead-primary">
-							<tr class="text-center">					
-							<tbody>
-							<tr class="text-center">
-								<td>
-									<div style="text-align:center"><h2>댓글 작성</h2></div>
-									<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
-								</td>
-							</tr>
-							<tr class="text-center">
-								<td>
-									<div class="form-group col-sm-2">
-										<input class="form-control input-sm" id="newReplyWriter" name="COMMENTWRITER" type="text" value="관리자" readonly>
-									</div>
-								</td>
-							</tr>
-							<tr class="text-center">
-								<td>
-									<div class="form-group col-sm-8">
-										<input class="form-control input-sm" id="newReplyText" name="COMMENTT" type="text" placeholder="댓글 입력...">
-									</div>
-									<div class="form-group col-sm-2">
-										<button type="button" class="btn btn-light py-2 px-3"
-											onclick="commentCheck()">
-										<i class="fa fa-save"></i>저장
-										</button>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</form>
-</html>
-
-
-<%-- 
-</head>
-	<div style="text-align:center">
-		<h1> 상세 내용 </h1>
+		
 	</div>
-	
-	<section class="ftco-section ftco-cart">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 ftco-animate">
-				
-					<table class="table">
-						<tbody>
-							<tr class="text-center">
-								<td>제목</td>
-								<td colspan="2">${qnaBean.CTITLE}</td>
-							</tr>
-							<tr class="text-center">
-								<td>작성자</td>
-								<td>${qnaBean.CWRITER}</td>
-								<td>${qnaBean.CDATE}</td>
-							</tr>
-							<tr class="text-center">
-								<td>글 내용</td>
-								<td colspan="2" style="height:10">${qnaBean.CCONTENT}</td>
-							</tr>
-						</tbody>
-					</table>
-					
-				</div>
-			</div>
-		</div>
-	</section>
+</section>
 
-	<div style="text-align:center">
+
+
+
+
+
+<%-- 	<div style="text-align:center">
 		<h3> 답변 </h3>
 	</div>
 	<section class="ftco-section ftco-cart">
@@ -256,7 +207,7 @@ $(".replyAddBtn").on("click",function() {
 												<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
 											</td>
 											<td>
-												<button type="submit" onclick="return deleteCheck1()" class="btn btn-light px-4" >삭제</button>
+												<button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button>
 											</td>
 										</tr>
 						   		 	</c:forEach>
@@ -305,7 +256,7 @@ $(".replyAddBtn").on("click",function() {
 							<tr>
 								<td>
 									<div class="form-group col-sm-2">
-										<button type="button" class="btn btn-light py-2 px-3"
+										<button type="button" class="btn btn-primary py-3 px-4"
 											onclick="commentCheck()">
 										<i class="fa fa-save"></i>저장
 										</button>
@@ -318,5 +269,5 @@ $(".replyAddBtn").on("click",function() {
 			</div>
 		</div>
 	</section>
-	</form>
-</html> --%>
+	</form> --%>
+</html>
