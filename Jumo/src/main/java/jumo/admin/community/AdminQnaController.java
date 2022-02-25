@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
@@ -73,6 +74,18 @@ public class AdminQnaController {
 		return "/admin/community/adminQnaDelete";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/adminQnaDeleteAjax.al")
+	public String adminQnaDeleteAjax(CommunityBean community,
+			Model model) throws Exception{
+	
+		
+		
+		adminComService.deleteCommunityId(community);
+		
+		return "success";
+	}
+	
 	@RequestMapping(value="/adminQnaDetail.al")
 	public String adminQnaDetail(CommunityBean community,
 			CommentBean comment,
@@ -98,12 +111,7 @@ public class AdminQnaController {
 	@RequestMapping(value="/adminQnaComWrite.al")
 	public String adminQnaComWrite(CommentBean comment,
 			Model model) throws Exception {	
-		
-		System.out.println(comment.getARTICLEIDX());
-		System.out.println(comment.getCOMMENTIDX());
-		System.out.println(comment.getCOMMENTT());
-		System.out.println(comment.getCOMMENTWRITER());
-		System.out.println(comment.getCOMMENTDATE());
+
 		
 		
 		model.addAttribute("msg", "댓글 작성이 완료되었습니다.");
@@ -112,15 +120,20 @@ public class AdminQnaController {
 		
 		return "/admin/community/adminQnaComWrite";
 	}
+	
+	@RequestMapping(value="/adminQnaComWriteAjax.al")
+	@ResponseBody
+	public String adminQnaComWriteAjax(CommentBean comment) throws Exception {	
+
+		
+		adminComService.insertComment(comment);		
+		
+		return "good";
+	}
 
 	@RequestMapping(value="/adminQnaComModify.al")
 	public String adminQnaComModify(CommentBean comment, Model model) throws Exception {
-		
-		System.out.println(comment.getARTICLEIDX());
-		System.out.println(comment.getCOMMENTIDX());
-		System.out.println(comment.getCOMMENTT());
-		System.out.println(comment.getCOMMENTWRITER());
-		System.out.println(comment.getCOMMENTDATE());
+
 		
 
 		model.addAttribute("msg", "댓글 수정이 완료되었습니다.");
@@ -134,13 +147,21 @@ public class AdminQnaController {
 	public String adminQnaComDelete(CommentBean comment, Model model) 
 			throws Exception {
 
-		System.out.println(comment.getARTICLEIDX());
-		System.out.println(comment.getCOMMENTIDX());
 		
 		model.addAttribute("msg", "댓글 삭제가 완료되었습니다.");
 		model.addAttribute("url", "/adminQnaDetail.al?CIDX="+comment.getARTICLEIDX());
 		adminComService.deleteComment(comment);				
 		
 		return "/admin/community/adminQnaComDelete";
+	}
+	
+	@RequestMapping(value="/adminQnaComDeleteAjax.al")
+	@ResponseBody
+	public String adminQnaComDeleteAjax(CommentBean comment) 
+			throws Exception {
+
+		adminComService.deleteComment(comment);				
+		
+		return "good";
 	}
 }
