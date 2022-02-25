@@ -97,6 +97,7 @@ window.onload = function() {
 		<br>
 		  <div class="container">
 		  	<div style="text-align:center" id="board" >
+		  	<div class="cart-list">
 	    		<table class="table">
 					<thead class="thead-primary">
 						<tr>
@@ -160,12 +161,14 @@ window.onload = function() {
 					</c:if>
 			 </tbody>
 		</table>
+			
+					</div> <!-- end cart-list div -->
 		<br>				  						  
 	<!-- 쇼핑계속버튼 -->		  
 		<div style='float: right;'>
 			<input type="button" class="btn btn-dark py-2 px-3" value="쇼핑 계속하기" onclick="location.href='/Jumo/allList.al'"/>
     	</div>
-    	<br>
+    	
 	</div>
 </div>
 

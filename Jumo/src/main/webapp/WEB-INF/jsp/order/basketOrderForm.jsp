@@ -161,6 +161,18 @@ window.onload = function() {
 	getCount();
 };
 </script>
+<script>
+$(document).on("keyup", "input[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );})
+$(document).on("keyup", "input[noSpecial]", function() {$(this).val( $(this).val().replace(/[^ㄱ-힣a-zA-Z0-9@]/gi,"") );})
+$(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val().replace(/\s/gi,"") );})//문자제한
+</script>
+<script>
+    function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }//글자수제한
+</script>
 </head>
 <body>
 <hr>
@@ -170,15 +182,16 @@ window.onload = function() {
 	</div>
 	<br>
 	 <div class="container" style="text-align:center">
-		
+		<div class="cart-list">
 			<table class="table">
+			
 				<thead class="thead-primary">
 						<tr>
 						   <!-- <th>&nbsp;</th> -->
 						   <th colspan="2">상품명</th>
 						   <th>수량</th>
-						   <th>할인가격</th>
-						   <th>결제금액</th>
+						   <th>할인 가격</th>
+						   <th>결제 금액</th>
 						</tr>
 				</thead>
 			<c:if test="${Size>=1}">
@@ -224,7 +237,7 @@ window.onload = function() {
 				</c:if>
 			</tbody>
 		</table>
-
+</div> <!-- end cart-list div -->
 			</div>
 	<input type="hidden" id="listSize" name="listSize" value="${Size}">
 
@@ -261,7 +274,8 @@ window.onload = function() {
     			
     			
     			 <br>
-		<div class="container" style="text-align:center;">
+    			 <section class="ftco-section">
+		<div class="container" style="margin-left:auto; margin-right:auto; text-align:center;">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 				
@@ -294,7 +308,7 @@ window.onload = function() {
 					<!-- 주문자 정보와 동일한지 체크-->
 					<div class="row align-items-end" style="padding-left:150px;">
 						<div class="form-group">
-							<h6 class="mb-4" style="text-align:left;">
+							<h6 class="mb-4" style="text-align:center;">
 							주문자 정보와 동일
 							<input type="checkbox" style="width:50px;"
 								id="infoCheck" name="infoCheck" checked>
@@ -322,7 +336,7 @@ window.onload = function() {
 							<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 							<input type="text" id="MOBILE" name="OMOBILE" class="form-control"
 								onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
-								value="${memberBean.MOBILE}"> 
+								value="${memberBean.MOBILE}" maxlength="11" oninput="numberMaxLength(this);"> 
 							<div class="w-100"></div>
 							<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 						</div>
@@ -382,9 +396,8 @@ window.onload = function() {
 
 
 				</div>
-				
-
-			</div>
+				</div>
+			</section>
 		<br>
 	<br>
 <br><br>	
