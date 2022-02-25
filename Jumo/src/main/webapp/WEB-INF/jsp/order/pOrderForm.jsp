@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>주모</title>
 <script>
+
+
 function orderCheck() {
 	var pOrderForm = document.getElementById("pOrderForm");
 	
@@ -133,6 +135,13 @@ $(document).ready(function() {
         }).open();
     }
 </script>
+<script>
+    function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }//글자수제한
+</script>
 </head>
 <body>
 	<div style="text-align:center">
@@ -151,19 +160,20 @@ $(document).ready(function() {
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-									<th>&nbsp;</th>
-									<th>상품명</th>
+									<!-- <th>&nbsp;</th> -->
+									<th colspan="2">상품명</th>
 									<th>수량</th>
-									<th>원가</th>
-									<th>할인률</th>
-									<th>판매가</th>
-									<th>결제금액</th>
+									<th>상품 금액</th>
+									<th>판매 금액</th>
+									<th>할인 금액</th>
+									<th>결제 금액</th>
 								</tr>
 							</thead>
 							<tbody>
 							
 								<tr class="text-center">
-									<td class="image-prod"><div class="img" style="background-image:url(img/${productBean.PIMAGE});"></div></td>
+									<td class="image-prod">
+									<div class="img" style="background-image:url(img/${productBean.PIMAGE});"></div></td>
 									
 									<td class="product-name">
 										<h3><b>${productBean.PNAME}</b></h3>
@@ -173,12 +183,15 @@ $(document).ready(function() {
 									
 									<td class="price">${productBean.PPRICE}원</td>
 									
-									<td class="price">${productBean.PSALE}%</td>
 									
 									<td class="price">
 				          				<c:set var="salePrice" value="${productBean.PPRICE * (100-productBean.PSALE) / 100}" />
 				          				<fmt:formatNumber value="${salePrice}" pattern="#.#" />원
 									</td>
+									
+									<td class="price" style="color:Crimson">
+									<c:set var="saled" value="${(productBean.PPRICE-salePrice)*PCOUNT}" />
+									<fmt:formatNumber value="${saled}" pattern="#.#" />원</td>
 									
 									<td class="total">
 										<c:set var="total" value="${salePrice*PCOUNT}" />
@@ -233,7 +246,7 @@ $(document).ready(function() {
 						<div class="form-group">
 							<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 							<input type="text" class="form-control"
-								style="width:400px;" value="${memberBean.MOBILE}"> 
+								style="width:400px;" value="${memberBean.MOBILE}" readonly> 
 							<div class="w-100"></div>
 						</div>
 						<div class="w-100"></div>
@@ -241,7 +254,7 @@ $(document).ready(function() {
 					</div>
 						
 					<hr>
-					
+					<br><br>
 					<!-- 주문자 정보와 동일한지 체크-->
 					<div class="row align-items-end" style="padding-left:150px;">
 						<div class="form-group">
@@ -273,7 +286,7 @@ $(document).ready(function() {
 							<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 							<input type="text" id="MOBILE" name="OMOBILE" class="form-control"
 								onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
-								value="${memberBean.MOBILE}"> 
+								value="${memberBean.MOBILE}" maxlength="11" oninput="numberMaxLength(this);"> 
 							<div class="w-100"></div>
 							<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 						</div>
