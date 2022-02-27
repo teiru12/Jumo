@@ -426,6 +426,7 @@ public class ProductController {
 		model.addAttribute("reviewBeanList", reviewBeanList);
 
 		return "pDetailAjax";
+		// return "pDetail";
 	}
 
 	@RequestMapping(value = "/putBasket.al")
