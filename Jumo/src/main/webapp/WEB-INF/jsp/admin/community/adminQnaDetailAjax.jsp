@@ -53,6 +53,55 @@ $(function (){
 });
 </script>
 
+<script>
+/* 댓글 삭제 Ajax */
+function deleteCheckAjax(commentIDX, articleIDX, index) {
+   if(confirm("삭제하시겠습니까?") == true) {
+      
+      $.ajax({
+         url         : "adminQnaComDeleteAjax.al",
+         data      : {"COMMENTIDX" : Number(commentIDX), "ARTICLEIDX" : Number(articleIDX)},
+         contentType   : "application/json",
+         success      : function(data) {
+            alert("삭제하였습니다.");
+            $("#Dcom"+index).remove();
+         },
+         error:function(request, error) {
+            alert("fail");
+            // error 발생 이유를 알려준다.
+         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      });
+   }
+}
+</script>
+
+<script>
+/* 댓글 입력 Ajax */
+function WriteCheckAjax(cidx) {
+   if(confirm("작성하시겠습니까?") == true) {
+
+	   var commentT = document.getElementById("newReplyText").value;
+	   var writer = document.getElementById("newReplyWriter").value;
+	  
+	   
+      $.ajax({
+         url         : "adminQnaComWriteAjax.al",
+         data      : {"ARTICLEIDX" : Number(cidx), "COMMENTT" : commentT, "COMMENTWRITER" : writer},
+         contentType   : "application/json",
+         success      : function(data) {
+            alert("작성이완료되었습니다.");
+            window.location.reload();
+         },
+         error:function(request, error) {
+            alert("fail");
+            // error 발생 이유를 알려준다.
+         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+         }
+      });
+   }
+}
+</script>
 <!-- 댓글 입력 (추후에 AJAX사용할때 쓸수도..?-->
 <!-- <script>
 $(".replyAddBtn").on("click",function() {
@@ -135,7 +184,7 @@ $(".replyAddBtn").on("click",function() {
 		    	<c:when test="${comCount!=0}">
 					<c:forEach var="comment" items="${comList}" varStatus="status">
 					    <ul class="comment-list">
-							<li class="comment">
+							<li class="comment" id="Dcom${status.index}">
 								<div class="vcard bio">
                     				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
                   				</div>
@@ -146,9 +195,13 @@ $(".replyAddBtn").on("click",function() {
 									 	<input type="hidden" id="COMMENTIDX" name="COMMENTIDX" value="${comment.COMMENTIDX }">
 										<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
 									 </p>
-									<p><a onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaComDelete.al?COMMENTIDX=${comment.COMMENTIDX}&ARTICLEIDX=${comment.ARTICLEIDX }' } else{ return false; }"
-										class="reply">삭제</a></p>
-									<!-- <button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button> -->
+									 <div>
+									 <input type="button" onClick="deleteCheckAjax(${comment.COMMENTIDX }, ${qnaBean.CIDX} ,${status.index});" value="삭제">
+									 </div>
+									 
+									 <%-- <p>
+									 <a onClick="deleteCheckAjax(${qnaBean[i].CIDX} ,${i});" class="reply" id="bas${i}">삭제
+									 </a></p> --%>
 								</div>
 						     </li>
 						</ul>
@@ -162,7 +215,7 @@ $(".replyAddBtn").on("click",function() {
 			
 			<div class="col-md-12 comment-form-wrap">
 			
-			<form id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post"><hr>
+			<form action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post" ><hr>
 				<p>댓글 쓰기</p>
 				<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
 				<input class="form-control input-sm" id="newReplyWriter" 
@@ -173,8 +226,11 @@ $(".replyAddBtn").on("click",function() {
 								style="text-align:left; width:1000px;"></textarea>
 						</div> &nbsp;&nbsp;
 						<div class="form-group">
+							<input type="button" class="btn py-3 px-4 btn-primary btn-outline-primary" onClick="WriteCheckAjax(${qnaBean.CIDX});" value="저장">
+					 	</div>
+<!-- 						<div class="form-group">
 							<input type="button" class="btn py-3 px-4 btn-primary btn-outline-primary" onClick="commentCheck()" value="저장">
-						</div>
+						</div> -->
 					</div>
 				</form>
 			</div>

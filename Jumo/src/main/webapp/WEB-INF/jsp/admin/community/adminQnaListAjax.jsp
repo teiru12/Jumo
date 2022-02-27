@@ -5,9 +5,33 @@
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<script>
+/* Ajax */
+function deleteCheckAjax(cidx, index) {
+   if(confirm("삭제하시겠습니까?") == true) {
+	   
+      $.ajax({
+         url         : "adminQnaDeleteAjax.al",
+         data      : {"CIDX" : Number(cidx)},
+         contentType   : "application/json",
+         success      : function(data) {
+            alert("삭제하였습니다.");
+            $("#qna"+index).remove();
+
+         },
+		error:function(request, error) {
+			alert("fail");
+			// error 발생 이유를 알려준다.
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+      });
+   }
+}
+</script>
 </head>
 <body>
 	<div style="text-align:center">
@@ -36,7 +60,7 @@
 							    <c:choose>
 							    	<c:when test="${qnaCount!=0}"> 
 							    		<c:forEach var="qna" items="${qnaList}" varStatus="status"> 
-											<tr class="text-center">
+											<tr class="text-center" id="qna${status.index}">
 												<td>${qna.CIDX}</td>
 												
 												<td><a href="adminQnaDetail.al?CIDX=${qna.CIDX}">${qna.CTITLE}</a></td>
@@ -46,11 +70,10 @@
 												<td>${qna.CDATE}</td>	
 												
 												<td>
-													<form id="qnaDelete" action="adminQnaDelete.al" method="post">
-										    			<button class="btn btn-light py-2 px-3"
-															onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaDelete.al?CIDX= + ${qna.CIDX}' } else{ return false; }">
-														삭제
-														</button>
+													<form id="qnaDelete" method="post">
+														<button class="btn btn-light py-2 px-3"
+															onClick="deleteCheckAjax(${qna.CIDX} ,${status.index});">삭제</button>
+														
 													</form>
 												</td>											
 												

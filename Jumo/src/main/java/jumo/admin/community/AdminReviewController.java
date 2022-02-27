@@ -56,7 +56,7 @@ public class AdminReviewController {
 		
 		model.addAttribute("reviewList", reviewList);
 		
-		return "adminReviewList";
+		return "adminReviewListAjax";
 	}
 	
 	@RequestMapping(value="/adminReviewDelete.al")
@@ -67,5 +67,15 @@ public class AdminReviewController {
 		adminCommunityService.deleteCommunityId(community);
 		
 		return "admin/community/adminReviewDelete";
+	}	
+
+	@RequestMapping(value="/adminReviewDeleteAjax.al")
+	public String adminReviewDeleteAjax(String CIDX) throws Exception{
+		CommunityBean community = new CommunityBean();
+		community.setCIDX(Integer.parseInt(CIDX));
+		
+		adminCommunityService.deleteCommunityId(community);
+	
+		return "adminReviewList";
 	}	
 }

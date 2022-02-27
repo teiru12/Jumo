@@ -8,6 +8,27 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<script>
+function deleteCheckAjax(cidx, index) {
+	if(confirm("삭제하시겠습니까?") == true) {
+		
+		$.ajax({
+			url			: "adminReviewDeleteAjax.al",
+			data		: {"CIDX" : cidx},
+			contentType	: "application/json",
+			success		: function(data) {
+				alert("삭제하였습니다.");
+				$("#rev"+index).remove();
+			},
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
+</script>
 </head>
 <body>
 	<div style="text-align:center">
@@ -37,7 +58,7 @@
 							    <c:choose>
 							    	<c:when test="${reviewCount!=0}"> 
 							    		<c:forEach var="review" items="${reviewList}" varStatus="status"> 
-											<tr class="text-center">
+											<tr id="rev${status.index}" class="text-center">
 												<td>${review.CIDX}</td>
 												
 												<td>${review.CTITLE}</td>
@@ -49,8 +70,7 @@
 												<td>${review.CDATE}</td>	
 												
 												<td>
-													<button class="btn btn-light py-2 px-3"
-														onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminReviewDelete.al?CIDX=${review.CIDX}' } else{ return false; }">삭제</button>
+													<a href="javascript:deleteCheckAjax(${review.CIDX}, ${status.index});">삭제</a>
 												</td>											
 												
 											</tr><!-- END TR-->

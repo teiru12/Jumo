@@ -5,6 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<script>
+function deleteCheckAjax(cidx, index) {
+	if(confirm("삭제하시겠습니까?") == true) {
+		
+		$.ajax({
+			url			: "adminNoticeDeleteAjax.al",
+			data		: {"CIDX" : cidx},
+			contentType	: "application/json",
+			success		: function(data) {
+				alert("삭제하였습니다.");
+				$("#not"+index).remove();
+			},
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
+</script>
 </head>
 <body>
 <br>
@@ -35,9 +56,10 @@
 									<th><th>
 								</tr>
 							</thead>
+							
 							<tbody>
-								<c:forEach var="notice" items="${noticeList}"> 
-								<tr class="text-center">
+								<c:forEach var="notice" items="${noticeList}"  varStatus="status"> 
+								<tr id="not${status.index}">
 									<td>${notice.CIDX}</td>
 									<td><a href="adminNoticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a></td>
 									<td class="product-name">
@@ -45,12 +67,7 @@
 									</td>
 									<td>${notice.CDATE}</td>
 									<td>
-										<form id="qnaDelete" action="adminQnaDelete.al" method="post">
-										   	<button class="btn btn-light py-2 px-3"
-												onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaDelete.al?CIDX= + ${qna.CIDX}' } else{ return false; }">
-												삭제
-											</button>
-										</form>
+										<a href="javascript:deleteCheckAjax(${notice.CIDX}, ${status.index});">삭제</a>
 												</td>
 								</tr><!-- END TR-->
 								</c:forEach>
