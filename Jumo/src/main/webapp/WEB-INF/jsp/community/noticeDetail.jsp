@@ -9,12 +9,31 @@
 </head>
 <body>
 <br>
-	<div style="text-align:center">
- 		<h3>공지 내용</h3>
-	</div> 		
-  	    <br>
-  	    <br>
-  		<!-- 공지사항 부분 -->
+<div style="text-align:center">
+ 	<h5>상세 내용</h5>
+	<hr width="80%">
+</div> 		
+<br>
+<br>
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
+			<div class="blog-entry align-self-stretch d-md-flex">
+				<div class="text d-block pl-md-4">
+					<h3>${communityBean.CTITLE}</h3>
+					<div class="meta mb-3">
+						<div>${communityBean.CWRITER}</div>
+						<div>${communityBean.CDATE}</div>
+					</div><hr>
+      				<p class="mt-5" style="font-size:large;">${communityBean.CCONTENT}</p>
+    			</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<%-- <!-- 공지사항 부분 -->
   	<div class="container">
 		<div style="text-align:center" id="noticeDetail" >
 		<div class="col-md-12 ftco-animate">
@@ -39,7 +58,6 @@
 </div>
 </div>
 </div>
-<br>
-
+<br> --%>
 </body>
 </html>

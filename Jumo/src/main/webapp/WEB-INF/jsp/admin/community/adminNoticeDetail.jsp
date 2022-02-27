@@ -15,9 +15,30 @@ function deleteCheck() {
 </script>
 </head>
 <body>
+<div style="text-align:center">
+	<h5>공지사항</h5>
+	<input type="hidden" id="CIDX" name="CIDX" value="${noticeBean.CIDX }">
+	<hr width="80%">
+</div>
 
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
+			<div class="blog-entry align-self-stretch d-md-flex">
+				<div class="text d-block pl-md-4">
+					<h3>${noticeBean.CTITLE}</h3>
+					<div class="meta mb-3">
+						<div>${noticeBean.CWRITER}</div>
+						<div>${noticeBean.CDATE}</div>
+					</div><hr>
+      				<p class="mt-5" style="font-size:large;">${noticeBean.CCONTENT}</p>
+    			</div>
+			</div>
+		</div><hr>
+	</div>
+</section>
 
-<br> 
+<%-- <br> 
 	<div style="text-align:center"><h2>공지 사항</h2></div>
  	<input type="hidden" id="CIDX" name="CIDX" value="${noticeBean.CIDX }">
 <br>
@@ -55,10 +76,10 @@ function deleteCheck() {
 				</div>
 			</div>
 		</div>
-<br>
+<br> --%>
 <p style="text-align:center;">
 <button class="btn btn-black py-2 px-3" onclick="location.href='adminNoticeModifyForm.al?CIDX=${noticeBean.CIDX}'">수정</button>
 <button class="btn btn-light py-2 px-3" onclick="return deleteCheck()">삭제</button>
-</p>
+</p><br><br>
 </body>
 </html>

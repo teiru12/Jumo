@@ -20,15 +20,28 @@ function getCount() {
 	return count;
 }
 
-function putBasket() {
+function putBasketAjax(pid) {
 	if(confirm("장바구니에 넣으시겠습니까?") == true) {
-		var pId = document.getElementById('PID').value;
-		var count = document.getElementById('BCOUNT').value;		
-		location.href="putBasket.al?BID=" + pId + "&BCOUNT=" + count;
-	} else {
-		return;
+		
+		let count = document.getElementById("BCOUNT").value;
+		
+		$.ajax({
+			url			:"putBasketAjax.al",
+			data		:{"BID":Number(pid), "BCOUNT" : Number(count), "message" : "" },
+			contentType	:"application/json",
+			success		:function(data){
+				alert(data.message);
+				if(confirm("장바구니로 가시겠습니까?") == true) {
+					location.href='basketList.al';
+				}
+			},
+			error		:function(request, error){
+							alert("fail");
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
 	}
-}
+} 
 
 function pOrderForm() {
 	var pId = document.getElementById('PID').value;
@@ -154,7 +167,8 @@ window.onload = function() {
 				          			</tr>
 				          			<tr>
 				          				<td colspan="2" style="text-align:right;">
-				          					<p><input type="button" class="btn btn-primary py-2 px-4" onClick="putBasket()" value="장바구니">
+				          					<p><input type="button" class="btn btn-primary py-2 px-4" 
+				          						onClick="putBasketAjax(${productBean.PID});" value="장바구니">
 				          					<input type="button" class="btn btn-black py-2 px-4" onClick="pOrderForm()" value="구&emsp;&emsp;매"></p>
 				          				</td>
 				          			</tr>				          			
