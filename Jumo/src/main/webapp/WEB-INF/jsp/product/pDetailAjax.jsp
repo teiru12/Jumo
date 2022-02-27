@@ -41,7 +41,7 @@ function putBasketAjax(pid) {
 			}
 		});
 	}
-}
+} 
 
 function pOrderForm() {
 	var pId = document.getElementById('PID').value;

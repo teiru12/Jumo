@@ -8,13 +8,62 @@
 <title>주모</title>
 </head>
 <body>
+<br><br>s
+<div style="text-align:center">
+	<h5>상세 내용</h5>
+	<hr width="80%">
+</div> 		
 <br>
-	<div style="text-align:center">
- 		<h3>상세 내용</h3>
-	</div> 		
-  	    <br>
-  	    <br>
-  		<!-- 고객센터 상세 부분 -->
+<br>
+<section class="ftco-section ftco-degree-bg">
+	<div class="container">
+		<div class="row">
+			<div class="blog-entry align-self-stretch d-md-flex">
+				<div class="text d-block pl-md-4">
+					<h3>${communityBean.CTITLE}</h3>
+					<div class="meta mb-3">
+						<div>${communityBean.CWRITER}</div>
+						<div>${communityBean.CDATE}</div>
+					</div><hr>
+      				<p class="mt-5" style="font-size:large;">${communityBean.CCONTENT}</p>
+    			</div>
+			</div>
+		</div>
+		
+		<div class="col-md-12"><hr>
+		    <p class="mb-5 mt-5">댓글</p>
+		    <c:choose>
+		    	<c:when test="${comCount!=0}">
+					<c:forEach var="comment" items="${commentBeanList}" varStatus="status"> 
+					    <ul class="comment-list">
+							<li class="comment">
+								<div class="vcard bio">
+                    				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
+                  				</div>
+								<div class="comment-body">
+									<div class="meta">${comment.COMMENTDATE}</div><!-- 답변 작성 날짜 -->
+									<p style="font-size:middle;">
+									 	${comment.COMMENTT}
+									 </p>
+								</div>
+						     </li>
+						</ul>
+					</c:forEach>
+				</c:when>
+				<c:otherwise> 
+		   			<tr>
+						<td colspan="2">조회된 결과가 없습니다.</td> 
+					</tr>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</section>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+<%-- <!-- 고객센터 상세 부분 -->
   	<div class="container">
 		<div style="text-align:center" id="qnaDetail" >
 			<div class="col-md-12 ftco-animate">
@@ -57,7 +106,7 @@
 	
 	</div>
 </div>
-</div>
+</div> --%>
 <br>
 <br>
 </body>

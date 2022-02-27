@@ -407,7 +407,7 @@ public class ProductController {
 		return "etcList";
 	}
 
-	@RequestMapping("/pDetail.al")
+	@RequestMapping("/pDetail.al") 
 	public String pDetail(ProductBean product, CommunityBean community, Model model) throws Exception {
 
 		Map<String, Object> map = productService.selectProductId(product);

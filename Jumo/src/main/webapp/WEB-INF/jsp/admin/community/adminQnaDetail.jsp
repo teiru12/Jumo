@@ -85,7 +85,8 @@ $(".replyAddBtn").on("click",function() {
 </script> -->
 </head>
 <div style="text-align:center">
-	<h1> 상세 내용 </h1>
+	<h5> 상세 내용 </h5>
+	<hr width="80%">
 </div>
 
 <%-- <section class="ftco-section ftco-cart">
@@ -130,9 +131,8 @@ $(".replyAddBtn").on("click",function() {
 		</div>
 		
 		<div class="col-md-12"><hr>
-		    <p class="mb-5 mt-5">댓글</p>
-		    <c:choose>
-		    	<c:when test="${comCount!=0}">
+		    <b>댓글</b><br><br>
+		    	<c:if test="${comCount!=0}">
 					<c:forEach var="comment" items="${comList}" varStatus="status">
 					    <ul class="comment-list">
 							<li class="comment">
@@ -148,37 +148,30 @@ $(".replyAddBtn").on("click",function() {
 									 </p>
 									<p><a onClick="javascript:if(confirm('삭제하시겠습니까?')==true){ location.href='adminQnaComDelete.al?COMMENTIDX=${comment.COMMENTIDX}&ARTICLEIDX=${comment.ARTICLEIDX }' } else{ return false; }"
 										class="reply">삭제</a></p>
-									<!-- <button type="submit" onclick="return deleteCheck1()" class="btn btn-primary px-4" >삭제</button> -->
 								</div>
 						     </li>
 						</ul>
 					</c:forEach>
-				</c:when>
-				<c:otherwise>
-		  
-				</c:otherwise>
-			</c:choose>
+				</c:if>
+				<p>댓글이 없습니다.</p>
 			</div>
 			
 			<div class="col-md-12 comment-form-wrap">
-			
-			<form id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post"><hr>
-				<p>댓글 쓰기</p>
-				<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
-				<input class="form-control input-sm" id="newReplyWriter" 
+				<form id="commentForm" action="adminQnaComWrite.al?CIDX=${qnaBean.CIDX}" method="post"><hr>
+				<b>댓글 쓰기</b><br><br>
+					<input type="hidden" name="ARTICLEIDX" value="${qnaBean.CIDX}">
+					<input class="form-control input-sm" id="newReplyWriter" 
 								name="COMMENTWRITER" type="hidden" value="관리자" readonly>
 					<div class="row">
 						<div class="form-group">
-							<textarea class="form-control input-sm" maxlength="200" id="newReplyText" name="COMMENTT" 
-								style="text-align:left; width:1000px;"></textarea>
-						</div> &nbsp;&nbsp;
+                    		<textarea id="newReplyText" name="COMMENTT" cols="120" rows="2" class="form-control"></textarea>
+                 		</div> &nbsp;&nbsp;
 						<div class="form-group">
 							<input type="button" class="btn py-3 px-4 btn-primary btn-outline-primary" onClick="commentCheck()" value="저장">
 						</div>
 					</div>
 				</form>
 			</div>
-		
 	</div>
 </section>
 
