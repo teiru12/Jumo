@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
+
 	<!-- selectMemberId(아이디 중복확인, 로그인 기능, 회원정보수정폼)--> 
 	<select id="selectMemberId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -12,7 +13,7 @@
  			EMAIL= #{EMAIL} 
 	]]>
 	</select>
-	
+
 	<!-- selectMemberJumin(아이디 찾기 결과, 비밀번호 찾기 결과) -->
     <select id="selectMemberJumin" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -23,6 +24,84 @@
 			JUMIN1= #{JUMIN1} AND JUMIN2 = #{JUMIN2}
 	]]>
 	</select>
+	
+   	<!-- memberListPaging(회원리스트 페이징) -->
+   	<select id="memberListPaging" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
+			FROM (
+				SELECT
+					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
+				FROM
+					MEMBER
+				ORDER BY MDATE ASC		
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>	
+	
+	<!-- memberListSearchPaging(회원리스트 검색페이징) -->
+   	<select id="memberListSearchPaging" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
+			FROM (
+				SELECT
+					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
+				FROM
+					MEMBER
+		   		<where>
+		   			<if test="KEYWORD!=NULL">
+		   				<if test="CONDITION.equals('EMAIL')">
+		   					EMAIL LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+						<if test="CONDITION.equals('NAME')">
+		   					NAME LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+						<if test="CONDITION.equals('RANK')">
+		   					RANK LIKE '%'||#{KEYWORD}||'%'
+		   				</if>
+		   			</if>
+		   		</where>					
+				ORDER BY MDATE ASC		
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>	
+	
+	<!-- memberCount(회원 수) -->
+   	<select id="memberCount" resultType="hashmap">
+   		SELECT
+   			COUNT(*) COUNT
+   		FROM 
+   			MEMBER
+	</select>		
+	
+	<!-- memberSearchCount(회원 수) -->
+   	<select id="memberSearchCount" parameterType="hashmap" resultType="hashmap">
+   		SELECT
+   			COUNT(*) COUNT
+   		FROM 
+   			MEMBER
+   		<where>
+   			<if test="KEYWORD!=NULL">
+   				<if test="CONDITION.equals('EMAIL')">
+   					EMAIL LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+				<if test="CONDITION.equals('NAME')">
+   					NAME LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+				<if test="CONDITION.equals('RANK')">
+   					RANK LIKE '%'||#{KEYWORD}||'%'
+   				</if>
+   			</if>
+   		</where>
+	</select>	
 	
 	<!-- insertMember(회원가입 성공) -->
 	<insert id="insertMember" parameterType="hashmap" >
@@ -93,6 +172,9 @@
 	]]>
    	</delete>
    	
+   	
+   	<!-- 사용하지 않음 -->
+   	
    	<!-- memberList(회원리스트) -->
    	<select id="memberList" resultType="hashmap">
 	<![CDATA[
@@ -100,84 +182,6 @@
    		FROM 
    			MEMBER
 	]]>
-	</select>
-	
-   	<!-- memberListPaging(회원리스트 페이징) -->
-   	<select id="memberListPaging" parameterType="hashmap" resultType="hashmap">
-		SELECT *
-		FROM (
-			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
-			FROM (
-				SELECT
-					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
-				FROM
-					MEMBER
-				ORDER BY MDATE ASC		
-			)
-			ORDER BY R
-		)
-		WHERE
-			R BETWEEN #{START} AND #{END}
 	</select>	
-	
-	<!-- memberCount(회원 수) -->
-   	<select id="memberCount" resultType="hashmap">
-   		SELECT
-   			COUNT(*) COUNT
-   		FROM 
-   			MEMBER
-	</select>		
-	
-	<!-- memberListSearchPaging(회원리스트 검색페이징) -->
-   	<select id="memberListSearchPaging" parameterType="hashmap" resultType="hashmap">
-		SELECT *
-		FROM (
-			SELECT EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK, ROWNUM R
-			FROM (
-				SELECT
-					EMAIL, NAME, JUMIN1, JUMIN2, MDATE, ADDRESS1, ADDRESS2, POSTCODE, PHONE, MOBILE, RANK, BLOCK
-				FROM
-					MEMBER
-		   		<where>
-		   			<if test="KEYWORD!=NULL">
-		   				<if test="CONDITION.equals('EMAIL')">
-		   					EMAIL LIKE '%'||#{KEYWORD}||'%'
-		   				</if>
-						<if test="CONDITION.equals('NAME')">
-		   					NAME LIKE '%'||#{KEYWORD}||'%'
-		   				</if>
-						<if test="CONDITION.equals('RANK')">
-		   					RANK LIKE '%'||#{KEYWORD}||'%'
-		   				</if>
-		   			</if>
-		   		</where>					
-				ORDER BY MDATE ASC		
-			)
-			ORDER BY R
-		)
-		WHERE
-			R BETWEEN #{START} AND #{END}
-	</select>	
-	
-	<!-- memberSearchCount(회원 수) -->
-   	<select id="memberSearchCount" parameterType="hashmap" resultType="hashmap">
-   		SELECT
-   			COUNT(*) COUNT
-   		FROM 
-   			MEMBER
-   		<where>
-   			<if test="KEYWORD!=NULL">
-   				<if test="CONDITION.equals('EMAIL')">
-   					EMAIL LIKE '%'||#{KEYWORD}||'%'
-   				</if>
-				<if test="CONDITION.equals('NAME')">
-   					NAME LIKE '%'||#{KEYWORD}||'%'
-   				</if>
-				<if test="CONDITION.equals('RANK')">
-   					RANK LIKE '%'||#{KEYWORD}||'%'
-   				</if>
-   			</if>
-   		</where>
-	</select>		
 	
 </mapper>

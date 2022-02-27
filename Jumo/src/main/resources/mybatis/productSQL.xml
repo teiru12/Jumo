@@ -48,185 +48,6 @@
 		]]>
 	</select>
 	
-	<!-- [allList]전체상품 게시판 -->
-	<select id="allList" resultType="hashmap">
-	<![CDATA[
-		SELECT * 
-		FROM 
-			PRODUCT
-	]]>
-	</select> 
-	
-	<!-- [allListSearch]전체상품 게시판 리스트 검색 -->
-	<select id="allListSearch" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT * 
-		FROM 
-			PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-	</trim>
-	<trim prefix="ORDER BY">
-		<if test="#{PSELL}!=NULL">
-			PSELL DESC  
-		</if>
-	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	             </if>
-	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	             </if>
-	             <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	             </if>
-	</trim>
-	</select>
-	
-	<!-- [aclList]주류상품 게시판 -->
-	<select id="aclList" resultType="hashmap">
-	<![CDATA[
-		SELECT * 
-		FROM
-			PRODUCT 
-		WHERE
-			PTYPE ='ALCOHOL'
-	]]>
-	</select> 
-	
-	<!-- [aclListSearch]주류상품 게시판 리스트 검색 -->
-	<select id="aclListSearch" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT * 
-			FROM PRODUCT 
-	]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-	
-		<if test="#{PKIND}!=NULL">
-			AND PKIND = #{PKIND} 
-		</if>
-		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
-			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
-		</if>
-	              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
-			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
-		</if>
-			AND PTYPE='ALCOHOL' 
-	</trim>
-	<trim prefix="ORDER BY">
-	    <if test="#{PSELL}!=NULL">
-			PSELL DESC 
-		</if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	    </if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	    </if>
-	    <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	    </if>
-	</trim>
-	</select>
-	
-	<!-- [etcList]기타상품 게시판 -->
-	<select id="etcList" resultType="hashmap">
-	<![CDATA[
-		SELECT *
-		FROM
-			PRODUCT
-		WHERE
-			PTYPE ='ETC'
-	]]>
-	</select> 
-	
-	<!-- [etcListSearch]기타상품 게시판 리스트 검색 -->
-	<select id="etcListSearch" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT * 
-			FROM PRODUCT 
-		]]>
-	<trim prefix="ORDER BY">
-		<if test="#{PSELL}!=NULL">
-			PSELL DESC  
-		</if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE ASC 
-	    </if>
-	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
-			PPRICE DESC 
-	    </if>
-	    <if test="#{PDATE}!=NULL">
-			PDATE DESC 
-	    </if>
-	</trim>
-	</select>
-	
-	<!-- [allListKeywordSearch]전체상품 게시판 키워드 검색 -->
-	<select id="allListKeywordSearch" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[	
-		SELECT * 
-		FROM PRODUCT 
-		]]>
-	<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<if test="KEYWORD!=NULL and #{KEYWORD}=='ALCOHOL'">
-			AND PTYPE='ALCOHOL' 
-		</if>
-		<if test="KEYWORD!=NULL and #{KEYWORD}=='ETC'">
-			AND PTYPE='ETC' 
-		</if>
-		<if test="KEYWORD!=NULL and ISNUMBER==NULL">
-			AND (PKIND LIKE '%'||#{KEYWORD}||'%' 
-			OR PNAME LIKE '%'||#{KEYWORD}||'%')
-		</if>
-		<if test="KEYWORD!=NULL and ISNUMBER!=NULL">
-			AND (PDEGREE=TO_NUMBER(#{KEYWORD}) 
-			OR PNAME LIKE '%'||#{KEYWORD}||'%')
-		</if>
-	</trim>
-	</select>
-	
-	<!-- [insertProduct]상품 입력 기능 -->
-	<insert id="insertProduct" parameterType="hashmap">
-		INSERT INTO 
-			PRODUCT
-		VALUES(
-			PID_SEQ.NEXTVAL,
-			#{PNAME},
-			#{PIMAGE},
-			SYSDATE,
-			#{PPRICE},
-			#{PSALE},
-			#{PSTOCK},
-			0,
-			#{PCOM},
-			#{PLOC},
-			<if test="PDEGREE != null">
-			#{PDEGREE},
-			</if>
-			<if test="PDEGREE == null">
-			null,
-			</if>
-			<if test="PKIND != null">
-			#{PKIND},
-			</if>
-			<if test="PKIND == null">
-			null,
-			</if>
-			#{PTYPE}
-		)
-	</insert>
-	
 	<!-- [selectPIDMax] 상품 테이블의 PID 최대값 -->
 	<select id="selectPIDMax" resultType="hashmap">
 		SELECT
@@ -234,45 +55,6 @@
 		FROM
 			PRODUCT	
 	</select>
-	
-	<!-- [updateProduct]상품 수정 기능 -->
-	<update id="updateProduct" parameterType="hashmap">
-		UPDATE 
-		  PRODUCT
-		SET PNAME=#{PNAME},
-			PIMAGE=#{PIMAGE},
-			PPRICE=#{PPRICE},
-			PSALE=#{PSALE},
-			PSTOCK=#{PSTOCK},
-			PCOM=#{PCOM},
-			PLOC=#{PLOC},
-			<if test="PDEGREE != null">
-			PDEGREE=#{PDEGREE},
-			</if>
-			<if test="PDEGREE == null">
-			PDEGREE=null,
-			</if>
-			<if test="PKIND != null">
-			PKIND=#{PKIND},
-			</if>
-			<if test="PKIND == null">
-			PKIND=null,
-			</if>
-			PTYPE=#{PTYPE}
-		WHERE 
-			PID=#{PID}
-	</update>
-	
-	<!-- [deleteProduct]상품 삭제 기능 -->
-	<delete id="deleteProduct" parameterType="hashmap">
-	<![CDATA[
-		DELETE 
-		FROM 
-			PRODUCT
-		WHERE
-			PID=#{PID}
-		]]>
-	</delete>
 	
 	<!-- [allListPaging]전체상품 게시판 페이징-->
 	<select id="allListPaging" parameterType="hashmap" resultType="hashmap">
@@ -285,25 +67,6 @@
 				FROM 
 					PRODUCT
 				ORDER BY PID
-			)
-			ORDER BY R
-		)
-		WHERE
-			R BETWEEN #{START} AND #{END}
-	]]>
-	</select> 
-	
-	<!-- [allListPSELLDescPaging]전체상품 게시판 페이징-->
-	<select id="allListPSELLDescPaging" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT *
-		FROM (
-			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE, ROWNUM R
-			FROM (
-				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE
-				FROM 
-					PRODUCT
-				ORDER BY PSELL DESC
 			)
 			ORDER BY R
 		)
@@ -356,6 +119,59 @@
 		)
 		WHERE
 			R BETWEEN #{START} AND #{END}
+	</select>
+	
+	<!-- [allListKeywordPaging]전체상품 게시판 키워드 검색 -->
+	<select id="allListKeywordPaging" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE, ROWNUM R
+			FROM ( 	
+				SELECT 
+					PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE
+				FROM 
+					PRODUCT 
+				<trim prefix="WHERE" prefixOverrides="OR">
+					<if test="KEYWORD!=NULL">	
+						<if test="KEYNUMBER!=NULL">	
+							OR PNAME LIKE '%'||#{KEYWORD}||'%'
+							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+							OR PKIND LIKE '%'||#{KEYWORD}||'%'	
+							OR PPRICE = #{KEYNUMBER}
+							OR PSTOCK = #{KEYNUMBER}
+							OR PDEGREE = #{KEYNUMBER}
+						</if>
+						<if test="KEYNUMBER==NULL">				
+							OR PNAME LIKE '%'||#{KEYWORD}||'%'
+							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+							OR PKIND LIKE '%'||#{KEYWORD}||'%'		
+						</if>
+					</if>
+				</trim>
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	</select>
+	
+	<!-- [allListPSELLDescPaging]전체상품 게시판 페이징-->
+	<select id="allListPSELLDescPaging" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT *
+		FROM (
+			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE, ROWNUM R
+			FROM (
+				SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE
+				FROM 
+					PRODUCT
+				ORDER BY PSELL DESC
+			)
+			ORDER BY R
+		)
+		WHERE
+			R BETWEEN #{START} AND #{END}
+	]]>
 	</select>
 	
 	<!-- [aclListPaging] 주류상품 게시판 페이징 -->
@@ -509,7 +325,31 @@
 			</if>
 		</trim>
 	</select>
-		
+	
+	<!-- [allListKeywordCount] 주류상품 검색 수량 -->
+	<select id="allListKeywordCount" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) COUNT
+		FROM 
+			PRODUCT 
+		<trim prefix="WHERE" prefixOverrides="OR">
+			<if test="KEYWORD!=NULL">	
+				<if test="KEYNUMBER!=NULL">	
+					OR PNAME LIKE '%'||#{KEYWORD}||'%'
+					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+					OR PKIND LIKE '%'||#{KEYWORD}||'%'
+					OR PPRICE = #{KEYNUMBER}
+					OR PSTOCK = #{KEYNUMBER}
+					OR PDEGREE = #{KEYNUMBER}
+				</if>
+				<if test="KEYNUMBER==NULL">				
+					OR PNAME LIKE '%'||#{KEYWORD}||'%'
+					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
+					OR PKIND LIKE '%'||#{KEYWORD}||'%'		
+				</if>
+			</if>
+		</trim>
+	</select>
+	
 	<!-- [aclListCount] 주류상품 수량 -->
 	<select id="aclListCount" resultType="hashmap">
 	<![CDATA[
@@ -555,62 +395,225 @@
 	]]>
 	</select>
 	
-	<!-- [allListKeywordPaging]전체상품 게시판 키워드 검색 -->
-	<select id="allListKeywordPaging" parameterType="hashmap" resultType="hashmap">
-		SELECT *
-		FROM (
-			SELECT PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE, ROWNUM R
-			FROM ( 	
-				SELECT 
-					PID, PNAME, PIMAGE, PPRICE, PSALE, PSTOCK, PSELL, PCOM, PLOC, PDEGREE, PKIND, PTYPE
-				FROM 
-					PRODUCT 
-				<trim prefix="WHERE" prefixOverrides="OR">
-					<if test="KEYWORD!=NULL">	
-						<if test="KEYNUMBER!=NULL">	
-							OR PNAME LIKE '%'||#{KEYWORD}||'%'
-							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
-							OR PKIND LIKE '%'||#{KEYWORD}||'%'	
-							OR PPRICE = #{KEYNUMBER}
-							OR PSTOCK = #{KEYNUMBER}
-							OR PDEGREE = #{KEYNUMBER}
-						</if>
-						<if test="KEYNUMBER==NULL">				
-							OR PNAME LIKE '%'||#{KEYWORD}||'%'
-							OR PTYPE LIKE '%'||#{KEYWORD}||'%'
-							OR PKIND LIKE '%'||#{KEYWORD}||'%'		
-						</if>
-					</if>
-				</trim>
-			)
-			ORDER BY R
+	<!-- [insertProduct]상품 입력 기능 -->
+	<insert id="insertProduct" parameterType="hashmap">
+		INSERT INTO 
+			PRODUCT
+		VALUES(
+			PID_SEQ.NEXTVAL,
+			#{PNAME},
+			#{PIMAGE},
+			SYSDATE,
+			#{PPRICE},
+			#{PSALE},
+			#{PSTOCK},
+			0,
+			#{PCOM},
+			#{PLOC},
+			<if test="PDEGREE != null">
+			#{PDEGREE},
+			</if>
+			<if test="PDEGREE == null">
+			null,
+			</if>
+			<if test="PKIND != null">
+			#{PKIND},
+			</if>
+			<if test="PKIND == null">
+			null,
+			</if>
+			#{PTYPE}
 		)
-		WHERE
-			R BETWEEN #{START} AND #{END}
-	</select>
+	</insert>
 	
-	<!-- [allListKeywordCount] 주류상품 검색 수량 -->
-	<select id="allListKeywordCount" parameterType="hashmap" resultType="hashmap">
-		SELECT COUNT(*) COUNT
+	<!-- [updateProduct]상품 수정 기능 -->
+	<update id="updateProduct" parameterType="hashmap">
+		UPDATE 
+		  PRODUCT
+		SET PNAME=#{PNAME},
+			PIMAGE=#{PIMAGE},
+			PPRICE=#{PPRICE},
+			PSALE=#{PSALE},
+			PSTOCK=#{PSTOCK},
+			PCOM=#{PCOM},
+			PLOC=#{PLOC},
+			<if test="PDEGREE != null">
+			PDEGREE=#{PDEGREE},
+			</if>
+			<if test="PDEGREE == null">
+			PDEGREE=null,
+			</if>
+			<if test="PKIND != null">
+			PKIND=#{PKIND},
+			</if>
+			<if test="PKIND == null">
+			PKIND=null,
+			</if>
+			PTYPE=#{PTYPE}
+		WHERE 
+			PID=#{PID}
+	</update>
+	
+	<!-- [deleteProduct]상품 삭제 기능 -->
+	<delete id="deleteProduct" parameterType="hashmap">
+	<![CDATA[
+		DELETE 
+		FROM 
+			PRODUCT
+		WHERE
+			PID=#{PID}
+		]]>
+	</delete>	
+	
+	
+   	<!-- 사용하지 않음 -->	
+	
+	<!-- [allList]전체상품 게시판 -->
+	<select id="allList" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM 
+			PRODUCT
+	]]>
+	</select> 
+	
+	<!-- [allListSearch]전체상품 게시판 리스트 검색 -->
+	<select id="allListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
 		FROM 
 			PRODUCT 
-		<trim prefix="WHERE" prefixOverrides="OR">
-			<if test="KEYWORD!=NULL">	
-				<if test="KEYNUMBER!=NULL">	
-					OR PNAME LIKE '%'||#{KEYWORD}||'%'
-					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
-					OR PKIND LIKE '%'||#{KEYWORD}||'%'
-					OR PPRICE = #{KEYNUMBER}
-					OR PSTOCK = #{KEYNUMBER}
-					OR PDEGREE = #{KEYNUMBER}
-				</if>
-				<if test="KEYNUMBER==NULL">				
-					OR PNAME LIKE '%'||#{KEYWORD}||'%'
-					OR PTYPE LIKE '%'||#{KEYWORD}||'%'
-					OR PKIND LIKE '%'||#{KEYWORD}||'%'		
-				</if>
-			</if>
-		</trim>
+	]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<if test="#{PKIND}!=NULL">
+			AND PKIND = #{PKIND} 
+		</if>
+		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
+			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+		</if>
+	    <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
+			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+		</if>
+	</trim>
+	<trim prefix="ORDER BY">
+		<if test="#{PSELL}!=NULL">
+			PSELL DESC  
+		</if>
+	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE ASC 
+	             </if>
+	             <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE DESC 
+	             </if>
+	             <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	             </if>
+	</trim>
+	</select>
+	
+	<!-- [aclList]주류상품 게시판 -->
+	<select id="aclList" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM
+			PRODUCT 
+		WHERE
+			PTYPE ='ALCOHOL'
+	]]>
+	</select> 
+	
+	<!-- [aclListSearch]주류상품 게시판 리스트 검색 -->
+	<select id="aclListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+			FROM PRODUCT 
+	]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+	
+		<if test="#{PKIND}!=NULL">
+			AND PKIND = #{PKIND} 
+		</if>
+		<if test="#{PDEGREEMIN} != NULL AND #{PDEGREEMAX} != NULL">
+			AND PDEGREE BETWEEN #{PDEGREEMIN} AND #{PDEGREEMAX} 
+		</if>
+	              <if test="#{PPRICEMIN} != NULL AND #{PPRICEMAX} != NULL">
+			AND PPRICE BETWEEN #{PPRICEMIN} AND #{PPRICEMAX} 
+		</if>
+			AND PTYPE='ALCOHOL' 
+	</trim>
+	<trim prefix="ORDER BY">
+	    <if test="#{PSELL}!=NULL">
+			PSELL DESC 
+		</if>
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE ASC 
+	    </if>
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE DESC 
+	    </if>
+	    <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	    </if>
+	</trim>
+	</select>
+	
+	<!-- [etcList]기타상품 게시판 -->
+	<select id="etcList" resultType="hashmap">
+	<![CDATA[
+		SELECT *
+		FROM
+			PRODUCT
+		WHERE
+			PTYPE ='ETC'
+	]]>
+	</select> 
+	
+	<!-- [etcListSearch]기타상품 게시판 리스트 검색 -->
+	<select id="etcListSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+			FROM PRODUCT 
+		]]>
+	<trim prefix="ORDER BY">
+		<if test="#{PSELL}!=NULL">
+			PSELL DESC  
+		</if>
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE ASC 
+	    </if>
+	    <if test="#{PPRICE}!=NULL AND #{PORDER}">
+			PPRICE DESC 
+	    </if>
+	    <if test="#{PDATE}!=NULL">
+			PDATE DESC 
+	    </if>
+	</trim>
+	</select>
+	
+	<!-- [allListKeywordSearch]전체상품 게시판 키워드 검색 -->
+	<select id="allListKeywordSearch" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[	
+		SELECT * 
+		FROM PRODUCT 
+		]]>
+	<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<if test="KEYWORD!=NULL and #{KEYWORD}=='ALCOHOL'">
+			AND PTYPE='ALCOHOL' 
+		</if>
+		<if test="KEYWORD!=NULL and #{KEYWORD}=='ETC'">
+			AND PTYPE='ETC' 
+		</if>
+		<if test="KEYWORD!=NULL and ISNUMBER==NULL">
+			AND (PKIND LIKE '%'||#{KEYWORD}||'%' 
+			OR PNAME LIKE '%'||#{KEYWORD}||'%')
+		</if>
+		<if test="KEYWORD!=NULL and ISNUMBER!=NULL">
+			AND (PDEGREE=TO_NUMBER(#{KEYWORD}) 
+			OR PNAME LIKE '%'||#{KEYWORD}||'%')
+		</if>
+	</trim>
 	</select>
 
 </mapper>

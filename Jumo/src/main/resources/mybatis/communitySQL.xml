@@ -3,16 +3,6 @@
 
 <mapper namespace="community">
 
-	<!-- noticeList(공지 게시판 리스트) -->
-	<select id="noticeList" resultType="hashmap">
-        <![CDATA[
-				SELECT * 
-					FROM COMMUNITY
-					WHERE CTYPE = 'N'
-	 	]]>
-     </select>
-     
-     
 	<!-- selectNoticeId(공지 게시판 상세보기) -->
      <select id="selectNoticeId" parameterType="hashmap" resultType="hashmap">
      <![CDATA[
@@ -22,47 +12,6 @@
      ]]>
 	</select>
 	
-	
-	<!-- insertNotice(공지사항 등록 기능) -->
-	<insert id="insertNotice" parameterType="hashmap">
-	<![CDATA[
-		INSERT 
-		INTO COMMUNITY
-		VALUES(
-			CIDX_SEQ.NEXTVAL, 
-			#{CTITLE}, 
-			SYSDATE, 
-			#{CWRITER}, 
-			NULL, 
-			0, 
-			#{CCONTENT}, 
-			'N'
-			)
-		]]>
-	</insert>
-	
-	
-	<!-- updateNoticeId(공지사항 수정 기능) -->
-	<update id="updateNoticeId" parameterType="hashmap" >
-        <![CDATA[
-			UPDATE COMMUNITY 
-				SET CTITLE=#{CTITLE}, 
-					CCONTENT=#{CCONTENT}
-				WHERE CIDX=#{CIDX}
-	   ]]>
-	</update>
-	
-	
-	<!-- qnaList(고객센터 게시판 리스트) -->
-	<select id="qnaList" resultType="hashmap">
-	 <![CDATA[
-		SELECT *
-			FROM COMMUNITY
-			WHERE CTYPE= 'Q'
-	   ]]>
-	</select>
-     
-          
 	<!-- selectQnaId(고객센터 게시판 상세보기) -->
 	<select id="selectQnaId" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
@@ -71,72 +20,7 @@
 				WHERE CTYPE = 'Q' AND CIDX = #{CIDX}
 		]]>
 	</select>
-	
-	
-	<!-- insertQna(고객센터 게시판 글 입력 기능) -->
-	<insert id="insertQna" parameterType="hashmap">
-	<![CDATA[
-		INSERT 
-			INTO COMMUNITY
-			VALUES(
-				CIDX_SEQ.NEXTVAL, 
-				#{CTITLE}, 
-				SYSDATE, 
-				#{CWRITER}, 
-				NULL, 
-				0, 
-				#{CCONTENT}, 
-				'Q'
-				)
-		]]>
-	</insert> 
-	
-	
-	<!-- commentListId(고객센터 댓글 리스트) -->
-	<select id="commentListId" parameterType="hashmap" resultType="hashmap">
-	 <![CDATA[
-		SELECT * 
-			FROM COMMENTTABLE
-			WHERE ARTICLEIDX=#{ARTICLEIDX}
-	   ]]>
-        </select>
-	
-	
-	<!-- insertComment(고객센터 댓글 입력기능) -->
-	<insert id="insertComment" parameterType="hashmap">
-	<![CDATA[
-		INSERT 
-		INTO COMMENTTABLE
-			VALUES(
-				COMMENTIDX_SEQ.NEXTVAL, 
-				#{ARTICLEIDX}, 
-				#{COMMENTWRITER}, 
-				SYSDATE, 
-				#{COMMENTT}
-				)
-	]]>
-	</insert>
-	
-	<!-- updateComment(고객센터 댓글 수정 기능) -->
-	<update id="updateComment" parameterType="hashmap" >
-        <![CDATA[
-				UPDATE COMMENTTABLE 
-					SET COMMENTT=#{COMMENTT} 
-				WHERE COMMENTIDX=#{COMENTIDX}
-	   ]]>
-	</update>
-	
-	
-	<!-- deleteComment(고객센터 댓글 삭제기능) -->
-	<delete id="deleteComment" parameterType="hashmap" >
-	<![CDATA[
-		DELETE 
-			FROM COMMENTTABLE
-			WHERE COMMENTIDX=#{COMMENTIDX}
-	]]>
-	</delete>
-	
-	
+
 	<!-- selectQnaMemberId(마이페이지 고객센터) -->
 	<select id="selectQnaMemberId" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
@@ -145,47 +29,7 @@
 				WHERE CTYPE = 'Q' AND CWRITER = #{EMAIL}
 		]]>
 	</select>
-	
 
-
-	<!-- reviewList(후기 게시판 리스트) -->
-	<select id="reviewList" resultType="hashmap">
-	 <![CDATA[
-			SELECT * 
-				FROM COMMUNITY 
-				WHERE CTYPE='R'
-	   ]]>
-        </select>
-
-	<!-- insertReview(후기 게시판 글 입력 기능) -->
-	<insert id="insertReview" parameterType="hashmap">
-	<![CDATA[
-			INSERT 
-				INTO COMMUNITY
-				VALUES(
-					CIDX_SEQ.NEXTVAL, 
-					#{CTITLE}, 
-					SYSDATE, 
-					#{CWRITER}, 
-					#{PID}, 
-					0, 
-					#{CCONTENT}, 
-					'R'
-					)
-	]]>
-	</insert>
-	
-	
-	<!-- selectReviewProduct(상품 후기 리스트) -->
-	<select id="selectReviewProduct" parameterType="hashmap" resultType="hashmap">
-	 <![CDATA[
-			SELECT * 
-			FROM COMMUNITY 
-			WHERE CTYPE='R' AND PID=#{PID}
-	   ]]>
-        </select>
-	
-	
 	<!-- selectReviewMemberId(마이페이지 후기) -->
 	<select id="selectReviewMemberId" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
@@ -195,15 +39,14 @@
 		]]>
 	</select>
 	
-	
-	<!-- deleteCommunityId(공지,후기 삭제 기능) -->
-	<delete id="deleteCommunityId" parameterType="hashmap" >
-	<![CDATA[
-		DELETE 
-			FROM COMMUNITY
-			WHERE CIDX=#{CIDX}
-	]]>
-	</delete>
+	<!-- selectReviewProduct(상품 후기 리스트) -->
+	<select id="selectReviewProduct" parameterType="hashmap" resultType="hashmap">
+	 <![CDATA[
+			SELECT * 
+			FROM COMMUNITY 
+			WHERE CTYPE='R' AND PID=#{PID}
+	   ]]>
+	</select>
 	
 	<!-- noticeListPaging(공지 게시판 리스트 페이징) -->
 	<select id="noticeListPaging" parameterType="hashmap" resultType="hashmap">
@@ -267,7 +110,7 @@
 			R BETWEEN #{START} AND #{END}
 	]]>
 	</select>
-
+	
 	<!-- noticeListCount(공지 게시판 게시글수) -->
 	<select id="noticeListCount" resultType="hashmap">
         <![CDATA[
@@ -300,5 +143,151 @@
 					CTYPE = 'R'
 	 	]]>
 	</select>
+	
+	<!-- insertNotice(공지사항 등록 기능) -->
+	<insert id="insertNotice" parameterType="hashmap">
+	<![CDATA[
+		INSERT 
+		INTO COMMUNITY
+		VALUES(
+			CIDX_SEQ.NEXTVAL, 
+			#{CTITLE}, 
+			SYSDATE, 
+			#{CWRITER}, 
+			NULL, 
+			0, 
+			#{CCONTENT}, 
+			'N'
+			)
+		]]>
+	</insert>
+	
+	<!-- insertReview(후기 게시판 글 입력 기능) -->
+	<insert id="insertReview" parameterType="hashmap">
+	<![CDATA[
+			INSERT 
+				INTO COMMUNITY
+				VALUES(
+					CIDX_SEQ.NEXTVAL, 
+					#{CTITLE}, 
+					SYSDATE, 
+					#{CWRITER}, 
+					#{PID}, 
+					0, 
+					#{CCONTENT}, 
+					'R'
+					)
+	]]>
+	</insert>
+	
+	<!-- insertQna(고객센터 게시판 글 입력 기능) -->
+	<insert id="insertQna" parameterType="hashmap">
+	<![CDATA[
+		INSERT 
+			INTO COMMUNITY
+			VALUES(
+				CIDX_SEQ.NEXTVAL, 
+				#{CTITLE}, 
+				SYSDATE, 
+				#{CWRITER}, 
+				NULL, 
+				0, 
+				#{CCONTENT}, 
+				'Q'
+				)
+		]]>
+	</insert> 
+	
+	<!-- updateNoticeId(공지사항 수정 기능) -->
+	<update id="updateNoticeId" parameterType="hashmap" >
+        <![CDATA[
+			UPDATE COMMUNITY 
+				SET CTITLE=#{CTITLE}, 
+					CCONTENT=#{CCONTENT}
+				WHERE CIDX=#{CIDX}
+	   ]]>
+	</update>	
+	
+	<!-- deleteCommunityId(공지,후기 삭제 기능) -->
+	<delete id="deleteCommunityId" parameterType="hashmap" >
+	<![CDATA[
+		DELETE 
+			FROM COMMUNITY
+			WHERE CIDX=#{CIDX}
+	]]>
+	</delete>
+	
+	<!-- commentListId(고객센터 댓글 리스트) -->
+	<select id="commentListId" parameterType="hashmap" resultType="hashmap">
+	 <![CDATA[
+		SELECT * 
+			FROM COMMENTTABLE
+			WHERE ARTICLEIDX=#{ARTICLEIDX}
+	   ]]>
+	</select>
+	
+	<!-- insertComment(고객센터 댓글 입력기능) -->
+	<insert id="insertComment" parameterType="hashmap">
+	<![CDATA[
+		INSERT 
+		INTO COMMENTTABLE
+			VALUES(
+				COMMENTIDX_SEQ.NEXTVAL, 
+				#{ARTICLEIDX}, 
+				#{COMMENTWRITER}, 
+				SYSDATE, 
+				#{COMMENTT}
+				)
+	]]>
+	</insert>
+	
+	<!-- updateComment(고객센터 댓글 수정 기능) -->
+	<update id="updateComment" parameterType="hashmap" >
+        <![CDATA[
+				UPDATE COMMENTTABLE 
+					SET COMMENTT=#{COMMENTT} 
+				WHERE COMMENTIDX=#{COMENTIDX}
+	   ]]>
+	</update>
+	
+	
+	<!-- deleteComment(고객센터 댓글 삭제기능) -->
+	<delete id="deleteComment" parameterType="hashmap" >
+	<![CDATA[
+		DELETE 
+			FROM COMMENTTABLE
+			WHERE COMMENTIDX=#{COMMENTIDX}
+	]]>
+	</delete>
+	
+		
+   	<!-- 사용하지 않음 -->	
 
+	<!-- noticeList(공지 게시판 리스트) -->
+	<select id="noticeList" resultType="hashmap">
+        <![CDATA[
+				SELECT * 
+					FROM COMMUNITY
+					WHERE CTYPE = 'N'
+	 	]]>
+     </select>
+	
+	<!-- qnaList(고객센터 게시판 리스트) -->
+	<select id="qnaList" resultType="hashmap">
+	 <![CDATA[
+		SELECT *
+			FROM COMMUNITY
+			WHERE CTYPE= 'Q'
+	   ]]>
+	</select>
+
+	<!-- reviewList(후기 게시판 리스트) -->
+	<select id="reviewList" resultType="hashmap">
+	 <![CDATA[
+			SELECT * 
+				FROM COMMUNITY 
+				WHERE CTYPE='R'
+	   ]]>
+	</select>
+	
 </mapper>

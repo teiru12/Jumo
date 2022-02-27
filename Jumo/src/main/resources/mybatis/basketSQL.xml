@@ -3,23 +3,17 @@
 
 <mapper namespace="basket">
 
-	<!-- insertBasket (장바구니 추가 기능) -->
-	<insert id="insertBasket" parameterType="hashmap">
+	<!-- 상품ID BIDX를 갖는 basket 정보  -->
+	<select id="selectBasketBIDX" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		INSERT INTO
-			BASKET
-		VALUES(
-			BIDX_SEQ.NEXTVAL,
-			#{BNUMBER},
-			#{BNAME},
-			#{BID},
-			#{BPRICE},
-			#{BSALE},
-			#{BEMAIL},
-			#{BCOUNT}
-		)	
+		SELECT
+			* 
+		FROM
+			BASKET 
+		WHERE
+			BIDX=#{BIDX}
 	]]>
-	</insert>
+	</select>
 	
 	<!-- 상품ID BID를 갖는 basket 정보  -->
 	<select id="selectBasketBID" parameterType="hashmap" resultType="hashmap">
@@ -34,20 +28,8 @@
 			BEMAIL=#{BEMAIL}
 	]]>
 	</select>
-	
-	<!-- 상품ID BIDX를 갖는 basket 정보  -->
-	<select id="selectBasketBIDX" parameterType="hashmap" resultType="hashmap">
-	<![CDATA[
-		SELECT
-			* 
-		FROM
-			BASKET 
-		WHERE
-			BIDX=#{BIDX}
-	]]>
-	</select>
-	
-	<!-- BEMAIL 사용자가 가진 장바구니의 수 -->
+
+	<!-- BEMAIL 사용자가 가진 장바구니번호 -->
 	<select id="selectBasketBnumberMaxBemail" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT
@@ -79,7 +61,25 @@
 		WHERE
 			BEMAIL=#{EMAIL}
 	]]>
-	</select>
+	</select>	
+	
+	<!-- insertBasket (장바구니 추가 기능) -->
+	<insert id="insertBasket" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO
+			BASKET
+		VALUES(
+			BIDX_SEQ.NEXTVAL,
+			#{BNUMBER},
+			#{BNAME},
+			#{BID},
+			#{BPRICE},
+			#{BSALE},
+			#{BEMAIL},
+			#{BCOUNT}
+		)	
+	]]>
+	</insert>
 	
 	<!-- updateBasket (장바구니 수정기능) -->
 	<update id="updateBasket" parameterType="hashmap">
