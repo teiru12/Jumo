@@ -299,4 +299,21 @@
 			value="/WEB-INF/jsp/community/qnaList.jsp" />
 	</definition>
 	
+	<!-- Event -->
+	<definition name="point" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/event/point.jsp" />
+	</definition>
+	
+	<definition name="coupon" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/event/coupon.jsp" />
+	</definition>
+	
+	<definition name="rullet" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/event/rullet.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
