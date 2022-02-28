@@ -222,8 +222,7 @@ $(".replyAddBtn").on("click",function() {
 								name="COMMENTWRITER" type="hidden" value="관리자" readonly>
 					<div class="row">
 						<div class="form-group">
-							<textarea class="form-control input-sm" maxlength="200" id="newReplyText" name="COMMENTT" 
-								style="text-align:left; width:1000px;"></textarea>
+							<textarea id="newReplyText" name="COMMENTT" cols="120" rows="2" class="form-control"></textarea>
 						</div> &nbsp;&nbsp;
 						<div class="form-group">
 							<input type="button" class="btn py-3 px-4 btn-primary btn-outline-primary" onClick="WriteCheckAjax(${qnaBean.CIDX});" value="저장">
