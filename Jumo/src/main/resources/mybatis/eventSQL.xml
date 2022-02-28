@@ -13,14 +13,14 @@
 </select>
 
 <!-- pointIdListPaging -->
-<select id="pointIdListPaging" parameterType="String" resultType="hashmap">
+<select id="pointIdListPaging" parameterType="hashmap" resultType="hashmap">
 	select * 
 	from (
 		select
-			 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, R
+			 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, ROWNUM R
 		from (
 			select
-				 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, ROWNUM R
+				 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE
 			from 
 				JUMO_POINT
 			where 
@@ -29,6 +29,8 @@
 		)
 		order by R ASC
 	)
+	where
+		R between #{START} and #{END}
 </select>
 
 <!-- pointIdListSearchPaging -->
@@ -36,10 +38,10 @@
 	select * 
 	from (
 		select
-			 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, R
+			 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, ROWNUM R
 		from (
 			select
-				 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE, ROWNUM R
+				 POINT_KEY, EMAIL, JUMO_POINT, RULLETDATE
 			from 
 				JUMO_POINT
 			where 
@@ -50,6 +52,8 @@
 		)
 		order by R ASC
 	)
+	where
+		R between #{START} and #{END}
 </select>
 
 <!-- pointIdCount -->
