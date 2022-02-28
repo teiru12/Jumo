@@ -51,4 +51,13 @@ public class BasketServiceImpl implements BasketService {
 		
 		return basketDAO.selectBasketBIDX(map);
 	}
+
+	@Override
+	public void deleteBasketBid(BasketBean basket) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("BID", basket.getBID());	
+		
+		basketDAO.deleteBasketBid(map);	
+	}
 }
