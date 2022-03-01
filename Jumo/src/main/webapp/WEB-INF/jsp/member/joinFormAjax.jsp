@@ -245,122 +245,152 @@ window.onload = function() {
 </head>
 <body class="goto-here">
 <section class="ftco-section">
-<div class="container" style="text-align:center;">
-	<div class="row justify-content-center">
-		<div class="col-xl-7 ftco-animate">
-			<form id="joinForm" name="joinForm" method="POST" action="/Jumo/joinSuccess.al" class="billing-form" >
-			<h2 class="mb-4 billing-heading">회원가입</h2>
-				<div class="row align-items-end" style="padding-left:150px;">
+<div class="container">
+		<div class="col-xl-12 ftco-animate center">
+			<form id="joinForm" name="joinForm" method="POST" action="/Jumo/joinSuccess.al" style="align:center" >
+			<h2 class="mb-4 billing-heading" align="center">회원가입</h2>
+				<div class="row align-items-end"  style="text-align:center">
 					
 					<!-- 이메일 -->
-					<h6 class="mb-4" style="text-align:left;">아이디</h6>
 					<div class="w-100"></div>
+					<div class="col-md-4 mx-auto" align="center">
+					<h6 class="mb-4" style="text-align:left;">아이디</h6>
 					<div class="form-group d-flex">
-						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:300px;" 
+						<input type="text" class="form-control" id="EMAIL" name="EMAIL"
 							maxlength="10" noSpecial>
-						<input type="button" value="중복확인" class="submit px-3" name="check_id"
+						<input type="button" value="중복확인" class="submit btn btn-primary btn-outline-primary px-4" name="check_id"
 						onClick="checkId()">
+					</div>
 					</div>
 					<div class="w-100"></div>
            
 					<!-- 비밀번호 -->
-					<div class="form-group">
-						<h6 class="mb-4" style="text-align:left;">비밀번호</h6>
-						<input type="password" id="PASSWORD" name="PASSWORD" class="form-control" style="width:400px;" 
-							maxlength="10" noBlank>
+					<div class="col-md-4 mx-auto">
+					<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">비밀번호</h6>
+							<input type="password" id="PASSWORD" name="PASSWORD" class="form-control" 
+								maxlength="10" noBlank>
+						</div>
+						</div>
+						
+						
+						<!-- 비밀번호 확인 -->
+						<div class="col-md-6">
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">비밀번호 확인</h6>
+							<input type="password" id="PASSWORD2" name="PASSWORD2"  class="form-control" 
+								maxlength="10" noBlank>
+						</div>
+						</div>
 					</div>
-					<div class="w-100"></div>
-					
-					<!-- 비밀번호 확인 -->
-					<div class="form-group">
-						<h6 class="mb-4" style="text-align:left;">비밀번호 확인</h6>
-						<input type="password" id="PASSWORD2" name="PASSWORD2"  class="form-control" style="width:400px;" 
-							maxlength="10" noBlank>
 					</div>
 					<div class="w-100"></div>
 					<br/><br/>
 		
 					<!-- 이름 -->
+					<div class="col-md-4 mx-auto">
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">이름</h6>
-						<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;" 
+						<input type="text" id="NAME" name="NAME"  class="form-control" 
 							maxlength="8" noBlank>
+					</div>
 					</div>
 					<div class="w-100"></div>
 					
 					<!-- 주민등록번호 -->
-					<div class="form-group">
-						<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
-						<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
-							style="width:190px;" numberOnly>
+					<div class="col-md-4 mx-auto">
+					<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
+					<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
+								numberOnly>
+						</div>
+						</div>
+						<div class="col-md-6">
+						<div class="form-group">
+							<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
+								numberOnly>
+						</div>
+						</div>
 					</div>
-					&emsp;
-					<div class="form-group">
-						<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
-							style="width:190px;" numberOnly>
 					</div>
 					<div class="w-100"></div>
 					
 					<!-- 전화번호 -->
+					<div class="col-md-4 mx-auto">
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
 						<input type="text" id="PHONE" name="PHONE" size="24"  class="form-control"
-							style="width:400px;" maxlength="11" numberOnly>
+							maxlength="11" numberOnly>
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
+					</div>
 					</div>
 					<div class="w-100"></div>
 
 					<!-- 핸드폰 번호 -->
+					<div class="col-md-4 mx-auto">
 					<div class="form-group">
 						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 						<input type="text" id="MOBILE" name="MOBILE" class="form-control"
-							size="24" style="width:400px;" maxlength="11" numberOnly> 
+							size="24" maxlength="11" numberOnly> 
 						<div class="w-100"></div>
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
+					</div>
 					</div>
 					<div class="w-100"></div>
 					<br/><br/>
 					
 					<!-- 주소 -->
-					<h6 class="mb-4" style="text-align:left;">우편번호</h6>
-					<div class="w-100"></div>
-					<div class="form-group d-flex">
-						<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호"
-							maxlength="7" style="width:270px;" numberOnly>
-						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-					</div>
-					<div class="w-100"></div>
-					<div class="form-group">
+					<div class="col-md-4 mx-auto">
 						<h6 class="mb-4" style="text-align:left;">주소</h6>
-						<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" 
-							class="form-control" style="width:190px;" maxlength="100">
+						<div class="form-group d-flex">
+							<input type="text" class="form-control" name="POSTCODE" id="POSTCODE" placeholder="우편번호"
+								maxlength="7" numberOnly>
+							<input type="button" class="btn btn-primary btn-outline-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+						</div>
 					</div>
-					&emsp;
-					<div class="form-group">
-						<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" 
-						 class="form-control" style="width:190px;" maxlength="100">
-					</div>			
+					<div class="w-100"></div>
+					<div class="col-md-4 mx-auto">
+					<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" name="ADDRESS1" id="ADDRESS1" placeholder="주소" 
+								class="form-control" maxlength="100">
+						</div>
+						</div>
+						<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" 
+							 class="form-control" maxlength="100">
+						</div>
+						</div>	
+					</div>	
+					</div>	
 					<div class="w-100"></div>
 					<br/><br/><br/><br/>
-					</div>
 
 					
 				<!-- 버튼 -->
-					<div class="form-group" align="center">
-						 <button type="button" class="btn btn-primary py-3 px-5" onClick="checks(this.form)">회원가입</button>
+					<div class="col-md-6 mx-auto">
+					<div class="form-group">
+						 <input type="button" class="btn btn-primary py-3 px-3" onClick="checks(this.form)" value="회원가입">
 				            
 				          &emsp;&emsp;
-				          <button type="reset" class="btn btn-black py-3 px-5">다시 입력</button>
+				          <input type="reset" class="btn btn-black py-3 px-3" value="다시입력">
 				
 				          &emsp;&emsp;
-				          <button type="button" class="btn btn-black py-3 px-5" onclick="location.href='loginForm.al'">취소</button>
-				     
+				          <input type="button" class="btn btn-black py-3 px-4" onClick="location.href='loginForm.al'" value="&nbsp;취소&nbsp;">
 					</div>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
-</div>
+
 </section>
 </body>
 </html>

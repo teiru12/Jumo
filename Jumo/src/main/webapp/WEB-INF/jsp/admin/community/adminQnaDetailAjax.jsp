@@ -196,7 +196,7 @@ $(".replyAddBtn").on("click",function() {
 										<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
 									 </p>
 									 <div>
-									 <input type="button" onClick="deleteCheckAjax(${comment.COMMENTIDX }, ${qnaBean.CIDX} ,${status.index});" value="삭제">
+									 <a onClick="deleteCheckAjax(${comment.COMMENTIDX }, ${qnaBean.CIDX} ,${status.index});" class="reply">삭제</a>
 									 </div>
 									 
 									 <%-- <p>
