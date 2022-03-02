@@ -243,7 +243,7 @@ window.onload = function() {
 }
 </script>
 </head>
-<body class="goto-here">
+<body class="goto-here"> 
 <section class="ftco-section">
 <div class="container">
 		<div class="col-xl-12 ftco-animate center">
