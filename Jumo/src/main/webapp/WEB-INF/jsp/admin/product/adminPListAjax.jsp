@@ -34,25 +34,26 @@ window.onload = function() {
 }
 </script>
 </head>
+
 <body class="goto-here">
 <section class="ftco-section ftco-cart">
 	<div style="text-align:center"><h2>상품 리스트</h2></div>
 	<br/>
 		<div class="container">
 			<div class="row">
-			<pre>                                                                               </pre>
+				<br>
+				<pre>    </pre>
 				<form action="adminPList.al">
 				<div class="form-group d-flex">
-					<input type="text" name="keyword" id="keyword" class="form-control" style="width:250px;" value="${keyword}">
-					<input type="submit" value="검색" class="btn btn-black py-2 px-4">
+					<input type="text" name="keyword" id="keyword" class="form-control" style="width:70%;" value="${keyword}">
+					<input type="submit" value="검색" class="btn-black py-2 px-4">
 				</div>
 				</form>
 				&nbsp;
 				<div>
-					<input type="button" value="상품 추가" class="btn btn-primary py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
+					<input type="button" value="상품 추가" class="btn btn-black py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
 				</div>
-				<div>
-				</div>
+				
 				<br>
 				<div class="container" style="padding-right:70px;">				
 					<div class="col-md-12 ftco-animate">
@@ -64,8 +65,7 @@ window.onload = function() {
 										<th>상품종류</th>
 										<th>주류종류</th>
 										<th>도수</th>
-										<th>&nbsp;</th>
-										<th>&nbsp;상품명</th>										
+										<th colspan="2">상품명</th>										
 										<th>가격</th>
 										<th>재고량</th>
 										<th>&nbsp;</th>

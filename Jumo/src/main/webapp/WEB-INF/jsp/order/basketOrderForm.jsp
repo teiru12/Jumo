@@ -177,6 +177,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 <body>
 <hr>
 <form method="post" id="basketOrderForm" action="basketOrder.al">
+<div class="col-md-12 ftco-animate">
 	<div style="text-align:center">
 		<h3> 주문 페이지 </h3>
 	</div>
@@ -274,7 +275,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
     			
     			
     			 <br>
-    			 <section class="ftco-section">
+    			 <section class="ftco-section" style="margin-left:auto; margin-right:auto; text-align:center;">
 		<div class="container" style="margin-left:auto; margin-right:auto; text-align:center;">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
@@ -401,7 +402,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 		<br>
 	<br>
 <br><br>	
-		
+</div>		
 </form>
 
 
