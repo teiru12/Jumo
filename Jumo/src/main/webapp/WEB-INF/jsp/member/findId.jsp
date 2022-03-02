@@ -53,38 +53,47 @@ window.onload = function() {
 </script>
 <body>
 <div class="container" style="text-align:center;">
-	<div class="row justify-content-center">
-		<div class="col-xl-7 ftco-animate">
+	<div class="row slider-text justify-content-center align-items-center">
+		<div class="col-xl-12 ftco-animate">
 			<form id="findIdForm" action="/Jumo/findIdResult.al" method="post" class="billing-form">
 			<h2 class="mb-4 billing-heading">아이디 찾기</h2><br>
 			<hr><br>
-			<div class="row align-items-end" style="padding-left:130px;">
+			<div class="row align-items-end"  style="text-align:center">
 
-				
-				<div class="form-group">
+				<div class="col-md-4 mx-auto" align="center">
 					<h6 class="mb-4" style="text-align:center;">이름</h6>
-					<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;" 
-						maxlength="8" noBlank>
+					<div class="form-group d-flex">
+					<input type="text" id="NAME" name="NAME"  class="form-control" maxlength="8" noBlank>
 				</div>
-				<div class="w-100"></div><br>
-				<h6 class="mb-4" style="text-align:center; padding-left:150px;">주민등록번호</h6><br>
+				</div>
 				<div class="w-100"></div>
-				<div class="form-group">
+				
+				<div class="col-md-4 mx-auto">
+				<h6 class="mb-4" style="text-align:center;">주민등록번호</h6>
+				<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
 					<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
-							style="width:190px;" numberOnly>
-				</div>
-				&emsp;
-				<div class="form-group">
-					<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
-							style="width:190px;" onkeypress="keyPress()" numberOnly>
-				</div>
-				<div class="w-100"></div>
-			</div>
+							numberOnly>
+				
+					</div>
+					</div>
+						<div class="col-md-6">
+						<div class="form-group">
+							<input type="password" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
+								numberOnly>
+					</div>
+					</div>
+					</div>
+					</div>
+					<div class="w-100"></div>
 			<p></p>
 			
+			<div class="col-md-6 mx-auto">
 			<input type="button" value="찾기" class="btn btn-primary py-2 px-4" style="padding-right:30px;"
 				onClick="return formCheck()">
-				
+				</div>
+				</div>
 			<p></p>		
 			</form>
 		</div>
