@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jumo.model.JUMO_EVENT;
 import jumo.model.JUMO_POINT;
+import jumo.model.Payment;
 
 @Service("eventService")
 public class EventServiceImpl implements EventService {
@@ -108,5 +109,20 @@ public class EventServiceImpl implements EventService {
 	// updateCouponId : Email 회원의 쿠폰을 수정
 	public void updateCouponId(JUMO_EVENT event) throws Exception {
 		eventDAO.updateCouponId(event);		
-	}	
+	}
+
+	@Override
+	public Payment selectPaymentOID(int OID) throws Exception {
+		return eventDAO.selectPaymentOID(OID);
+	}
+
+	@Override
+	public Payment selectPaymentOBNUMBER(int OBNUMBER) throws Exception {
+		return eventDAO.selectPaymentOBNUMBER(OBNUMBER);
+	}
+
+	@Override
+	public void insertPayment(Payment payment) throws Exception {
+		eventDAO.insertPayment(payment);
+	}		
 }

@@ -8,9 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<style>
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+</style>
 <script>
-
-
 function orderCheck() {
 	var pOrderForm = document.getElementById("pOrderForm");
 	
@@ -21,6 +26,8 @@ function orderCheck() {
 	var MOBILE = document.getElementById("MOBILE");
 	
 	var point = document.getElementById("point");
+	var maxPoint = document.getElementById("maxPoint");
+	var totalPrice = document.getElementById("endPrice");
 	
 	if(confirm("주문하시겠습니까?") == true) {
 				
@@ -49,9 +56,7 @@ function orderCheck() {
 			ADDRESS2.focus();
 			return false;
 		}
-		
-		alert(point.value);
-		
+
 		pOrderForm.submit();
 	}
 }
@@ -85,18 +90,121 @@ $(document).ready(function() {
 			ADDRESS2.value = "";
 		}		
 	});
+	
+	/* 쿠폰 태그 변경시 작동 */
+	$('#coupon').change(function() {
+		
+		/* 주문금액, 할인금액 구하기 */
+		var totalPrice = $('#totalPrice').val(); // 주문금액
+		var saled = $('#saled').val(); // 할인금액
+		
+		/* select 태그의 값 */
+		var couponValue;
+		if($('#coupon').val() == '1K') {
+			couponValue = 1000;
+		} else if($('#coupon').val() == '2K') {
+			couponValue = 2000;
+		} else if($('#coupon').val() == '3K') {
+			couponValue = 3000;
+		} else if($('#coupon').val() == '5K') {
+			couponValue = 5000;
+		} else if($('#coupon').val() == '10K') {
+			couponValue = 10000;
+		} else {
+			couponValue = 0;
+		}
+		
+		/* id="point" number 태그의 값 */ 
+		var pointValue = $('#point').val();
+		if(pointValue == null || pointValue == "") {
+			pointValue = 0;
+		}
+		
+		/* 쿠폰값을 변경할 때 입력한 point의 값이 포인트 보유량보다 클 경우 변경 */ 
+		var maxPoint = $('#maxPoint').val();
+		if(Number(pointValue) > Number(maxPoint)) {
+			pointValue = maxPoint;
+			$('#point').val(pointValue);
+		}
+		
+		var eventValue = Number(couponValue) + Number(pointValue);
+		
+		/* 쿠폰 + 포인트 값이 주문금액 - 할인금액 + 배송비보다 많으면 초기화 */
+		if(Number(eventValue) > (parseInt(totalPrice) - parseInt(saled) + parseInt("3000"))) {
+			alert("쿠폰과 포인트 사용금액이 주문금액보다 많습니다");
+			$('#coupon').val("---");
+			$('#point').val("0");
+			couponValue = 0;
+			pointValue = 0;
+			eventValue = 0;
+		}
+		
+		/* 쿠폰/포인트 항목 출력 */
+		$('#eventPoint').text(eventValue + "원");
+		
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
+		$('#finalSum').text(Number(totalPrice) - Number(saled) - Number(eventValue) + Number(3000) + "원");		
+	});
+	
+	$('#point').change(function(){
+		
+		/* 주문금액, 할인금액 구하기 */
+		var totalPrice = $('#totalPrice').val(); // 주문금액
+		var saled = $('#saled').val(); // 할인금액
+		
+		/* select 태그의 값 */
+		var couponValue;
+		if($('#coupon').val() == '1K') {
+			couponValue = 1000;
+		} else if($('#coupon').val() == '2K') {
+			couponValue = 2000;
+		} else if($('#coupon').val() == '3K') {
+			couponValue = 3000;
+		} else if($('#coupon').val() == '5K') {
+			couponValue = 5000;
+		} else if($('#coupon').val() == '10K') {
+			couponValue = 10000;
+		} else {
+			couponValue = 0;
+		}
+		
+		/* 포인트 입력시 100단위가 아니면 자동 변환 */
+		var pointValue = $('#point').val();
+	    pointValue = Math.floor(pointValue/100) * 100; 
+		if(pointValue == null || pointValue == "") {
+			pointValue = 0;
+		}
+		$('#point').val(pointValue);
+		
+		/* 입력한 point의 값이 포인트 보유량보다 클 경우 변경 */ 
+		var maxPoint = $('#maxPoint').val();
+		if(Number(pointValue) > Number(maxPoint)) {
+			alert("보유하신 포인트는 " + maxPoint + "Point입니다.");
+			pointValue = maxPoint;
+			$('#point').val(pointValue);
+		}
+		
+		var eventValue = Number(couponValue) + Number(pointValue);
+		
+		/* 쿠폰 + 포인트 값이 주문금액 - 할인금액 + 배송비보다 많으면 초기화 */
+		if(Number(eventValue) > (parseInt(totalPrice) - parseInt(saled) + parseInt("3000"))) {
+			alert("쿠폰과 포인트 사용금액이 주문금액보다 많습니다");
+			$('#coupon').val("---");
+			$('#point').val("0");
+			couponValue = 0;
+			pointValue = 0;
+			eventValue = 0;
+		}
+
+		/* 쿠폰/포인트 항목 출력 */
+		$('#eventPoint').text(eventValue + "원");
+		
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
+		$('#finalSum').text(Number(totalPrice) - Number(saled) - Number(eventValue) + Number(3000) + "원");			
+	});	
 })
 
 $(document).on("keyup", "input[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );})
-
-$(function() {
-  $('#point').on('change', function() {
-     var n = $(this).val(); 
-     n = Math.floor(n/100) * 100; 
-     //alert(n);  
-     $(this).val(n);
-  });
-});
 
 </script>
 <!-- 우편번호 API -->
@@ -205,7 +313,8 @@ $(function() {
 									</td>
 									
 									<td class="price" style="color:Crimson">
-									<c:set var="saled" value="${(productBean.PPRICE-salePrice)*PCOUNT}" />
+									<c:set var="sale" value="${(productBean.PPRICE-salePrice)*PCOUNT}" />
+									<fmt:parseNumber var="saled" integerOnly="true" value="${sale}"/>
 									<fmt:formatNumber value="${saled}" pattern="#.#" />원</td>
 									
 									<td class="total">
@@ -230,7 +339,7 @@ $(function() {
 <input type="hidden" name="OCOUNT" value="${PCOUNT}">
 <input type="hidden" name="OPRICE" value="${productBean.PPRICE}">
 <input type="hidden" name="OSALE" value="${productBean.PSALE}">
-<input type="hidden" name="OTOTAL" value="${totalPrice}">
+<input type="hidden" id="OTOTAL" name="OTOTAL" value="${totalPrice}">
 
 <input type="hidden" name="OMAIL" value="${memberBean.EMAIL}">
 
@@ -342,21 +451,21 @@ $(function() {
 							<h6 class="mb-4" style="text-align:left;">쿠폰</h6>
 								<div class="select-wrap">
 									<select name="coupon" id="coupon" class="form-control" style="width:400px;">			
-										<option>---</option>
+										<option value="---">---</option>
 										<c:if test="${eventBean.COUPON1K == 'Y' }">
-											<option value="1K">1천원</option>
+											<option id="1K" value="1K">1천원</option>
 										</c:if>
 										<c:if test="${eventBean.COUPON2K == 'Y' }">
-											<option value="2K">2천원</option>
+											<option id="2K" value="2K">2천원</option>
 										</c:if>
 										<c:if test="${eventBean.COUPON3K == 'Y' }">
-											<option value="3K">3천원</option>
+											<option id="3K" value="3K">3천원</option>
 										</c:if>
 										<c:if test="${eventBean.COUPON5K == 'Y' }">
-											<option value="5K">5천원</option>
+											<option id="5K" value="5K">5천원</option>
 										</c:if>
 										<c:if test="${eventBean.COUPON10K == 'Y' }">
-											<option value="10K">1만원</option>
+											<option id="10K" value="10K">1만원</option>
 										</c:if>
 									</select>
 								</div>
@@ -370,6 +479,7 @@ $(function() {
 							<input type="number" id="point" name="point" class="form-control"
 								size="24" style="width:400px;" numberOnly step="100" min="0" max="${eventBean.JUMO_POINT}"
 								placeholder="100단위 포인트를 입력해주세요. " maxlength="11" oninput="numberMaxLength(this);"> 
+							<input type="hidden" id="maxPoint" value="${eventBean.JUMO_POINT}">
 							<div class="w-100"></div>
 							<p class="mb-4" style="text-align:left;">포인트는 최대 10만까지 사용할 수 있습니다.<br>100이하는 계산되지 않습니다.</p>				
 						</div>
@@ -386,10 +496,16 @@ $(function() {
 	    					<p class="d-flex">
 	    						<span>주문금액</span>
 	    						<span id="originalSum">${productBean.PPRICE*PCOUNT}원</span>
+	    						<input type="hidden" id="totalPrice" name="totalPrice" value="${productBean.PPRICE*PCOUNT}">
 	    					</p>
 	    					<p class="d-flex">
 	    						<span>할인금액</span>
 	    						<span id="saleSum" style="color:Crimson"><fmt:formatNumber value="${saled}" pattern="#.#" />원</span>
+	    						<input type="hidden" id="saled" name="saled" value="${saled}">
+	    					</p>
+	    					<p class="d-flex">
+	    						<span>쿠폰/포인트</span>
+	    						<span id="eventPoint" style="color:Crimson">0원</span>
 	    					</p>
 	    					<p class="d-flex">
 	    						<span>배송비</span>

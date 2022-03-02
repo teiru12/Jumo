@@ -4,6 +4,7 @@ import java.util.List;
 
 import jumo.model.JUMO_EVENT;
 import jumo.model.JUMO_POINT;
+import jumo.model.Payment;
 
 public interface EventService {
 	
@@ -26,4 +27,13 @@ public interface EventService {
 	
 	// updateCouponId : Email 회원의 쿠폰을 수정
 	public void updateCouponId(JUMO_EVENT event) throws Exception;
+	
+	// selectPaymentOID : OID 값으로 결제 정보를 읽어옴
+	public Payment selectPaymentOID(int OID) throws Exception;
+	
+	// selectPaymentOBNUMBER : OBNUMBER 값으로 결제 정보를 읽어옴
+	public Payment selectPaymentOBNUMBER(int OBNUMBER) throws Exception;
+	
+	// insertPayment : 결제 정보를 입력
+	public void insertPayment(Payment payment) throws Exception;
 }

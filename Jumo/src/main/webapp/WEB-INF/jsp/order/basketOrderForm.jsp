@@ -114,7 +114,7 @@ $(document).ready(function() {
     		ADDRESS2.value = "";
     	}		
    	});
-   })
+})
 
     function orderCheck() {
     	var basketOrderForm = document.getElementById("basketOrderForm"); 	

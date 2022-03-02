@@ -119,4 +119,49 @@
 		EMAIL = #{EMAIL}
 </update>
 
+<!-- selectPaymentOID -->
+<select id="selectPaymentOID" parameterType="int" resultType="jumo.model.Payment">
+	select
+		*
+	from
+		PAYMENT
+	where
+		OID = #{OID}
+</select>
+
+<!-- selectPaymentOBNUMBER -->
+<select id="selectPaymentOBNUMER" parameterType="int" resultType="jumo.model.Payment">
+	select
+		*
+	from
+		PAYMENT
+	where
+		OBNUMBER = #{OBNUMBER}
+</select>
+
+<!-- insertPayment -->
+<insert id="insertPayment" parameterType="jumo.model.Payment">
+	insert into
+		PAYMENT
+	values(
+		PAYMENTIDX_SEQ.NEXTVAL,
+		<if test="OID == -1">
+			null,
+		</if>
+		<if test="OID != -1">
+			#{OID},
+		</if>
+		<if test="OBNUMBER == -1">
+			null,
+		</if>
+		<if test="OBNUMBER != -1">
+			#{OBNUMBER},
+		</if>
+		#{TOTALSUM},
+		#{TOTALPAYMENT},
+		#{COUPON},
+		#{POINT}
+	)
+</insert>
+
 </mapper>

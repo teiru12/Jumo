@@ -19,6 +19,7 @@ import jumo.common.product.ProductService;
 import jumo.event.EventService;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
+import jumo.model.Payment;
 import jumo.model.ProductBean;
 import jumo.model.BasketBean;
 import jumo.model.JUMO_EVENT;
@@ -117,12 +118,6 @@ public class OrderController {
 	@RequestMapping("/pOrder.al")
 	public String pOrder(HttpServletRequest request, OrderBean order, Model model) throws Exception {
 		
-		String pointStr = request.getParameter("point");
-		String coupon = request.getParameter("coupon"); 
-		
-		
-		
-		
 		orderService.insertOrderDirect(order);
 		
 		/* 주문 후 주문한 수량만큼 product의 stock을 감소 : 재고 감소 */
@@ -143,14 +138,73 @@ public class OrderController {
 		/* 입력한 주문 번호를 구한다 */
 		int OID = orderService.selectOIDMax();
 		
+		/* 쿠폰/포인트 사용 처리 */
+		int point = 0; // 포인트
+		if(request.getParameter("point")!=null && !request.getParameter("point").equals("")) {
+			point = Integer.parseInt(request.getParameter("point"));	
+		}
+		String coupon = request.getParameter("coupon"); // 쿠폰 
+		int TOTALSUM = Integer.parseInt(request.getParameter("totalPrice")); // 주문 금액
+		int saled = Integer.parseInt(request.getParameter("saled")); // 할인 금액
+		
+		// 사용자의 이벤트 테이블 정보를 가져온다.
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		JUMO_EVENT eventInfo = eventService.selectEventId(email);
+		
+		JUMO_EVENT updateEvent = eventInfo; // 업데이트에 사용할 새 객체 선언
+		// 쿠폰을 사용했으면 쿠폰 내역을 업데이트
+		int couponValue = 0;
+		if(coupon != null) {
+			if(coupon.equals("1K")) {
+				updateEvent.setCOUPON1K("N");
+				couponValue = 1000;
+			} else if(coupon.equals("2K")) {
+				updateEvent.setCOUPON2K("N");
+				couponValue = 2000;
+			} else if(coupon.equals("3K")) {
+				updateEvent.setCOUPON3K("N");
+				couponValue = 3000;
+			} else if(coupon.equals("5K")) {
+				updateEvent.setCOUPON5K("N");
+				couponValue = 5000;
+			} else if(coupon.equals("10K")) {
+				updateEvent.setCOUPON10K("N");
+				couponValue = 10000;
+			} 
+		}
+		eventService.updateCouponId(updateEvent);
+		
+		// 포인트를 사용했으면 포인트 내역을 업데이트
+		updateEvent.setJUMO_POINT(eventInfo.getJUMO_POINT()-point);
+		eventService.updatePointId(updateEvent);		
+		
+		// 결제 테이블 등록 OID, OBNUMBER = null, TOTALSUM, TOTALPAYMENT, COUPON, POINT
+		int OBNUMBER = -1; // 직접 주문이기 때문에 장바구니 번호는 null
+		int TOTALPAYMENT = TOTALSUM - saled - couponValue - point + 3000;
+		
+		System.out.println("TOTALSUM : " + TOTALSUM);
+		System.out.println("saled : " + saled);
+		System.out.println("couponValue : " + couponValue);
+		System.out.println("point : " + point);
+		
+		
+		Payment payment = new Payment();
+		payment.setOID(OID);
+		payment.setOBNUMBER(OBNUMBER);
+		payment.setTOTALSUM(TOTALSUM);
+		payment.setTOTALPAYMENT(TOTALPAYMENT);
+		payment.setCOUPON(coupon);
+		payment.setPOINT(point);
+		
+		eventService.insertPayment(payment);
+		
 		model.addAttribute("msg", "주문을 완료했습니다.");
 		
 		String urlParam = "/orderResult.al?OID=" + OID;
 		model.addAttribute("url", urlParam);
 		
 		return "/order/pOrder";
-	}
-	
+	}	
 	
 	@RequestMapping("/basketOrder.al")
 	public String basksetOrder (OrderBean order, HttpServletRequest request,

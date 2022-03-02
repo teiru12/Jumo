@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import jumo.model.JUMO_EVENT;
+import jumo.model.Payment;
 
 @Repository("eventDAO")
 public class EventDAO {
@@ -50,4 +51,19 @@ public class EventDAO {
 	public void updateCouponId(JUMO_EVENT event) throws Exception {
 		sqlSessionTemplate.update("event.updateCouponId", event);
 	}	
+	
+	// selectPaymentOID : OID 값으로 결제 정보를 읽어옴
+	public Payment selectPaymentOID(int OID) throws Exception {
+		return sqlSessionTemplate.selectOne("event.selectPaymentOID", OID);
+	}
+	
+	// selectPaymentOBNUMBER : OBNUMBER 값으로 결제 정보를 읽어옴
+	public Payment selectPaymentOBNUMBER(int OBNUMBER) throws Exception {
+		return sqlSessionTemplate.selectOne("event.selectPaymentOBNUMBER", OBNUMBER);
+	}
+	
+	// insertPayment : 결제 정보를 입력
+	public void insertPayment(Payment payment) throws Exception {
+		sqlSessionTemplate.insert("event.insertPayment", payment);
+	}
 }
