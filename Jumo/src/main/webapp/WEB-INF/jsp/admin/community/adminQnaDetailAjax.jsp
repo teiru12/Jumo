@@ -132,6 +132,11 @@ $(".replyAddBtn").on("click",function() {
 	});
 });
 </script> -->
+
+<style type="text/css">
+p { word-break: break-all;}
+</style>
+
 </head>
 <div style="text-align:center">
 	<h1> 상세 내용 </h1>
@@ -168,12 +173,12 @@ $(".replyAddBtn").on("click",function() {
 		<div class="row">
 			<div class="blog-entry align-self-stretch d-md-flex">
 				<div class="text d-block pl-md-4">
-					<h3>${qnaBean.CTITLE}</h3>
+					<h3><p style="width: 100%;">${qnaBean.CTITLE}</p></h3>
 					<div class="meta mb-3">
 						<div>${qnaBean.CWRITER}</div>
 						<div>${qnaBean.CDATE}</div>
 					</div><hr>
-      				<p class="mt-5" style="font-size:large;">${qnaBean.CCONTENT}</p>
+      				<p class="mt-5" style="font-size:large; width: 100%;">${qnaBean.CCONTENT}</p>
     			</div>
 			</div>
 		</div>
@@ -189,8 +194,8 @@ $(".replyAddBtn").on("click",function() {
                     				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
                   				</div>
 								<div class="comment-body">
-									<div class="meta">${comment.COMMENTDATE}</div><!-- 답변 작성 날짜 -->
-									<p style="font-size:middle;">
+									<div class="meta"><p style="width: 100%;">${comment.COMMENTDATE}</p></div><!-- 답변 작성 날짜 -->
+									<p style="font-size:middle; width: 100%;">
 									 	${comment.COMMENTT}
 									 	<input type="hidden" id="COMMENTIDX" name="COMMENTIDX" value="${comment.COMMENTIDX }">
 										<input type="hidden" id="ARTICLEIDX" name="ARTICLEIDX" value="${comment.ARTICLEIDX }">
