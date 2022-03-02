@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+
+<style type="text/css">
+p { word-break: break-all; color : #00B992} 
+</style>
 </head>
 <body>
 <br><br>s
@@ -20,12 +24,12 @@
 		<div class="row">
 			<div class="blog-entry align-self-stretch d-md-flex">
 				<div class="text d-block pl-md-4">
-					<h3>${communityBean.CTITLE}</h3>
+					<h3><p style="width: 100%;">${communityBean.CTITLE}</p></h3>
 					<div class="meta mb-3">
 						<div>${communityBean.CWRITER}</div>
 						<div>${communityBean.CDATE}</div>
 					</div><hr>
-      				<p class="mt-5" style="font-size:large;">${communityBean.CCONTENT}</p>
+      				<p class="mt-5" style="font-size:large; width: 100%;">${communityBean.CCONTENT}</p>
     			</div>
 			</div>
 		</div>
@@ -41,8 +45,8 @@
                     				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
                   				</div>
 								<div class="comment-body">
-									<div class="meta">${comment.COMMENTDATE}</div><!-- 답변 작성 날짜 -->
-									<p style="font-size:middle;">
+									<div class="meta"><p style="width: 100%;">${comment.COMMENTDATE}</p></div><!-- 답변 작성 날짜 -->
+									<p style="font-size:middle; width: 100%;">
 									 	${comment.COMMENTT}
 									 </p>
 								</div>

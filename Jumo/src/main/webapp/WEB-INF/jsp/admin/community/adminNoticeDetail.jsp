@@ -13,6 +13,11 @@ function deleteCheck() {
 	}
 }
 </script>
+
+<style type="text/css">
+p { word-break: break-all;}
+</style>
+
 </head>
 <body>
 <div style="text-align:center">
@@ -26,12 +31,12 @@ function deleteCheck() {
 		<div class="row">
 			<div class="blog-entry align-self-stretch d-md-flex">
 				<div class="text d-block pl-md-4">
-					<h3>${noticeBean.CTITLE}</h3>
+					<h3><p style="width: 100%;">${noticeBean.CTITLE}</p></h3>
 					<div class="meta mb-3">
 						<div>${noticeBean.CWRITER}</div>
 						<div>${noticeBean.CDATE}</div>
 					</div><hr>
-      				<p class="mt-5" style="font-size:large;">${noticeBean.CCONTENT}</p>
+      				<p class="mt-5" style="font-size:large; width: 100%;">${noticeBean.CCONTENT}</p>
     			</div>
 			</div>
 		</div><hr>
