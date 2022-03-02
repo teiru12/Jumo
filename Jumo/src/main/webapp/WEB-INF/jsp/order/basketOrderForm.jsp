@@ -281,7 +281,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 				
 					<!-- 주문자 정보 -->
 					<h2 class="mb-4 billing-heading">주문자 정보</h2>
-					<div class="row align-items-end" style="padding-left:150px;">
+					<div class="row slider-text justify-content-center align-items-center">
 					
 						<!-- 이름 -->
 						<div class="form-group">
@@ -306,7 +306,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 					
 					<br><br>
 					<!-- 주문자 정보와 동일한지 체크-->
-					<div class="row align-items-end" style="padding-left:150px;">
+					<div class="row slider-text justify-content-center align-items-center">
 						<div class="form-group">
 							<h6 class="mb-4" style="text-align:center;">
 							주문자 정보와 동일
@@ -321,7 +321,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 						
 					<!-- 받는 사람 정보 -->
 					<h2 class="mb-4 billing-heading">배송 정보</h2>
-					<div class="row align-items-end" style="padding-left:150px;">
+					<div class="row slider-text justify-content-center align-items-center">
 					
 						<!-- 받는 사람 이름 -->
 						<div class="form-group">
@@ -353,8 +353,9 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 							<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 						</div>
 						<div class="w-100"></div>
+						<h6 class="mb-4" style="text-align:left;">주소</h6>
+						<div class="w-100"></div>
 						<div class="form-group">
-							<h6 class="mb-4" style="text-align:left;">주소</h6>
 							<input type="text" name="OADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;"
 								value="${memberBean.ADDRESS1}">
 						</div>
@@ -370,7 +371,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 					
 					<!-- 결제 정보 -->
 					<h2 class="mb-4 billing-heading">주문자 정보</h2>
-					<div class="row align-items-end" style="padding-left:150px;">
+					<div class="row slider-text justify-content-center align-items-center">
 					
 						<!-- 결제 방법 -->
 						<div class="form-group">

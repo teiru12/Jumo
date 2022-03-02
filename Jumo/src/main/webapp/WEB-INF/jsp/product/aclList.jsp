@@ -114,15 +114,17 @@ window.onload = function() {
 </head>
 <body>
 	<p/>
-	<div>
+	<div class="col-md-12">
 		<div>
 			<div>
 				<form action="aclList.al">
 				<div style="text-align:center">
-					<table style="margin-left:auto; margin-right:auto; width:32%">
+					<table style="margin-left:auto; margin-right:auto; width:600; font-size: 0.9vw;">
 						<tr>
 							<td style="text-align:left;">
 								<b>주종</b>&emsp;
+							</td>
+							<td style="text-align:left;">
 								<label><input type="radio" id="PKIND1" name="PKIND" class="mr-2" value="증류주"
 									ondblclick="radioReset(this)">증류주</label>
 							</td>
@@ -146,6 +148,8 @@ window.onload = function() {
 						<tr>
 							<td style="text-align:left;">
 								<b>도수</b>&emsp;
+							</td>
+							<td style="text-align:left;">
 								<label><input type="radio" id="dMax1" name="dMax" class="mr-2" value="0"
 									ondblclick="radioReset(this)">0-10</label>
 							</td>
@@ -169,6 +173,8 @@ window.onload = function() {
 						<tr>
 							<td style="text-align:left;">
 								<b>가격</b>&emsp;
+							</td>
+							<td style="text-align:left;">
 								<label><input type="radio" id="pMax1" name="pMax" class="mr-2" value="0"
 									ondblclick="radioReset(this)"> 0-5천원</label>
 							</td>

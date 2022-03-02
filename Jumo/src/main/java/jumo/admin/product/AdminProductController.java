@@ -8,17 +8,17 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jumo.common.basket.BasketService;
 import jumo.common.product.ProductService;
+import jumo.model.BasketBean;
 import jumo.model.ProductBean;
 import jumo.util.FileUpload;
 import jumo.util.MapToBean;
@@ -32,6 +32,9 @@ public class AdminProductController {
 	
 	@Resource(name="productService")
 	private ProductService productService;
+	
+	@Resource(name="basketService")
+	private BasketService basketService;
 	
 	@RequestMapping(value="/adminPList.al")
 	public String adminPList(HttpServletRequest request,
@@ -289,6 +292,12 @@ public class AdminProductController {
 		
 		adminProductService.deleteProduct(product);
 		
+		/* 상품을 삭제하면 해당 상품에 대한 모든 장바구니 정보를 장바구니 테이블에서 삭제한다. */
+		int BID = product.getPID();
+		BasketBean delBas = new BasketBean();
+		delBas.setBID(BID);
+		basketService.deleteBasketBid(delBas);
+		
 		model.addAttribute("msg", "상품을 삭제하였습니다.");
 		model.addAttribute("url", "/adminPList.al");
 		
@@ -303,6 +312,11 @@ public class AdminProductController {
 		product.setPID(Integer.parseInt(PID));
 		
 		adminProductService.deleteProduct(product);		
+		
+		int BID = product.getPID();
+		BasketBean delBas = new BasketBean();
+		delBas.setBID(BID);
+		basketService.deleteBasketBid(delBas);
 		
 		return "adminPList";
 	}

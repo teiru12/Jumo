@@ -30,4 +30,8 @@ public class BasketDAO {
 	public Map<String, Object> selectBasketBIDX(Map<String,Object> map) throws Exception{
 		return sqlSessionTemplate.selectOne("basket.selectBasketBIDX", map);
 	}
+	
+	public void deleteBasketBid(Map<String, Object> map) throws Exception {
+		sqlSessionTemplate.delete("basket.deleteBasketBid", map);
+	}
 }
