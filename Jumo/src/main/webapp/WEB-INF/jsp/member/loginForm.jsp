@@ -10,7 +10,8 @@
 <style>
 #EMAIL {
   display: block;
-  width: 15%;
+  min-width : 15%;
+  max-width : 100%;
   height: calc(2.25rem + 2px);
   margin : 0 auto;
   padding: 0.375rem 0.75rem;
@@ -25,7 +26,8 @@
 }
 #PASSWORD {
   display: block;
-  width: 15%;
+  min-width : 15%;
+  max-width : 100%;
   height: calc(2.25rem + 2px);
   margin : 0 auto;
   padding: 0.375rem 0.75rem;
