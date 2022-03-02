@@ -72,8 +72,8 @@ function deleteCheckAjax(bidx, index) {
 	if(confirm("삭제하시겠습니까?") == true) {
 		
 		$.ajax({
-			url			: "basketDelete.al",
-			data		: Number({"BIDX" : bidx}),
+			url			: "basketDeleteAjax.al",
+			data		: {"BIDX" : Number(bidx)},
 			contentType	: "application/json",
 			success		: function(data) {
 				alert("삭제하였습니다.");
@@ -131,8 +131,11 @@ window.onload = function() {
 		</div>
 		
 		<br>
-		  <div class="container">
-		  	<div style="text-align:center" id="board" >
+	<div class="col-md-12 ftco-animate">
+		<div class="container">
+			<div style="text-align:center" id="board" >
+				<div class="cart-list">
+				
 	    		<table class="table">
 					<thead class="thead-primary">
 						<tr>
@@ -199,6 +202,7 @@ window.onload = function() {
 					</c:if>
 			 </tbody>
 		</table>
+		</div>
 		<br>				  						  
 	<!-- 쇼핑계속버튼 -->		  
 		<div style='float: right;'>
@@ -240,7 +244,7 @@ window.onload = function() {
     				<!-- <a href="/Jumo/basketOrderForm.al" class="btn btn-primary py-3 px-4">선택 상품 주문</a> -->
     				</div>
     			</div>
-    			
+    			</div>
     			
   </body>
 </html>

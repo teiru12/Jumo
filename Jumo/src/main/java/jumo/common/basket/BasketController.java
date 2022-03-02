@@ -127,6 +127,7 @@ public class BasketController {
 		return "/basket/basketDelete";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/basketDeleteAjax.al")
 	public String basketDeleteAjax(BasketBean basket) throws Exception {
 		
