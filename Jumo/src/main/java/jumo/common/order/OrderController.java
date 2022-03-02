@@ -182,12 +182,6 @@ public class OrderController {
 		int OBNUMBER = -1; // 직접 주문이기 때문에 장바구니 번호는 null
 		int TOTALPAYMENT = TOTALSUM - saled - couponValue - point + 3000;
 		
-		System.out.println("TOTALSUM : " + TOTALSUM);
-		System.out.println("saled : " + saled);
-		System.out.println("couponValue : " + couponValue);
-		System.out.println("point : " + point);
-		
-		
 		Payment payment = new Payment();
 		payment.setOID(OID);
 		payment.setOBNUMBER(OBNUMBER);
