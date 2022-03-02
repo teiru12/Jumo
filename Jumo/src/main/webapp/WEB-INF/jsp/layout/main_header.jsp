@@ -68,6 +68,17 @@ function logoutCheck() {
 	        
 	          <li class="nav-item"><a href="/Jumo/noticeList.al" class="nav-link" style="font-size:large; color:dark;">공지</a></li>
 	          <li class="nav-item"><a href="/Jumo/qnaList.al" class="nav-link" style="font-size:large; color:dark;">고객센터</a></li>
+			  
+	          <li class="nav-item active dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              	  style="font-size:large; color:dark;">이벤트</a>
+	              <div class="dropdown-menu" aria-labelledby="dropdown04">
+	              	<a class="dropdown-item" href="/Jumo/point.al">포인트</a>
+	              	<a class="dropdown-item" href="/Jumo/coupon.al">쿠폰</a>
+	                <a class="dropdown-item" href="/Jumo/rullet.al">룰렛</a>
+	              </div>
+           	  </li>
+			  
 	        </ul>
 	      </div>
 	    </div>

@@ -3,8 +3,7 @@ package jumo.event;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,16 +155,213 @@ public class EventController {
 	}
 	
 	// Ajax를 사용한 point 수정
-//	@ResponseBody
-//	@RequestMapping("/updatePoint.al")
-//	public String updatePoint(@RequestBody String message, JUMO_EVENT eventBean) throws Exception {
-//		
-//	}
+	@ResponseBody
+	@RequestMapping("/updatePoint.al")
+	public Map<String, String> updatePoint(@RequestBody String message, JUMO_EVENT eventBean) throws Exception {
+		
+		Map<String, String> msg = new HashMap<String, String>();
+		
+		int point = eventBean.getJUMO_POINT();
+		int updatePoint;
+		
+		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
+		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
+		JUMO_EVENT event = eventService.selectEventId(email);
+		
+		if((event.getJUMO_POINT() + point) >= 100000) {
+			// 추가할 포인트와 기존의 포인트의 총합이 10만 이상이면 10만으로 설정
+			updatePoint = 100000;
+			
+			msg.put("message", "포인트는 최대 10만까지 적립이 됩니다. 현재 보유 포인트 : 10만 Point");
+		} else {
+			// 추가할 포인트와 기존의 포인트의 총합이 10만 이하이면 포인트를 두 값의 합으로 설정
+			updatePoint = event.getJUMO_POINT() + point;
+			
+			msg.put("message", "포인트를 적립하였습니다. 현재 보유 포인트 :" + updatePoint + "Point");
+		}
+		
+		eventBean.setJUMO_POINT(updatePoint); // 수정할 포인트를 가진 event 객체
+		
+		eventService.updatePointId(eventBean);
+		
+		msg.put("point", "" + point);
+		
+		msg.put("updatePoint", "" + updatePoint);
+		
+		return msg;
+	}
 
 	// Ajax를 사용한 coupon 수정
-//	@ResponseBody
-//	@RequestMapping("/updateCoupon.al")
-//	public String updateCoupon(@RequestBody JUMO_EVENT eventBean) throws Exception {
-//		
-//	}	
+	@ResponseBody
+	@RequestMapping("/updateCoupon.al")
+	public Map<String, String> updateCoupon(String inputCoupon ,JUMO_EVENT eventBean) throws Exception {
+		
+		Map<String, String> msg = new HashMap<String, String>();
+		String message = "";
+		
+		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
+		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
+		JUMO_EVENT eventInfo = eventService.selectEventId(email);		
+		
+		if(inputCoupon.equals("1K")) {
+			eventBean.setCOUPON1K("Y");
+			
+			/* 현재 유저의 1000원 쿠폰이 있을 때 */
+			if(eventInfo.getCOUPON1K().equals("Y")) {
+				message += "이미 1천원 쿠폰이 있습니다. 포인트로 전환됩니다.\n";
+				
+				/* 보유한 포인트 + 1000포인트가 10만이 넘었을 때*/
+				if((eventInfo.getJUMO_POINT()+1000) >= 100000) {
+					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
+					eventBean.setJUMO_POINT(100000);
+				} else {
+					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+1000);
+					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+1000) + " Point";
+				}
+								
+				eventService.updatePointId(eventBean);
+				
+			/* 현재 유저의 1000원 쿠폰이 없을 때 */
+			} else {
+				eventBean.setCOUPON2K(eventInfo.getCOUPON2K());
+				eventBean.setCOUPON3K(eventInfo.getCOUPON3K());
+				eventBean.setCOUPON5K(eventInfo.getCOUPON5K());
+				eventBean.setCOUPON10K(eventInfo.getCOUPON10K());
+				
+				eventService.updateCouponId(eventBean);
+				
+				message += "1천원 쿠폰이 발급되었습니다.";
+				
+				msg.put("coupon", "1K");
+			}
+		} else if(inputCoupon.equals("2K")) {
+			eventBean.setCOUPON2K("Y");
+			
+			/* 현재 유저의 2000원 쿠폰이 있을 때 */
+			if(eventInfo.getCOUPON2K().equals("Y")) {
+				message += "이미 2천원 쿠폰이 있습니다. 포인트로 전환됩니다.\n";
+				
+				/* 보유한 포인트 + 2000포인트가 10만이 넘었을 때*/
+				if((eventInfo.getJUMO_POINT()+2000) >= 100000) {
+					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
+					eventBean.setJUMO_POINT(100000);
+				} else {
+					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+2000);
+					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+2000) + " Point";
+				}
+								
+				eventService.updatePointId(eventBean);
+				
+			/* 현재 유저의 2000원 쿠폰이 없을 때 */
+			} else {
+				eventBean.setCOUPON1K(eventInfo.getCOUPON1K());
+				eventBean.setCOUPON3K(eventInfo.getCOUPON3K());
+				eventBean.setCOUPON5K(eventInfo.getCOUPON5K());
+				eventBean.setCOUPON10K(eventInfo.getCOUPON10K());
+				
+				eventService.updateCouponId(eventBean);
+				
+				message += "2천원 쿠폰이 발급되었습니다.";
+				
+				msg.put("coupon", "2K");
+			}
+		} else if(inputCoupon.equals("3K")) {
+			eventBean.setCOUPON3K("Y");
+			
+			/* 현재 유저의 3000원 쿠폰이 있을 때 */
+			if(eventInfo.getCOUPON3K().equals("Y")) {
+				message += "이미 3천원 쿠폰이 있습니다. 포인트로 전환됩니다.\n";
+				
+				/* 보유한 포인트 + 3000포인트가 10만이 넘었을 때*/
+				if((eventInfo.getJUMO_POINT()+3000) >= 100000) {
+					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
+					eventBean.setJUMO_POINT(100000);
+				} else {
+					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+3000);
+					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+3000) + " Point";
+				}
+								
+				eventService.updatePointId(eventBean);
+				
+			/* 현재 유저의 3000원 쿠폰이 없을 때 */
+			} else {
+				eventBean.setCOUPON1K(eventInfo.getCOUPON1K());
+				eventBean.setCOUPON2K(eventInfo.getCOUPON2K());
+				eventBean.setCOUPON5K(eventInfo.getCOUPON5K());
+				eventBean.setCOUPON10K(eventInfo.getCOUPON10K());
+				
+				eventService.updateCouponId(eventBean);
+				
+				message += "3천원 쿠폰이 발급되었습니다.";
+				
+				msg.put("coupon", "3K");
+			}
+		} else if(inputCoupon.equals("5K")) {
+			eventBean.setCOUPON5K("Y");
+			
+			/* 현재 유저의 5000원 쿠폰이 있을 때 */
+			if(eventInfo.getCOUPON5K().equals("Y")) {
+				message += "이미 5천원 쿠폰이 있습니다. 포인트로 전환됩니다.\n";
+				
+				/* 보유한 포인트 + 5000포인트가 10만이 넘었을 때*/
+				if((eventInfo.getJUMO_POINT()+5000) >= 100000) {
+					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
+					eventBean.setJUMO_POINT(100000);
+				} else {
+					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+5000);
+					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+5000) + " Point";
+				}
+								
+				eventService.updatePointId(eventBean);
+				
+			/* 현재 유저의 5000원 쿠폰이 없을 때 */
+			} else {
+				eventBean.setCOUPON1K(eventInfo.getCOUPON1K());
+				eventBean.setCOUPON2K(eventInfo.getCOUPON2K());
+				eventBean.setCOUPON3K(eventInfo.getCOUPON3K());
+				eventBean.setCOUPON10K(eventInfo.getCOUPON10K());
+				
+				eventService.updateCouponId(eventBean);
+				
+				message += "5천원 쿠폰이 발급되었습니다.";
+				
+				msg.put("coupon", "5K");
+			}
+		} else if(inputCoupon.equals("10K")) {
+			eventBean.setCOUPON10K("Y");
+			
+			/* 현재 유저의 10000원 쿠폰이 있을 때 */
+			if(eventInfo.getCOUPON10K().equals("Y")) {
+				message += "이미 1만원 쿠폰이 있습니다. 포인트로 전환됩니다.\n";
+				
+				/* 보유한 포인트 + 10000포인트가 10만이 넘었을 때*/
+				if((eventInfo.getJUMO_POINT()+10000) >= 100000) {
+					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
+					eventBean.setJUMO_POINT(100000);
+				} else {
+					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+10000);
+					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+10000) + " Point";
+				}
+								
+				eventService.updatePointId(eventBean);
+				
+			/* 현재 유저의 10000원 쿠폰이 없을 때 */
+			} else {
+				eventBean.setCOUPON1K(eventInfo.getCOUPON1K());
+				eventBean.setCOUPON2K(eventInfo.getCOUPON2K());
+				eventBean.setCOUPON3K(eventInfo.getCOUPON3K());
+				eventBean.setCOUPON5K(eventInfo.getCOUPON5K());
+				
+				eventService.updateCouponId(eventBean);
+				
+				message += "1만원 쿠폰이 발급되었습니다.";
+				
+				msg.put("coupon", "10K");
+			}
+		}		
+		
+		msg.put("message", message);
+		
+		return msg;
+	}	
 }

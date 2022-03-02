@@ -16,11 +16,12 @@ import jumo.admin.product.AdminProductService;
 import jumo.common.basket.BasketService;
 import jumo.common.member.MyInfoService;
 import jumo.common.product.ProductService;
+import jumo.event.EventService;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
 import jumo.model.ProductBean;
 import jumo.model.BasketBean;
-
+import jumo.model.JUMO_EVENT;
 import jumo.util.MapToBean;
 
 @Controller
@@ -41,6 +42,8 @@ public class OrderController {
 	@Resource(name="basketService")
 	private BasketService basketService;
 	
+	@Resource(name = "eventService")
+	private EventService eventService;	
 	
 	@RequestMapping("/pOrderForm.al")
 	public String pOrderForm (ProductBean product, HttpServletRequest request, Model model) throws Exception {
@@ -61,9 +64,13 @@ public class OrderController {
 		/* 주문 수량 정보를 읽어옴 */
 		String PCOUNT = request.getParameter("PCOUNT");
 		
+		/* 이벤트 정보를 읽어옴 */
+		JUMO_EVENT eventBean = eventService.selectEventId(loginEmail);
+		
 		model.addAttribute("productBean", productBean);
 		model.addAttribute("memberBean", memberBean);
 		model.addAttribute("PCOUNT", PCOUNT);
+		model.addAttribute("eventBean", eventBean);
 		
 		return "pOrderForm";
 	}
@@ -108,7 +115,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/pOrder.al")
-	public String pOrder(OrderBean order, Model model) throws Exception {
+	public String pOrder(HttpServletRequest request, OrderBean order, Model model) throws Exception {
+		
+		String pointStr = request.getParameter("point");
+		String coupon = request.getParameter("coupon"); 
+		
+		
+		
 		
 		orderService.insertOrderDirect(order);
 		

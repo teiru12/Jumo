@@ -94,19 +94,19 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	// insertPointId : Email 회원 가입시 point 지급시 사용
-	public void insertPointId(String email) throws Exception {
-		eventDAO.insertPointId(email);		
+	public void insertPointId(JUMO_EVENT event) throws Exception {
+		eventDAO.insertPointId(event);		
 	}
 
 	@Override
 	// updatePointId : Email 회원의 point를 수정
-	public void updatePointId(String email) throws Exception {
-		eventDAO.updatePointId(email);		
+	public void updatePointId(JUMO_EVENT event) throws Exception {
+		eventDAO.updatePointId(event);		
 	}
 
 	@Override
 	// updateCouponId : Email 회원의 쿠폰을 수정
-	public void updateCouponId(String email) throws Exception {
-		eventDAO.updateCouponId(email);		
+	public void updateCouponId(JUMO_EVENT event) throws Exception {
+		eventDAO.updateCouponId(event);		
 	}	
 }

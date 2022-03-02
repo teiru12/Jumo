@@ -37,17 +37,17 @@ public class EventDAO {
 	}
 	
 	// insertPointId : Email 회원 가입시 point 지급시 사용
-	public void insertPointId(String email) throws Exception {
-		sqlSessionTemplate.insert("event.insertPointId", email);
+	public void insertPointId(JUMO_EVENT event) throws Exception {
+		sqlSessionTemplate.insert("event.insertPointId", event);
 	}	
 	
 	// updatePointId : Email 회원의 point를 수정
-	public void updatePointId(String email) throws Exception {
-		sqlSessionTemplate.update("event.updatePointId", email);
+	public void updatePointId(JUMO_EVENT event) throws Exception {
+		sqlSessionTemplate.update("event.updatePointId", event);
 	}	
 	
 	// updateCouponId : Email 회원의 쿠폰을 수정
-	public void updateCouponId(String email) throws Exception {
-		sqlSessionTemplate.update("event.updateCouponId", email);
+	public void updateCouponId(JUMO_EVENT event) throws Exception {
+		sqlSessionTemplate.update("event.updateCouponId", event);
 	}	
 }

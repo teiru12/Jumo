@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jumo.event.EventService;
 import jumo.model.CommunityBean;
+import jumo.model.JUMO_EVENT;
 import jumo.model.MemberBean;
 import jumo.model.OrderBean;
 import jumo.util.MapToBean;
@@ -33,6 +35,9 @@ public class MemberController {
 
 	@Resource(name = "myInfoService")
 	private MyInfoService myInfoService;
+	
+	@Resource(name = "eventService")
+	private EventService eventService;
 
 	@RequestMapping(value = "/joinForm.al")
 	public String joinForm(Model model) {
@@ -130,8 +135,14 @@ public class MemberController {
 		} else {
 			// 회원가입 성공
 			joinService.insertMember(member);
+			
+			/* 회원가입에 성공했을 경우 포인트 테이블 생성 및 지급 */
+			JUMO_EVENT event = new JUMO_EVENT();
+			event.setEMAIL(member.getEMAIL());
+			event.setJUMO_POINT(5000);
+			eventService.insertPointId(event);
 
-			model.addAttribute("msg", "회원가입에 성공했습니다.");
+			model.addAttribute("msg", "회원가입에 성공했습니다. 포인트 5천 지급되었습니다.");
 			model.addAttribute("url", "/loginForm.al");
 		}
 

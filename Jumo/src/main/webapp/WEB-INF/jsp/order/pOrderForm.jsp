@@ -20,6 +20,8 @@ function orderCheck() {
 	var POSTCODE = document.getElementById("POSTCODE");
 	var MOBILE = document.getElementById("MOBILE");
 	
+	var point = document.getElementById("point");
+	
 	if(confirm("주문하시겠습니까?") == true) {
 				
 		if(NAME.value.trim() == ""){
@@ -47,6 +49,8 @@ function orderCheck() {
 			ADDRESS2.focus();
 			return false;
 		}
+		
+		alert(point.value);
 		
 		pOrderForm.submit();
 	}
@@ -82,6 +86,17 @@ $(document).ready(function() {
 		}		
 	});
 })
+
+$(document).on("keyup", "input[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );})
+
+$(function() {
+  $('#point').on('change', function() {
+     var n = $(this).val(); 
+     n = Math.floor(n/100) * 100; 
+     //alert(n);  
+     $(this).val(n);
+  });
+});
 
 </script>
 <!-- 우편번호 API -->
@@ -319,9 +334,79 @@ $(document).ready(function() {
 					</div>
 
 					<hr>
+					<h2 class="mb-4 billing-heading">쿠폰/포인트</h2>
+					<div class="row slider-text justify-content-center align-items-center">
+					
+						<!-- 쿠폰 -->
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">쿠폰</h6>
+								<div class="select-wrap">
+									<select name="coupon" id="coupon" class="form-control" style="width:400px;">			
+										<option>---</option>
+										<c:if test="${eventBean.COUPON1K == 'Y' }">
+											<option value="1K">1천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON2K == 'Y' }">
+											<option value="2K">2천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON3K == 'Y' }">
+											<option value="3K">3천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON5K == 'Y' }">
+											<option value="5K">5천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON10K == 'Y' }">
+											<option value="10K">1만원</option>
+										</c:if>
+									</select>
+								</div>
+						</div>
+						<div class="w-100"></div>
+	
+						<!-- 포인트 -->
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">포인트</h6>
+							<p>현재 보유 포인트는 ${eventBean.JUMO_POINT} Point입니다.</p>
+							<input type="number" id="point" name="point" class="form-control"
+								size="24" style="width:400px;" numberOnly step="100" min="0" max="${eventBean.JUMO_POINT}"
+								placeholder="100단위 포인트를 입력해주세요. " maxlength="11" oninput="numberMaxLength(this);"> 
+							<div class="w-100"></div>
+							<p class="mb-4" style="text-align:left;">포인트는 최대 10만까지 사용할 수 있습니다.<br>100이하는 계산되지 않습니다.</p>				
+						</div>
+						<div class="w-100"></div>
+						<br/><br/>
+					</div>
+
+					<hr>
+					
+					<br>	
+					<div class="container">  
+						<div class="cart-total mb-3" style="text-align:center">
+	    					<h2>결제 금액</h2><br>
+	    					<p class="d-flex">
+	    						<span>주문금액</span>
+	    						<span id="originalSum">${productBean.PPRICE*PCOUNT}원</span>
+	    					</p>
+	    					<p class="d-flex">
+	    						<span>할인금액</span>
+	    						<span id="saleSum" style="color:Crimson"><fmt:formatNumber value="${saled}" pattern="#.#" />원</span>
+	    					</p>
+	    					<p class="d-flex">
+	    						<span>배송비</span>
+	    						<span>3000원</span>
+	    					</p>
+	    					<hr>
+	    					<p class="d-flex total-price">
+	    						<span>총 금액</span>
+	    						<span id="finalSum"> <fmt:formatNumber value="${total+3000}" pattern="#.#" />원</span>
+	    					</p>
+	    				</div>
+	    			</div>
+
+					<hr>
 					
 					<!-- 결제 정보 -->
-					<h2 class="mb-4 billing-heading">주문자 정보</h2>
+					<h2 class="mb-4 billing-heading">결제 정보</h2>
 					<div class="row slider-text justify-content-center align-items-center">
 					
 						<!-- 결제 방법 -->
@@ -332,6 +417,9 @@ $(document).ready(function() {
 						</div>
 						<div class="w-100"></div>
 					</div>
+					
+					<br>	
+					<br>	
 			
 					<!-- 버튼 -->
 					<div class="form-group" align="center">

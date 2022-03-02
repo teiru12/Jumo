@@ -249,31 +249,6 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 	<input type="hidden" id="OADDRESS1" value="${memberBean.ADDRESS1}">
 	<input type="hidden" id="OADDRESS2" value="${memberBean.ADDRESS2}">
 	
-			<br>	
-				<div class="container">  
-					<div class="cart-total mb-3" style="text-align:center">
-    					<h2>결제 금액</h2><br>
-    					<p class="d-flex">
-    						<span>주문금액</span>
-    						<span id="originalSum"></span>
-    					</p>
-    					<p class="d-flex">
-    						<span>할인금액</span>
-    						<span id="saleSum" style="color:Crimson"></span>
-    					</p>
-    					<p class="d-flex">
-    						<span>배송비</span>
-    						<span>3000원</span>
-    					</p>
-    					<hr>
-    					<p class="d-flex total-price">
-    						<span>총 금액</span>
-    						<span id="finalSum"></span>
-    					</p>
-    				</div>
-    				</div>
-    			
-    			
     			 <br>
     			 <section class="ftco-section" style="margin-left:auto; margin-right:auto; text-align:center;">
 		<div class="container" style="margin-left:auto; margin-right:auto; text-align:center;">
@@ -382,6 +357,32 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 						</div>
 						<div class="w-100"></div>
 					</div>
+					
+					<br>	
+					<div class="container">  
+						<div class="cart-total mb-3" style="text-align:center">
+	    					<h2>결제 금액</h2><br>
+	    					<p class="d-flex">
+	    						<span>주문금액</span>
+	    						<span id="originalSum"></span>
+	    					</p>
+	    					<p class="d-flex">
+	    						<span>할인금액</span>
+	    						<span id="saleSum" style="color:Crimson"></span>
+	    					</p>
+	    					<p class="d-flex">
+	    						<span>배송비</span>
+	    						<span>3000원</span>
+	    					</p>
+	    					<hr>
+	    					<p class="d-flex total-price">
+	    						<span>총 금액</span>
+	    						<span id="finalSum"></span>
+	    					</p>
+	    				</div>
+	    			</div>
+					<br>	
+					<br>	
 			
 					<!-- 버튼 -->
 					<div style="text-align:center">
