@@ -1,36 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
-<script>
-function updatePoint() {
-	
-	$.ajax({
-		url 			: "updatePoint.al",
-		data 			: {"EMAIL" : "test1", "JUMO_POINT" : Number(500), "message" : ""},
-		contentType 	: "application/json",
-		success			: function(data) {
-			
-			alert(data.message);
-			alert(data.point);
-			alert(data.updatePoint);
-		},
-		error:function(request, error) {
-			alert("fail");
-			// error 발생 이유를 알려준다.
-		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
-</script>
 </head>
 <body>
 
-<input type="button" value="500원" onClick="updatePoint()">
+<div class="col-md-4 ftco-animate mx-auto" style="text-align:center">
+	<h3>보유 포인트</h3>
+</div> 		
+
+<br>
+
+<div class="col-md-4 ftco-animate mx-auto">
+	<table class="mx-auto" style="width:50%">
+		<tbody>
+			<tr> 
+				<td scope="col" width="50%" style="text-align:center">보유 포인트</td> 
+				<td scope="col" style="text-align:center"><b>${eventBean.JUMO_POINT}Point</b></td> 
+			</tr>  
+		
+		</tbody> 
+	</table>
+</div>
+
+<br>
+<br>
+
+<div class="col-md-4 ftco-animate mx-auto" style="text-align:center">
+	<h3>포인트 획득 내역</h3>
+</div> 
+
+<br>
+<br>
+
+	<div class="container">
+	
+	     <div class="row justify-content-center">
+   			<div class="col-md-10 mb-5 text-center">
+   				<ul class="product-category">
+   					<li><a href="point.al">전체</a></li>
+   					<li><a href="point.al?maxDate=0">1개월전~오늘</a></li>
+   					<li><a href="point.al?maxDate=1">2개월전~1개월전순</a></li>
+   					<li><a href="point.al?maxDate=2">3개월전~2개월전</a></li>
+   					<li><a href="point.al?maxDate=3">3개월전</a></li>
+   				</ul>
+   			</div>
+   		</div>
+	
+		<div style="text-align:center" id="board" >
+		<div class="col-md-4 ftco-animate">
+			<table class="table">
+				<thead class="thead-primary">
+		    		<tr> 
+						<th>획득 날짜</th>
+						<th>획득 포인트</th>			
+					</tr>		
+				</thead>
+			
+				<tbody>
+					<c:if test="${size==0}">
+						<tr><td colspan="2">조회된 내역이 없습니다.</td></tr>				
+					</c:if>
+					<c:if test="${size!=0}">
+						<c:forEach var="point" items="${pointList}">
+							<tr> 
+								<td scope="col" width="50%" style="text-align:center">${point.RULLETDATE}</td> 
+								<td scope="col" style="text-align:center"><b>${point.JUMO_POINT}Point</b></td> 
+							</tr>  
+						</c:forEach>
+					</c:if>
+				
+				</tbody> 
+			</table>
+			${paging.pageHtml}
+			</div>
+		</div>
+	</div>
+
+
+<!-- <input type="button" value="500원" onClick="updatePoint()"> -->
 
 </body>
 </html>

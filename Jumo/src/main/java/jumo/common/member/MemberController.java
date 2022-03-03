@@ -139,35 +139,54 @@ public class MemberController {
 			// 회원가입 성공
 			joinService.insertMember(member);
 			
+			/* 재가입 여부를 판단하기 위해서 포인트 테이블에서 email로 검색 */
+			JUMO_EVENT eventInfo = eventService.selectEventId(member.getEMAIL());
+			
 			/* 회원가입에 성공했을 경우 포인트 테이블 생성 및 지급 */
 			// 1. 재가입이 아닐 경우 생성
-			
-			JUMO_EVENT event = new JUMO_EVENT();
-			event.setEMAIL(member.getEMAIL());
-			event.setJUMO_POINT(5000);
-			eventService.insertPointId(event);
-			
-			/* 포인트 지급 시 포인트 획득 내역 등록 */
-			// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
-			JUMO_POINT jumo_point = new JUMO_POINT();
-			
-			jumo_point.setEMAIL(member.getEMAIL());
-			jumo_point.setJUMO_POINT(5000);
-			
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
-			// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
-			// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
-			Calendar cal = Calendar.getInstance();
-			
-			String today = formatDate.format(cal.getTime()); // 오늘
-			
-			jumo_point.setRULLETDATE(today);
-					
-			eventService.insertJumoPointID(jumo_point);
-			
+			if(eventInfo == null) {
+				JUMO_EVENT event = new JUMO_EVENT();
+				event.setEMAIL(member.getEMAIL());
+				event.setJUMO_POINT(5000);
+				eventService.insertPointId(event);
+				
+				/* 포인트 지급 시 포인트 획득 내역 등록 */
+				// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
+				JUMO_POINT jumo_point = new JUMO_POINT();
+				
+				jumo_point.setEMAIL(member.getEMAIL());
+				jumo_point.setJUMO_POINT(5000);
+				
+				SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+				// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+				// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+				Calendar cal = Calendar.getInstance();
+				
+				String today = formatDate.format(cal.getTime()); // 오늘
+				
+				jumo_point.setRULLETDATE(today);
+						
+				eventService.insertJumoPointID(jumo_point);
+				
+				model.addAttribute("msg", "회원가입에 성공했습니다. 포인트 5천 지급되었습니다.");
+			} else {
 			// 2. 재가입일 경우 포인트 테이블을 생성하지 않는다.
-
-			model.addAttribute("msg", "회원가입에 성공했습니다. 포인트 5천 지급되었습니다.");
+			// 포인트, 쿠폰 모두 초기화
+				JUMO_EVENT event = new JUMO_EVENT();
+				event.setJUMO_POINT(0);
+				event.setCOUPON1K("N");
+				event.setCOUPON2K("N");
+				event.setCOUPON3K("N");
+				event.setCOUPON5K("N");
+				event.setCOUPON10K("N");
+				event.setEMAIL(member.getEMAIL());
+				
+				eventService.updateCouponId(event);
+				eventService.updatePointId(event);
+				
+				model.addAttribute("msg", "재가입에 성공했습니다.");
+			}
+			
 			model.addAttribute("url", "/loginForm.al");
 		}
 

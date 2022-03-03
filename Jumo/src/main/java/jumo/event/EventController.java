@@ -121,6 +121,7 @@ public class EventController {
 		
 		model.addAttribute("eventBean", eventBean);
 		model.addAttribute("pointList", list);
+		model.addAttribute("size", list.size());
 		model.addAttribute("maxDate", request.getParameter("maxDate"));
 		
 		/* 페이징을 위한 값 삽입 */
@@ -151,7 +152,7 @@ public class EventController {
 		
 		model.addAttribute("eventBean", eventBean);		
 		
-		return "coupon";
+		return "rullet";
 	}
 	
 	// Ajax를 사용한 point 수정
