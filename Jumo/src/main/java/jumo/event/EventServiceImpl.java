@@ -124,5 +124,15 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void insertPayment(Payment payment) throws Exception {
 		eventDAO.insertPayment(payment);
-	}		
+	}
+
+	@Override
+	public void insertJumoPointID(JUMO_POINT jumo_point) throws Exception {
+		eventDAO.insertJumoPointID(jumo_point);		
+	}
+
+	@Override
+	public JUMO_POINT selectLastJumoPointID(String email) throws Exception {
+		return eventDAO.selectLastJumoPointID(email);
+	}
 }

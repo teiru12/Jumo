@@ -26,7 +26,7 @@ function getCount() {
 		sum += price * count;
 		saleSum += (price*sale/100)*count;// 상품이 할인받은 가격
 		/* document.getElementById("totalPrice"+i).innerText = totalPrice + '원';  */
-		document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원'; 
+		/* document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원'; */ 
 	}
 	document.getElementById("originalSum").innerText = sum + '원'; // 페이지의 sum값 출력
 	document.getElementById("saleSum").innerText = saleSum + '원'; // 페이지의 saleSum값 출력
@@ -114,6 +114,146 @@ $(document).ready(function() {
     		ADDRESS2.value = "";
     	}		
    	});
+    
+	/* 쿠폰 태그 변경시 작동 */
+	$('#coupon').change(function() {
+		
+		var size = $('#listSize').val();
+		var sum = 0; //원가의 전체 합
+		var saleSum = 0; //할인된 총 전체 합
+		for(var i=0;i<size;i++){
+			var count = $('#OCOUNT'+i).val();
+			var price = $('#OPRICE'+i).val();
+			var sale = $('#OSALE'+i).val();
+			var salePrice = price * (100-sale) / 100;
+			var totalPrice = salePrice * count; // 할인된 상품 가격
+			
+			sum += price * count;
+			saleSum += (price*sale/100)*count;// 상품이 할인받은 가격
+		}
+		
+		/* 주문금액, 할인금액 구하기 */
+		var totalPrice = sum; // 주문금액
+		var saled = saleSum; // 할인금액
+		
+		/* select 태그의 값 */
+		var couponValue;
+		if($('#coupon').val() == '1K') {
+			couponValue = 1000;
+		} else if($('#coupon').val() == '2K') {
+			couponValue = 2000;
+		} else if($('#coupon').val() == '3K') {
+			couponValue = 3000;
+		} else if($('#coupon').val() == '5K') {
+			couponValue = 5000;
+		} else if($('#coupon').val() == '10K') {
+			couponValue = 10000;
+		} else {
+			couponValue = 0;
+		}
+		
+		/* id="point" number 태그의 값 */ 
+		var pointValue = $('#point').val();
+		if(pointValue == null || pointValue == "") {
+			pointValue = 0;
+		}
+		
+		/* 쿠폰값을 변경할 때 입력한 point의 값이 포인트 보유량보다 클 경우 변경 */ 
+		var maxPoint = $('#maxPoint').val();
+		if(Number(pointValue) > Number(maxPoint)) {
+			pointValue = maxPoint;
+			$('#point').val(pointValue);
+		}
+		
+		var eventValue = Number(couponValue) + Number(pointValue);
+		
+		/* 쿠폰 + 포인트 값이 주문금액 - 할인금액 + 배송비보다 많으면 초기화 */
+		if(Number(eventValue) > (parseInt(totalPrice) - parseInt(saled) + parseInt("3000"))) {
+			alert("쿠폰과 포인트 사용금액이 주문금액보다 많습니다");
+			$('#coupon').val("---");
+			$('#point').val("0");
+			couponValue = 0;
+			pointValue = 0;
+			eventValue = 0;
+		}
+		
+		/* 쿠폰/포인트 항목 출력 */
+		$('#eventPoint').text(eventValue + "원");
+		
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
+		$('#finalSum').text(Number(totalPrice) - Number(saled) - Number(eventValue) + Number(3000) + "원");		
+	});
+	
+	$('#point').change(function(){
+		
+		var size = $('#listSize').val();
+		var sum = 0; //원가의 전체 합
+		var saleSum = 0; //할인된 총 전체 합
+		for(var i=0;i<size;i++){
+			var count = $('#OCOUNT'+i).val();
+			var price = $('#OPRICE'+i).val();
+			var sale = $('#OSALE'+i).val();
+			var salePrice = price * (100-sale) / 100;
+			var totalPrice = salePrice * count; // 할인된 상품 가격
+			
+			sum += price * count;
+			saleSum += (price*sale/100)*count;// 상품이 할인받은 가격 
+		}
+		
+		/* 주문금액, 할인금액 구하기 */
+		var totalPrice = sum; // 주문금액
+		var saled = saleSum; // 할인금액
+		
+		/* select 태그의 값 */
+		var couponValue;
+		if($('#coupon').val() == '1K') {
+			couponValue = 1000;
+		} else if($('#coupon').val() == '2K') {
+			couponValue = 2000;
+		} else if($('#coupon').val() == '3K') {
+			couponValue = 3000;
+		} else if($('#coupon').val() == '5K') {
+			couponValue = 5000;
+		} else if($('#coupon').val() == '10K') {
+			couponValue = 10000;
+		} else {
+			couponValue = 0;
+		}
+		
+		/* 포인트 입력시 100단위가 아니면 자동 변환 */
+		var pointValue = $('#point').val();
+	    pointValue = Math.floor(pointValue/100) * 100; 
+		if(pointValue == null || pointValue == "") {
+			pointValue = 0;
+		}
+		$('#point').val(pointValue);
+		
+		/* 입력한 point의 값이 포인트 보유량보다 클 경우 변경 */ 
+		var maxPoint = $('#maxPoint').val();
+		if(Number(pointValue) > Number(maxPoint)) {
+			alert("보유하신 포인트는 " + maxPoint + "Point입니다.");
+			pointValue = maxPoint;
+			$('#point').val(pointValue);
+		}
+		
+		var eventValue = Number(couponValue) + Number(pointValue);
+		
+	 	/* 쿠폰 + 포인트 값이 주문금액 - 할인금액 + 배송비보다 많으면 초기화 */
+		if(Number(eventValue) > (parseInt(totalPrice) - parseInt(saled) + parseInt("3000"))) {
+			alert("쿠폰과 포인트 사용금액이 주문금액보다 많습니다");
+			$('#coupon').val("---");
+			$('#point').val("0");
+			couponValue = 0;
+			pointValue = 0;
+			eventValue = 0;
+		}
+
+		/* 쿠폰/포인트 항목 출력 */
+		$('#eventPoint').text(eventValue + "원");
+		
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
+		$('#finalSum').text(Number(totalPrice) - Number(saled) - Number(eventValue) + Number(3000) + "원");			
+	});	
 })
 
     function orderCheck() {
@@ -191,7 +331,7 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 						   <!-- <th>&nbsp;</th> -->
 						   <th colspan="2">상품명</th>
 						   <th>수량</th>
-						   <th>할인 가격</th>
+						   <th>할인 금액</th>
 						   <th>결제 금액</th>
 						</tr>
 				</thead>
@@ -220,9 +360,10 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 		    					
 				          	</td> --%>
 				          	<td id="saled${i}" style="color:Crimson">
+				          	<fmt:formatNumber value="${(basketBeanList[i].BPRICE*basketBeanList[i].BSALE/100)*basketBeanList[i].BCOUNT}" pattern="#.#"/>원
 				          	<c:set var="salePrice" value="${basketBeanList[i].BPRICE * (100-basketBeanList[i].BSALE) * 0.01}" />
 				          	<input type="hidden" id="OPRICE${i}" name="OPRICE" value="${basketBeanList[i].BPRICE}"></td>
-						        
+				          							        
 						    <td style="font-weight : bold;">
 								<c:set var="total" value="${salePrice * basketBeanList[i].BCOUNT}"/>
 								<fmt:parseNumber var="totalPrice" integerOnly="true" value="${total}"/>
@@ -344,19 +485,54 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 					</div>
 
 					<hr>
-					
-					<!-- 결제 정보 -->
-					<h2 class="mb-4 billing-heading">주문자 정보</h2>
+					<h2 class="mb-4 billing-heading">쿠폰/포인트</h2>
 					<div class="row slider-text justify-content-center align-items-center">
 					
-						<!-- 결제 방법 -->
+						<!-- 쿠폰 -->
 						<div class="form-group">
-							<h6 class="mb-4" style="text-align:left;">무통장 입금</h6>
-							<input type="text" class="form-control" style="width:400px;"
-								value="국민은행 1222222-266" readonly>
+							<h6 class="mb-4" style="text-align:left;">쿠폰</h6>
+								<div class="select-wrap">
+									<select name="coupon" id="coupon" class="form-control" style="width:400px;">			
+										<option value="---">---</option>
+										<c:if test="${eventBean.COUPON1K == 'Y' }">
+											<option id="1K" value="1K">1천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON2K == 'Y' }">
+											<option id="2K" value="2K">2천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON3K == 'Y' }">
+											<option id="3K" value="3K">3천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON5K == 'Y' }">
+											<option id="5K" value="5K">5천원</option>
+										</c:if>
+										<c:if test="${eventBean.COUPON10K == 'Y' }">
+											<option id="10K" value="10K">1만원</option>
+										</c:if>
+									</select>
+								</div>
 						</div>
 						<div class="w-100"></div>
+	
+						<!-- 포인트 -->
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">포인트</h6>
+							<p>현재 보유 포인트는 ${eventBean.JUMO_POINT} Point입니다.</p>
+							<input type="number" id="point" name="point" class="form-control"
+								size="24" style="width:400px;" numberOnly step="100" min="0" max="${eventBean.JUMO_POINT}"
+								placeholder="100단위 포인트를 입력해주세요. " maxlength="11" oninput="numberMaxLength(this);"> 
+							<input type="hidden" id="maxPoint" value="${eventBean.JUMO_POINT}">
+							<div class="w-100"></div>
+							<p class="mb-4" style="text-align:left;">포인트는 최대 10만까지 사용할 수 있습니다.<br>100이하는 계산되지 않습니다.</p>				
+						</div>
+						<div class="w-100"></div>
+						<br/><br/>
 					</div>
+
+					<hr>
+					
+					<!-- 결제 정보 -->
+					<h2 class="mb-4 billing-heading">결제 정보</h2>
 					
 					<br>	
 					<div class="container">  
@@ -371,6 +547,10 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 	    						<span id="saleSum" style="color:Crimson"></span>
 	    					</p>
 	    					<p class="d-flex">
+	    						<span>쿠폰/포인트</span>
+	    						<span id="eventPoint" style="color:Crimson">0원</span>
+	    					</p>
+	    					<p class="d-flex">
 	    						<span>배송비</span>
 	    						<span>3000원</span>
 	    					</p>
@@ -381,6 +561,17 @@ $(document).on("keyup", "input[noBlank]", function() {$(this).val( $(this).val()
 	    					</p>
 	    				</div>
 	    			</div>
+	    			
+					<div class="row slider-text justify-content-center align-items-center">
+					
+						<!-- 결제 방법 -->
+						<div class="form-group">
+							<h6 class="mb-4" style="text-align:left;">무통장 입금</h6>
+							<input type="text" class="form-control" style="width:400px;"
+								value="국민은행 1222222-266" readonly>
+						</div>
+						<div class="w-100"></div>
+					</div>
 					<br>	
 					<br>	
 			

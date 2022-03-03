@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<h1> 주문 페이지 </h1>
+		<h1> 주문 결과 </h1>
 	</div>
 	
 	<form method="post" id="pOrderForm" action="pOrder.al">
@@ -120,6 +120,11 @@
 								</tr>
 							
 								<tr class="text-center">
+									<td class="count">적립 포인트</td>
+									<td class="count"><b>${jumo_point.JUMO_POINT}Point</b></td>
+								</tr>
+							
+								<tr class="text-center">
 									<td class="count">총 결제 금액</td>
 									<td class="count"><b>${orderBean.OTOTAL}원</b></td>
 								</tr>
@@ -225,6 +230,11 @@
 							
 								<tr class="text-center">
 									<td rowspan="3"><h4><b>결제 정보</b></h4></td>
+								</tr>
+								
+								<tr class="text-center">
+									<td class="count">적립 포인트</td>
+									<td class="count"><b>${jumo_point.JUMO_POINT}Point</b></td>
 								</tr>
 							
 								<tr class="text-center">

@@ -3,7 +3,9 @@ package jumo.common.order;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import jumo.model.Payment;
 import jumo.model.ProductBean;
 import jumo.model.BasketBean;
 import jumo.model.JUMO_EVENT;
+import jumo.model.JUMO_POINT;
 import jumo.util.MapToBean;
 
 @Controller
@@ -106,11 +109,15 @@ public class OrderController {
 		
 		String BCOUNT = request.getParameter("BCOUNT");
 		
+		/* 이벤트 정보를 읽어옴 */
+		JUMO_EVENT eventBean = eventService.selectEventId(loginEmail);
+		
 		model.addAttribute("basketBeanList",basketBeanList);
 		model.addAttribute("Size", basketBeanList.size());
 		model.addAttribute("memberBean", memberBean);
 		model.addAttribute("proInfoList", proInfoList);
 		model.addAttribute("BCOUNT", BCOUNT);
+		model.addAttribute("eventBean", eventBean);
 		
 		return "basketOrderForm";
 	}
@@ -152,7 +159,7 @@ public class OrderController {
 		JUMO_EVENT eventInfo = eventService.selectEventId(email);
 		
 		JUMO_EVENT updateEvent = eventInfo; // 업데이트에 사용할 새 객체 선언
-		// 쿠폰을 사용했으면 쿠폰 내역을 업데이트
+		// 1. 쿠폰을 사용했으면 쿠폰 내역을 업데이트
 		int couponValue = 0;
 		if(coupon != null) {
 			if(coupon.equals("1K")) {
@@ -174,12 +181,13 @@ public class OrderController {
 		}
 		eventService.updateCouponId(updateEvent);
 		
-		// 포인트를 사용했으면 포인트 내역을 업데이트
+		// 2. 포인트를 사용했으면 포인트 내역을 업데이트
 		updateEvent.setJUMO_POINT(eventInfo.getJUMO_POINT()-point);
 		eventService.updatePointId(updateEvent);		
 		
-		// 결제 테이블 등록 OID, OBNUMBER = null, TOTALSUM, TOTALPAYMENT, COUPON, POINT
+		// 3. 결제 테이블 등록 OID, OBNUMBER = null, TOTALSUM, TOTALPAYMENT, COUPON, POINT
 		int OBNUMBER = -1; // 직접 주문이기 때문에 장바구니 번호는 null
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
 		int TOTALPAYMENT = TOTALSUM - saled - couponValue - point + 3000;
 		
 		Payment payment = new Payment();
@@ -191,6 +199,38 @@ public class OrderController {
 		payment.setPOINT(point);
 		
 		eventService.insertPayment(payment);
+		
+		// 4. 포인트 획득 처리
+		int gainPoint = (int) ((double) TOTALPAYMENT * 0.01);
+		
+		// 포인트 업데이트
+		JUMO_EVENT newEvent = new JUMO_EVENT(); // 포인트 업데이트에 사용할 새 객체 선언
+		// 기존 보유 포인트 + 획득 포인트가 10만 이상이면 10만으로 설정
+		if((eventInfo.getJUMO_POINT() + gainPoint) > 100000) {
+			newEvent.setJUMO_POINT(100000);
+		} else {
+			newEvent.setJUMO_POINT(eventInfo.getJUMO_POINT() + gainPoint);
+		}
+		newEvent.setEMAIL(email);
+		eventService.updatePointId(newEvent);
+		
+		// 포인트 획득 테이블에 등록
+		// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
+		JUMO_POINT jumo_point = new JUMO_POINT();
+		
+		jumo_point.setEMAIL(email);
+		jumo_point.setJUMO_POINT(gainPoint);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+		// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+		Calendar cal = Calendar.getInstance();
+		
+		String today = formatDate.format(cal.getTime()); // 오늘
+		
+		jumo_point.setRULLETDATE(today);
+				
+		eventService.insertJumoPointID(jumo_point);
 		
 		model.addAttribute("msg", "주문을 완료했습니다.");
 		
@@ -219,7 +259,11 @@ public class OrderController {
 		//장바구니 리스트의 크기만큼 루프를 돌면서 주문
 		// orderBean에는 주문 정보가 들어있으므로 orderBean을 사용해서 insertOrderBasket
 		
-		boolean checkOBNUMBER = false; int OBNUMBER = -1; 
+		int TOTALSUM = 0; // 주문 금액
+		int saled = 0; // 할인 금액
+		
+		boolean checkOBNUMBER = false;
+		int OBNUMBER = -1; 
 		for(BasketBean infoBasket :	basketBeanList) {
 		  
 			if(checkOBNUMBER == false) {
@@ -238,6 +282,10 @@ public class OrderController {
 			order.setOSALE(infoBasket.getBSALE());
 			order.setOMAIL(infoBasket.getBEMAIL());
 			order.setOCOUNT(infoBasket.getBCOUNT());
+			
+			/* 총 주문금액/할인가격에 각각의 장바구니 주문금액/할인가격을 더함 */
+			TOTALSUM += order.getOPRICE() * order.getOCOUNT(); 
+			saled += (order.getOPRICE() * order.getOSALE() / 100) * order.getOCOUNT(); 
 
 			// 장바구니 주문 폼에서 넘어오는 값들 (따로 설정할 필요없음) - jsp
 			// ONAME:받는사람정보, OTOTAL:상품가격*수량, OMOBILE, OPOSTCODE, OADDRESS1, OADDRESS2
@@ -261,6 +309,90 @@ public class OrderController {
 			adminProductService.updateProduct(infoPro);
 		}
 		
+		/* 쿠폰/포인트 사용 처리 */
+		int point = 0; // 포인트
+		if(request.getParameter("point")!=null && !request.getParameter("point").equals("")) {
+			point = Integer.parseInt(request.getParameter("point"));	
+		}
+		String coupon = request.getParameter("coupon"); // 쿠폰 
+		
+		// 사용자의 이벤트 테이블 정보를 가져온다.
+		JUMO_EVENT eventInfo = eventService.selectEventId(email);
+		
+		JUMO_EVENT updateEvent = eventInfo; // 업데이트에 사용할 새 객체 선언
+		// 1. 쿠폰을 사용했으면 쿠폰 내역을 업데이트
+		int couponValue = 0;
+		if(coupon != null) {
+			if(coupon.equals("1K")) {
+				updateEvent.setCOUPON1K("N");
+				couponValue = 1000;
+			} else if(coupon.equals("2K")) {
+				updateEvent.setCOUPON2K("N");
+				couponValue = 2000;
+			} else if(coupon.equals("3K")) {
+				updateEvent.setCOUPON3K("N");
+				couponValue = 3000;
+			} else if(coupon.equals("5K")) {
+				updateEvent.setCOUPON5K("N");
+				couponValue = 5000;
+			} else if(coupon.equals("10K")) {
+				updateEvent.setCOUPON10K("N");
+				couponValue = 10000;
+			} 
+		}
+		eventService.updateCouponId(updateEvent);
+		
+		// 2. 포인트를 사용했으면 포인트 내역을 업데이트
+		updateEvent.setJUMO_POINT(eventInfo.getJUMO_POINT()-point);
+		eventService.updatePointId(updateEvent);		
+		
+		// 3. 결제 테이블 등록 OID = null, OBNUMBER, TOTALSUM, TOTALPAYMENT, COUPON, POINT
+		int OID = -1; // 직접 주문이기 때문에 장바구니 번호는 null
+		/* 총 금액 : totalPrice(주문금액) - saled(할인금액) - eventValue(쿠폰/포인트) + 3000(배송비) */
+		int TOTALPAYMENT = TOTALSUM - saled - couponValue - point + 3000;
+		
+		Payment payment = new Payment();
+		payment.setOID(OID);
+		payment.setOBNUMBER(OBNUMBER);
+		payment.setTOTALSUM(TOTALSUM);
+		payment.setTOTALPAYMENT(TOTALPAYMENT);
+		payment.setCOUPON(coupon);
+		payment.setPOINT(point);
+		
+		eventService.insertPayment(payment);
+		
+		// 4. 포인트 획득 처리
+		int gainPoint = (int) ((double) TOTALPAYMENT * 0.01);
+		
+		// 포인트 업데이트
+		JUMO_EVENT newEvent = new JUMO_EVENT(); // 포인트 업데이트에 사용할 새 객체 선언
+		// 기존 보유 포인트 + 획득 포인트가 10만 이상이면 10만으로 설정
+		if((eventInfo.getJUMO_POINT() + gainPoint) > 100000) {
+			newEvent.setJUMO_POINT(100000);
+		} else {
+			newEvent.setJUMO_POINT(eventInfo.getJUMO_POINT() + gainPoint);
+		}
+		newEvent.setEMAIL(email);
+		eventService.updatePointId(newEvent);
+		
+		// 포인트 획득 테이블에 등록
+		// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
+		JUMO_POINT jumo_point = new JUMO_POINT();
+		
+		jumo_point.setEMAIL(email);
+		jumo_point.setJUMO_POINT(gainPoint);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+		// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+		Calendar cal = Calendar.getInstance();
+		
+		String today = formatDate.format(cal.getTime()); // 오늘
+		
+		jumo_point.setRULLETDATE(today);
+				
+		eventService.insertJumoPointID(jumo_point);
+		
 		model.addAttribute("msg", "주문을 완료했습니다.");
 		String urlParam = "/orderResult.al?OBNUMBER=" + OBNUMBER;
 		model.addAttribute("url", urlParam);
@@ -277,7 +409,11 @@ public class OrderController {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<OrderBean> orderBeanList = new ArrayList<OrderBean>();
 		
-		System.out.println("order.getOBNUMBER : " + order.getOBNUMBER());
+		/* 주문을 통해 최근 적립된 포인트 내역 */ 
+		String email = (String) request.getSession().getAttribute("EMAIL");
+		JUMO_POINT jumo_point = eventService.selectLastJumoPointID(email);
+		
+		model.addAttribute("jumo_point", jumo_point);		
 		
 		if(order.getOBNUMBER() == 0) {
 			// 만약 OBNUMBER가 null일 경우 직접 주문의 결과

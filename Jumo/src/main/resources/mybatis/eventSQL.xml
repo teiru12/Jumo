@@ -164,4 +164,34 @@
 	)
 </insert>
 
+<!-- selectLastJumoPointID -->
+<select id="selectLastJumoPointID" parameterType="String" resultType="jumo.model.JUMO_POINT">
+	select
+		*
+	from
+		JUMO_POINT
+	where 
+		POINT_KEY =
+		(
+			select 
+				MAX(POINT_KEY)
+			from
+				JUMO_POINT
+			where
+				EMAIL = #{EMAIL}
+		)
+</select>
+
+<!-- insertJumoPointID : JUMO_POINT 테이블에 입력 -->
+<insert id="insertJumoPointID" parameterType="jumo.model.JUMO_POINT">
+	insert into
+		JUMO_POINT
+	values(
+		POINT_KEY_SEQ.NEXTVAL,
+		#{EMAIL},
+		#{JUMO_POINT},
+		#{RULLETDATE}
+	)
+</insert>
+
 </mapper>

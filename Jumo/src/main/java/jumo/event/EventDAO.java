@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import jumo.model.JUMO_EVENT;
+import jumo.model.JUMO_POINT;
 import jumo.model.Payment;
 
 @Repository("eventDAO")
@@ -17,8 +18,8 @@ public class EventDAO {
 	@Resource(name="sqlSessionTemplate")
 	SqlSessionTemplate sqlSessionTemplate;
 
-	public JUMO_EVENT selectEventId(String email) throws Exception{
-		return sqlSessionTemplate.selectOne("event.selectEventId", email);
+	public JUMO_EVENT selectEventId(String EMAIL) throws Exception{
+		return sqlSessionTemplate.selectOne("event.selectEventId", EMAIL);
 	}
 	
 	public List<Map<String,Object>> pointIdListPaging (Map<String,Object> map) throws Exception{
@@ -29,8 +30,8 @@ public class EventDAO {
 		return sqlSessionTemplate.selectList("event.pointIdListSearchPaging",map);
 	}	
 	
-	public int pointIdCount(String email) throws Exception {
-		return sqlSessionTemplate.selectOne("event.pointIdCount",email);
+	public int pointIdCount(String EMAIL) throws Exception {
+		return sqlSessionTemplate.selectOne("event.pointIdCount", EMAIL);
 	}
 	
 	public int pointIdSearchCount(Map<String, Object> map) throws Exception {
@@ -65,5 +66,15 @@ public class EventDAO {
 	// insertPayment : 결제 정보를 입력
 	public void insertPayment(Payment payment) throws Exception {
 		sqlSessionTemplate.insert("event.insertPayment", payment);
+	}
+	
+	// insertJumoPointID : 포인트 획득 내역 저장
+	public void insertJumoPointID(JUMO_POINT jumo_point) throws Exception {
+		sqlSessionTemplate.insert("event.insertJumoPointID", jumo_point); 
+	}
+	
+	// selectLastJumoPointID : ID 회원이 가장 최근에 획득한 포인트 내역 읽어오기
+	public JUMO_POINT selectLastJumoPointID(String EMAIL) throws Exception {
+		return sqlSessionTemplate.selectOne("event.selectLastJumoPointID", EMAIL);
 	}
 }

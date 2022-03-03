@@ -36,4 +36,10 @@ public interface EventService {
 	
 	// insertPayment : 결제 정보를 입력
 	public void insertPayment(Payment payment) throws Exception;
+	
+	// insertJumoPointID : 포인트 획득 내역 저장
+	public void insertJumoPointID(JUMO_POINT jumo_point) throws Exception;
+	
+	// selectLastJumoPointID : ID 회원이 가장 최근에 획득한 포인트 내역 읽어오기
+	public JUMO_POINT selectLastJumoPointID(String email) throws Exception;
 }
