@@ -9,6 +9,19 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
+<style>
+.point_table {
+    width: 100%;
+}
+.point_table th {
+	background-color: #82AF47;
+	color : white;
+}
+.point_table th, .point_table td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+</style>
 <body>
 
 <div class="col-md-4 ftco-animate mx-auto" style="text-align:center">
@@ -41,7 +54,7 @@
 
 	<div class="container">
 	
-	     <div class="row justify-content-center">
+	     <div class="row justify-content-center ftco-animate">
    			<div class="col-md-10 mb-5 text-center">
    				<ul class="product-category">
    					<li><a href="point.al">전체</a></li>
@@ -53,9 +66,9 @@
    			</div>
    		</div>
 	
-		<div style="text-align:center" id="board" >
-		<div class="col-md-4 ftco-animate">
-			<table class="table">
+	<div class="col-md-12" style="text-align:center" id="board" >
+		<div class="col-md-4 ftco-animate mx-auto">
+			<table class="point_table col-md-12 mx-auto">
 				<thead class="thead-primary">
 		    		<tr> 
 						<th>획득 날짜</th>
@@ -83,6 +96,9 @@
 		</div>
 	</div>
 
+	<br>
+	<br>
+	<br>
 
 <!-- <input type="button" value="500원" onClick="updatePoint()"> -->
 
