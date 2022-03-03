@@ -39,25 +39,27 @@ window.onload = function() {
 <section class="ftco-section ftco-cart">
 	<div style="text-align:center"><h2>상품 리스트</h2></div>
 	<br/>
-		<div class="container">
+		<div class="container" style="padding-right:70px;">
+		<div class="col-xl-12 ftco-animate center">
 			<div class="row">
 				<br>
-				<pre>    </pre>
+				
+				<div class="col-md-4 ml-auto">
 				<form action="adminPList.al">
 				<div class="form-group d-flex">
-					<input type="text" name="keyword" id="keyword" class="form-control" style="width:70%;" value="${keyword}">
+					<input type="text" name="keyword" id="keyword" class="form-control" style="width:200px;" value="${keyword}">
 					<input type="submit" value="검색" class="btn-black py-2 px-4">
-				</div>
-				</form>
-				&nbsp;
+					&nbsp;
 				<div>
 					<input type="button" value="상품 추가" class="btn btn-black py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
 				</div>
+				</div>
+				</form>
+				</div>
+				<pre>       </pre>
 				
-				<br>
-				<div class="container" style="padding-right:70px;">				
-					<div class="col-md-12 ftco-animate">
-						<div class="cart-list">
+				<div class="container">				
+					<div class="cart-list">
 							<table class="table">
 								<thead class="thead-primary">
 									<tr class="text-center">
@@ -104,7 +106,7 @@ window.onload = function() {
 						</div>
 						
 						${paging.pageHtml}
-					</div>			
+					</div>
 				</div>
 		</div>
 	</div>
