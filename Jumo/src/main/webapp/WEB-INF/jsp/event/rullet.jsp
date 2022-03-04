@@ -60,56 +60,36 @@
 	'innerRadius'     : 75,         // 아마 중앙원 사이즈?
 	'textOrientation' : 'vertical', // 텍스트 정렬값 넣는곳
 	'textAlignment'   : 'outer',    // 텍스트를 휠에 맞게 해주는곳
-	'numSegments'     : 24,         // 저 피자조각 갯수
+	'numSegments'     : 14,         // 저 피자조각 갯수
 	'segments'        :             // 저 피자조각을 민트 맛으로 할지 파인애플 맛으로 할지 정하면서 위에다가 텍스트 쓰는곳
 	[                               // 글자 크기랑 텍스트의 색을 민트맛으로 할지 보라색맛으로 할지 정하는곳
-		{'fillStyle' : '#ee1c24', 'text' : '1000P'},
+		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
 		
-		{'fillStyle' : '#3cb878', 'text' : '10P'},
+		{'fillStyle' : '#3cb878', 'text' : '200P'},
 		
-		{'fillStyle' : '#f6989d', 'text' : '1P'},
+		{'fillStyle' : '#fff200', 'text' : '5천쿠폰'},
 		
-		{'fillStyle' : '#00aef0', 'text' : '50P'},
+		{'fillStyle' : '#f6989d', 'text' : '300P'},
+		
+		{'fillStyle' : '#00aef0', 'text' : '400P'},
+		
+		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
 		
 		{'fillStyle' : '#f26522', 'text' : '500P'},
 		
-		{'fillStyle' : '#000000', 'text' : '민 트 초 코', 'textFontSize' : 16, 'textFillStyle' : '#00ffff'},
+		{'fillStyle' : '#000000', 'text' : '1000P'},
 		
-		{'fillStyle' : '#e70697', 'text' : '3000P'},
+		{'fillStyle' : '#e70697', 'text' : '2000P'},
 		
-		{'fillStyle' : '#fff200', 'text' : '600P'},
+		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
 		
-		{'fillStyle' : '#f6989d', 'text' : '700P'},
+		{'fillStyle' : '#fff200', 'text' : '3천쿠폰'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '350P'},
+		{'fillStyle' : '#ee1c24', 'text' : '100P'},
 		
-		{'fillStyle' : '#3cb878', 'text' : '500P'},
+		{'fillStyle' : '#fff200', 'text' : '1만쿠폰'},
 		
-		{'fillStyle' : '#f26522', 'text' : '800P'},
-		
-		{'fillStyle' : '#a186be', 'text' : '300P'},
-		
-		{'fillStyle' : '#fff200', 'text' : '400P'},
-		
-		{'fillStyle' : '#00aef0', 'text' : '650P'},
-		
-		{'fillStyle' : '#ee1c24', 'text' : '1000P'},
-		
-		{'fillStyle' : '#f6989d', 'text' : '500P'},
-		
-		{'fillStyle' : '#f26522', 'text' : '400P'},
-		
-		{'fillStyle' : '#3cb878', 'text' : '900P'},
-		
-		{'fillStyle' : '#40ffff', 'text' : '백 신 펀 치', 'textFontSize' : 16, 'textFillStyle' : '#ffffff'},
-		
-		{'fillStyle' : '#a186be', 'text' : '600P'},
-		
-		{'fillStyle' : '#fff200', 'text' : '700P'},
-		
-		{'fillStyle' : '#00aef0', 'text' : '800P'},
-		
-		{'fillStyle' : '800080', 'text' : '보 라 색 맛', 'textFontSize' : 12}
+		{'fillStyle' : '#ee1c24', 'text' : '꽝'}
 	],
 			'animation' :           // 사용할 애니메이션 지정
 			{
@@ -217,10 +197,22 @@
 
 	function alertPrize(indicatedSegment)
 	{
+		alert(indicatedSegment.text);
+		
+		alert(typeof(indicatedSegment.text));
+	
 		// 결과값 출력
-		if (indicatedSegment.text == '후') {
-		    alert('왜');
-		} else if (indicatedSegment.text == '안돼') {
+		if (indicatedSegment.text == '100P') {
+		    alert('400나와라');
+		} else if (indicatedSegment.text == '500P') {
+		    alert('500나와라');
+		} else if (indicatedSegment.text == '600P') {
+		    alert('600나와라');
+		}
+		
+		
+		
+		else if (indicatedSegment.text == '안돼') {
 		    alert('망할놈아');
 		} else {
 		    alert(indicatedSegment.text  + "당첨되셨습니다. ");
