@@ -44,19 +44,19 @@ window.onload = function() {
 			<div class="row">
 				<br>
 				
-				<div class="col-md-4 ml-auto">
+			<div class="col-md-6 ml-auto">
 				<form action="adminPList.al">
-				<div class="form-group d-flex">
-					<input type="text" name="keyword" id="keyword" class="form-control" style="width:200px;" value="${keyword}">
-					<input type="submit" value="검색" class="btn-black py-2 px-4">
-					&nbsp;
-				<div>
-					<input type="button" value="상품 추가" class="btn btn-black py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
-				</div>
-				</div>
+					<div class="form-group d-flex">
+						<input type="text" name="keyword" id="keyword" class="form-control" value="${keyword}">
+						<input type="submit" value="검색" class="btn-black py-2 px-4">
+						&nbsp;
+					<div>
+						<input type="button" value="상품 추가" class="btn btn-black py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
+					</div>
+					</div>
 				</form>
-				</div>
-				<pre>       </pre>
+			</div>
+				
 				
 				<div class="container">				
 					<div class="cart-list">
