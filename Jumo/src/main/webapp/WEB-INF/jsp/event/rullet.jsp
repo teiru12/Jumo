@@ -91,37 +91,37 @@
 	'numSegments'     : 16,         // 저 피자조각 갯수
 	'segments'        :             // 저 피자조각을 민트 맛으로 할지 파인애플 맛으로 할지 정하면서 위에다가 텍스트 쓰는곳
 	[                               // 글자 크기랑 텍스트의 색을 민트맛으로 할지 보라색맛으로 할지 정하는곳
-		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
+		{'fillStyle' : '#081f22', 'text' : '꽝', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#3cb878', 'text' : '200P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '200P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#fff200', 'text' : '5천쿠폰'},
+		{'fillStyle' : '#25B4B1', 'text' : '5천쿠폰', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#f6989d', 'text' : '300P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '300P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#00aef0', 'text' : '400P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '400P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
+		{'fillStyle' : '#081f22', 'text' : '꽝', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#f26522', 'text' : '500P'},
+		{'fillStyle' : '#3cb878', 'text' : '500P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#3cb878', 'text' : '200P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '200P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#f26522', 'text' : '1000P'},
+		{'fillStyle' : '#495761', 'text' : '1000P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '100P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '100P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#e70697', 'text' : '2000P'},
+		{'fillStyle' : '#f6989d', 'text' : '2000P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
+		{'fillStyle' : '#081f22', 'text' : '꽝', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#fff200', 'text' : '3천쿠폰'},
+		{'fillStyle' : '#bf9fcb', 'text' : '3천쿠폰', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '100P'},
+		{'fillStyle' : '#B2DFE7', 'text' : '100P', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
+		{'fillStyle' : '#081f22', 'text' : '꽝', 'textFillStyle' : '#FFFFFF'},
 		
-		{'fillStyle' : '#fff200', 'text' : '1만쿠폰'}
+		{'fillStyle' : '#EB7F8A', 'text' : '1만쿠폰', 'textFillStyle' : '#FFFFFF'}
 	],
 			'animation' :           // 사용할 애니메이션 지정
 			{
