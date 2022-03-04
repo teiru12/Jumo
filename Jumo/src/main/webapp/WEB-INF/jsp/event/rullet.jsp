@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div align="center">
-	<h1>왜 값이 전송이 안됌?</h1>
+	<h1>룰렛</h1>
 <br><br><br>
 
 	<table cellpadding="0" cellspacing="0" border="0">
@@ -60,7 +60,7 @@
 	'innerRadius'     : 75,         // 아마 중앙원 사이즈?
 	'textOrientation' : 'vertical', // 텍스트 정렬값 넣는곳
 	'textAlignment'   : 'outer',    // 텍스트를 휠에 맞게 해주는곳
-	'numSegments'     : 14,         // 저 피자조각 갯수
+	'numSegments'     : 16,         // 저 피자조각 갯수
 	'segments'        :             // 저 피자조각을 민트 맛으로 할지 파인애플 맛으로 할지 정하면서 위에다가 텍스트 쓰는곳
 	[                               // 글자 크기랑 텍스트의 색을 민트맛으로 할지 보라색맛으로 할지 정하는곳
 		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
@@ -77,7 +77,11 @@
 		
 		{'fillStyle' : '#f26522', 'text' : '500P'},
 		
-		{'fillStyle' : '#000000', 'text' : '1000P'},
+		{'fillStyle' : '#3cb878', 'text' : '200P'},
+		
+		{'fillStyle' : '#f26522', 'text' : '1000P'},
+		
+		{'fillStyle' : '#ee1c24', 'text' : '100P'},
 		
 		{'fillStyle' : '#e70697', 'text' : '2000P'},
 		
@@ -87,9 +91,9 @@
 		
 		{'fillStyle' : '#ee1c24', 'text' : '100P'},
 		
-		{'fillStyle' : '#fff200', 'text' : '1만쿠폰'},
+		{'fillStyle' : '#ee1c24', 'text' : '꽝'},
 		
-		{'fillStyle' : '#ee1c24', 'text' : '꽝'}
+		{'fillStyle' : '#fff200', 'text' : '1만쿠폰'}
 	],
 			'animation' :           // 사용할 애니메이션 지정
 			{
@@ -102,7 +106,7 @@
 			},
 			'pins' :                // 왜 하는지 모르겠음 어쨋든 없으면 소리가 안남 돌지도 않음
 			{
-			    'number'     : 24,
+			    'number'     : 16,
 			
 			    'fillStyle'  : 'silver',
 			
@@ -197,25 +201,38 @@
 
 	function alertPrize(indicatedSegment)
 	{
-		alert(indicatedSegment.text);
-		
-		alert(typeof(indicatedSegment.text));
-	
 		// 결과값 출력
 		if (indicatedSegment.text == '100P') {
-		    alert('400나와라');
+		    rulletAjax('100', 'point');
+		} else if (indicatedSegment.text == '200P') {
+			rulletAjax('200', 'point');
+		} else if (indicatedSegment.text == '300P') {
+			rulletAjax('300', 'point');
+		} else if (indicatedSegment.text == '400P') {
+			rulletAjax('400', 'point');
 		} else if (indicatedSegment.text == '500P') {
-		    alert('500나와라');
-		} else if (indicatedSegment.text == '600P') {
-		    alert('600나와라');
+			rulletAjax('500', 'point');
+		} else if (indicatedSegment.text == '1000P') {
+			rulletAjax('1000', 'point');
+		} else if (indicatedSegment.text == '2000P') {
+			rulletAjax('2000', 'point');
+		} else if (indicatedSegment.text == '3천쿠폰') {
+			rulletAjax('3K', 'coupon');
+		} else if (indicatedSegment.text == '5천쿠폰') {
+			rulletAjax('5K', 'coupon');
+		} else if (indicatedSegment.text == '1만쿠폰') {
+			rulletAjax('10K', 'coupon');
+		} else { // 꽝
+			alert("꽝입니다.");
 		}
 		
-		
-		
-		else if (indicatedSegment.text == '안돼') {
-		    alert('망할놈아');
-		} else {
-		    alert(indicatedSegment.text  + "당첨되셨습니다. ");
+	}
+	
+	function rulletAjax(value, type) {
+		if(type == 'point') {
+			alert("포인트");
+		} else if(type == 'coupon') {
+			alert("쿠폰");
 		}
 	}
 </script>
