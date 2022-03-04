@@ -48,10 +48,10 @@ window.onload = function() {
 				<form action="adminPList.al">
 					<div class="form-group d-flex">
 						<input type="text" name="keyword" id="keyword" class="form-control" value="${keyword}">
-						<input type="submit" value="검색" class="btn-black py-2 px-4">
+						<input type="submit" value="검색" class="btn-black px-4">
 						&nbsp;
 					<div>
-						<input type="button" value="상품 추가" class="btn btn-black py-2 px-2" style="height:55px;" onClick="location.href='adminPWriteForm.al'">
+						<input type="button" value="상품 추가" class="btn btn-black py-3 px-2" onClick="location.href='adminPWriteForm.al'">
 					</div>
 					</div>
 				</form>
