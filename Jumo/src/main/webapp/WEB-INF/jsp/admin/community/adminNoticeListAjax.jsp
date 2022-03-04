@@ -31,14 +31,14 @@ function deleteCheckAjax(cidx, index) {
 </script>
 </head>
 <body>
-<br>
-<br>
+<section class="ftco-section ftco-cart">
 		<div class="container">
 			<div class="row">			
 				<div class="container" style="padding-right:70px;">
 				<div style="text-align:center"><h2>공지 사항</h2></div>
 							<br><br>					
-					<div class="col-md-12 ftco-animate">					
+					<div class="col-md-12 ftco-animate">	
+					<div class="cart-list">				
 							<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
@@ -66,6 +66,7 @@ function deleteCheckAjax(cidx, index) {
 								</c:forEach>
 							</tbody>
 							</table>
+						</div> <!-- end cart-list div -->
 						<br>
 						<div style="text-align:center;">
 							<button class="btn btn-light py-2 px-3" style="height:55px;"
@@ -77,6 +78,7 @@ function deleteCheckAjax(cidx, index) {
 				</div>
 			</div>
 		</div>
+</section>
 </body>
 <br><br>
 </html>
