@@ -10,10 +10,11 @@
 <title>주모</title>
 </head>
 <body>
-<div style="text-align:center">
-	<h3> 후기 </h3>
-</div>
 <section class="ftco-section ftco-cart">
+<div style="text-align:center">
+	<h2> 후기 </h2>
+</div>
+<br>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 ftco-animate">

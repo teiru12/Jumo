@@ -10,11 +10,12 @@
 <title>주모</title>
 </head>
 <body>
+
+<section class="ftco-section ftco-cart">
 	<div style="text-align:center">
-		<h1> 매 출 리 스 트 </h1>
+		<h2>매출 리스트</h2>
 	</div>
-	
-	<section class="ftco-section ftco-cart">
+	<br>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 ftco-animate">

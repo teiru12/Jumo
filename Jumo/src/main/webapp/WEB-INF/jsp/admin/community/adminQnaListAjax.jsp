@@ -34,11 +34,13 @@ function deleteCheckAjax(cidx, index) {
 </script>
 </head>
 <body>
+
+<section class="ftco-section ftco-cart">
 	<div style="text-align:center">
-		<h1> 고객센터 </h1>
+		<h2> 고객센터 </h2>
 	</div>
-	
-	<section class="ftco-section ftco-cart">
+	<br>
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 ftco-animate">
