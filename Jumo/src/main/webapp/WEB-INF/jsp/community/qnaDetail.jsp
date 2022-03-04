@@ -8,7 +8,7 @@
 <title>주모</title>
 
 <style type="text/css">
-p { word-break: break-all; color : #00B992} 
+p { word-break: break-all; color : #5d5d5d} 
 </style>
 </head>
 <body>
@@ -42,7 +42,7 @@ p { word-break: break-all; color : #00B992}
 					    <ul class="comment-list">
 							<li class="comment">
 								<div class="vcard bio">
-                    				<h5 style="color:#82ae46;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
+                    				<h5 style="color:#5d5d5d;">Jumo</h5><!-- COMMENTWRITER로 하면 ADMIN으로 떠서 Jumo로 입력 -->
                   				</div>
 								<div class="comment-body">
 									<div class="meta"><p style="width: 100%;">${comment.COMMENTDATE}</p></div><!-- 답변 작성 날짜 -->
