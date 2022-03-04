@@ -162,8 +162,10 @@ public class EventController {
 		
 		Map<String, String> msg = new HashMap<String, String>();
 		
-		int point = eventBean.getJUMO_POINT();
-		int updatePoint;
+		int point = eventBean.getJUMO_POINT(); // 입력한 포인트
+		int updatePoint; // 수정될 포인트
+		
+		int gainPoint; // 획득한 포인트
 		
 		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
 		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
@@ -172,11 +174,13 @@ public class EventController {
 		if((event.getJUMO_POINT() + point) >= 100000) {
 			// 추가할 포인트와 기존의 포인트의 총합이 10만 이상이면 10만으로 설정
 			updatePoint = 100000;
+			gainPoint = 100000 - event.getJUMO_POINT();
 			
 			msg.put("message", "포인트는 최대 10만까지 적립이 됩니다. 현재 보유 포인트 : 10만 Point");
 		} else {
 			// 추가할 포인트와 기존의 포인트의 총합이 10만 이하이면 포인트를 두 값의 합으로 설정
 			updatePoint = event.getJUMO_POINT() + point;
+			gainPoint = point;
 			
 			msg.put("message", "포인트를 적립하였습니다. 현재 보유 포인트 :" + updatePoint + "Point");
 		}
@@ -185,8 +189,25 @@ public class EventController {
 		
 		eventService.updatePointId(eventBean);
 		
-		msg.put("point", "" + point);
+		// 포인트 획득 테이블에 등록
+		// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
+		JUMO_POINT jumo_point = new JUMO_POINT();
 		
+		jumo_point.setEMAIL(email);
+		jumo_point.setJUMO_POINT(gainPoint);
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+		// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+		Calendar cal = Calendar.getInstance();
+		
+		String today = formatDate.format(cal.getTime()); // 오늘
+		
+		jumo_point.setRULLETDATE(today);
+				
+		eventService.insertJumoPointID(jumo_point);		
+		
+		msg.put("point", "" + point);		
 		msg.put("updatePoint", "" + updatePoint);
 		
 		return msg;
@@ -203,6 +224,21 @@ public class EventController {
 		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
 		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
 		JUMO_EVENT eventInfo = eventService.selectEventId(email);
+		
+		/* 포인트 획득시 포인트 획득 내역을 저장하기 위해 사용할 변수들 */
+		// 포인트 획득 테이블에 등록
+		// EMAIL, JUMO_POINT(gainPoint), RULLETDATE(8글자 계산)
+		JUMO_POINT jumo_point = new JUMO_POINT();
+		int gainPoint = 0; // 획득한 포인트
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+		// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+		Calendar cal = Calendar.getInstance();
+		
+		String today = formatDate.format(cal.getTime()); // 오늘
+		
+		jumo_point.setEMAIL(email);
+		jumo_point.setRULLETDATE(today);
 		
 		if(inputCoupon.equals("1K")) {
 			eventBean.setCOUPON1K("Y");
@@ -221,12 +257,17 @@ public class EventController {
 					if((eventInfo.getJUMO_POINT()+1000) >= 100000) {
 						message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
 						eventBean.setJUMO_POINT(100000);
+						gainPoint = 100000 - eventInfo.getJUMO_POINT();
 					} else {
 						eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+1000);
+						gainPoint = 1000;
 						message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+1000) + " Point";
 					}
 									
 					eventService.updatePointId(eventBean);
+					
+					jumo_point.setJUMO_POINT(gainPoint);
+					eventService.insertJumoPointID(jumo_point);
 				}
 				
 			/* 현재 유저의 1000원 쿠폰이 없을 때 */
@@ -258,12 +299,17 @@ public class EventController {
 					if((eventInfo.getJUMO_POINT()+2000) >= 100000) {
 						message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
 						eventBean.setJUMO_POINT(100000);
+						gainPoint = 100000 - eventInfo.getJUMO_POINT();
 					} else {
 						eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+2000);
 						message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+2000) + " Point";
+						gainPoint = 2000;
 					}
 									
 					eventService.updatePointId(eventBean);
+					
+					jumo_point.setJUMO_POINT(gainPoint);
+					eventService.insertJumoPointID(jumo_point);
 				}
 				
 			/* 현재 유저의 2000원 쿠폰이 없을 때 */
@@ -290,12 +336,17 @@ public class EventController {
 				if((eventInfo.getJUMO_POINT()+3000) >= 100000) {
 					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
 					eventBean.setJUMO_POINT(100000);
+					gainPoint = 100000 - eventInfo.getJUMO_POINT();
 				} else {
 					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+3000);
 					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+3000) + " Point";
+					gainPoint = 3000;
 				}
 								
 				eventService.updatePointId(eventBean);
+				
+				jumo_point.setJUMO_POINT(gainPoint);
+				eventService.insertJumoPointID(jumo_point);
 				
 			/* 현재 유저의 3000원 쿠폰이 없을 때 */
 			} else {
@@ -322,12 +373,17 @@ public class EventController {
 				if((eventInfo.getJUMO_POINT()+5000) >= 100000) {
 					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
 					eventBean.setJUMO_POINT(100000);
+					gainPoint = 100000 - eventInfo.getJUMO_POINT();
 				} else {
 					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+5000);
 					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+5000) + " Point";
+					gainPoint = 5000;
 				}
 								
 				eventService.updatePointId(eventBean);
+				
+				jumo_point.setJUMO_POINT(gainPoint);
+				eventService.insertJumoPointID(jumo_point);
 				
 			/* 현재 유저의 5000원 쿠폰이 없을 때 */
 			} else {
@@ -354,12 +410,17 @@ public class EventController {
 				if((eventInfo.getJUMO_POINT()+10000) >= 100000) {
 					message += "현재 보유 포인트 : 10만 Point\n최대 보유 포인트는 10만 Point입니다.";
 					eventBean.setJUMO_POINT(100000);
+					gainPoint = 100000 - eventInfo.getJUMO_POINT();
 				} else {
 					eventBean.setJUMO_POINT(eventInfo.getJUMO_POINT()+10000);
 					message += "현재 보유 포인트 : " + (eventInfo.getJUMO_POINT()+10000) + " Point";
+					gainPoint = 10000;
 				}
 								
 				eventService.updatePointId(eventBean);
+				
+				jumo_point.setJUMO_POINT(gainPoint);
+				eventService.insertJumoPointID(jumo_point);
 				
 			/* 현재 유저의 10000원 쿠폰이 없을 때 */
 			} else {
