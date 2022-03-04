@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>주모</title>
+<style type="text/css">
+#tatle1{ position: absolute; border: 3px solid green; top: 100px; }
+</style>
 <script>
 function deleteCheckAjax(cidx, index) {
 	if(confirm("삭제하시겠습니까?") == true) {
@@ -29,24 +32,14 @@ function deleteCheckAjax(cidx, index) {
 </head>
 <body>
 <br>
-<!-- 기존 타이틀 위치 -->
-<!-- <div style="text-align:center"><h2>공지 사항</h2></div> -->
-<br/>
-<style type="text/css">
-#tatle1{ position: absolute; border: 3px solid green; top: 100px; }
-</style>
-
+<br>
 		<div class="container">
 			<div class="row">			
-			<pre>                                                                               </pre>		
-				<div>			
-				</div>
-				<br>
-				<div class="container" style="padding-right:70px;">					
+				<div class="container" style="padding-right:70px;">
+				<div style="text-align:center"><h2>공지 사항</h2></div>
+							<br><br>					
 					<div class="col-md-12 ftco-animate">					
 							<table class="table">
-							<div style="text-align:center"><h2>공지 사항</h2></div>
-							<br><br>
 							<thead class="thead-primary">
 								<tr class="text-center">
 									<th>번호</th>
