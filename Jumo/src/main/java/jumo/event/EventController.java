@@ -310,6 +310,7 @@ public class EventController {
 				
 				msg.put("coupon", "3K");
 			}
+			
 		} else if(inputCoupon.equals("5K")) {
 			eventBean.setCOUPON5K("Y");
 			
@@ -341,6 +342,7 @@ public class EventController {
 				
 				msg.put("coupon", "5K");
 			}
+			
 		} else if(inputCoupon.equals("10K")) {
 			eventBean.setCOUPON10K("Y");
 			
@@ -378,4 +380,45 @@ public class EventController {
 		
 		return msg;
 	}	
+	
+	// Ajax를 사용한 룰렛 사용 날짜 업데이트
+	@ResponseBody
+	@RequestMapping("/updateRulletDate.al")
+	public Map<String, String> updateRulletDate(JUMO_EVENT eventBean) throws Exception {
+		Map<String, String> msg = new HashMap<String, String>();
+		
+		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
+		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
+		
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+		// 오늘 날짜를 구해서 캘린더객체로 생성한 다음에
+		// 오늘 날짜의 8자리 yyyyMMdd값을 구한다.
+		Calendar cal = Calendar.getInstance();
+		
+		String today = formatDate.format(cal.getTime()); // 오늘날짜
+		
+		/* 쿠폰을 획득하거나 포인트로 전환된 후에 룰렛을 돌린 날짜를 설정 */
+		JUMO_EVENT dateEvent = new JUMO_EVENT();
+		dateEvent.setEMAIL(email);
+		dateEvent.setRULLETDATE(today);
+		eventService.updateRulletdateId(dateEvent);
+		
+		return msg;
+	}
+	
+	// Ajax를 사용해 룰렛을 돌린 날짜 리턴
+	@ResponseBody
+	@RequestMapping("/getRulletDate.al")
+	public Map<String, String> getRulletDate(JUMO_EVENT eventBean) throws Exception {
+		Map<String, String> msg = new HashMap<String, String>();
+		
+		/* 현재 로그인한 유저의 이벤트 정보를 읽어온다. */
+		String email = eventBean.getEMAIL(); // 포인트를 수정할 회원의 이메일
+		
+		JUMO_EVENT eventInfo = eventService.selectEventId(email);
+		
+		msg.put("rulletDate" ,eventInfo.getRULLETDATE());
+		
+		return msg;
+	}
 }

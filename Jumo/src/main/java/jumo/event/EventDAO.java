@@ -53,6 +53,11 @@ public class EventDAO {
 		sqlSessionTemplate.update("event.updateCouponId", event);
 	}	
 	
+	// updateRulletdateId : 룰렛을 돌린 날짜를 수정
+	public void updateRulletdateId(JUMO_EVENT event) throws Exception {
+		sqlSessionTemplate.update("event.updateRulletdateId", event);
+	}
+	
 	// selectPaymentOID : OID 값으로 결제 정보를 읽어옴
 	public Payment selectPaymentOID(int OID) throws Exception {
 		return sqlSessionTemplate.selectOne("event.selectPaymentOID", OID);

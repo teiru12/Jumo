@@ -119,6 +119,16 @@
 		EMAIL = #{EMAIL}
 </update>
 
+<!-- updateRulletdateId -->
+<update id="updateRulletdateId" parameterType="jumo.model.JUMO_EVENT">
+	update
+		JUMO_EVENT
+	set
+		RULLETDATE = #{RULLETDATE}
+	where 
+		EMAIL = #{EMAIL}
+</update>
+
 <!-- selectPaymentOID -->
 <select id="selectPaymentOID" parameterType="int" resultType="jumo.model.Payment">
 	select

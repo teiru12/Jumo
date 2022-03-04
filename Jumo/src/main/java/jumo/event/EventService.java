@@ -28,6 +28,9 @@ public interface EventService {
 	// updateCouponId : Email 회원의 쿠폰을 수정
 	public void updateCouponId(JUMO_EVENT event) throws Exception;
 	
+	// updateRulletdateId : 룰렛을 돌린 날짜를 수정
+	public void updateRulletdateId(JUMO_EVENT event) throws Exception;
+	
 	// selectPaymentOID : OID 값으로 결제 정보를 읽어옴
 	public Payment selectPaymentOID(int OID) throws Exception;
 	

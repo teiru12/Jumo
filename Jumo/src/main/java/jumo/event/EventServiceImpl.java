@@ -110,6 +110,11 @@ public class EventServiceImpl implements EventService {
 	public void updateCouponId(JUMO_EVENT event) throws Exception {
 		eventDAO.updateCouponId(event);		
 	}
+	
+	@Override
+	public void updateRulletdateId(JUMO_EVENT event) throws Exception {
+		eventDAO.updateRulletdateId(event);
+	}
 
 	@Override
 	public Payment selectPaymentOID(int OID) throws Exception {

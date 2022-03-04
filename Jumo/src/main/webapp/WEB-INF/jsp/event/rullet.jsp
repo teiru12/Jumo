@@ -10,49 +10,77 @@
 <title>주모</title>
 </head>
 <body>
-	<div align="center">
-	<h1>룰렛</h1>
-<br><br><br>
 
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr>
-			<td>
-	<div class="power_controls">	
-<br><br>
+<input type="hidden" id="EMAIL" value="<%= request.getSession().getAttribute("EMAIL") %>">
 
-	<table class="power" cellpadding="10" cellspacing="0">
-		<tr>
-			<th align="center">Power</th>
-		</tr>
-		<tr>
-			<td width="78" align="center" id="pw3" onClick="powerSelected(3);">High</td>
-		</tr>
-		<tr>
-			<td align="center" id="pw2" onClick="powerSelected(2);">Med</td>
-		</tr>
-		<tr>
-			<td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
-		</tr>
-	</table>
-<br>
+	<div class="col-md-4 ftco-animate mx-auto" style="text-align:center">
+		<h3>룰렛</h3>
+	</div> 	
+	<br><br><br>
 
-			<img id="spin_button" src="img/spin_off.png" alt="Spin" onClick="startSpin();" />
-<br><br>
+	<div class="col-md-12 ftco-animate mx-auto" style="text-align:center">
+	<div class="container">
+	
+	     <div class="row justify-content-center ftco-animate">
+   			<div class="col-md-10 mb-5 text-center mx-auto">
+			
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-left:auto; margin-right:auto">
+					<tr>
+						<td>
+							<div class="power_controls mx-auto">	
+							<br><br>
+			
+							<table class="power" cellpadding="10" cellspacing="0">
+								<tr>
+									<td width="78" align="center" id="pw3" onClick="powerSelected(3);">더 세게</td>
+									<td align="center" id="pw2" onClick="powerSelected(2);">세게</td>
+									<td align="center" id="pw1" onClick="powerSelected(1);">약하게</td>
+									<td>
+										<img id="spin_button" src="img/spin_off.png" alt="Spin" onClick="startSpin();" />
+									</td>
+								</tr>
+							</table>
+							<br>
+			
+							<!-- <img id="spin_button" src="img/spin_off.png" alt="Spin" onClick="startSpin();" /> -->
+							<br><br>
+			
+							&nbsp;&nbsp;
+							<!-- <a href="#" onClick="resetWheel(); return false;">리셋</a> -->
+							<br>
 
-			&nbsp;&nbsp;
-			<a href="#" onClick="resetWheel(); return false;">리셋</a>
-<br>
+							</div>
+						</td>
 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset)
+					</tr>
+				</table>
+	
+			</div>
+		</div>
 	</div>
-			</td>
-			<td width="438" height="582" class="the_wheel" align="center" valign="center">
-				<canvas id="canvas" width="434" height="434">
-				<p style="{color: white}" align="center">안돼</p>
-				</canvas>
-			</td>
-		</tr>
-	</table>
+	</div>
+	
+	<div class="col-md-12 ftco-animate mx-auto" style="text-align:center">
+	<div class="container">
+	
+	     <div class="row justify-content-center ftco-animate">
+   			<div class="col-md-10 mb-5 text-center">
+			
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-left:auto; margin-right:auto">
+					<tr>
+						<td width="438" height="582" class="the_wheel" align="center" valign="center">
+							<canvas id="canvas" width="434" height="434">
+							<!-- <p style="{color: black}" align="center">안돼</p> -->
+							</canvas>
+						</td>
+					</tr>
+				</table>
+	
+			</div>
+		</div>
+	</div>
+	</div>
+	
 <script>
 	// 휠에 매개변수를 지정하는 곳 + 새 휠 객체 구축하는 곳
 	let theWheel = new Winwheel({
@@ -158,83 +186,168 @@
 	}
 }
 
-	// 시작 버튼
-	function startSpin()
+// 시작 버튼
+function startSpin() {
 	
-	{
-		// 판 돌아가는 중인데 또 시작 버튼 클릭하면 입구컷 시키는 기능
-		if (wheelSpinning == false) {
-		// 저 밑에 파워가 레벨이고 그거에 따라 스핀갯수를 조정함
-		// + 애니메이션 지속 시간에 따라 휠을 빠르게 회전함
-		if (wheelPower == 1) {
-		    theWheel.animation.spins = 3;
-		} else if (wheelPower == 2) {
-		    theWheel.animation.spins = 6;
-		} else if (wheelPower == 3) {
-		    theWheel.animation.spins = 10;
-		}
-			// 판 돌아가는중에 다시 못돌리게 막아줌
-			document.getElementById('spin_button').src       = "img/spin_off.png";
-			document.getElementById('spin_button').className = "";
-			// 애니메이션 실행시켜주는 놈? 인듯
-			theWheel.startAnimation();
-			// 다시 게임 시작 못하게 true를 주고 위에 시간을 적어서 다음 시간동안 작동을 못하게 설정하기
-			// 게임 시작전에 사용자가 이미 돌렸는지 돌리지 않았는지 구분함
-			wheelSpinning = true;
-		}
-	}
+	var email = $('#EMAIL').val();
+	
+	// getRulletDate.al Ajax
+	// DB에서 룰렛을 돌린 날짜를 받아와서 현재날짜와 비교
+	$.ajax({
+		url				:	"getRulletDate.al",
+		data			:	{ "EMAIL" : email },
+		contentType		:	"application/json",
+		success			:	function(data) {
+			
+			// 현재 날짜를 구한다.
+			let today = new Date();
+			
+			let year = today.getFullYear();
+			let month = ('0' + (today.getMonth() + 1)).slice(-2);
+			let day = ('0' + today.getDate()).slice(-2);
+
+			let todayDate = year + '' + month  + '' + day;
+			
+			if(data.rulletDate == todayDate) {
+				alert("오늘은 이미 룰렛을 돌리셨습니다.");
+			} else {
+				
+				// updateRulletDate.al Ajax
+				// 룰렛을 돌리면 무조건 룰렛을 돌린 날짜로 설정해서 새로고침해서 룰렛을 다시 돌리는 것을 방지
+				$.ajax({
+					url				:	"updateRulletDate.al",
+					data			:	{ "EMAIL" : email },
+					contentType		:	"application/json",
+					success			:	function(data) {
+						
+					},				
+					error:function(request, error) {
+						alert("fail");
+						// error 발생 이유를 알려준다.
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}		
+				});					
+				
+				// 판 돌아가는 중인데 또 시작 버튼 클릭하면 입구컷 시키는 기능
+				if (wheelSpinning == false) {
+				// 저 밑에 파워가 레벨이고 그거에 따라 스핀갯수를 조정함
+				// + 애니메이션 지속 시간에 따라 휠을 빠르게 회전함
+				if (wheelPower == 1) {
+				    theWheel.animation.spins = 3;
+				} else if (wheelPower == 2) {
+				    theWheel.animation.spins = 6;
+				} else if (wheelPower == 3) {
+				    theWheel.animation.spins = 10;
+				}
+					// 판 돌아가는중에 다시 못돌리게 막아줌
+					document.getElementById('spin_button').src       = "img/spin_off.png";
+					document.getElementById('spin_button').className = "";
+					// 애니메이션 실행시켜주는 놈? 인듯
+					theWheel.startAnimation();
+					// 다시 게임 시작 못하게 true를 주고 위에 시간을 적어서 다음 시간동안 작동을 못하게 설정하기
+					// 게임 시작전에 사용자가 이미 돌렸는지 돌리지 않았는지 구분함
+					wheelSpinning = true;
+				}
+			}			
+		},				
+		error:function(request, error) {
+			alert("fail");
+			// error 발생 이유를 알려준다.
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}		
+	});		
+
+}
 // 리셋 버튼 기능
 
-
-	function resetWheel()
-	{
-		theWheel.stopAnimation(false);  // 애니메이션 중지하고 false를 선언하여 아래 기능을 수행하게 한다
-		theWheel.rotationAngle = 0;     // 돌림판 각도 설정이라는데 잘 모르겠음
-		theWheel.draw();                // 돌린판을 렌더링할때 필요한 그리기라는데 잘 모르겠음
-		document.getElementById('pw1').className = "";  // 게임 시작을 누르면 모든 버튼의 색이 정지 하는 기능
-		document.getElementById('pw2').className = "";
-		document.getElementById('pw3').className = "";
-		wheelSpinning = false;          // 리셋 기능을 해주는 기능
-	}
+function resetWheel()
+{
+	theWheel.stopAnimation(false);  // 애니메이션 중지하고 false를 선언하여 아래 기능을 수행하게 한다
+	theWheel.rotationAngle = 0;     // 돌림판 각도 설정이라는데 잘 모르겠음
+	theWheel.draw();                // 돌린판을 렌더링할때 필요한 그리기라는데 잘 모르겠음
+	document.getElementById('pw1').className = "";  // 게임 시작을 누르면 모든 버튼의 색이 정지 하는 기능
+	document.getElementById('pw2').className = "";
+	document.getElementById('pw3').className = "";
+	wheelSpinning = false;          // 리셋 기능을 해주는 기능
+}
 
 // 변수에 리턴?값을 넣어줬기에 애니메이션이 끝나면 결과값을 알려준다.
 
-	function alertPrize(indicatedSegment)
-	{
-		// 결과값 출력
-		if (indicatedSegment.text == '100P') {
-		    rulletAjax('100', 'point');
-		} else if (indicatedSegment.text == '200P') {
-			rulletAjax('200', 'point');
-		} else if (indicatedSegment.text == '300P') {
-			rulletAjax('300', 'point');
-		} else if (indicatedSegment.text == '400P') {
-			rulletAjax('400', 'point');
-		} else if (indicatedSegment.text == '500P') {
-			rulletAjax('500', 'point');
-		} else if (indicatedSegment.text == '1000P') {
-			rulletAjax('1000', 'point');
-		} else if (indicatedSegment.text == '2000P') {
-			rulletAjax('2000', 'point');
-		} else if (indicatedSegment.text == '3천쿠폰') {
-			rulletAjax('3K', 'coupon');
-		} else if (indicatedSegment.text == '5천쿠폰') {
-			rulletAjax('5K', 'coupon');
-		} else if (indicatedSegment.text == '1만쿠폰') {
-			rulletAjax('10K', 'coupon');
-		} else { // 꽝
-			alert("꽝입니다.");
-		}
-		
+function alertPrize(indicatedSegment)
+{
+	// 결과값 출력
+	if (indicatedSegment.text == '100P') {
+	    rulletAjax('100', 'point');
+	} else if (indicatedSegment.text == '200P') {
+		rulletAjax('200', 'point');
+	} else if (indicatedSegment.text == '300P') {
+		rulletAjax('300', 'point');
+	} else if (indicatedSegment.text == '400P') {
+		rulletAjax('400', 'point');
+	} else if (indicatedSegment.text == '500P') {
+		rulletAjax('500', 'point');
+	} else if (indicatedSegment.text == '1000P') {
+		rulletAjax('1000', 'point');
+	} else if (indicatedSegment.text == '2000P') {
+		rulletAjax('2000', 'point');
+	} else if (indicatedSegment.text == '3천쿠폰') {
+		rulletAjax('3K', 'coupon');
+	} else if (indicatedSegment.text == '5천쿠폰') {
+		rulletAjax('5K', 'coupon');
+	} else if (indicatedSegment.text == '1만쿠폰') {
+		rulletAjax('10K', 'coupon');
+	} else { // 꽝
+		alert("꽝입니다.");
 	}
 	
-	function rulletAjax(value, type) {
-		if(type == 'point') {
-			alert("포인트");
-		} else if(type == 'coupon') {
-			alert("쿠폰");
-		}
+}
+
+function rulletAjax(value, type) {
+
+	var email = $('#EMAIL').val();
+	
+	if(type == 'point') {
+		
+		// updatePoint.al Ajax
+		$.ajax({
+			url				:	"updatePoint.al",
+			data			:	{ "EMAIL" : email, "JUMO_POINT" : Number(value) },
+			contentType		:	"application/json",
+			success			:	function(data) {
+				
+				alert(data.message);
+			},				
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+			
+		});			
+		
+	} else if(type == 'coupon') {
+		
+		// updateCoupon.al Ajax
+		$.ajax({
+			url				:	"updateCoupon.al",
+			data			:	{ "EMAIL" : email, "inputCoupon" : value, "page" : "rullet" },
+			contentType		:	"application/json",
+			success			:	function(data) {
+				
+				alert(data.message);
+			},				
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+			
+			
+		});	
+		
 	}
+}
 </script>
 
 <br><br><br><br>
