@@ -16,7 +16,7 @@
 	<br/>
 		<div class="container">
 			<div class="row">
-			<pre>                                                                               </pre>
+
 				<form action="memberList.al">
 				<div class="form-group d-flex">
 					<select name="condition" id="condition">

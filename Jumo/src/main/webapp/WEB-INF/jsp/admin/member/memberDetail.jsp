@@ -135,14 +135,14 @@ if( regExp.test(obj.value) ){
 <section class="ftco-section">
 <div class="container" style="text-align:center;">
 	<div class="row justify-content-center">
-		<div class="col-xl-7 ftco-animate">
+		<div class="col-xl-12 ftco-animate">
 			<form method="post" id="memberDetailForm" action="memberModify.al"
 				name="membermodify">
 			<h2 class="mb-4 billing-heading">회원정보 수정</h2>
-				<div class="row align-items-end" style="padding-left:150px;">
+				<div class="row align-items-end" style="text-align:center">
 				
 					<!-- 회원등급 -->
-					<div class="select-wrap">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">
 						회원등급 :
 						<c:if test="${memberBean.RANK == 'B'}">
@@ -165,7 +165,7 @@ if( regExp.test(obj.value) ){
 					<div class="w-100"></div><br>
 					
 					<!-- 이메일 -->					
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">이메일</h6>
 						<input type="text" class="form-control" id="EMAIL" name="EMAIL" style="width:400px;"
 							value="${memberBean.EMAIL}" readonly>
@@ -173,7 +173,7 @@ if( regExp.test(obj.value) ){
 					<div class="w-100"></div>
            
 					<!-- 이름 -->
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">이름</h6>
 						<input type="text" id="NAME" name="NAME"  class="form-control" style="width:400px;"
 							value="${memberBean.NAME}" readonly>
@@ -181,20 +181,27 @@ if( regExp.test(obj.value) ){
 					<div class="w-100"></div>
 					
 					<!-- 주민등록번호 -->
-					<div class="form-group">
-						<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
+					<div class="col-mb-4 mx-auto" align="left">
+					<h6 class="mb-4" style="text-align:left;">주민등록번호</h6>
+						<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
 						<input type="text" id="JUMIN1" name="JUMIN1" size="12" maxlength="6"  class="form-control"
-							style="width:190px;" value="${memberBean.JUMIN1}" readonly>
-					</div>
-					&emsp;
-					<div class="form-group">
+							style="width:186px;" value="${memberBean.JUMIN1}" readonly>
+						</div>
+						</div>
+						<div class="col-md-6">
+						<div class="form-group">
 						<input type="text" id="JUMIN2" name="JUMIN2"  size="12" maxlength="7"  class="form-control"
-							style="width:190px;" value="${memberBean.JUMIN2}" readonly>
+							style="width:186px;" value="${memberBean.JUMIN2}" readonly>
+					</div>
+					</div>
+					</div>
 					</div>
 					<div class="w-100"></div>
 					
 					<!-- 전화번호 -->
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">전화번호</h6>
 						<input type="text" maxlength="11" id="PHONE" name="PHONE" size="24"  class="form-control"
 							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:400px;"
@@ -205,7 +212,7 @@ if( regExp.test(obj.value) ){
 					<div class="w-100"></div>
 
 					<!-- 핸드폰 번호 -->
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">핸드폰 번호</h6>
 						<input type="text" maxlength="11" id="MOBILE" name="MOBILE" class="form-control"
 							onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="24" style="width:400px;"
@@ -214,9 +221,10 @@ if( regExp.test(obj.value) ){
 						<h6 class="mb-4" style="text-align:left;">'-'는 빼고 숫자만 입력해주세요.</h6>
 					</div>
 					<div class="w-100"></div>
-					<br/><br/>
+					<br/>
 					
 					<!-- 주소 -->
+					<div class="col-mb-4 mx-auto" align="left">
 					<h6 class="mb-4" style="text-align:left;">우편번호</h6>
 					<div class="w-100"></div>
 					<div class="form-group d-flex">
@@ -225,7 +233,7 @@ if( regExp.test(obj.value) ){
 						<input type="button" class="submit px-3" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<div class="w-100"></div>
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">주소</h6>
 						<input type="text" maxlength="50" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" name="ADDRESS1" id="ADDRESS1" placeholder="주소" class="form-control" style="width:190px;"
 							value="${memberBean.ADDRESS1}">
@@ -234,11 +242,12 @@ if( regExp.test(obj.value) ){
 					<div class="form-group">
 						<input type="text" maxlength="50" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" name="ADDRESS2" id="ADDRESS2" placeholder="상세주소" class="form-control" style="width:190px;"
 							value="${memberBean.ADDRESS2}">
-					</div>			
+					</div>
+					</div>
 					<div class="w-100"></div>
 					
 					<!-- 회원 정지 -->
-					<div class="form-group">
+					<div class="col-mb-4 mx-auto" align="left">
 						<h6 class="mb-4" style="text-align:left;">회원 정지</h6>
 							<c:if test="${memberBean.BLOCK == 'N'}">
 								<input type="checkbox" size="100" name="BLOCK" value="Y" class="form-control" style="width:400px;"> 
