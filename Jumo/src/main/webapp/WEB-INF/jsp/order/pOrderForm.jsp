@@ -123,7 +123,8 @@ $(document).ready(function() {
 		/* 쿠폰값을 변경할 때 입력한 point의 값이 포인트 보유량보다 클 경우 변경 */ 
 		var maxPoint = $('#maxPoint').val();
 		if(Number(pointValue) > Number(maxPoint)) {
-			pointValue = maxPoint;
+		
+			pointValue = Math.floor(maxPoint / 100) * 100;
 			$('#point').val(pointValue);
 		}
 		
@@ -180,7 +181,9 @@ $(document).ready(function() {
 		var maxPoint = $('#maxPoint').val();
 		if(Number(pointValue) > Number(maxPoint)) {
 			alert("보유하신 포인트는 " + maxPoint + "Point입니다.");
-			pointValue = maxPoint;
+			
+			pointValue = Math.floor(maxPoint / 100) * 100;
+			
 			$('#point').val(pointValue);
 		}
 		

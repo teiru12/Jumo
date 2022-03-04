@@ -232,7 +232,7 @@ $(document).ready(function() {
 		var maxPoint = $('#maxPoint').val();
 		if(Number(pointValue) > Number(maxPoint)) {
 			alert("보유하신 포인트는 " + maxPoint + "Point입니다.");
-			pointValue = maxPoint;
+			pointValue = Math.floor(maxPoint / 100) * 100;
 			$('#point').val(pointValue);
 		}
 		
