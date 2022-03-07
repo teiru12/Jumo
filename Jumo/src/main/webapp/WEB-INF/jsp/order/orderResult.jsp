@@ -188,78 +188,71 @@
 							</tbody>
 						</table>
 						
-							<table class="table">
-							<tbody>
-								<tr class="text-center">
-									<td rowspan="4"><h4><b>주문자 정보</b></h4></td>
-								</tr>
-							
-								<tr class="text-center">
-									<td class="count">이름</td>
-									<td class="count">${memberBean.NAME}</td>
-								</tr>
-								
-								<tr class="text-center">
-									<td class="count">전화번호</td>				
-									<td class="count">${memberBean.PHONE}</td>
-								</tr>
-								
-								<tr class="text-center">	
-									<td class="count">휴대폰번호</td>
-									<td class="count">${memberBean.MOBILE}</td>
-								</tr><!-- END TR-->
-
-								<tr class="text-center">
-									<td rowspan="4"><h4><b>배송 정보</b></h4></td>
-								</tr>
-							
-								<tr class="text-center">
-									<td class="count">우편번호</td>
-									<td class="count">${orderBeanList[0].OPOSTCODE}</td>
-								</tr>
-								
-								<tr class="text-center">
-									<td class="count">주소</td>				
-									<td class="count">${orderBeanList[0].OADDRESS1}</td>
-								</tr>
-								
-								<tr class="text-center">	
-									<td class="count">상세주소</td>
-									<td class="count">${orderBeanList[0].OADDRESS2}</td>
-								</tr><!-- END TR-->
-							
-								<tr class="text-center">
-									<td rowspan="3"><h4><b>결제 정보</b></h4></td>
-								</tr>
-								
-								<tr class="text-center">
-									<td class="count">적립 포인트</td>
-									<td class="count"><b>${jumo_point.JUMO_POINT}Point</b></td>
-								</tr>
-							
-								<tr class="text-center">
-									<td class="count">총 결제 금액</td>
-									<td class="count"><b>${orderBeanList[0].OTOTAL}원</b></td>
-								</tr>
-								
-								<tr class="text-center">
-									<td class="count">무통장 입금</td>				
-									<td class="count">국민은행 1222222-266</td>
-								</tr>
-							
-							</tbody>
-						</table>
-						</c:if>
-						
-						
-						
-						
 					</div> <!-- end cart-list div -->
+					<div class="row justify-content-end">
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>주문자 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>이름</span>
+									<span>${memberBean.NAME}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>전화번호</span>
+									<span>${memberBean.PHONE}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>휴대폰번호</span>
+									<span>${memberBean.MOBILE}</span>
+								</p><br>
+								<p class="d-flex total-price"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>배송 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>우편번호</span>
+									<span>${orderBeanList[0].OPOSTCODE}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>주소</span>
+									<span>${orderBeanList[0].OADDRESS1}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>상세주소</span>
+									<span>${orderBeanList[0].OADDRESS2}</span>
+								</p><br>
+								<p class="d-flex total-price"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>결제 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>적립 포인트</span>
+									<span>${jumo_point.JUMO_POINT}&nbsp;Point</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>총 결제 금액</span>
+									<span>${orderBeanList[0].OTOTAL}&nbsp;원</span>
+								</p>
+								<p class="d-flex total-price">
+									무통장 입금
+								</p>
+								<p class="d-flex total-price">
+									&emsp;&emsp;<span><b>국민은행</b></span>
+									<span>1222222-266</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</c:if>
 
-				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 	
 
 	
