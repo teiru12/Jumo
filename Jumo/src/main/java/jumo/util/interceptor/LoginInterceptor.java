@@ -62,7 +62,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			/* 성인인증 메시지 출력 후 주소로 이동 */
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('성인 인증을 해주세요.'); location.href='/Jumo/loginForm.al';</script>");
+			out.println("<script>alert('로그인이 필요합니다. 회원가입을 해주세요'); location.href='/Jumo/loginForm.al';</script>");
 			out.flush();
 			
 			// response.sendRedirect("/Jumo/loginForm.al"); return false;

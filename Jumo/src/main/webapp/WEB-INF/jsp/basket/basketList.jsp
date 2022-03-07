@@ -11,11 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script>
 function getCount() {
+	
 	var size = document.getElementById('listSize').value;
 	var sum = 0; //원가의 전체 합
 	var saleSum = 0; //할인된 총 전체 합
 	for(var i=0;i<size;i++){
-		var count = document.getElementById('BCOUNT'+i).value;
+		var count = 0;
+		count = document.getElementById('BCOUNT'+i).value;
 		var price = document.getElementById('BPRICE'+i).value;
 		var sale = document.getElementById('BSALE'+i).value;
 		var salePrice = price * (100-sale) / 100;

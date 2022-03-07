@@ -21,7 +21,7 @@
 			  <a href="https://mblogthumb-phinf.pstatic.net/MjAxODEyMzBfMTk4/MDAxNTQ2MTYwOTQyMzQw.qBVdJsXsTDzI0SUixp_CZMivoTNJrtVo70QFPjWxz1og.Ni-O5f4zpeTENYHCHcU-tPItgQLUiOS4kwfJC9RZbBkg.JPEG.twinkling_j/output_3237625016.jpg?type=w800"
 			  class="py-2 d-block" style="color: Cyan">사업자확인</a>
               </p>
-              <p>대표 : 김종균</p>
+              <p>대표 : 주신</p>
               <b>주모는 통신판매중개자로서 통신판매 당사자가 아니며,</b>
               <p><b>판매자가 등록한 상품정보 및 거래에 대해 주모는 책임을 지지 않습니다.</b></p>
             </div>
@@ -52,7 +52,7 @@
               </ul>
 	          <ul class="list-unstyled">
 	          	<h2><b>$돈$</b></h2>
-	          	<li>기업은행 : 568-031734-01-011</li>
+	          	<li>기업은행 : 165-188182-15-178</li>
 	          	<li><b>It's me Mario!!</b></li>
 	          </ul>
             </div>

@@ -15,16 +15,29 @@ function getCount() {
 	var sum = 0; //원가의 전체 합
 	var saleSum = 0; //할인된 총 전체 합
 	for(var i=0;i<size;i++){
-		var count = document.getElementById('BCOUNT'+i).value;
-		var price = document.getElementById('BPRICE'+i).value;
-		var sale = document.getElementById('BSALE'+i).value;
+		var count = 0;
+		var price = 0;
+		var sale = 0;
+		if(document.getElementById('BCOUNT'+i) != null) {
+			count = document.getElementById('BCOUNT'+i).value;
+		}
+		if(document.getElementById('BPRICE'+i) != null) {
+			price = document.getElementById('BPRICE'+i).value;
+		}
+		if(document.getElementById('BSALE'+i) != null) {
+			sale = document.getElementById('BSALE'+i).value;
+		}
 		var salePrice = price * (100-sale) / 100;
 		var totalPrice = salePrice * count; // 할인된 상품 가격
 		
 		sum += price * count;
 		saleSum += (price*sale/100)*count;// 상품이 할인받은 가격
-		document.getElementById("totalPrice"+i).innerText = totalPrice + '원';
-		document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원';
+		if(document.getElementById("totalPrice"+i) != null) {
+			document.getElementById("totalPrice"+i).innerText = totalPrice + '원';
+		}
+		if(document.getElementById("saled"+i) != null) {
+			document.getElementById("saled"+i).innerText = (price*sale/100)*count + '원';
+		}	
 	}
 	document.getElementById("originalSum").innerText = sum + '원'; // 페이지의 sum값 출력
 	document.getElementById("saleSum").innerText = saleSum + '원'; // 페이지의 saleSum값 출력
@@ -78,6 +91,9 @@ function deleteCheckAjax(bidx, index) {
 			success		: function(data) {
 				alert("삭제하였습니다.");
 				$("#bas"+index).remove();
+				
+				// 삭제 뒤에 스크립트로 결제 금액 계산
+				getCount();
 			},
 			error:function(request, error) {
 				alert("fail");
@@ -85,6 +101,9 @@ function deleteCheckAjax(bidx, index) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
+
+		
+
 	}
 }
 function modifyCheckAjax(bidx, index) {
@@ -98,6 +117,9 @@ function modifyCheckAjax(bidx, index) {
 			contentType	: "application/json",
 			success		: function(data) {
 				alert(data.message);
+				
+				// 삭제 뒤에 스크립트로 결제 금액 계산
+				getCount();
 			},
 			error:function(request, error) {
 				alert("fail");
@@ -189,7 +211,9 @@ window.onload = function() {
 						    
 						        <td>
 								<input type="button" class="btn btn-primary py-1 px-2"
-									onClick="modifyCheckAjax(${basketBeanList[i].BIDX}, ${i}).value " value="수정">
+									onClick="modifyCheckAjax(${basketBeanList[i].BIDX}, ${i});" value="수정">
+<%-- 								<input type="button" class="btn btn-primary py-1 px-2"
+									onClick="modifyCheckAjax(${basketBeanList[i].BIDX}, ${i}).value " value="수정"> --%>
 								<%-- <input type="button" class="btn btn-primary py-1 px-2" onClick="basketModify(${i})" value="수정"> --%>
 								<input type="button" class="btn btn-dark py-1 px-2" onClick="deleteCheckAjax(${basketBeanList[i].BIDX} ,${i});" value="삭제">
 						        <%-- <input type="button" class="btn btn-dark py-1 px-2" onClick="basketDelete(${i})" value="삭제"> --%>
