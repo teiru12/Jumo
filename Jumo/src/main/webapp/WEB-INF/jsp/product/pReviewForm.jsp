@@ -152,7 +152,7 @@ window.onload = function() {
 								제목 
 							</td>
 							<td>
-								<input type="text" id="CTITLE" name="CTITLE" style="width:90%; text-align:right;" maxlength="50">
+								<input type="text" id="CTITLE" name="CTITLE" style="width:90%;" maxlength="50">
 							</td>
 						</tr>
 						<tr>

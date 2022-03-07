@@ -75,7 +75,7 @@
 							</tbody>
 						</table>
 						
-						<table class="table">
+<%-- 						<table class="table">
 							<tbody>
 								<tr class="text-center">
 									<td rowspan="4"><h4><b>주문자 정보</b></h4></td>
@@ -135,7 +135,7 @@
 								</tr>
 							
 							</tbody>
-						</table>
+						</table> --%>
 						
 						</c:if>
 						
@@ -188,7 +188,77 @@
 							</tbody>
 						</table>
 						
+						</c:if>
+						
 					</div> <!-- end cart-list div -->
+					
+					<!-- 직접 구매 -->
+					<c:if test="${result=='direct'}">
+									
+					<div class="row justify-content-end">
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>주문자 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>이름</span>
+									<span>${memberBean.NAME}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>전화번호</span>
+									<span>${memberBean.PHONE}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>휴대폰번호</span>
+									<span>${memberBean.MOBILE}</span>
+								</p><br>
+								<p class="d-flex total-price"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>배송 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>우편번호</span>
+									<span>${orderBean.OPOSTCODE}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>주소</span>
+									<span>${orderBean.OADDRESS1}</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>상세주소</span>
+									<span>${orderBean.OADDRESS2}</span>
+								</p><br>
+								<p class="d-flex total-price"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+							<div class="cart-total mb-3">
+								<h5><b>결제 정보</b></h5><br>
+								<p class="d-flex total-price">
+									<span>적립 포인트</span>
+									<span>${jumo_point.JUMO_POINT}&nbsp;Point</span>
+								</p>
+								<p class="d-flex total-price">
+									<span>총 결제 금액</span>
+									<span>${orderBean.OTOTAL}&nbsp;원</span>
+								</p>
+								<p class="d-flex total-price">
+									무통장 입금
+								</p>
+								<p class="d-flex total-price">
+									&emsp;&emsp;<span><b>우리은행</b></span>
+									<span>1222222-266</span>
+								</p>
+							</div>
+						</div>
+					</div>				
+					
+					</c:if>	
+					
+					<!-- 장바구니 -->
+					<c:if test="${result=='basket'}">
+					
 					<div class="row justify-content-end">
 						<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 							<div class="cart-total mb-3">
@@ -247,7 +317,8 @@
 							</div>
 						</div>
 					</div>
-				</c:if>
+					
+					</c:if>
 
 			</div>
 		</div>

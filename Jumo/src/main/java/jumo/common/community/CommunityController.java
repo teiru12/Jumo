@@ -10,17 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jumo.model.CommentBean;
 import jumo.model.CommunityBean;
-import jumo.model.MemberBean;
-import jumo.model.OrderBean;
 import jumo.util.MapToBean;
 import jumo.util.Paging;
-import jumo.util.validator.CommunityValidator;
 
 @Controller
 public class CommunityController {
@@ -32,7 +27,7 @@ public class CommunityController {
 	public String noticeList(Model model, HttpServletRequest request) throws Exception {
 		
 		/* 페이징을 위한 변수 */
-		int pageSize = 10; // 페이지당 출력할 공지의 수
+		int pageSize = 5; // 페이지당 출력할 공지의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지
@@ -91,7 +86,7 @@ public class CommunityController {
 	public String qnaList(Model model, HttpServletRequest request)
 			throws Exception {
 		/* 페이징을 위한 변수 */
-		int pageSize = 10; // 페이지당 출력할 qna의 수
+		int pageSize = 5; // 페이지당 출력할 qna의 수
 		int START = 1;
 		int END = pageSize;
 		int currentPage = 1; // 현재 페이지
