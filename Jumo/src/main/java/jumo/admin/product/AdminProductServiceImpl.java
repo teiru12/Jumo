@@ -119,6 +119,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 		map.put("PKIND", product.getPKIND());
 		map.put("PTYPE", product.getPTYPE());
 		map.put("PID", product.getPID());
+		map.put("PSELL", product.getPSELL());
 						
 		adminProductDAO.updateProduct(map);
 	}

@@ -437,6 +437,7 @@
 			PSTOCK=#{PSTOCK},
 			PCOM=#{PCOM},
 			PLOC=#{PLOC},
+			PSELL=#{PSELL},
 			<if test="PDEGREE != null">
 			PDEGREE=#{PDEGREE},
 			</if>
