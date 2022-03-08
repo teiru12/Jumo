@@ -9,6 +9,27 @@
 <meta charset="UTF-8">
 <title>주모</title>
 </head>
+<script>
+function deleteCheckAjax(cidx, index) {
+	if(confirm("삭제하시겠습니까?") == true) {
+		
+		$.ajax({
+			url			: "adminReviewDeleteAjax.al",
+			data		: {"CIDX" : cidx},
+			contentType	: "application/json",
+			success		: function(data) {
+				alert("삭제하였습니다.");
+				$("#rev"+index).remove();
+			},
+			error:function(request, error) {
+				alert("fail");
+				// error 발생 이유를 알려준다.
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
+</script>
 <body>
 <section class="ftco-section ftco-cart">
 <div style="text-align:center">
@@ -35,7 +56,7 @@
 					    <c:choose>
 					    	<c:when test="${reviewCount!=0}"> 
 					    		<c:forEach var="review" items="${reviewList}" varStatus="status"> 
-									<tr class="text-center">
+									<tr id="rev${status.index}" class="text-center">
 										<td>&emsp;&emsp;&emsp;${review.CIDX}</td>
 										
 										<td>&emsp;&emsp;&emsp;&emsp;

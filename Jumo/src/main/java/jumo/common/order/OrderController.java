@@ -142,27 +142,7 @@ public class OrderController {
 		// 상품의 판매량을 증가
 		int updateSell = infoPro.getPSELL() + order.getOCOUNT();
 		infoPro.setPSELL(updateSell);
-		
-		
-System.out.println("INSERT SERVICE 테스트");
-System.out.println("PNAME : " + infoPro.getPNAME());
-System.out.println("PIMAGE : " + infoPro.getPIMAGE());
-System.out.println("PPRICE : " + infoPro.getPPRICE());
-System.out.println("PSALE : " + infoPro.getPSALE());
-System.out.println("PSTOCK : " + infoPro.getPSTOCK());
-System.out.println("PCOM : " + infoPro.getPCOM());
-System.out.println("PLOC : " + infoPro.getPLOC());
-System.out.println("PSELL : " + infoPro.getPSELL());
-System.out.println("PDEGREE : " + infoPro.getPDEGREE());
-System.out.println("PKIND : " + infoPro.getPKIND());
-System.out.println("PTYPE : " + infoPro.getPTYPE());
-System.out.println("PID : " + infoPro.getPID());
 
-		
-		
-		
-		
-		
 		// 바뀐 상품 정보를 이용해서 상품 정보를 업데이트
 		adminProductService.updateProduct(infoPro);
 		
