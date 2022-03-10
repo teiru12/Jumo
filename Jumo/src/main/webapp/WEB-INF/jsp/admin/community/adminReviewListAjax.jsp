@@ -57,13 +57,13 @@ function deleteCheckAjax(cidx, index) {
 					    	<c:when test="${reviewCount!=0}"> 
 					    		<c:forEach var="review" items="${reviewList}" varStatus="status"> 
 									<tr id="rev${status.index}" class="text-center">
-										<td>&emsp;&emsp;&emsp;${review.CIDX}</td>
+										<td>${review.CIDX}</td>
 										
-										<td>&emsp;&emsp;&emsp;&emsp;
+										<td>
 											<a href="pDetail.al?PID=${review.PID}"class="img-prod">
 											<img class="img-fluid" src="img/product-${review.PID}.png" style="height:70px;">
 											</a>
-										</td>&emsp;&emsp;&emsp;&emsp;
+										</td>
 										
 										<td><b>${review.CTITLE}</b><br>${review.CCONTENT}</td>
 										
@@ -72,7 +72,8 @@ function deleteCheckAjax(cidx, index) {
 										<td>${review.CDATE}</td>	
 										
 										<td>
-											<a href="javascript:deleteCheckAjax(${review.CIDX}, ${status.index});">삭제</a>
+											<button class="btn btn-light py-2 px-3"
+															onClick="deleteCheckAjax(${review.CIDX}, ${status.index});">삭제</button>
 										</td>											
 										
 									</tr><!-- END TR-->

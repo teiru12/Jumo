@@ -6,7 +6,14 @@
 <meta charset="UTF-8">
 <title>주모</title>
 <style type="text/css">
-#tatle1{ position: absolute; border: 3px solid green; top: 100px; }
+.name {
+  width        : 225px;     /* 너비는 변경될수 있습니다. */
+  text-overflow: ellipsis;  /* 위에 설정한 너비보다 길면 말줄임표처럼 표시합니다. */
+  white-space  : nowrap;    /* 줄바꿈을 하지 않습니다. */
+  overflow     : hidden;    /* 내용이 길면 감춤니다 */
+  display      : block;     /* ie6이상 현재요소를 블럭처리합니다. */
+  color   : black;
+}
 </style>
 <script>
 function deleteCheckAjax(cidx, index) {
@@ -32,21 +39,31 @@ function deleteCheckAjax(cidx, index) {
 </head>
 <body>
 <section class="ftco-section ftco-cart">
+	<div style="text-align:center">
+		<h2> 공지사항 </h2>
+	</div>
+	<br>
+
 		<div class="container">
-			<div class="row">			
-				<div class="container" style="padding-right:70px;">
-				<div style="text-align:center"><h2>공지 사항</h2></div>
-							<br><br>					
-					<div class="col-md-12 ftco-animate">	
-					<div class="cart-list">				
-							<table class="table">
+			<div class="row">
+				<div class="col-md-12 ftco-animate">
+				
+					<div class="cart-list">
+					
+						<div style="text-align:right;">
+							<button class="btn btn-light py-2 px-3" style="height:55px;"
+								onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
+						</div>
+						<br>
+				
+						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
 									<th>번호</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>작성일</th>
-									<th><th>
+									<th>&nbsp;</th>
 								</tr>
 							</thead>
 							
@@ -54,31 +71,29 @@ function deleteCheckAjax(cidx, index) {
 								<c:forEach var="notice" items="${noticeList}"  varStatus="status"> 
 								<tr id="not${status.index}">
 									<td>${notice.CIDX}</td>
+								
 									<td><a href="adminNoticeDetail.al?CIDX=${notice.CIDX}">${notice.CTITLE}</a></td>
 									<td class="product-name">
 										${notice.CWRITER}
 									</td>
 									<td>${notice.CDATE}</td>
 									<td>
-										<a href="javascript:deleteCheckAjax(${notice.CIDX}, ${status.index});">삭제</a>
-												</td>
+										<button class="btn btn-light py-2 px-3"
+											onClick="deleteCheckAjax(${notice.CIDX}, ${status.index});">삭제</button>
+									</td>
 								</tr><!-- END TR-->
 								</c:forEach>
 							</tbody>
-							</table>
-						</div> <!-- end cart-list div -->
-						<br>
-						<div style="text-align:center;">
-							<button class="btn btn-light py-2 px-3" style="height:55px;"
-							onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
-						</div>
-						<br>
-						${paging.pageHtml}
-					</div>			
-				</div>
+						</table>
+					</div> <!-- end cart-list div -->
+					<br>
+
+					<br>
+					${paging.pageHtml}
+				</div>			
 			</div>
 		</div>
-</section>
+	</section>
 </body>
 <br><br>
 </html>

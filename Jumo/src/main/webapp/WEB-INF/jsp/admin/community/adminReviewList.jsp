@@ -13,14 +13,16 @@
 <div style="text-align:center">
 	<h3> 후기 </h3>
 </div>
-<section class="ftco-section ftco-cart">
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 ftco-animate">
-			<div class="cart-list">
-				<table class="table">
-					<thead class="thead-primary">
-						<tr class="text-center">
+	<section class="ftco-section ftco-cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 ftco-animate">
+				
+					<div class="cart-list">
+				
+						<table class="table">
+							<thead class="thead-primary">
+								<tr class="text-center">
 							<th>번호</th>
 							<th>제품명</th>
 							<th>내용</th>
