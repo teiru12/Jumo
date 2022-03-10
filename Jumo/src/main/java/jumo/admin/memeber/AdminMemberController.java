@@ -123,6 +123,12 @@ public class AdminMemberController {
 			member.setBLOCK("N");
 		}
 		
+		if(member.getEMAIL().equals("ADMIN") && member.getBLOCK().equals("Y")) {
+			model.addAttribute("msg", "관리자는 정지시킬 수 없습니다.");
+			model.addAttribute("url", "/memberList.al");
+			return "admin/member/memberModify";
+		}
+		
 		adminMemberService.updateMemberAdmin(member);
 		
 		model.addAttribute("msg", member.getEMAIL() + "회원의 정보가 수정되었습니다.");
