@@ -51,7 +51,7 @@ function deleteCheckAjax(cidx, index) {
 					<div class="cart-list">
 					
 						<div style="text-align:right;">
-							<button class="btn btn-light py-2 px-3" style="height:55px;"
+							<button class="btn btn-primary py-2 px-3" style="height:55px;"
 								onclick="location.href='adminNoticeWriteForm.al'">글쓰기</button>
 						</div>
 						<br>
