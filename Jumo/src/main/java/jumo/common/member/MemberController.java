@@ -341,13 +341,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/myInfoModify.al")
-	public String myInfoModify(MemberBean member, BindingResult result, Model model) throws Exception {
-
-		new MemberValidator().validate(member, result);
-
-		if (result.hasErrors()) {
-			return "/myInfoModifyForm.al";
-		}
+	public String myInfoModify(MemberBean member, Model model) throws Exception {
 
 		myInfoService.updateMember(member);
 		model.addAttribute("msg", "회원정보가 수정되었습니다.");
